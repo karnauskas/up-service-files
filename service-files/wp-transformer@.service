@@ -1,0 +1,17 @@
+[Unit]
+Description=Wordpress Transformer 
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/wp-transformer
+ExecStart=/bin/sh -c '\
+    export WORDPRESS_CONTENTAPI_KEY=$(/usr/bin/etcdctl get /ft/_credentials/wp); \
+    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 -e "WORDPRESS_CONTENTAPI_KEY=$WORDPRESS_CONTENTAPI_KEY" coco/wp-transformer' 
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=wp-transformer@*.service

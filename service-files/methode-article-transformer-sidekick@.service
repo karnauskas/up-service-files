@@ -1,0 +1,23 @@
+[Unit]
+Description=method article transformer sidekick
+BindsTo=methode-article-transformer@%i.service
+After=methode-article-transformer@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export MAT_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  etcdctl set /vulcand/backends/methode-article-transformer/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/methode-article-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-article-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-article-transformer`)\"}'; \
+  while true; do \
+    export MAT_PORT=$(echo $(/usr/bin/docker port methode-article-transformer-%i 8080 ) | cut -d':' -f2); \
+    etcdctl set /services/methode-article-transformer/%i/host '%H' --ttl 60; \
+    etcdctl set /services/methode-article-transformer/%i/app_port $(echo $(/usr/bin/docker port methode-article-transformer-%i 8080 ) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/methode-article-transformer/%i/admin_port $(echo $(/usr/bin/docker port methode-article-transformer-%i 8081 ) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /vulcand/backends/methode-article-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$MAT_IP:$MAT_PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/methode-article-transformer/%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-article-transformer/servers/srv%i
+
+[X-Fleet]
+MachineOf=methode-article-transformer@%i.service

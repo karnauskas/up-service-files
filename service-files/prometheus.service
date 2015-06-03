@@ -1,0 +1,22 @@
+[Unit]
+Description=Prometheus
+Requires=docker.socket
+After=docker.socket
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/bin/sh -c "docker history coco/prometheus >/dev/null 2>&1 || docker pull coco/prometheus"
+ExecStart=/bin/bash -c "\
+  export DOCKER_IP=$(/usr/bin/ifconfig docker0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  docker run --rm --dns=$DOCKER_IP -p 9090:9090 --name %p coco/prometheus"
+ExecStopPost=-/usr/bin/docker rm -f %p
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+MachineMetadata=host_type=monitor
+

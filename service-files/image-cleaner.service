@@ -1,0 +1,20 @@
+[Unit]
+Description=Job to clean up docker images + containers on hosts
+Wants=docker.socket
+
+[Service]
+ExecStart=/bin/sh -c "\
+  while true; do \
+    docker rm `docker ps -a -q --no-trunc`; \
+    docker rmi `docker images -f \"dangling=true\" -q --no-trunc`; \
+    sleep 300; \
+  done"
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+

@@ -1,0 +1,24 @@
+[Unit]
+Description=mongodb backed document store api
+After=docker.service
+Requires=docker.service
+# TODO: should not require mongo. Instead, allow unheathy startup.
+# TODO: reach when more mongo instances appear.
+Requires=mongodb@1.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/document-store-api
+
+ExecStart=/bin/sh -c '\
+  MONGO_ADDRESSES=$(for x in $(etcdctl ls /services/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done);\
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "MONGO_ADDRESSES=$(echo $MONGO_ADDRESSES | sed s/.$//)" --env "API_PATH=api.ft.com" coco/document-store-api;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+
+[X-Fleet]
+Conflicts=document-store-api@*.service

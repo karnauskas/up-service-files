@@ -1,0 +1,21 @@
+[Unit]
+Description=Annotations API Sidekick
+BindsTo=annotations-api@%i.service
+After=annotations-api@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set /vulcand/backends/annotations-api/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/annotations-api/frontend '{\"Type\": \"http\", \"BackendId\": \"annotations-api\", \"Route\": \"PathRegexp(`/content/.*/annotations.*`) && Host(`annotations-api`)\"}'; \
+  etcdctl setdir /services/annotations-api --ttl 60; \
+  etcdctl setdir /vulcand/backends/annotations-api/servers --ttl 60; \
+  while true; do \
+    export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port annotations-api-%i 8080) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/annotations-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/annotations-api/%i
+ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/annotations-api/servers/srv%i
+
+[X-Fleet]
+MachineOf=annotations-api@%i.service

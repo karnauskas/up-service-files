@@ -1,0 +1,21 @@
+[Unit]
+Description=Prometheus Dashboard
+Requires=docker.socket
+After=docker.socket
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/bin/sh -c "docker history prom/promdash:latest >/dev/null 2>&1 || docker pull prom/promdash:latest"
+ExecStartPre=/bin/sh -c "test -e /tmp/prom/file.sqlite3 || docker run -p 3000:3000 -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 prom/promdash ./bin/rake db:migrate"
+ExecStart=/bin/bash -c "docker run --rm -p 3000:3000 -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 --name %p prom/promdash"
+ExecStopPost=-/usr/bin/docker rm -f %p
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+MachineMetadata=host_type=monitor
+

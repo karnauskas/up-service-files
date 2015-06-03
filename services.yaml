@@ -1,0 +1,9 @@
+---
+services:
+  - name: mongodb@.service
+    version: latest
+    count: 4
+  - name: mongodb-configurator.service
+    version: latest
+    count: 0
+

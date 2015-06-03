@@ -1,0 +1,24 @@
+[Unit]
+Description=api policy component
+BindsTo=api-policy-component@%i.service
+After=api-policy-component@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$HOSTNAME; \
+  etcdctl set /vulcand/backends/api-policy-component/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/api-policy-component/frontend '{\"Type\": \"http\", \"BackendId\": \"api-policy-component\", \"Route\": \"PathRegexp(`/.*`) && Host(`api-policy-component`)\"}'; \
+  while true; do \
+    export APP_HOST='%H'; \
+    export APP_PORT=$(echo $(/usr/bin/docker port api-policy-component-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/api-policy-component/%i/host '%H' --ttl 60; \
+    etcdctl set /services/api-policy-component/%i/app_port $(echo $(/usr/bin/docker port api-policy-component-%i 8080) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/api-policy-component/%i/admin_port $(echo $(/usr/bin/docker port api-policy-component-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /vulcand/backends/api-policy-component/servers/srv%i \"{\\\"url\\\": \\\"http://$APP_HOST:$APP_PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/api-policy-component@%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/api-policy-component/servers/srv%i
+
+[X-Fleet]
+MachineOf=api-policy-component@%i.service

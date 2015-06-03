@@ -1,0 +1,25 @@
+[Unit]
+Description=Document store api sidekick
+BindsTo=document-store-api@%i.service
+After=document-store-api@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$HOSTNAME; \
+  etcdctl set /vulcand/backends/document-store-api/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/document-store-api/frontend '{\"Type\": \"http\", \"BackendId\": \"document-store-api\", \"Route\": \"PathRegexp(`/.*`) && Host(`document-store-api`)\"}'; \
+  etcdctl set /vulcand/frontends/document-store-api2/frontend '{\"Type\": \"http\", \"BackendId\": \"document-store-api\", \"Route\": \"PathRegexp(`/lists/.*`) && Host(`public-services`)\"}'; \
+  while true; do \
+    export MONGO_WRITER_PORT=$(echo $(/usr/bin/docker port document-store-api-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/document-store-api/%i/host '%H' --ttl 60; \
+    etcdctl set /services/document-store-api/%i/app_port $(echo $(/usr/bin/docker port document-store-api-%i 8080) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/document-store-api/%i/admin_port $(echo $(/usr/bin/docker port document-store-api-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /vulcand/backends/document-store-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$MONGO_WRITER_PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/document-store-api/%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/document-store-api/servers/srv%i
+
+[X-Fleet]
+MachineOf=document-store-api@%i.service
+

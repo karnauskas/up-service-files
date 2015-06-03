@@ -1,0 +1,21 @@
+[Unit]
+Description=Content Writer Sesame
+After=docker.service 
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/content-writer-sesame
+
+ExecStart=/bin/sh -c '\
+  export GRAPHDB_PATH=$(/usr/bin/etcdctl get /services/graphdb/path); \
+  export GRAPHDB_URL=http://$HOSTNAME:8080$GRAPHDB_PATH \
+  export HOSTIP=$(/usr/bin/ifconfig eth0 | sed -n \'2 p\' | awk \'{print $2}\' | cut -d\':\' -f2); \
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 -e "RDF_REPOSITORY_PROXY=$GRAPHDB_URL" coco/content-writer-sesame'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=content-writer-sesame@*.service

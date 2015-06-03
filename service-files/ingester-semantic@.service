@@ -1,0 +1,24 @@
+[Unit]
+Description=Semantic Ingester
+After=vulcan.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=300
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/ingester
+
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export ADMIN_PORT=8080; \
+  export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /services/zookeeper/ip); \
+  export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /services/zookeeper/port); \
+  export KAFKA_HOST=$(/usr/bin/etcdctl get /services/kafka/ip); \
+  export KAFKA_PORT=$(/usr/bin/etcdctl get /services/kafka/port); \
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "WRITER_ENDPOINT=$HOSTNAME" --env "WRITER_HEADER=content-writer-sesame" --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" --env "KAFKA_GROUPNAME=SemanticWriter" --env "TRANSFORMER_PROXY=$HOSTNAME:8080" coco/ingester'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=%p@*.service

@@ -1,0 +1,25 @@
+[Unit]
+Description=Content writer sesame
+BindsTo=content-writer-sesame@%i.service
+After=content-writer-sesame@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  etcdctl set /vulcand/backends/content-writer-sesame/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/content-writer-sesame/frontend '{\"Type\": \"http\", \"BackendId\": \"content-writer-sesame\", \"Route\": \"PathRegexp(`/.*`) && Host(`content-writer-sesame`)\"}'; \
+  etcdctl setdir /services/content-writer-sesame --ttl 60; \
+  etcdctl setdir /vulcand/backends/content-writer-sesame/servers --ttl 60; \
+  while true; do \
+    export CONTENT_WRITER_PORT=$(echo $(/usr/bin/docker port content-writer-sesame-%i 9012 ) | cut -d':' -f2); \
+    etcdctl set /services/content-writer-sesame/%i/host '%H' --ttl 60; \
+    etcdctl set /services/content-writer-sesame/%i/app_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 9012 ) | cut -d':' -f2); \
+    etcdctl set /services/content-writer-sesame/%i/admin_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 9013 ) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/content-writer-sesame/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$CONTENT_WRITER_PORT\\\"}\"; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/content-writer-sesame/%i
+ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/content-writer-sesame/servers/srv%i
+
+[X-Fleet]
+MachineOf=content-writer-sesame@%i.service

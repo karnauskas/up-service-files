@@ -1,0 +1,17 @@
+[Unit]
+Description=api policy component
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/api-policy-component
+
+ExecStart=/bin/sh -c "\
+/usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env \"READ_ENDPOINT=$HOSTNAME:8080\" coco/api-policy-component;"
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=api-policy-component@*.service

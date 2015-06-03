@@ -1,0 +1,21 @@
+[Unit]
+Description=MongoDB Sidekick
+BindsTo=mongodb@%i.service
+After=mongodb@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export MONGODB_IP=$HOSTNAME; \
+  while true; do \
+    export MONGODB_PORT=$(/usr/bin/docker port mongodb-%i 27017 | cut -d':' -f2); \
+    export MONGODB_ADMIN_PORT=$(/usr/bin/docker port mongodb-%i 28017 | cut -d':' -f2); \
+    etcdctl set /services/mongodb/%i/host $MONGODB_IP --ttl 60; \
+    etcdctl set /services/mongodb/%i/port $MONGODB_PORT --ttl 60; \
+    etcdctl set /services/mongodb/%i/admin_port $MONGODB_ADMIN_PORT --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/mongodb/%i/
+
+[X-Fleet]
+MachineOf=mongodb@%i.service
+

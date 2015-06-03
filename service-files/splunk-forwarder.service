@@ -1,0 +1,16 @@
+[Unit]
+Description=Splunk forwarder
+
+[Service]
+ExecStart=/bin/bash -c "\ 
+  export SPLUNK_IP=$(/usr/bin/etcdctl get /ft/splunk_host); \ 
+  /usr/bin/journalctl -a -f --output=json | ncat $SPLUNK_IP 514"
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+

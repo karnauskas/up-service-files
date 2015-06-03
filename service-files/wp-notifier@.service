@@ -1,0 +1,20 @@
+[Unit]
+Description=Wordpress Notifier
+After=docker.service kafka.service
+Requires=docker.service kafka.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/wordpress-notifier
+
+ExecStart=/bin/sh -c '\
+    export BROKER_LIST=$(/usr/bin/etcdctl get /services/kafka/ip):$(/usr/bin/etcdctl get /services/kafka/port); \
+    export TRANSFORMER_HOST=$(/usr/bin/etcdctl get /services/wp-transformer/1/host); \
+    export TRANSFORMER_PORT=$(/usr/bin/etcdctl get /services/wp-transformer/1/app_port); \
+    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "BROKER_LIST=$BROKER_LIST" --env "TRANSFORMER_HOST=$TRANSFORMER_HOST" --env "TRANSFORMER_PORT=$TRANSFORMER_PORT" coco/wordpress-notifier'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=%p@*.service

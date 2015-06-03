@@ -4,7 +4,7 @@ After=docker.service
 Requires=docker.service
 # TODO: should not require mongo. Instead, allow unheathy startup.
 # TODO: reach when more mongo instances appear.
-Requires=mongodb@1.service
+Wants=mongodb@1.service
 
 [Service]
 TimeoutStartSec=0

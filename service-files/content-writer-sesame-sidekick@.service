@@ -11,10 +11,10 @@ ExecStart=/bin/sh -c "\
   etcdctl setdir /services/content-writer-sesame --ttl 60; \
   etcdctl setdir /vulcand/backends/content-writer-sesame/servers --ttl 60; \
   while true; do \
-    export CONTENT_WRITER_PORT=$(echo $(/usr/bin/docker port content-writer-sesame-%i 9012 ) | cut -d':' -f2); \
+    export CONTENT_WRITER_PORT=$(echo $(/usr/bin/docker port content-writer-sesame-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/content-writer-sesame/%i/host '%H' --ttl 60; \
-    etcdctl set /services/content-writer-sesame/%i/app_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 9012 ) | cut -d':' -f2); \
-    etcdctl set /services/content-writer-sesame/%i/admin_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 9013 ) | cut -d':' -f2); \
+    etcdctl set /services/content-writer-sesame/%i/app_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/content-writer-sesame/%i/admin_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 8081) | cut -d':' -f2); \
     etcdctl set /vulcand/backends/content-writer-sesame/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$CONTENT_WRITER_PORT\\\"}\"; \
     sleep 45; \
   done"

@@ -2,8 +2,145 @@
 services:
   - name: mongodb@.service
     version: latest
-    count: 4
+    count: 3
+  - name: mongodb-sidekick@.service
+    version: latest
+    count: 3
   - name: mongodb-configurator.service
     version: latest
+    count: 0 
+  - name: annotations-api@.service 
+    version: latest
+    count: 1
+  - name: annotations-api-sidekick@.service 
+    version: latest
+    count: 1
+  - name: api-policy-component@.service 
+    version: latest
+    count: 1
+  - name: api-policy-component-sidekick@.service 
+    version: latest
+    count: 1
+  - name: content-writer-sesame@.service
+    version: latest
+    count: 1
+  - name: content-writer-sesame-sidekick@.service
+    version: latest
+    count: 1
+  - name: document-store-api@.service 
+    version: latest
+    count: 1
+  - name: document-store-api-sidekick@.service 
+    version: latest
+    count: 1
+  - name: fastftxf@.service
+    version: latest
+    count: 1
+  - name: fastftxf-sidekick@.service
+    version: latest
+    count: 1
+  - name: graphdb-cluster-manager@.service 
+    version: latest
+    count: 1
+  - name: graphdb-master@.service
+    version: latest
+    count: 1
+  - name: graphdb-master-sidekick@.service
+    version: latest
+    count: 1
+  - name: graphdb-worker@.service
+    version: latest
+    count: 1
+  - name: graphdb-worker-sidekick@.service
+    version: latest
+    count: 1
+  - name: ingester-content@.service
+    version: latest
+    count: 1
+  - name: ingester-semantic@.service
+    version: latest
+    count: 1
+  - name: methode-article-transformer@.service
+    version: latest
+    count: 1
+  - name: methode-article-transformer-sidekick@.service
+    version: latest
+    count: 1
+  - name: ontology-manager@.service
+    version: latest
+    count: 1
+  - name: semantic-reader@.service 
+    version: latest
+    count: 1
+  - name: semantic-reader-sidekick@.service 
+    version: latest
+    count: 1
+  - name: varnish@.service
+    version: latest
+    count: 1
+  - name: varnish-sidekick@.service
+    version: latest
+    count: 1
+  - name: wp-notifier@.service
+    version: latest
+    count: 1
+  - name: wp-notifier-sidekick@.service
+    version: latest
+    count: 1
+  - name: wp-transformer@.service
+    version: latest
+    count: 1
+  - name: wp-transformer-sidekick@.service
+    version: latest
+    count: 1
+  - name: kafka.service
+    version: latest
     count: 0
-
+  - name: kafka-sidekick.service
+    version: latest
+    count: 0
+  - name: zookeeper.service
+    version: latest
+    count: 0
+  - name: zookeeper-sidekick.service
+    version: latest
+    count: 0
+  - name: splunk.service
+    version: latest
+    count: 0
+  - name: splunk-sidekick.service
+    version: latest
+    count: 0
+  - name: cadvisor.service 
+    version: latest
+    count: 0
+  - name: cadvisor-dns.service 
+    version: latest
+    count: 0
+  - name: splunk-forwarder.service
+    version: latest
+    count: 0
+  - name: skydns.service
+    version: latest
+    count: 0
+  - name: prometheus.service
+    version: latest
+    count: 0
+  - name: vulcan.service
+    version: latest
+    count: 0
+  - name: image-cleaner.service
+    version: latest
+    count: 0
+  - name: graylog.service
+    version: latest
+    count: 0
+  - name: graylog-forwarder.service
+    version: latest
+    count: 0
+  - name: promdash.service
+    version: latest
+    count: 0
+  - name: grafana.service
+    version: latest
+    count: 0

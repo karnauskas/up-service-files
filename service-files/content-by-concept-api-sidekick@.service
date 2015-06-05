@@ -1,0 +1,21 @@
+[Unit]
+Description=Content-By-Concept API Sidekick
+BindsTo=content-by-concept-api@%i.service
+After=content-by-concept-api@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set /vulcand/backends/content-by-concept-api/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/content-by-concept-api/frontend '{\"Type\": \"http\", \"BackendId\": \"content-by-concept-api\", \"Route\": \"PathRegexp(`/content?isAnnotatedBy=.*`) && Host(`content-by-concept-api`)\"}'; \
+  etcdctl setdir /services/content-by-concept-api --ttl 60; \
+  etcdctl setdir /vulcand/backends/content-by-concept-api/servers --ttl 60; \
+  while true; do \
+    export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port content-by-concept-api-%i 8080) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/content-by-concept-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/content-by-concept-api/%i
+ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/content-by-concept-api/servers/srv%i
+
+[X-Fleet]
+MachineOf=content-by-concept-api@%i.service

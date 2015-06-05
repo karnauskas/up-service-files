@@ -1,0 +1,26 @@
+[Unit]
+Description=Enriched Content Read API
+After=vulcan.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/enriched-content-read-api
+
+# TODO: solve PING_URL vs. vulcan approach problem
+ExecStart=/bin/sh -c '\
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+    -e "CONTENT_API_REQUEST_URL=http://$HOSTNAME:8080$GRAPHDB_PATH" \
+    -e "CONTENT_API_REQUEST_URL=http://$HOSTNAME:8080/content/{{contentUuid}}" \
+    -e "CONTENT_API_PING_URL=http://$HOSTNAME:8080/ping" \
+    -e "ANNOTATIONS_API_REQUEST_URL=http://$HOSTNAME:8080/content/{{contentUuid}}/annotations" \
+    -e "ANNOTATIONS_API_PING_URL=http://$HOSTNAME:8080/ping" \
+    -e "ENV_HOST=coco.api.ft.com" \
+    coco/enriched-content-read-api'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=enriched-content-read-api@*.service

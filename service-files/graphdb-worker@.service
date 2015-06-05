@@ -7,8 +7,8 @@ Requires=docker.service
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/graphdb-worker
-ExecStart=/usr/bin/docker run --rm --name %p-%i -v /vol/graphdb-worker:/var/lib/data -P coco/graphdb-worker
+ExecStartPre=/usr/bin/docker pull coco/graphdb
+ExecStart=/usr/bin/docker run --rm --name %p-%i -v /vol/graphdb-worker:/var/lib/data -e "TRIPLE_STORE_TYPE=worker" -P coco/graphdb
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [X-Fleet]

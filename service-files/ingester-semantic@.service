@@ -1,7 +1,7 @@
 [Unit]
 Description=Semantic Ingester
-After=vulcan.service
-Requires=docker.service
+After=vulcan.service kafka-sidekick.service
+Requires=docker.service kafka.service
 
 [Service]
 TimeoutStartSec=300

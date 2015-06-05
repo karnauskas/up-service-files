@@ -90,7 +90,10 @@ services:
   - name: wp-transformer@.service
     version: latest
     count: 1
-  - name: wp-transformer-sidekick@.service
+  - name: wp-transformer-sidekick@.service 
+    version: latest
+    count: 1
+  - name: grafana@.service
     version: latest
     count: 1
   - name: kafka.service
@@ -141,6 +144,6 @@ services:
   - name: promdash.service
     version: latest
     count: 0
-  - name: grafana.service
+  - name: methodeapi-endpoint.service
     version: latest
     count: 0

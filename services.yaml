@@ -57,6 +57,9 @@ services:
   - name: ingester-content@.service
     version: latest
     count: 1
+  - name: ingester-content-sidekick@.service
+    version: latest
+    count: 1
   - name: ingester-semantic@.service
     version: latest
     count: 1

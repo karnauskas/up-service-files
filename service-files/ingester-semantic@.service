@@ -1,6 +1,6 @@
 [Unit]
 Description=Semantic Ingester
-After=vulcan.service
+After=vulcan.service kafka-sidekick.service
 Requires=docker.service
 
 [Service]

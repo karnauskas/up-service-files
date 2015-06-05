@@ -1,7 +1,7 @@
 [Unit]
 Description=Wordpress Notifier
-After=docker.service kafka.service
-Wants=docker.service kafka.service
+After=docker.service kafka-sidekick.service
+Requires=docker.service kafka.service
 
 [Service]
 TimeoutStartSec=0

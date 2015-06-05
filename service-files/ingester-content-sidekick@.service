@@ -1,0 +1,24 @@
+[Unit]
+Description=Ingester content store sidekick
+BindsTo=ingester-content@%i.service
+After=ingester-content@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$HOSTNAME; \
+  etcdctl set /vulcand/backends/ingester-content/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/ingester-content/frontend '{\"Type\": \"http\", \"BackendId\": \"ingester-content\", \"Route\": \"Host(`ingester-content`)\"}'; \
+  while true; do \
+    export PORT=$(echo $(/usr/bin/docker port ingester-content-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/ingester-content/%i/host '%H' --ttl 60; \
+    etcdctl set /services/ingester-content/%i/app_port $(echo $(/usr/bin/docker port ingester-content-%i 8080) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/ingester-content/%i/admin_port $(echo $(/usr/bin/docker port ingester-content-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /vulcand/backends/ingester-content/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/ingester-content/%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/ingester-content/servers/srv%i
+
+[X-Fleet]
+MachineOf=ingester-content@%i.service
+

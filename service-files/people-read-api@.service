@@ -1,0 +1,22 @@
+[Unit]
+Description=People Read API
+After=vulcan.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/people-read-api
+
+ExecStart=/bin/sh -c '\
+  export GRAPHDB_PATH=$(/usr/bin/etcdctl get /services/graphdb/path); \
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+    -e "TRIPLE_STORE_URL=http://$HOSTNAME:8080$GRAPHDB_PATH" \
+    -e "ENV_HOST=coco.api.ft.com" \
+    coco/people-read-api'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=people-read-api@*.service

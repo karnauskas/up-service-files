@@ -2,7 +2,7 @@
 Description=MongoDB cluster configurator
 
 [Service]
-TimeoutStartSec=0
+TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStartPre=/usr/bin/docker pull coco/mongodb-configurator

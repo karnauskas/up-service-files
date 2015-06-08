@@ -2,7 +2,7 @@
 Description=GraphDB Cluster Manager
 
 [Service]
-TimeoutStartSec=0
+TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStartPre=/usr/bin/docker pull coco/graphdb-cluster-manager

@@ -4,6 +4,7 @@ Requires=docker.socket
 After=docker.socket
 
 [Service]
+TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStartPre=/bin/sh -c "docker history coco/prometheus >/dev/null 2>&1 || docker pull coco/prometheus"

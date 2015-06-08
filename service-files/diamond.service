@@ -1,0 +1,20 @@
+[Unit]
+Description=A diamond collector for docker containers 
+Requires=docker.socket
+After=docker.socket
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/usr/bin/docker pull coco/diamond
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -e GRAPHITE_HOST=graphite.ft.com -e GRAPHITE_PORT=2003 -e DOCKER_HOSTNAME=$HOSTNAME -e INTERVAL=60 -v /proc:/host_proc:ro -v /var/run/docker.sock:/var/run/docker.sock:ro coco/diamond"
+ExecStopPost=-/usr/bin/docker rm -f %p
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+

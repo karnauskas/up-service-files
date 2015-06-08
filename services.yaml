@@ -144,3 +144,6 @@ services:
   - name: methodeapi-endpoint.service
     version: latest
     count: 0
+  - name: diamond.service
+    version: latest
+    count: 0

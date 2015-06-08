@@ -1,7 +1,7 @@
 [Unit]
 Description=Content Ingester
-After=vulcan.service kafka-sidekick.service
-Requires=docker.service kafka.service
+After=vulcan.service
+Requires=docker.service
 
 [Service]
 TimeoutStartSec=300

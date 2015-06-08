@@ -138,12 +138,6 @@ services:
   - name: image-cleaner.service
     version: latest
     count: 0
-  - name: graylog.service
-    version: latest
-    count: 0
-  - name: graylog-forwarder.service
-    version: latest
-    count: 0
   - name: promdash.service
     version: latest
     count: 0

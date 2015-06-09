@@ -96,9 +96,6 @@ services:
   - name: wp-transformer-sidekick@.service 
     version: latest
     count: 1
-  - name: grafana@.service
-    version: latest
-    count: 1
   - name: kafka.service
     version: latest
     count: 0

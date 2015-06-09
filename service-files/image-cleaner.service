@@ -7,7 +7,7 @@ ExecStart=/bin/sh -c "\
   while true; do \
     docker rm `docker ps -a -q --no-trunc`; \
     docker rmi `docker images -f \"dangling=true\" -q --no-trunc`; \
-    sleep 300; \
+    sleep 1800; \
   done"
 Restart=on-failure
 RestartSec=60

@@ -18,5 +18,4 @@ RestartSec=120
 
 [X-Fleet]
 Conflicts=kafka.service
-MachineMetadata=host_type=kafka
-
+MachineOf=zookeeper.service

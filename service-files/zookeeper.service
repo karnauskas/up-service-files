@@ -13,5 +13,4 @@ ExecStop=/usr/bin/docker stop %p
 
 [X-Fleet]
 Conflicts=zookeeper.service
-MachineMetadata=host_type=kafka
 

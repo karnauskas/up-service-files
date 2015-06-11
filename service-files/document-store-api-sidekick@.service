@@ -1,6 +1,6 @@
 [Unit]
 Description=Document store api sidekick
-BindsTo=document-store-api@%i.service
+PartOf=document-store-api@%i.service
 After=document-store-api@%i.service
 
 [Service]

@@ -1,6 +1,6 @@
 [Unit]
 Description=api policy component
-BindsTo=api-policy-component@%i.service
+PartOf=api-policy-component@%i.service
 After=api-policy-component@%i.service
 
 [Service]

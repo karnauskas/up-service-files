@@ -1,6 +1,6 @@
 [Unit]
 Description=FastFTXF Sidekick
-BindsTo=fastftxf@%i.service
+PartOf=fastftxf@%i.service
 After=fastftxf@%i.service
 
 [Service]

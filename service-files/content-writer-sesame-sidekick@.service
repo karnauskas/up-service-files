@@ -1,6 +1,6 @@
 [Unit]
 Description=Content writer sesame
-BindsTo=content-writer-sesame@%i.service
+PartOf=content-writer-sesame@%i.service
 After=content-writer-sesame@%i.service
 
 [Service]

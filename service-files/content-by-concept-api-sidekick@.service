@@ -1,6 +1,6 @@
 [Unit]
 Description=Content-By-Concept API Sidekick
-BindsTo=content-by-concept-api@%i.service
+PartOf=content-by-concept-api@%i.service
 After=content-by-concept-api@%i.service
 
 [Service]

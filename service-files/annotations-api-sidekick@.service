@@ -1,6 +1,6 @@
 [Unit]
 Description=Annotations API Sidekick
-BindsTo=annotations-api@%i.service
+PartOf=annotations-api@%i.service
 After=annotations-api@%i.service
 
 [Service]

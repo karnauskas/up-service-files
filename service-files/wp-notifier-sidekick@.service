@@ -1,6 +1,6 @@
 [Unit]
 Description=Wordpress Notifier Sidekick
-BindsTo=wp-notifier@%i.service
+PartOf=wp-notifier@%i.service
 After=wp-notifier@%i.service
 
 [Service]

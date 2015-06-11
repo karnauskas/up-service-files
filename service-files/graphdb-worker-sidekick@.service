@@ -1,6 +1,6 @@
 [Unit]
 Description=GraphDB Worker Sidekick
-BindsTo=graphdb-worker@%i.service
+PartOf=graphdb-worker@%i.service
 After=graphdb-worker@%i.service
 
 [Service]

@@ -1,6 +1,6 @@
 [Unit]
 Description=Ingester content store sidekick
-BindsTo=ingester-content@%i.service
+PartOf=ingester-content@%i.service
 After=ingester-content@%i.service
 
 [Service]

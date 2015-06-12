@@ -1,0 +1,21 @@
+[Unit]
+Description=Docker repository mirror
+Requires=docker.socket
+After=docker.socket
+
+[Service]
+TimeoutStartSec=600
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/bin/sh -c "docker pull registry"
+ExecStart=/bin/bash -c "docker run --rm --name repo-mirror -p 5000 -v /vol/repomirror:/tmp -e STANDALONE=false -e MIRROR_SOURCE=https://registry-1.docker.io -e MIRROR_SOURCE_INDEX=https://index.docker.io registry"
+ExecStopPost=-/usr/bin/docker rm -f %p
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+MachineMetadata=host_type=persistent
+

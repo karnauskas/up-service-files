@@ -1,0 +1,19 @@
+[Unit]
+Description=Repository mirror sidekick
+PartOf=repo-mirror.service
+After=repo-mirror.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set /vulcand/backends/repo-mirror/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/repo-mirror/frontend '{\"Type\": \"http\", \"BackendId\": \"repo-mirror\", \"Route\": \"Host(`localhost`) && HeaderRegexp(`User-Agent`, `.*docker.*`)\"}'; \
+  etcdctl setdir /vulcand/backends/repo-mirror/servers --ttl 60; \
+  while true; do \
+    export PORT=$(echo $(/usr/bin/docker port repo-mirror 5000) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/repo-mirror/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\"; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/repo-mirror/servers/srv1
+
+[X-Fleet]
+MachineOf=repo-mirror.service

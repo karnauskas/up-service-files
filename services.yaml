@@ -144,3 +144,9 @@ services:
   - name: diamond.service
     version: latest
     count: 0
+  - name: repo-mirror.service
+    version: latest
+    count: 0
+  - name: repo-mirror-sidekick.service
+    version: latest
+    count: 0

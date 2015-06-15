@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c "\
     sleep 45; \
   done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/wp-transformer/%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/wp-article-transformer/servers/srv%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/wp-transformer/servers/srv%i
 
 [X-Fleet]
 MachineOf=wp-transformer@%i.service

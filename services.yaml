@@ -96,6 +96,12 @@ services:
   - name: wp-transformer-sidekick@.service 
     version: latest
     count: 1
+  - name: binary-ingester@.service
+    version: latest
+    count: 1
+  - name: binary-ingester-sidekick@.service
+    version: latest
+    count: 1
   - name: kafka.service
     version: latest
     count: 0

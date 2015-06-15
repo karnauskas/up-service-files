@@ -27,6 +27,12 @@ services:
   - name: content-writer-sesame-sidekick@.service
     version: latest
     count: 1
+  - name: cms-notifier@.service
+    version: latest
+    count: 1
+  - name: cms-notifier-sidekick@.service
+    version: latest
+    count: 1
   - name: document-store-api@.service 
     version: latest
     count: 1

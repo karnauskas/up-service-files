@@ -168,3 +168,9 @@ services:
   - name: repo-mirror-sidekick.service
     version: latest
     count: 0
+  - name: nativerw@.service
+    version: latest
+    count: 1
+  - name: nativerw-sidekick@.service
+    version: latest
+    count: 1

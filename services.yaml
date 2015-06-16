@@ -174,3 +174,9 @@ services:
   - name: nativerw-sidekick@.service
     version: latest
     count: 1
+  - name: methode-image-model-transformer@.service
+    version: latest
+    count: 1
+  - name: methode-image-model-transformer-sidekick@.service
+    version: latest
+    count: 1

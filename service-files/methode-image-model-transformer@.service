@@ -1,0 +1,18 @@
+[Unit]
+Description=methode image model transformer
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=600
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/methode-image-model-transformer
+
+ExecStart=/bin/sh -c '\
+  /usr/bin/docker run --rm --name %p-%i -P --env "VULCAN_HOST=%H" coco/methode-image-model-transformer'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+[X-Fleet]
+Conflicts=methode-image-model-transformer@*.service

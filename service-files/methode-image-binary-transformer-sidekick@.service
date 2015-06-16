@@ -1,0 +1,25 @@
+[Unit]
+Description=Methode Image Binary Transformer
+PartOf=methode-image-binary-transformer@%i.service
+After=methode-image-binary-transformer@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export METHODE_IMAGE_BINARY_TRANSFORMER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  export _IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  etcdctl set /vulcand/backends/methode-image-binary-transformer/backend '{\"Type\": \"http\"}' ; \
+  etcdctl set /vulcand/frontends/methode-image-binary-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-image-binary-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-image-binary-transformer`)\"}'; \
+  while true; do \
+    export METHODE_IMAGE_BINARY_TRANSFORMER_PORT=$(/usr/bin/docker port methode-image-binary-transformer-%i 8080 | cut -d':' -f2); \
+    etcdctl set /services/methode-image-binary-transformer/%i/host '%H' --ttl 60; \
+    etcdctl set /services/methode-image-binary-transformer/%i/app_port $METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 60; \
+    etcdctl set /services/methode-image-binary-transformer/%i/admin_port $(echo $(/usr/bin/docker port methode-image-binary-transformer-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /vulcand/backends/methode-image-binary-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$METHODE_IMAGE_BINARY_TRANSFORMER_IP:$METHODE_IMAGE_BINARY_TRANSFORMER_PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm --recursive /services/methode-image-binary-transformer/%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-image-binary-transformer/servers/srv%i
+
+[X-Fleet]
+MachineOf=methode-image-binary-transformer@%i.service

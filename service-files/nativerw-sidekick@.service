@@ -1,0 +1,20 @@
+[Unit]
+Description=Nativerw sidekick
+PartOf=nativerw@%i.service
+After=nativerw@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$HOSTNAME; \
+  etcdctl set /vulcand/backends/nativerw/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/nativerw/frontend '{\"Type\": \"http\", \"BackendId\": \"nativerw\", \"Route\": \"PathRegexp(`/.*`) && Host(`nativerw`)\"}'; \
+  while true; do \
+    export NATIVERW_PORT=$(echo $(/usr/bin/docker port nativerw-%i 8080) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/nativerw/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$NATIVERW_PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/nativerw/servers/srv%i
+
+[X-Fleet]
+MachineOf=nativerw@%i.service
+

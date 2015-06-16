@@ -1,0 +1,23 @@
+[Unit]
+Description=MongoDB nativerw
+After=docker.service
+Requires=docker.service
+# TODO: should not require mongo. Instead, allow unheathy startup.
+# TODO: reach when more mongo instances appear.
+Wants=mongodb@1.service
+
+[Service]
+TimeoutStartSec=600
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/nativerw
+
+ExecStart=/bin/sh -c '\
+  MONGO_ADDRESSES=$(for x in $(etcdctl ls /services/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//);\
+  /usr/bin/docker run --rm --name %p-%i -P --env "MONGO_ADDRESSES=$MONGO_ADDRESSES" coco/nativerw;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=nativerw@*.service

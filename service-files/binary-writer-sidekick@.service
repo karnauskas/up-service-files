@@ -1,0 +1,24 @@
+[Unit]
+Description=Binary Writer Sidekick
+PartOf=binary-writer@%i.service
+After=binary-writer@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$HOSTNAME; \
+  etcdctl set /vulcand/backends/binary-writer/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/binary-writer/frontend '{\"Type\": \"http\", \"BackendId\": \"binary-writer\", \"Route\": \"Host(`binary-writer`)\"}'; \
+  while true; do \
+    export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/binary-writer/%i/host '%H' --ttl 60; \
+    etcdctl set /services/binary-writer/%i/app_port $(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/binary-writer/%i/admin_port $(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /vulcand/backends/binary-writer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /services/binary-writer/%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-writer/servers/srv%i
+
+[X-Fleet]
+MachineOf=binary-writer@%i.service
+

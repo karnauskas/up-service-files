@@ -8,7 +8,6 @@ services:
     count: 3
   - name: mongodb-configurator.service
     version: latest
-    count: 0 
   - name: annotations-api@.service 
     version: latest
     count: 1
@@ -128,58 +127,40 @@ services:
     count: 1
   - name: kafka.service
     version: latest
-    count: 0
   - name: kafka-sidekick.service
     version: latest
-    count: 0
   - name: zookeeper.service
     version: latest
-    count: 0
   - name: zookeeper-sidekick.service
     version: latest
-    count: 0
   - name: splunk.service
     version: latest
-    count: 0
   - name: splunk-sidekick.service
     version: latest
-    count: 0
   - name: cadvisor.service 
     version: latest
-    count: 0
   - name: cadvisor-dns.service 
     version: latest
-    count: 0
   - name: splunk-forwarder.service
     version: latest
-    count: 0
   - name: skydns.service
     version: latest
-    count: 0
   - name: prometheus.service
     version: latest
-    count: 0
   - name: vulcan.service
     version: latest
-    count: 0
   - name: image-cleaner.service
     version: latest
-    count: 0
   - name: promdash.service
     version: latest
-    count: 0
   - name: methodeapi-endpoint.service
     version: latest
-    count: 0
   - name: diamond.service
     version: latest
-    count: 0
   - name: repo-mirror.service
     version: latest
-    count: 0
   - name: repo-mirror-sidekick.service
     version: latest
-    count: 0
   - name: nativerw@.service
     version: latest
     count: 1

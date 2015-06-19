@@ -6,7 +6,7 @@ After=repo-mirror.service
 [Service]
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/repo-mirror/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/frontends/repo-mirror/frontend '{\"Type\": \"http\", \"BackendId\": \"repo-mirror\", \"Route\": \"Host(`localhost`) && HeaderRegexp(`User-Agent`, `.*docker.*`)\"}'; \
+  etcdctl set /vulcand/frontends/repo-mirror/frontend '{\"Type\": \"http\", \"BackendId\": \"repo-mirror\", \"Route\": \"HeaderRegexp(`User-Agent`, `.*docker.*`)\"}'; \
   etcdctl setdir /vulcand/backends/repo-mirror/servers --ttl 60; \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port repo-mirror 5000) | cut -d':' -f2); \

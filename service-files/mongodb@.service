@@ -8,9 +8,12 @@ TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStartPre=/usr/bin/docker pull coco/mongodb
-ExecStart=/usr/bin/docker run --rm --name %p-%i -v /vol/mongodb:/data/db -P coco/mongodb
+ExecStart=/bin/sh -c "\
+MONGO_PORT=27017;\
+MONGO_ADMIN_PORT=$(( $MONGO_PORT + 1000));\
+/usr/bin/docker run --rm --name %p-%i -v /vol/mongodb:/data/db -p $(( $MONGO_PORT + %i )):$MONGO_PORT -p $(( $MONGO_ADMIN_PORT + %i )):$MONGO_ADMIN_PORT coco/mongodb;"
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [X-Fleet]
 Conflicts=mongodb@*.service
-MachineMetadata=host_type=persistent
+MachineMetadata=persistent_tag=%i

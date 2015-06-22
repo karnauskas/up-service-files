@@ -13,4 +13,4 @@ ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [X-Fleet]
 Conflicts=mongodb@*.service
-MachineMetadata=host_type=persistent
+MachineMetadata=persistent_tag=%i

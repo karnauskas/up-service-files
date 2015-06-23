@@ -1,6 +1,6 @@
 [Unit]
 Description=Kafka Sidekick
-BindsTo=kafka.service
+PartOf=kafka.service
 After=kafka.service
 
 [Service]

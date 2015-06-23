@@ -1,6 +1,6 @@
 [Unit]
 Description=Zookeeper Sidekick
-BindsTo=zookeeper.service
+PartOf=zookeeper.service
 After=zookeeper.service
 
 [Service]

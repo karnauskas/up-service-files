@@ -18,6 +18,3 @@ RestartSec=60
 [Install]
 WantedBy=multi-user.target
 
-[X-Fleet]
-MachineMetadata=host_type=monitor
-

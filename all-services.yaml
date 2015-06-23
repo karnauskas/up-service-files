@@ -125,6 +125,12 @@ services:
   - name: methode-image-binary-transformer-sidekick@.service
     version: latest
     count: 1
+  - name: aggregate-healthcheck@.service
+    version: latest
+    count: 1
+  - name: aggregate-healthcheck-sidekick@.service
+    version: latest
+    count: 1
   - name: kafka.service
     version: latest
   - name: kafka-sidekick.service

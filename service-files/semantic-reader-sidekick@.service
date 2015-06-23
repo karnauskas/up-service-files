@@ -1,6 +1,6 @@
 [Unit]
 Description=Semantic reader api sidekick
-BindsTo=semantic-reader@%i.service
+PartOf=semantic-reader@%i.service
 After=semantic-reader@%i.service
 
 [Service]

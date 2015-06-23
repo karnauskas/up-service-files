@@ -1,6 +1,6 @@
 [Unit]
 Description=Splunk Sidekick
-BindsTo=splunk.service
+PartOf=splunk.service
 After=splunk.service
 
 [Service]

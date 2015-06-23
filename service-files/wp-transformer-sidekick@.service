@@ -1,6 +1,6 @@
 [Unit]
 Description=wp-transformer Sidekick
-BindsTo=wp-transformer@%i.service
+PartOf=wp-transformer@%i.service
 After=wp-transformer@%i.service
 
 [Service]

@@ -1,6 +1,6 @@
 [Unit]
 Description=method article transformer sidekick
-BindsTo=methode-article-transformer@%i.service
+PartOf=methode-article-transformer@%i.service
 After=methode-article-transformer@%i.service
 
 [Service]

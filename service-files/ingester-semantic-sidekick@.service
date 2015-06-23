@@ -1,6 +1,6 @@
 [Unit]
 Description=Ingester semantic store sidekick
-BindsTo=ingester-semantic@%i.service
+PartOf=ingester-semantic@%i.service
 After=ingester-semantic@%i.service
 
 [Service]

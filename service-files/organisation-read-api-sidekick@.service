@@ -1,6 +1,6 @@
 [Unit]
 Description=Organisation Read API Sidekick
-BindsTo=organisation-read-api@%i.service
+PartOf=organisation-read-api@%i.service
 After=organisation-read-api@%i.service
 
 [Service]

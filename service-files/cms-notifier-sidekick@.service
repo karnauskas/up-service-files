@@ -1,6 +1,6 @@
 [Unit]
 Description=CMS Notifier Sidekick
-BindsTo=cms-notifier@%i.service
+PartOf=cms-notifier@%i.service
 After=cms-notifier@%i.service
 
 [Service]

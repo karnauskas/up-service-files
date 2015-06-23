@@ -82,7 +82,3 @@ services:
     version: latest
   - name: diamond.service
     version: latest
-  - name: repo-mirror.service
-    version: latest
-  - name: repo-mirror-sidekick.service
-    version: latest

@@ -2,11 +2,15 @@
 Description=Splunk forwarder
 
 [Service]
-ExecStart=/bin/bash -c "\ 
-  export SPLUNK_IP=$(/usr/bin/etcdctl get /ft/splunk_host); \ 
-  /usr/bin/journalctl -a -f --output=json | ncat $SPLUNK_IP 514"
-Restart=on-failure
-RestartSec=5
+
+TimeoutStartSec=600
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull coco/coco-splunk-http-forwarder
+ExecStart=/bin/bash -c "\
+      export FORWARD_URL=$(/usr/bin/etcdctl get /ft/_credentials/splunk-forwarder/splunk_url); \
+      /usr/bin/journalctl -a -f --output=json | docker run -i --rm --name %p-%i --env=\"FORWARD_URL=$FORWARD_URL\" coco/coco-splunk-http-forwarder"
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [Install]
 WantedBy=multi-user.target

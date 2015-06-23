@@ -1,6 +1,6 @@
 [Unit]
 Description=Varnish Sidekick
-BindsTo=varnish@%i.service
+PartOf=varnish@%i.service
 After=varnish@%i.service
 
 [Service]

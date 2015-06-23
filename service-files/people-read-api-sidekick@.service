@@ -1,6 +1,6 @@
 [Unit]
 Description=People Read API Sidekick
-BindsTo=people-read-api@%i.service
+PartOf=people-read-api@%i.service
 After=people-read-api@%i.service
 
 [Service]

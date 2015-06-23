@@ -1,6 +1,6 @@
 [Unit]
 Description=MongoDB Sidekick
-BindsTo=mongodb@%i.service
+PartOf=mongodb@%i.service
 After=mongodb@%i.service
 
 [Service]

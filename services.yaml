@@ -45,7 +45,7 @@ services:
     version: latest
     count: 1
   - name: nativerw@.service
-    version: latest
+    version: version_2015-06-16_12-19-06
     count: 1
   - name: nativerw-sidekick@.service
     version: latest

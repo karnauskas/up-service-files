@@ -1,0 +1,14 @@
+[Unit]
+Description=Dashing forwarder
+
+[Service]
+ExecStart=/bin/bash -c "\
+  while true; do \  
+  DASHING_AUTH_TOKEN=$(/usr/bin/etcdctl get /ft/_credentials/dashing/auth_token); \
+  res=`curl -si -H \"Host: aggregate-healthcheck\" $HOSTNAME:8080/__health | grep -c 'HTTP/1.1 404\|HTTP/1.1 500\|HTTP/1.1 503\|\"ok\":false'`; \
+  if [ $res -eq 0 ]; \
+    then curl -d '{ \"auth_token\": \"$DASHING_AUTH_TOKEN\", \"status\": \"ok\", \"message\": \"OK\" }' http://dashing.internal.ft.com/widgets/coco; \
+    else curl -d '{ \"auth_token\": \"$DASHING_AUTH_TOKEN\", \"status\": \"critical\", \"message\": \"Cluster unhealthy - please investigate\" }' http://dashing.internal.ft.com/widgets/coco; \
+  fi; \
+  sleep 30; \
+done"

@@ -9,7 +9,8 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/aggregate-healthcheck/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/aggregate-healthcheck/frontend '{\"Type\": \"http\", \"BackendId\": \"aggregate-healthcheck\", \"Route\": \"Host(`aggregate-healthcheck`)\"}'; \
   \
-  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"aggregate-healthcheck\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"aggregate-healthcheck\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health\\\", \\\"Replacement\\\":\\\"/__health\\\"}}\"; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080) | cut -d':' -f2); \

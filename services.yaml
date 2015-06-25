@@ -90,3 +90,5 @@ services:
     version: latest
   - name: dashing-forwarder.service
     version: latest
+  - name: deployer.service
+    version: latest

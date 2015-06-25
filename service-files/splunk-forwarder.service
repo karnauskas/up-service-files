@@ -10,7 +10,7 @@ ExecStartPre=/usr/bin/docker pull coco/coco-splunk-http-forwarder
 ExecStartPre=/usr/bin/docker pull coco/coco-logfilter
 ExecStart=/bin/bash -c "\
       export FORWARD_URL=$(/usr/bin/etcdctl get /ft/_credentials/splunk-forwarder/splunk_url); \
-      /usr/bin/journalctl -a -f --output=json | docker run -i --rm --name %p-%i --env=\"FORWARD_URL=$FORWARD_URL\" coco/coco-splunk-http-forwarder"
+      /usr/bin/journalctl -a -f --output=json | docker run -i --rm coco/coco-logfilter | docker run -i --rm --name %p-%i --env=\"FORWARD_URL=$FORWARD_URL\" coco/coco-splunk-http-forwarder"
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [Install]

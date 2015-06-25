@@ -4,11 +4,12 @@ PartOf=aggregate-healthcheck@%i.service
 After=aggregate-healthcheck@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/aggregate-healthcheck/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/aggregate-healthcheck/frontend '{\"Type\": \"http\", \"BackendId\": \"aggregate-healthcheck\", \"Route\": \"Host(`aggregate-healthcheck`)\"}'; \
   \
-  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend '{\"Type\":\"http\", \"BackendId\":\"aggregate-healthcheck\", \"Route\":\"Host(`ELB_HOSTNAME`)\"}'; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"aggregate-healthcheck\\\", \\\"Route\":\\\"Host(`$ELB_HOSTNAME`)\\\"}\"; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080) | cut -d':' -f2); \

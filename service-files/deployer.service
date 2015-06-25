@@ -1,5 +1,7 @@
 [Unit]
 Description=Deployer
+After=docker.service
+Requires=docker.service
 
 [Service]
 TimeoutStartSec=600

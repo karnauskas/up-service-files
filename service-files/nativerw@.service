@@ -11,7 +11,7 @@ Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/nativerw:$DOCKER_APP_VESRION
+ExecStartPre=/usr/bin/docker pull coco/nativerw:$DOCKER_APP_VERSION
 
 ExecStart=/bin/sh -c '\
   MONGO_ADDRESSES=$(for x in $(etcdctl ls /services/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//);\

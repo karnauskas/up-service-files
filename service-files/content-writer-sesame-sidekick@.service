@@ -10,6 +10,10 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/content-writer-sesame/frontend '{\"Type\": \"http\", \"BackendId\": \"content-writer-sesame\", \"Route\": \"PathRegexp(`/.*`) && Host(`content-writer-sesame`)\"}'; \
   etcdctl setdir /services/content-writer-sesame --ttl 60; \
   etcdctl setdir /vulcand/backends/content-writer-sesame/servers --ttl 60; \
+  \
+  etcdctl set /vulcand/frontends/content-writer-sesame-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"content-writer-sesame\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/content-writer-sesame/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/content-writer-sesame-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/content-writer-sesame(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export CONTENT_WRITER_PORT=$(echo $(/usr/bin/docker port content-writer-sesame-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/content-writer-sesame/%i/host '%H' --ttl 60; \

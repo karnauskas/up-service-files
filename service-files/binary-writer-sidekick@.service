@@ -8,6 +8,10 @@ ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/binary-writer/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/binary-writer/frontend '{\"Type\": \"http\", \"BackendId\": \"binary-writer\", \"Route\": \"Host(`binary-writer`)\"}'; \
+  \
+  etcdctl set /vulcand/frontends/binary-writer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"binary-writer\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/binary-writer/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/binary-writer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/binary-writer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/binary-writer/%i/host '%H' --ttl 60; \

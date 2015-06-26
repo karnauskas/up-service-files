@@ -9,6 +9,10 @@ ExecStart=/bin/sh -c "\
   export _IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/methode-image-binary-transformer/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/methode-image-binary-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-image-binary-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-image-binary-transformer`)\"}'; \
+  \
+  etcdctl set /vulcand/frontends/methode-image-binary-transformer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-image-binary-transformer\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/methode-image-binary-transformer/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/methode-image-binary-transformer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-image-binary-transformer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export METHODE_IMAGE_BINARY_TRANSFORMER_PORT=$(/usr/bin/docker port methode-image-binary-transformer-%i 8080 | cut -d':' -f2); \
     etcdctl set /services/methode-image-binary-transformer/%i/host '%H' --ttl 60; \

@@ -8,6 +8,10 @@ ExecStart=/bin/sh -c "\
   export METHODE_CONTENT_IMPORTER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/methode-content-importer/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/methode-content-importer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-content-importer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-content-importer`)\"}'; \
+  \
+  etcdctl set /vulcand/frontends/methode-content-importer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-content-importer\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/methode-content-importer/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/methode-content-importer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-content-importer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export METHODE_CONTENT_IMPORTER_PORT=$(/usr/bin/docker port methode-content-importer-%i 8080 | cut -d':' -f2); \
     etcdctl set /services/methode-content-importer/%i/host '%H' --ttl 60; \

@@ -8,6 +8,10 @@ ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/api-policy-component/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/api-policy-component/frontend '{\"Type\": \"http\", \"BackendId\": \"api-policy-component\", \"Route\": \"PathRegexp(`/.*`) && Host(`api-policy-component`)\"}'; \
+  \
+  etcdctl set /vulcand/frontends/api-policy-component-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"api-policy-component\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/api-policy-component/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/api-policy-component-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/api-policy-component(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export APP_HOST='%H'; \
     export APP_PORT=$(echo $(/usr/bin/docker port api-policy-component-%i 8080) | cut -d':' -f2); \

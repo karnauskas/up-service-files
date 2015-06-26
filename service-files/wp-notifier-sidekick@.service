@@ -8,6 +8,10 @@ ExecStart=/bin/sh -c "\
   export WP_NOTIFIER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/wp-notifier/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/wp-notifier/frontend '{\"Type\": \"http\", \"BackendId\": \"wp-notifier\", \"Route\": \"PathRegexp(`/.*`) && Host(`wp-notifier`)\"}'; \
+  \
+  etcdctl set /vulcand/frontends/wp-notifier-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"wp-notifier\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/wp-notifier/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/wp-notifier-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/wp-notifier(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export WP_NOTIFIER_PORT=$(/usr/bin/docker port wp-notifier-%i 8080 | cut -d':' -f2); \
     etcdctl set /services/wp-notifier/%i/host '%H' --ttl 60; \

@@ -90,3 +90,7 @@ services:
     version: latest
   - name: dashing-forwarder.service
     version: latest
+  - name: deployer.service
+    version: latest
+  - name: vulcan-elb-presence.service
+    version: latest

@@ -7,13 +7,13 @@ Requires=docker.service
 Wants=mongodb@1.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/nativerw:$DOCKER_APP_VESRION
+ExecStartPre=/bin/bash -c 'docker pull coco/nativerw:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  DOCKER_APP_VERSION=latest
   MONGO_ADDRESSES=$(for x in $(etcdctl ls /services/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//);\
   /usr/bin/docker run --rm --name %p-%i -P --env "MONGO_ADDRESSES=$MONGO_ADDRESSES" coco/nativerw:$DOCKER_APP_VERSION;'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

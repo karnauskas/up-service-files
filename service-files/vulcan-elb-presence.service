@@ -1,0 +1,14 @@
+[Unit]
+Description=Register vulcan instances with the cluster ELB
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill vulcan-elb-presence
+ExecStartPre=-/usr/bin/docker rm vulcan-elb-presence
+ExecStart=/bin/sh -c '\
+  AWS_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
+  AWS_SECRET_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
+  /usr/bin/docker run --rm --name vulcan-elb-presence -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY -e AWS_SECRET_KEY=$AWS_SECRET_KEY -e AWS_REGION=eu-west-1 -e ELB_NAME=cluster-elb quay.io/coreos/elb-presence'
+ExecStop=/usr/bin/docker stop vulcan-elb-presence
+
+[X-Fleet]
+Global=true

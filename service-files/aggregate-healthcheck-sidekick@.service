@@ -4,16 +4,19 @@ PartOf=aggregate-healthcheck@%i.service
 After=aggregate-healthcheck@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/aggregate-healthcheck/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/aggregate-healthcheck/frontend '{\"Type\": \"http\", \"BackendId\": \"aggregate-healthcheck\", \"Route\": \"Host(`aggregate-healthcheck`)\"}'; \
+  \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"aggregate-healthcheck\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health\\\", \\\"Replacement\\\":\\\"/__health\\\"}}\"; \
+  \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080) | cut -d':' -f2); \
-    etcdctl set /services/aggregate-healthcheck/%i/host '%H' --ttl 60; \
-    etcdctl set /services/aggregate-healthcheck/%i/app_port $(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080) | cut -d':' -f2) --ttl 60; \
-    etcdctl set /services/aggregate-healthcheck/%i/admin_port $(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8081) | cut -d':' -f2) --ttl 60; \
-    etcdctl set /vulcand/backends/aggregate-healthcheck/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
+    etcdctl set /services/aggregate-healthcheck/%i/host $HOSTNAME --ttl 60; \
+    etcdctl set /services/aggregate-healthcheck/%i/app_port $PORT --ttl 60; \
+    etcdctl set /vulcand/backends/aggregate-healthcheck/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/aggregate-healthcheck/%i

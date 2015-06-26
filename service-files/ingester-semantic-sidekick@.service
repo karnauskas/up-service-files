@@ -4,6 +4,7 @@ PartOf=ingester-semantic@%i.service
 After=ingester-semantic@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/ingester-semantic/backend '{\"Type\": \"http\"}'; \

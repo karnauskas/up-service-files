@@ -4,6 +4,7 @@ PartOf=semantic-reader@%i.service
 After=semantic-reader@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/frontends/semantic-reader/frontend '{\"Type\": \"http\", \"BackendId\": \"semantic-reader\", \"Route\": \"PathRegexp(`/content/.*`) && Host(`public-services`)\"}'; \

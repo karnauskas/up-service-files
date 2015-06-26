@@ -4,6 +4,7 @@ PartOf=wp-notifier@%i.service
 After=wp-notifier@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   export WP_NOTIFIER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/wp-notifier/backend '{\"Type\": \"http\"}' ; \

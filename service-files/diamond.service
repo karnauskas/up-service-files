@@ -2,6 +2,8 @@
 Description=A diamond collector for docker containers 
 Requires=docker.socket
 After=docker.socket
+After=registry.service
+Wants=registry.service
 
 [Service]
 ExecStartPre=-/usr/bin/docker kill %p

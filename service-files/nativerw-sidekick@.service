@@ -15,6 +15,9 @@ ExecStart=/bin/sh -c "\
   \
   while true; do \
     export NATIVERW_PORT=$(echo $(/usr/bin/docker port nativerw-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/nativerw/%i/host '%H' --ttl 60; \
+    etcdctl set /services/nativerw/%i/app_port $NATIVERW_PORT --ttl 60; \
+    etcdctl set /services/nativerw/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/nativerw/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$NATIVERW_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

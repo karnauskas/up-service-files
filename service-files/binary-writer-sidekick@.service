@@ -18,6 +18,7 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/binary-writer/%i/host '%H' --ttl 60; \
     etcdctl set /services/binary-writer/%i/app_port $(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2) --ttl 60; \
     etcdctl set /services/binary-writer/%i/admin_port $(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/binary-writer/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/binary-writer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

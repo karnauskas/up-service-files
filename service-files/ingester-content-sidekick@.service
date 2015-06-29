@@ -4,13 +4,13 @@ PartOf=ingester-content@%i.service
 After=ingester-content@%i.service
 
 [Service]
-Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
+
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/ingester-content/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/ingester-content/frontend '{\"Type\": \"http\", \"BackendId\": \"ingester-content\", \"Route\": \"Host(`ingester-content`)\"}'; \
   \
-  etcdctl set /vulcand/frontends/ingester-content-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"ingester-content\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/ingester-content/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/ingester-content-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"ingester-content\\\", \\\"Route\\\":\\\"Path(\`/health/ingester-content/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/ingester-content-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/ingester-content(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   \
   while true; do \

@@ -1,5 +1,7 @@
 [Unit]
 Description=Register vulcan instances with the cluster ELB
+Requires=docker.service
+After=docker.service
 After=registry.service
 Wants=registry.service
 

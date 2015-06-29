@@ -2,6 +2,8 @@
 Description=Aggregate Healthcheck
 After=docker.service
 Requires=docker.service
+After=registry.service
+Wants=registry.service
 
 [Service]
 TimeoutStartSec=600
@@ -11,10 +13,8 @@ ExecStartPre=/usr/bin/docker pull coco/coco-aggregate-healthcheck
 
 ExecStart=/bin/bash -c 'docker run --rm --name %p-%i -p 8080 \
 	--env="ETCD_PEERS=http://$HOSTNAME:4001" \
-	--env="KEY_PREFIX=/vulcand/frontends" \
+	--env="KEY_PREFIX=/services" \
 	--env="VULCAND_ADDRESS=$HOSTNAME:8080" \
-	--env="EXCLUDE_SERVICES=aggregate-healthcheck,repo-mirror,methodeapi" \
-	--env="HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com" \
 	coco/coco-aggregate-healthcheck'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

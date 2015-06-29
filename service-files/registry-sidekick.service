@@ -5,7 +5,7 @@ After=registry.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  etcdctl set /skydns/local/skydns/registry '{"host":"127.0.0.1"}'; \
+  etcdctl set /skydns/local/skydns/registry '{\"host\":\"127.0.0.1\"}'; \
   etcdctl set /vulcand/backends/repo-mirror/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/repo-mirror/frontend '{\"Type\": \"http\", \"BackendId\": \"docker-registry\", \"Route\": \"Host(`registry.skydns.local`)\"}'; \
   etcdctl setdir /vulcand/backends/docker-registry/servers --ttl 60; \

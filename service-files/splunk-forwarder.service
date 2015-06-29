@@ -2,7 +2,6 @@
 Description=Splunk forwarder
 
 [Service]
-
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i

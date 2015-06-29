@@ -3,6 +3,8 @@ Description=Methode Content Importer
 After=docker.service kafka.service
 Requires=docker.service
 Wants=kafka.service
+After=registry.service
+Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

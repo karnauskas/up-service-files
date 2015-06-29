@@ -1,5 +1,7 @@
 [Unit]
 Description=Register vulcan instances with the cluster ELB
+After=registry.service
+Wants=registry.service
 
 [Service]
 ExecStartPre=-/usr/bin/docker kill vulcan-elb-presence

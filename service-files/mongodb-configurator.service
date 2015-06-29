@@ -1,5 +1,7 @@
 [Unit]
 Description=MongoDB cluster configurator
+After=registry.service
+Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

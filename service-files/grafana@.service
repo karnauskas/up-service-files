@@ -1,6 +1,8 @@
 [Unit]
 Description=Grafana
 Requires=cadvisor.service
+After=registry.service
+Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

@@ -2,6 +2,8 @@
 Description=Prometheus Dashboard
 Requires=docker.socket
 After=docker.socket
+After=registry.service
+Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

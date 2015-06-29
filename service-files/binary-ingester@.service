@@ -7,7 +7,7 @@ Requires=docker.service
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/binary-ingester
+ExecStartPre=/usr/bin/docker pull coco/binary-ingester:logOnOneLine
 
 ExecStart=/bin/sh -c '\
   export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /services/zookeeper/ip); \

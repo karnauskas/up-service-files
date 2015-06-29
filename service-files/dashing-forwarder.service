@@ -1,5 +1,6 @@
 [Unit]
 Description=Dashing forwarder
+Wants=aggregate-healthcheck@1.service
 
 [Service]
 ExecStart=/bin/bash -c "\

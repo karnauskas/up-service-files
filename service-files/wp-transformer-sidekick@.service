@@ -4,13 +4,13 @@ PartOf=wp-transformer@%i.service
 After=wp-transformer@%i.service
 
 [Service]
-Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
+
 ExecStart=/bin/sh -c "\
   export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/wp-transformer/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/wp-transformer/frontend \"{\\\"Type\\\": \\\"http\\\", \\\"BackendId\\\": \\\"wp-transformer\\\", \\\"Route\\\": \\\"PathRegexp(\`/.*\`) && Host(\`wp-transformer\`)\\\"}\" ; \
   \
-  etcdctl set /vulcand/frontends/wp-transformer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"wp-transformer\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/wp-transformer/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/wp-transformer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"wp-transformer\\\", \\\"Route\\\":\\\"Path(\`/health/wp-transformer/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/wp-transformer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/wp-transformer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   \
   while true; do \

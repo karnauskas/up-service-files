@@ -4,13 +4,13 @@ PartOf=nativerw@%i.service
 After=nativerw@%i.service
 
 [Service]
-Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
+
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/nativerw/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/nativerw/frontend '{\"Type\": \"http\", \"BackendId\": \"nativerw\", \"Route\": \"PathRegexp(`/.*`) && Host(`nativerw`)\"}'; \
   \
-  etcdctl set /vulcand/frontends/nativerw-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"nativerw\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/nativerw/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/nativerw-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"nativerw\\\", \\\"Route\\\":\\\"Path(\`/health/nativerw/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/nativerw-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/nativerw(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   \
   while true; do \

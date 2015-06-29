@@ -4,14 +4,14 @@ PartOf=enriched-content-read-api@%i.service
 After=enriched-content-read-api@%i.service
 
 [Service]
-Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
+
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/enriched-content-read-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/enriched-content-read-api/frontend '{\"Type\": \"http\", \"BackendId\": \"enriched-content-read-api\", \"Route\": \"PathRegexp(`/enrichedcontent/.*`) && Host(`enriched-content-read-api`)\"}'; \
   etcdctl setdir /services/enriched-content-read-api --ttl 60; \
   etcdctl setdir /vulcand/backends/enriched-content-read-api/servers --ttl 60; \
   \
-  etcdctl set /vulcand/frontends/enriched-content-read-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"enriched-content-read-api\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/enriched-content-read-api/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/enriched-content-read-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"enriched-content-read-api\\\", \\\"Route\\\":\\\"Path(\`/health/enriched-content-read-api/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/enriched-content-read-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/enriched-content-read-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   \
   while true; do \

@@ -1,0 +1,21 @@
+[Unit]
+Description=Docker repository mirror
+Requires=docker.socket
+After=docker.socket
+
+[Service]
+TimeoutStartSec=600
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/bin/sh -c "docker pull registry"
+ExecStart=/bin/bash -c "\
+  AWS_KEY=$(etcdctl get /ft/_credentials/aws/aws_access_key_id);\
+  AWS_SECRET=$(etcdctl get /ft/_credentials/aws/aws_secret_access_key);\
+  docker run -p 5000 --name %p -e SETTINGS_FLAVOR=s3 -e AWS_BUCKET=coco-docker-registry -e STORAGE_PATH=/registry -e AWS_KEY=$AWS_KEY -e AWS_SECRET=AWS_SECRET -e MIRROR_SOURCE=https://registry-1.docker.io -e MIRROR_SOURCE_INDEX=https://index.docker.io -e AWS_REGION=eu-west-1 registry"
+ExecStopPost=-/usr/bin/docker rm -f %p
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+

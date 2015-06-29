@@ -1,0 +1,20 @@
+[Unit]
+Description=Docker registry sidekick
+PartOf=registry.service
+After=registry.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set /skydns/local/skydns/registry '{"host":"127.0.0.1"}'; \
+  etcdctl set /vulcand/backends/repo-mirror/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/repo-mirror/frontend '{\"Type\": \"http\", \"BackendId\": \"docker-registry\", \"Route\": \"Host(`registry.skydns.local`)\"}'; \
+  etcdctl setdir /vulcand/backends/docker-registry/servers --ttl 60; \
+  while true; do \
+    export PORT=$(echo $(/usr/bin/docker port registry 5000) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/docker-registry/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/docker-registry/servers/srv1
+
+[X-Fleet]
+MachineOf=registry.service

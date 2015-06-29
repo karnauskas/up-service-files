@@ -57,6 +57,4 @@ services:
   - name: dashing-forwarder.service
   - name: deployer.service
   - name: vulcan-elb-presence.service
-  - name: registry.service
-  - name: registry-sidekick.service
 

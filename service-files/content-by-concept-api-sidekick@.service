@@ -4,11 +4,16 @@ PartOf=content-by-concept-api@%i.service
 After=content-by-concept-api@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/content-by-concept-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/content-by-concept-api/frontend '{\"Type\": \"http\", \"BackendId\": \"content-by-concept-api\", \"Route\": \"PathRegexp(`/content?isAnnotatedBy=.*`) && Host(`content-by-concept-api`)\"}'; \
   etcdctl setdir /services/content-by-concept-api --ttl 60; \
   etcdctl setdir /vulcand/backends/content-by-concept-api/servers --ttl 60; \
+  \
+  etcdctl set /vulcand/frontends/content-by-concept-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"content-by-concept-api\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/content-by-concept-api/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/content-by-concept-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/content-by-concept-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port content-by-concept-api-%i 8080) | cut -d':' -f2); \
     etcdctl set /vulcand/backends/content-by-concept-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \

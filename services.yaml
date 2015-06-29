@@ -1,96 +1,62 @@
 ---
 services:
   - name: mongodb@.service
-    version: latest
     count: 3
   - name: mongodb-sidekick@.service
-    version: latest
     count: 3
   - name: mongodb-configurator.service
-    version: latest
   - name: cms-notifier@.service
-    version: latest
     count: 1
   - name: cms-notifier-sidekick@.service
-    version: latest
     count: 1
   - name: methode-content-importer@.service
-    version: latest
     count: 1
   - name: methode-content-importer-sidekick@.service
-    version: latest
     count: 1
   - name: binary-ingester@.service
-    version: latest
     count: 1
   - name: binary-ingester-sidekick@.service
-    version: latest
     count: 1
   - name: binary-writer@.service
-    version: latest
     count: 1
   - name: binary-writer-sidekick@.service
-    version: latest
     count: 1
   - name: methode-image-binary-transformer@.service
-    version: latest
     count: 1
   - name: methode-image-binary-transformer-sidekick@.service
-    version: latest
     count: 1
   - name: methode-image-model-transformer@.service
-    version: latest
     count: 1
   - name: methode-image-model-transformer-sidekick@.service
-    version: latest
     count: 1
   - name: nativerw@.service
     version: version_2015-06-16_12-19-06
     count: 1
   - name: nativerw-sidekick@.service
-    version: latest
     count: 1
   - name: aggregate-healthcheck@.service
-    version: latest
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
-    version: latest
     count: 1
   - name: kafka.service
-    version: latest
   - name: kafka-sidekick.service
-    version: latest
   - name: zookeeper.service
-    version: latest
   - name: zookeeper-sidekick.service
-    version: latest
   - name: splunk.service
-    version: latest
   - name: splunk-sidekick.service
-    version: latest
   - name: cadvisor.service 
-    version: latest
   - name: cadvisor-dns.service 
-    version: latest
   - name: splunk-forwarder.service
-    version: latest
   - name: skydns.service
-    version: latest
   - name: prometheus.service
-    version: latest
   - name: vulcan.service
-    version: latest
   - name: image-cleaner.service
-    version: latest
   - name: promdash.service
-    version: latest
   - name: methodeapi-endpoint.service
-    version: latest
   - name: diamond.service
-    version: latest
   - name: dashing-forwarder.service
-    version: latest
   - name: deployer.service
-    version: latest
   - name: vulcan-elb-presence.service
-    version: latest
+  - name: registry.service
+  - name: registry-sidekick.service
+

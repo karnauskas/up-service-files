@@ -4,11 +4,16 @@ PartOf=organisation-read-api@%i.service
 After=organisation-read-api@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/organisation-read-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/organisation-read-api/frontend '{\"Type\": \"http\", \"BackendId\": \"organisation-read-api\", \"Route\": \"PathRegexp(`/organisations/.*`) && Host(`organisation-read-api`)\"}'; \
   etcdctl setdir /services/organisation-read-api --ttl 60; \
   etcdctl setdir /vulcand/backends/organisation-read-api/servers --ttl 60; \
+  \
+  etcdctl set /vulcand/frontends/organisation-read-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"organisation-read-api\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/organisation-read-api/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/organisation-read-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/organisation-read-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export ORGANISATION_READ_API_PORT=$(echo $(/usr/bin/docker port organisation-read-api-%i 8080) | cut -d':' -f2); \
     etcdctl set /vulcand/backends/organisation-read-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ORGANISATION_READ_API_PORT\\\"}\"; \

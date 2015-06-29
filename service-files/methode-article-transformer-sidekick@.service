@@ -4,10 +4,15 @@ PartOf=methode-article-transformer@%i.service
 After=methode-article-transformer@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   export MAT_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/methode-article-transformer/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/methode-article-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-article-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-article-transformer`)\"}'; \
+  \
+  etcdctl set /vulcand/frontends/methode-article-transformer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-article-transformer\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/methode-article-transformer/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/methode-article-transformer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-article-transformer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export MAT_PORT=$(echo $(/usr/bin/docker port methode-article-transformer-%i 8080 ) | cut -d':' -f2); \
     etcdctl set /services/methode-article-transformer/%i/host '%H' --ttl 60; \

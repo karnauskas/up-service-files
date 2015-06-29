@@ -4,10 +4,15 @@ PartOf=semantic-reader@%i.service
 After=semantic-reader@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/frontends/semantic-reader/frontend '{\"Type\": \"http\", \"BackendId\": \"semantic-reader\", \"Route\": \"PathRegexp(`/content/.*`) && Host(`public-services`)\"}'; \
   etcdctl set /vulcand/backends/semantic-reader/backend '{\"Type\": \"http\"}'; \
+  \
+  etcdctl set /vulcand/frontends/semantic-reader-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"semantic-reader\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/semantic-reader/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/semantic-reader-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/semantic-reader(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
   while true; do \
     export SEMANTIC_READER_PORT=$(echo $(/usr/bin/docker port semantic-reader-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/semantic-reader/%i/host '%H' --ttl 60; \

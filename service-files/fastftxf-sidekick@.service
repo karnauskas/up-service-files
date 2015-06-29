@@ -4,6 +4,7 @@ PartOf=fastftxf@%i.service
 After=fastftxf@%i.service
 
 [Service]
+Environment="ELB_HOSTNAME=cluster-elb-1694467668.eu-west-1.elb.amazonaws.com"
 ExecStart=/bin/sh -c " \
   export HOST_IP=$(/usr/bin/ifconfig docker0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   while true; do \
@@ -14,6 +15,8 @@ ExecStart=/bin/sh -c " \
     etcdctl set /vulcand/backends/fastft-transformer/backend '{\"Type\": \"http\"}' --ttl 60; \
     etcdctl set /vulcand/backends/fastft-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$FASTFT_TRANSFORMER_PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/frontends/fastft-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"fastft-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`fastft-transformer`)\"}' --ttl 60; \
+    etcdctl set /vulcand/frontends/fastft-transformer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"nativerw\\\", \\\"Route\\\":\\\"Host(\`$ELB_HOSTNAME\`) && Path(\`/health/fastft-transformer/__health\`)\\\"}\"; \
+    etcdctl set /vulcand/frontends/fastft-transformer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/fastft-transformer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
     sleep 45; \
   done"
 ExecStop=/usr/bin/etcdctl rm /services/fastftxf@%i

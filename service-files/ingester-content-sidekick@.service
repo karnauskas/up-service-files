@@ -4,7 +4,6 @@ PartOf=ingester-content@%i.service
 After=ingester-content@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/ingester-content/backend '{\"Type\": \"http\"}'; \

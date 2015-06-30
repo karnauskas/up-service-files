@@ -4,7 +4,6 @@ PartOf=enriched-content-read-api@%i.service
 After=enriched-content-read-api@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/enriched-content-read-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/enriched-content-read-api/frontend '{\"Type\": \"http\", \"BackendId\": \"enriched-content-read-api\", \"Route\": \"PathRegexp(`/enrichedcontent/.*`) && Host(`enriched-content-read-api`)\"}'; \

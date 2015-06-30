@@ -4,7 +4,6 @@ PartOf=semantic-reader@%i.service
 After=semantic-reader@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/frontends/semantic-reader/frontend '{\"Type\": \"http\", \"BackendId\": \"semantic-reader\", \"Route\": \"PathRegexp(`/content/.*`) && Host(`public-services`)\"}'; \

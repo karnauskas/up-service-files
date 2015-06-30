@@ -4,7 +4,6 @@ PartOf=api-policy-component@%i.service
 After=api-policy-component@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/api-policy-component/backend '{\"Type\": \"http\"}'; \

@@ -4,7 +4,6 @@ PartOf=annotations-api@%i.service
 After=annotations-api@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/annotations-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/annotations-api/frontend '{\"Type\": \"http\", \"BackendId\": \"annotations-api\", \"Route\": \"PathRegexp(`/content/.*/annotations.*`) && Host(`annotations-api`)\"}'; \

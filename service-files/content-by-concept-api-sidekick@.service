@@ -4,7 +4,6 @@ PartOf=content-by-concept-api@%i.service
 After=content-by-concept-api@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/content-by-concept-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/content-by-concept-api/frontend '{\"Type\": \"http\", \"BackendId\": \"content-by-concept-api\", \"Route\": \"PathRegexp(`/content?isAnnotatedBy=.*`) && Host(`content-by-concept-api`)\"}'; \

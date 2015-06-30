@@ -4,7 +4,6 @@ PartOf=document-store-api@%i.service
 After=document-store-api@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/document-store-api/backend '{\"Type\": \"http\"}'; \

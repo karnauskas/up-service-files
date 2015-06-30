@@ -4,7 +4,6 @@ PartOf=people-read-api@%i.service
 After=people-read-api@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/people-read-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/people-read-api/frontend '{\"Type\": \"http\", \"BackendId\": \"people-read-api\", \"Route\": \"PathRegexp(`/people/.*`) && Host(`people-read-api`)\"}'; \

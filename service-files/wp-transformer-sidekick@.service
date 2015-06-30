@@ -4,7 +4,6 @@ PartOf=wp-transformer@%i.service
 After=wp-transformer@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/wp-transformer/backend '{\"Type\": \"http\"}' ; \

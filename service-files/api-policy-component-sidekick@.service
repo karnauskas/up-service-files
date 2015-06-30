@@ -19,6 +19,7 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/api-policy-component/%i/host '%H' --ttl 60; \
     etcdctl set /services/api-policy-component/%i/app_port $(echo $(/usr/bin/docker port api-policy-component-%i 8080) | cut -d':' -f2) --ttl 60; \
     etcdctl set /services/api-policy-component/%i/admin_port $(echo $(/usr/bin/docker port api-policy-component-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/api-policy-component/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/api-policy-component/servers/srv%i \"{\\\"url\\\": \\\"http://$APP_HOST:$APP_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

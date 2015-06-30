@@ -19,6 +19,7 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/document-store-api/%i/host '%H' --ttl 60; \
     etcdctl set /services/document-store-api/%i/app_port $(echo $(/usr/bin/docker port document-store-api-%i 8080) | cut -d':' -f2) --ttl 60; \
     etcdctl set /services/document-store-api/%i/admin_port $(echo $(/usr/bin/docker port document-store-api-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/document-store-api/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/document-store-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$MONGO_WRITER_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

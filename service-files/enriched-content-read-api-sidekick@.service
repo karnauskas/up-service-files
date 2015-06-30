@@ -16,6 +16,7 @@ ExecStart=/bin/sh -c "\
   \
   while true; do \
     export ENRICHED_CONTENT_READ_API_PORT=$(echo $(/usr/bin/docker port enriched-content-read-api-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/enriched-content-read-api/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/enriched-content-read-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ENRICHED_CONTENT_READ_API_PORT\\\"}\"; \
     sleep 45; \
   done"

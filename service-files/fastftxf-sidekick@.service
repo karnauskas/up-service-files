@@ -4,7 +4,6 @@ PartOf=fastftxf@%i.service
 After=fastftxf@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c " \
   export HOST_IP=$(/usr/bin/ifconfig docker0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   while true; do \

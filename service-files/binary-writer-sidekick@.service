@@ -4,26 +4,30 @@ PartOf=binary-writer@%i.service
 After=binary-writer@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/binary-writer/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/backends/binary-writer-admin/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/binary-writer/frontend '{\"Type\": \"http\", \"BackendId\": \"binary-writer\", \"Route\": \"Host(`binary-writer`)\"}'; \
+  etcdctl set /vulcand/frontends/binary-writer-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"binary-writer-admin\", \"Route\": \"Host(`binary-writer-admin`)\"}'; \
   \
   etcdctl set /vulcand/frontends/binary-writer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"binary-writer\\\", \\\"Route\\\":\\\"Path(\`/health/binary-writer/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/binary-writer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/binary-writer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
+    export ADMIN_PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2); \
     etcdctl set /services/binary-writer/%i/host '%H' --ttl 60; \
-    etcdctl set /services/binary-writer/%i/app_port $(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2) --ttl 60; \
-    etcdctl set /services/binary-writer/%i/admin_port $(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2) --ttl 60; \
+    etcdctl set /services/binary-writer/%i/app_port $PORT --ttl 60; \
+    etcdctl set /services/binary-writer/%i/admin_port $ADMIN_PORT --ttl 60; \
     etcdctl set /services/binary-writer/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/binary-writer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
+    etcdctl set /vulcand/backends/binary-writer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/binary-writer/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-writer/servers/srv%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-writer-admin/servers/srv%i
 
 [X-Fleet]
 MachineOf=binary-writer@%i.service

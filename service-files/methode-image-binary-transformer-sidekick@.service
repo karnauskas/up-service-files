@@ -4,7 +4,6 @@ PartOf=methode-image-binary-transformer@%i.service
 After=methode-image-binary-transformer@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export METHODE_IMAGE_BINARY_TRANSFORMER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   export _IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \

@@ -4,7 +4,6 @@ PartOf=methode-content-importer@%i.service
 After=methode-content-importer@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export METHODE_CONTENT_IMPORTER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /vulcand/backends/methode-content-importer/backend '{\"Type\": \"http\"}' ; \

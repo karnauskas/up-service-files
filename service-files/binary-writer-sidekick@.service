@@ -4,7 +4,6 @@ PartOf=binary-writer@%i.service
 After=binary-writer@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/binary-writer/backend '{\"Type\": \"http\"}'; \

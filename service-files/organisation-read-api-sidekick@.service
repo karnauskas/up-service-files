@@ -4,7 +4,6 @@ PartOf=organisation-read-api@%i.service
 After=organisation-read-api@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/organisation-read-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/organisation-read-api/frontend '{\"Type\": \"http\", \"BackendId\": \"organisation-read-api\", \"Route\": \"PathRegexp(`/organisations/.*`) && Host(`organisation-read-api`)\"}'; \
@@ -16,6 +15,7 @@ ExecStart=/bin/sh -c "\
   \
   while true; do \
     export ORGANISATION_READ_API_PORT=$(echo $(/usr/bin/docker port organisation-read-api-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/organisation-read-api/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/organisation-read-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ORGANISATION_READ_API_PORT\\\"}\"; \
     sleep 45; \
   done"

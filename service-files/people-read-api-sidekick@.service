@@ -4,7 +4,6 @@ PartOf=people-read-api@%i.service
 After=people-read-api@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/people-read-api/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/people-read-api/frontend '{\"Type\": \"http\", \"BackendId\": \"people-read-api\", \"Route\": \"PathRegexp(`/people/.*`) && Host(`people-read-api`)\"}'; \
@@ -16,6 +15,7 @@ ExecStart=/bin/sh -c "\
   \
   while true; do \
     export PEOPLE_READ_API_PORT=$(echo $(/usr/bin/docker port people-read-api-%i 8080) | cut -d':' -f2); \
+    etcdctl set /services/people-read-api/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/people-read-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PEOPLE_READ_API_PORT\\\"}\"; \
     sleep 45; \
   done"

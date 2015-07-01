@@ -2,8 +2,6 @@
 Description=Kafka
 After=docker.service zookeeper.service
 Requires=docker.service zookeeper.service
-After=registry.service
-Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

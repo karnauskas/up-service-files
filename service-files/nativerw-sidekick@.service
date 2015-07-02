@@ -4,7 +4,6 @@ PartOf=nativerw@%i.service
 After=nativerw@%i.service
 
 [Service]
-
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/nativerw/backend '{\"Type\": \"http\"}'; \

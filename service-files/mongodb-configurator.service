@@ -2,8 +2,6 @@
 Description=MongoDB cluster configurator
 Requires=docker.service
 After=docker.service
-After=registry.service
-Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

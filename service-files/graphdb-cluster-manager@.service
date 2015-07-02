@@ -1,7 +1,5 @@
 [Unit]
 Description=GraphDB Cluster Manager
-After=registry.service
-Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

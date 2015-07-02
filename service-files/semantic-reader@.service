@@ -2,8 +2,6 @@
 Description=Semantic reader
 After=docker.service
 Requires=docker.service
-After=registry.service
-Wants=registry.service
 
 [Service]
 TimeoutStartSec=600

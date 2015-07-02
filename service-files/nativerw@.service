@@ -5,8 +5,6 @@ Requires=docker.service
 # TODO: should not require mongo. Instead, allow unheathy startup.
 # TODO: reach when more mongo instances appear.
 Wants=mongodb@1.service
-After=registry.service
-Wants=registry.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

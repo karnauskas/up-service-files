@@ -7,9 +7,9 @@ Requires=docker.service
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/varnish
+ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/varnish
 ExecStart=/bin/sh -c '\
-/usr/bin/docker run --rm --name %p-%i -p 80:80 --env "VARNISH_BACKEND_HOST=$HOSTNAME" --env "VARNISH_BACKEND_PORT=8080" --env "HOST_HEADER=api-policy-component" coco/varnish'
+/usr/bin/docker run --rm --name %p-%i -p 80:80 --env "VARNISH_BACKEND_HOST=$HOSTNAME" --env "VARNISH_BACKEND_PORT=8080" --env "HOST_HEADER=api-policy-component" up-registry.ft.com/coco/varnish'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [X-Fleet]

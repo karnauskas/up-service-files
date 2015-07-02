@@ -7,8 +7,8 @@ Requires=docker.service
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/fastft-transformer
-ExecStart=/usr/bin/docker run --name %p-%i -p 8080 -p 8081 coco/fastft-transformer
+ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/fastft-transformer
+ExecStart=/usr/bin/docker run --name %p-%i -p 8080 -p 8081 up-registry.ft.com/coco/fastft-transformer
 ExecStop=/usr/bin/docker stop %p-%i
 
 [X-Fleet]

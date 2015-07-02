@@ -9,14 +9,14 @@ Wants=registry.service
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/binary-ingester:logOnOneLine2
+ExecStartPre=/usr/bin/docker pull coco/binary-ingester
 
 ExecStart=/bin/sh -c '\
   export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /services/zookeeper/ip); \
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /services/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /services/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /services/kafka/port); \
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "WRITER_ENDPOINT=$HOSTNAME:8080:8081" --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" --env "TRANSFORMER_PROXY=$HOSTNAME:8080" coco/binary-ingester:logOnOneLine2'
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "WRITER_ENDPOINT=$HOSTNAME:8080:8081" --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" --env "TRANSFORMER_PROXY=$HOSTNAME:8080" coco/binary-ingester'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

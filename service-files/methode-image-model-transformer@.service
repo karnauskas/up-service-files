@@ -8,6 +8,8 @@ TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/methode-image-model-transformer
+Restart=on-failure
+RestartSec=60
 
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i -P --env "VULCAN_HOST=%H" up-registry.ft.com/coco/methode-image-model-transformer'

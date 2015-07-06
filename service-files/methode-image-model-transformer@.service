@@ -7,10 +7,10 @@ Requires=docker.service
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/methode-image-model-transformer
+ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/methode-image-model-transformer
 
 ExecStart=/bin/sh -c '\
-  /usr/bin/docker run --rm --name %p-%i -P --env "VULCAN_HOST=%H" coco/methode-image-model-transformer'
+  /usr/bin/docker run --rm --name %p-%i -P --env "VULCAN_HOST=%H" up-registry.ft.com/coco/methode-image-model-transformer'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 

@@ -7,13 +7,13 @@ Requires=docker.service
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/content-writer-sesame
+ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/content-writer-sesame
 
 ExecStart=/bin/sh -c '\
   export GRAPHDB_PATH=$(/usr/bin/etcdctl get /services/graphdb/path); \
   export GRAPHDB_URL=http://$HOSTNAME:8080$GRAPHDB_PATH \
   export HOSTIP=$(/usr/bin/ifconfig eth0 | sed -n \'2 p\' | awk \'{print $2}\' | cut -d\':\' -f2); \
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 -e "RDF_REPOSITORY_PROXY=$GRAPHDB_URL" coco/content-writer-sesame'
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 -e "RDF_REPOSITORY_PROXY=$GRAPHDB_URL" up-registry.ft.com/coco/content-writer-sesame'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 

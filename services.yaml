@@ -30,7 +30,7 @@ services:
   - name: methode-image-model-transformer-sidekick@.service
     count: 1
   - name: nativerw@.service
-    version: version_2015-06-16_12-19-06
+    version: v20 
     count: 1
   - name: nativerw-sidekick@.service
     count: 1

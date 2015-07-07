@@ -1,7 +1,5 @@
 ---
 services:
-  - name: hello@.service
-    count: 2
   - name: mongodb@.service
     count: 3
   - name: mongodb-sidekick@.service

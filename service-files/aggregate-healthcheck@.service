@@ -7,7 +7,7 @@ Requires=docker.service
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull coco/coco-aggregate-healthcheck
+ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/coco-aggregate-healthcheck
 
 ExecStart=/bin/bash -c 'docker run --rm --name %p-%i -p 8080 \
 	--env="ETCD_PEERS=http://$HOSTNAME:4001" \

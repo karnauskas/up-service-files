@@ -13,7 +13,7 @@ ExecStart=/bin/bash -c 'docker run --rm --name %p-%i -p 8080 \
 	--env="ETCD_PEERS=http://$HOSTNAME:4001" \
 	--env="KEY_PREFIX=/services" \
 	--env="VULCAND_ADDRESS=$HOSTNAME:8080" \
-	coco/coco-aggregate-healthcheck'
+	up-registry.ft.com/coco/coco-aggregate-healthcheck'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 

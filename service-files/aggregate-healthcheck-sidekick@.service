@@ -13,7 +13,7 @@ ExecStart=/bin/sh -c "\
     export PORT=$(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/aggregate-healthcheck/%i/host $HOSTNAME --ttl 60; \
     etcdctl set /services/aggregate-healthcheck/%i/app_port $PORT --ttl 60; \
-    etcdctl set /vulcand/backends/aggregate-healthcheck/servers/srv%i '{\"url\": \"http://$HOSTNAME:$PORT\"}' --ttl 60; \
+    etcdctl set /vulcand/backends/aggregate-healthcheck/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/aggregate-healthcheck/%i

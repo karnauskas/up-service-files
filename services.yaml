@@ -31,7 +31,7 @@ services:
   - name: methode-image-binary-transformer-sidekick@.service
     count: 1
   - name: methode-image-model-transformer@.service
-    version: v13 
+    version: v14 
     count: 1
   - name: methode-image-model-transformer-sidekick@.service
     count: 1

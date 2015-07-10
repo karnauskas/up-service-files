@@ -4,9 +4,9 @@ Wants=docker.socket
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c "docker rm `docker ps -a -q --no-trunc`;"
-ExecStart=/bin/sh -c "docker rmi `docker images -f \"dangling=true\" -q --no-trunc`;"
-ExecStart=/bin/sh -c "rm -rf /var/lib/docker/tmp/*"
+ExecStart=-/bin/sh -c "docker rm `docker ps -a -q --no-trunc`;"
+ExecStart=-/bin/sh -c "docker rmi `docker images -f \"dangling=true\" -q --no-trunc`;"
+ExecStart=-/bin/sh -c "rm -rf /var/lib/docker/tmp/*"
 
 [Install]
 WantedBy=multi-user.target

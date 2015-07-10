@@ -1,0 +1,13 @@
+[Unit]
+Description=Run image-cleaner at 3 am every day
+
+[Timer]
+OnCalendar=daily 03:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+[X-Fleet]
+Global=true
+

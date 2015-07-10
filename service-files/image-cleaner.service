@@ -3,14 +3,10 @@ Description=Job to clean up docker images + containers on hosts
 Wants=docker.socket
 
 [Service]
-ExecStart=/bin/sh -c "\
-  while true; do \
-    docker rm `docker ps -a -q --no-trunc`; \
-    docker rmi `docker images -f \"dangling=true\" -q --no-trunc`; \
-    sleep 1800; \
-  done"
-Restart=on-failure
-RestartSec=60
+Type=oneshot
+ExecStart=/bin/sh -c "docker rm `docker ps -a -q --no-trunc`;"
+ExecStart=/bin/sh -c "docker rmi `docker images -f \"dangling=true\" -q --no-trunc`;"
+ExecStart=/bin/sh -c "rm -rf /var/lib/docker/tmp/*"
 
 [Install]
 WantedBy=multi-user.target

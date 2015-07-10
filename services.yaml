@@ -57,6 +57,7 @@ services:
   - name: prometheus.service
   - name: vulcan.service
   - name: image-cleaner.service
+  - name: image-cleaner.timer
   - name: promdash.service
   - name: methodeapi-endpoint.service
   - name: diamond.service

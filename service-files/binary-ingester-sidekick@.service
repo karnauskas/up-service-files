@@ -13,6 +13,7 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/binary-ingester-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"binary-ingester\\\", \\\"Route\\\":\\\"Path(\`/health/binary-ingester/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/binary-ingester-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/binary-ingester(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /ft/healthcheck/binary-ingester/%i /__health; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port binary-ingester-%i 8080) | cut -d':' -f2); \
@@ -20,7 +21,6 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/binary-ingester/%i/host '%H' --ttl 60; \
     etcdctl set /services/binary-ingester/%i/app_port $PORT --ttl 60; \
     etcdctl set /services/binary-ingester/%i/admin_port $ADMIN_PORT --ttl 60; \
-    etcdctl set /services/binary-ingester/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/binary-ingester/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/binary-ingester-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_PORT\\\"}\" --ttl 60; \
     sleep 45; \

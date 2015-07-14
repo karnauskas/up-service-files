@@ -15,13 +15,13 @@ ExecStartPre=/bin/sh -c "\
 
 ExecStart=/bin/sh -c "\
   export METHODE_CONTENT_IMPORTER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  etcdctl set /ft/healthcheck/methode-content-importer/%i /__health; \
   while true; do \
     export METHODE_CONTENT_IMPORTER_PORT=$(/usr/bin/docker port methode-content-importer-%i 8080 | cut -d':' -f2); \
     export ADMIN_METHODE_CONTENT_IMPORTER_PORT=$(/usr/bin/docker port methode-content-importer-%i 8081 | cut -d':' -f2); \
     etcdctl set /services/methode-content-importer/%i/host '%H' --ttl 60; \
     etcdctl set /services/methode-content-importer/%i/app_port $METHODE_CONTENT_IMPORTER_PORT --ttl 60; \
     etcdctl set /services/methode-content-importer/%i/admin_port $ADMIN_METHODE_CONTENT_IMPORTER_PORT --ttl 60; \
-    etcdctl set /services/methode-content-importer/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/methode-content-importer/servers/srv%i \"{\\\"url\\\": \\\"http://$METHODE_CONTENT_IMPORTER_IP:$METHODE_CONTENT_IMPORTER_PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/methode-content-importer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$METHODE_CONTENT_IMPORTER_IP:$ADMIN_METHODE_CONTENT_IMPORTER_PORT\\\"}\" --ttl 60; \
     sleep 45; \

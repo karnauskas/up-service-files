@@ -63,5 +63,6 @@ services:
   - name: diamond.service
   - name: dashing-forwarder.service
   - name: deployer.service
+  - name: deployer.timer
   - name: vulcan-elb-presence.service
 

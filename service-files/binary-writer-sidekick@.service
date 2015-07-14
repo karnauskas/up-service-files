@@ -13,6 +13,7 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/binary-writer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"binary-writer\\\", \\\"Route\\\":\\\"Path(\`/health/binary-writer/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/binary-writer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/binary-writer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /ft/healthcheck/binary-writer/%i /__health; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
@@ -20,7 +21,6 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/binary-writer/%i/host '%H' --ttl 60; \
     etcdctl set /services/binary-writer/%i/app_port $PORT --ttl 60; \
     etcdctl set /services/binary-writer/%i/admin_port $ADMIN_PORT --ttl 60; \
-    etcdctl set /services/binary-writer/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/binary-writer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/binary-writer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_PORT\\\"}\" --ttl 60; \
     sleep 45; \

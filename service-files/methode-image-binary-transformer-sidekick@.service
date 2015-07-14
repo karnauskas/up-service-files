@@ -15,13 +15,13 @@ ExecStartPre=/bin/sh -c "\
 
 ExecStart=/bin/sh -c "\
   export METHODE_IMAGE_BINARY_TRANSFORMER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  etcdctl set /ft/healthcheck/methode-image-binary-transformer/%i /__health; \
   while true; do \
     export METHODE_IMAGE_BINARY_TRANSFORMER_PORT=$(/usr/bin/docker port methode-image-binary-transformer-%i 8080 | cut -d':' -f2); \
     export ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT=$(/usr/bin/docker port methode-image-binary-transformer-%i 8081 | cut -d':' -f2); \
     etcdctl set /services/methode-image-binary-transformer/%i/host '%H' --ttl 60; \
     etcdctl set /services/methode-image-binary-transformer/%i/app_port $METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 60; \
-    etcdctl set /services/methode-image-binary-transformer/%i/admin_port $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 60; \
-    etcdctl set /services/methode-image-binary-transformer/%i/healthcheck /__health; \
+    etcdctl set /services/methode-image-binary-transformer/%i/admin_port $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 60; \    
     etcdctl set /vulcand/backends/methode-image-binary-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$METHODE_IMAGE_BINARY_TRANSFORMER_IP:$METHODE_IMAGE_BINARY_TRANSFORMER_PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/methode-image-binary-transformer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$METHODE_IMAGE_BINARY_TRANSFORMER_IP:$ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT\\\"}\" --ttl 60; \
     sleep 45; \

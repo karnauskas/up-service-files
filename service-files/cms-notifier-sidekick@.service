@@ -12,13 +12,13 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/cms-notifier-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"cms-notifier-admin\", \"Route\": \"PathRegexp(`/.*`) && Host(`cms-notifier-admin`)\"}'; \
   etcdctl set /vulcand/frontends/cms-notifier-health/frontend '{\"Type\":\"http\", \"BackendId\":\"cms-notifier\", \"Route\":\"Path(`/health/cms-notifier/__health`)\"}'; \
   etcdctl set /vulcand/frontends/cms-notifier-health/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/cms-notifier(.*)\", \"Replacement\":\"$1\"}}'; \
+  etcdctl set /ft/healthcheck/cms-notifier/%i /__health; \
   while true; do \
     export CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8080) | cut -d':' -f2); \
     export ADMIN_CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8081) | cut -d':' -f2); \
     etcdctl set /services/cms-notifier/%i/host '%H' --ttl 60; \
     etcdctl set /services/cms-notifier/%i/app_port $CMS_NOTIFIER_PORT --ttl 60; \
     etcdctl set /services/cms-notifier/%i/admin_port $ADMIN_CMS_NOTIFIER_PORT --ttl 60; \
-    etcdctl set /services/cms-notifier/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/cms-notifier/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$CMS_NOTIFIER_PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/cms-notifier-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_CMS_NOTIFIER_PORT\\\"}\" --ttl 60; \
     sleep 45; \

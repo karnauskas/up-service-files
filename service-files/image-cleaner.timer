@@ -2,7 +2,7 @@
 Description=Run image-cleaner at 3 am every day
 
 [Timer]
-OnCalendar="*-*-* 03:00:00"
+OnCalendar=*-*-* 03:00:00
 Persistent=true
 
 [Install]

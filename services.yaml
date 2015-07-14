@@ -44,6 +44,8 @@ services:
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
     count: 1
+  - name: synthetic-image-publication-monitor@.service
+    count: 1
   - name: kafka.service
   - name: kafka-sidekick.service
   - name: zookeeper.service

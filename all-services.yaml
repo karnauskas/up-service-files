@@ -106,7 +106,7 @@ services:
     count: 1
   - name: wp-transformer-sidekick@.service 
     version: latest
-    count: 1
+   count: 1
   - name: binary-ingester@.service
     version: latest
     count: 1
@@ -181,3 +181,6 @@ services:
     count: 1
   - name: dashing-forwarder.service
     version: latest
+  - name: synthetic-image-publication-monitor@.service
+    version: latest
+    count: 1

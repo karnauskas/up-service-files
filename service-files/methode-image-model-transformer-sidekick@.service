@@ -7,16 +7,17 @@ After=methode-image-model-transformer-sidekick@%i.service
 
 ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/backends/methode-image-model-transformer/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/backends/methode-image-model-transformer-%i/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/methode-image-model-transformer-admin/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/methode-image-model-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-image-model-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-image-model-transformer`)\"}'; \
   etcdctl set /vulcand/frontends/methode-image-model-transformer-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-image-model-transformer-admin\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-image-model-transformer-admin`)\"}'; \
   \
-  etcdctl set /vulcand/frontends/methode-image-model-transformer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-image-model-transformer\\\", \\\"Route\\\":\\\"Path(\`/health/methode-image-model-transformer/__health\`)\\\"}\"; \
-  etcdctl set /vulcand/frontends/methode-image-model-transformer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-image-model-transformer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\";"
+  etcdctl set /vulcand/frontends/methode-image-model-transformer-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-image-model-transformer-%i\\\", \\\"Route\\\":\\\"Path(\`/health/methode-image-model-transformer-%i/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/methode-image-model-transformer-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-image-model-transformer-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\";"
 
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
-  etcdctl set /ft/healthcheck/methode-image-model-transformer/%i /__health; \
+  etcdctl set /ft/healthcheck/methode-image-model-transformer-%i /__health; \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port methode-image-model-transformer-%i 8080) | cut -d':' -f2); \
     export ADMIN_PORT=$(echo $(/usr/bin/docker port methode-image-model-transformer-%i 8081) | cut -d':' -f2); \
@@ -24,6 +25,7 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/methode-image-model-transformer/%i/app_port $PORT --ttl 60; \
     etcdctl set /services/methode-image-model-transformer/%i/admin_port $ADMIN_PORT --ttl 60; \
     etcdctl set /vulcand/backends/methode-image-model-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
+    etcdctl set /vulcand/backends/methode-image-model-transformer-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/methode-image-model-transformer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

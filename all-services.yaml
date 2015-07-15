@@ -181,3 +181,6 @@ services:
     count: 1
   - name: dashing-forwarder.service
     version: latest
+  - name: synthetic-image-publication-monitor@.service
+    version: latest
+    count: 1

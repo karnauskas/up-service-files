@@ -25,6 +25,7 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/methode-image-model-transformer/%i/app_port $PORT --ttl 60; \
     etcdctl set /services/methode-image-model-transformer/%i/admin_port $ADMIN_PORT --ttl 60; \
     etcdctl set /vulcand/backends/methode-image-model-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
+    etcdctl set /vulcand/backends/methode-image-model-transformer-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/methode-image-model-transformer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

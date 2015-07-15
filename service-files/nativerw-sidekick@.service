@@ -6,10 +6,11 @@ After=nativerw@%i.service
 [Service]
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/nativerw/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/backends/nativerw-%i/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/nativerw/frontend '{\"Type\": \"http\", \"BackendId\": \"nativerw\", \"Route\": \"PathRegexp(`/.*`) && Host(`nativerw`)\"}'; \
-  etcdctl set /vulcand/frontends/nativerw-health/frontend '{\"Type\":\"http\", \"BackendId\":\"nativerw\", \"Route\":\"Path(`/health/nativerw/__health`)\"}'; \
-  etcdctl set /vulcand/frontends/nativerw-health/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/nativerw(.*)\", \"Replacement\":\"$1\"}}'; \
-  etcdctl set /ft/healthcheck/nativerw/%i /__health; \
+  etcdctl set /vulcand/frontends/nativerw-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"nativerw-%i\", \"Route\":\"Path(`/health/nativerw-%i/__health`)\"}'; \
+  etcdctl set /vulcand/frontends/nativerw-health-%i/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/nativerw-%i(.*)\", \"Replacement\":\"$1\"}}'; \
+  etcdctl set /ft/healthcheck/nativerw-%i /__health; \
   while true; do \
     NATIVERW_PORT=$(/usr/bin/docker port nativerw-%i 8080 | cut -d':' -f2); \
     etcdctl set /services/nativerw/%i/host '%H' --ttl 60; \

@@ -4,16 +4,17 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=600
 ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
-ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/coco-synthetic-image-publication-monitor
+ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c 'docker run --rm --name %p-%i -p 8080 \
-	--env="POST_ADDRESS=$HOSTNAME:8080" \
-	up-registry.ft.com/coco/coco-synthetic-image-publication-monitor'
+	--env "POST_ADDRESS=$HOSTNAME:8080" \
+	up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [X-Fleet]
-Conflicts=aggregate-healthcheck@*.service
+Conflicts=%p@*.service

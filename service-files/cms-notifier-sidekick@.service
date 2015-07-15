@@ -11,7 +11,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/cms-notifier-admin/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/cms-notifier/frontend '{\"Type\": \"http\", \"BackendId\": \"cms-notifier\", \"Route\": \"PathRegexp(`/.*`) && Host(`cms-notifier`)\"}'; \
   etcdctl set /vulcand/frontends/cms-notifier-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"cms-notifier-admin\", \"Route\": \"PathRegexp(`/.*`) && Host(`cms-notifier-admin`)\"}'; \
-  etcdctl set /vulcand/frontends/cms-notifier-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"cms-notifier-%i\\\", \\\"Route\\\":\\\"Path(\'/health/cms-notifier-%i/__health\')\\\"}\"; \
+  etcdctl set /vulcand/frontends/cms-notifier-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"cms-notifier-%i\\\", \\\"Route\\\":\\\"Path(\`/health/cms-notifier-%i/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/cms-notifier-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/cms-notifier-%i(.*)\\\", \\\"Replacement\\\":\\\"\\$1\\\"}}\"; \
   etcdctl set /ft/healthcheck/cms-notifier-%i /__health; \
   while true; do \

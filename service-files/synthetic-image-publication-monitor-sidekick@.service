@@ -17,7 +17,6 @@ ExecStart=/bin/sh -c "\
     etcdctl set /vulcand/backends/synthetic-image-publication-monitor-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"
-ExecStop=/usr/bin/etcdctl rm --recursive /services/synthetic-image-publication-monitor/%i
 ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/synthetic-image-publication-monitor/servers/srv%i
 
 [X-Fleet]

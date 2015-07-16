@@ -4,8 +4,7 @@ PartOf=cms-notifier@%i.service
 After=cms-notifier@%i.service
 
 [Service]
-ExecStart=/bin/sh -c "\
-  export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/backends/cms-notifier/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/cms-notifier-%i/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/cms-notifier-admin/backend '{\"Type\": \"http\"}'; \
@@ -13,8 +12,11 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/cms-notifier-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"cms-notifier-admin\", \"Route\": \"PathRegexp(`/.*`) && Host(`cms-notifier-admin`)\"}'; \
   etcdctl set /vulcand/frontends/cms-notifier-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"cms-notifier-%i\\\", \\\"Route\\\":\\\"Path(`/health/cms-notifier-%i/__health`)\\\"}\"; \
   etcdctl set /vulcand/frontends/cms-notifier-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/cms-notifier-%i(.*)\\\", \\\"Replacement\\\":\\\"\\$1\\\"}}\"; \
-  etcdctl set /ft/healthcheck/cms-notifier-%i /__health; \
-  while true; do \
+  etcdctl set /ft/healthcheck/cms-notifier-%i /__health; "
+ 
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+   while true; do \
     export CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8080) | cut -d':' -f2); \
     export ADMIN_CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8081) | cut -d':' -f2); \
     etcdctl set /services/cms-notifier/%i/host '%H' --ttl 60; \

@@ -14,8 +14,6 @@ ExecStart=/bin/sh -c "\
 
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port synthetic-image-publication-monitor-%i 8080) | cut -d':' -f2); \
-    etcdctl set /services/synthetic-image-publication-monitor/%i/host $HOSTNAME --ttl 60; \
-    etcdctl set /services/synthetic-image-publication-monitor/%i/app_port $PORT --ttl 60; \
     etcdctl set /vulcand/backends/synthetic-image-publication-monitor/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 60; \
     etcdctl set /vulcand/backends/synthetic-image-publication-monitor-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 60; \
     sleep 45; \

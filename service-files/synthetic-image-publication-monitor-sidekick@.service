@@ -7,7 +7,6 @@ After=synthetic-image-publication-monitor@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/synthetic-image-publication-monitor/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/synthetic-image-publication-monitor/frontend '{\"Type\": \"http\", \"BackendId\": \"synthetic-image-publication-monitor\", \"Route\": \"Host(`syn-pub`)\"}'; \
-  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-public/frontend '{\"Type\":\"http\", \"BackendId\":\"synthetic-image-publication-monitor\", \"Route\":\"Path(`/__health`)\"}'; \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port synthetic-image-publication-monitor-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/synthetic-image-publication-monitor/%i/host $HOSTNAME --ttl 60; \

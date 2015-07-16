@@ -47,6 +47,8 @@ services:
   - name: synthetic-image-publication-monitor@.service
     count: 1
     version: v9
+  - name: synthetic-image-publication-monitor-sidekick@.service
+    count: 1
   - name: kafka.service
   - name: kafka-sidekick.service
   - name: zookeeper.service

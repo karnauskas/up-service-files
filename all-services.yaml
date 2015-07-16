@@ -184,3 +184,6 @@ services:
   - name: synthetic-image-publication-monitor@.service
     version: latest
     count: 1
+  - name: synthetic-image-publication-monitor-sidekick@.service
+    version: latest
+    count: 1

@@ -8,7 +8,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/synthetic-image-publication-monitor/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/synthetic-image-publication-monitor-%i/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/synthetic-image-publication-monitor/frontend '{\"Type\": \"http\", \"BackendId\": \"synthetic-image-publication-monitor\", \"Route\": \"PathRegexp(`/.*`) && Host(`syn-pub`)\"}'; \
-  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"synthetic-image-publication-monitor-%i\", \"Route\":\"Path(\'/health/synthetic-image-publication-monitor-%i/__health\')\"}'; \
+  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"synthetic-image-publication-monitor-%i\", \"Route\":\"Path(`/health/synthetic-image-publication-monitor-%i/__health`)\"}'; \
   etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-health-%i/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/synthetic-image-publication-monitor-%i(.*)\", \"Replacement\":\"$1\"}}'; \
   etcdctl set /ft/healthcheck/synthetic-image-publication-monitor-%i /__health; \
   while true; do \

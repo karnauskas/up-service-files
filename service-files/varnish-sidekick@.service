@@ -1,6 +1,7 @@
 [Unit]
 Description=Varnish Sidekick
 PartOf=varnish@%i.service
+ReloadPropagatedFrom=varnish@%i.service
 After=varnish@%i.service
 
 [Service]

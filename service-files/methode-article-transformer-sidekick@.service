@@ -1,6 +1,7 @@
 [Unit]
 Description=method article transformer sidekick
 PartOf=methode-article-transformer@%i.service
+ReloadPropagatedFrom=methode-article-transformer@%i.service
 After=methode-article-transformer@%i.service
 
 [Service]

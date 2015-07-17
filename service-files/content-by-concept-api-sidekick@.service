@@ -1,6 +1,7 @@
 [Unit]
 Description=Content-By-Concept API Sidekick
 PartOf=content-by-concept-api@%i.service
+ReloadPropagatedFrom=content-by-concept-api@%i.service
 After=content-by-concept-api@%i.service
 
 [Service]

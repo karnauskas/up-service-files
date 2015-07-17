@@ -1,6 +1,7 @@
 [Unit]
 Description=Ingester semantic store sidekick
 PartOf=ingester-semantic@%i.service
+ReloadPropagatedFrom=ingester-semantic@%i.service
 After=ingester-semantic@%i.service
 
 [Service]

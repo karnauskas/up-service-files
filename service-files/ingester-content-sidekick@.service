@@ -1,6 +1,7 @@
 [Unit]
 Description=Ingester content store sidekick
 PartOf=ingester-content@%i.service
+ReloadPropagatedFrom=ingester-content@%i.service
 After=ingester-content@%i.service
 
 [Service]

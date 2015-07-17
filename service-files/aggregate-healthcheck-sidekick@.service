@@ -1,6 +1,7 @@
 [Unit]
 Description=Aggregate Healthcheck Sidekick
 PartOf=aggregate-healthcheck@%i.service
+ReloadPropagatedFrom=aggregate-healthcheck@%i.service
 After=aggregate-healthcheck@%i.service
 
 [Service]

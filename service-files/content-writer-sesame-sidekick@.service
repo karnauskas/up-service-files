@@ -1,6 +1,7 @@
 [Unit]
 Description=Content writer sesame
 PartOf=content-writer-sesame@%i.service
+ReloadPropagatedFrom=content-writer-sesame@%i.service
 After=content-writer-sesame@%i.service
 
 [Service]

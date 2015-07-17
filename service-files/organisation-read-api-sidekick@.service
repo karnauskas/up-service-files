@@ -1,6 +1,7 @@
 [Unit]
 Description=Organisation Read API Sidekick
 PartOf=organisation-read-api@%i.service
+ReloadPropagatedFrom=organisation-read-api@%i.service
 After=organisation-read-api@%i.service
 
 [Service]

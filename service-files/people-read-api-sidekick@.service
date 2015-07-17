@@ -1,6 +1,7 @@
 [Unit]
 Description=People Read API Sidekick
 PartOf=people-read-api@%i.service
+ReloadPropagatedFrom=people-read-api@%i.service
 After=people-read-api@%i.service
 
 [Service]

@@ -1,6 +1,7 @@
 [Unit]
 Description=Binary Writer Sidekick
 PartOf=binary-writer@%i.service
+ReloadPropagatedFrom=binary-writer@%i.service
 After=binary-writer@%i.service
 
 [Service]

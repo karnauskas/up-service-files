@@ -1,6 +1,7 @@
 [Unit]
 Description=Methode Image Binary Transformer
 PartOf=methode-image-binary-transformer@%i.service
+ReloadPropagatedFrom=methode-image-binary-transformer@%i.service
 After=methode-image-binary-transformer@%i.service
 
 [Service]

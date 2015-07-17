@@ -1,6 +1,7 @@
 [Unit]
 Description=Semantic reader api sidekick
 PartOf=semantic-reader@%i.service
+ReloadPropagatedFrom=semantic-reader@%i.service
 After=semantic-reader@%i.service
 
 [Service]

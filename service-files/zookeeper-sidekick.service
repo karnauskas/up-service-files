@@ -1,6 +1,7 @@
 [Unit]
 Description=Zookeeper Sidekick
 PartOf=zookeeper.service
+ReloadPropagatedFrom=zookeeper.service
 After=zookeeper.service
 
 [Service]

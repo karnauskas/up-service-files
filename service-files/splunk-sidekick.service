@@ -1,6 +1,7 @@
 [Unit]
 Description=Splunk Sidekick
 PartOf=splunk.service
+ReloadPropagatedFrom=splunk.service
 After=splunk.service
 
 [Service]

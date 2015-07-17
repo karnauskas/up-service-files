@@ -1,6 +1,7 @@
 [Unit]
 Description=GraphDB Worker Sidekick
 PartOf=graphdb-worker@%i.service
+ReloadPropagatedFrom=graphdb-worker@%i.service
 After=graphdb-worker@%i.service
 
 [Service]

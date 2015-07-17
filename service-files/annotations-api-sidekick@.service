@@ -1,6 +1,7 @@
 [Unit]
 Description=Annotations API Sidekick
 PartOf=annotations-api@%i.service
+ReloadPropagatedFrom=annotations-api@%i.service
 After=annotations-api@%i.service
 
 [Service]

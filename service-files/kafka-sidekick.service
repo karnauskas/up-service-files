@@ -1,6 +1,7 @@
 [Unit]
 Description=Kafka Sidekick
 PartOf=kafka.service
+ReloadPropagatedFrom=kafka.service
 After=kafka.service
 
 [Service]

@@ -2,7 +2,7 @@
 Description=Deployer timer
 
 [Timer]
-OnCalendar=*-*-* *:*:00
+OnCalendar=*:*:00
 Persistent=true
 
 [Install]

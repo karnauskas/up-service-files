@@ -3,14 +3,14 @@ Description=Splunk forwarder
 
 [Service]
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p-%i
-ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
 ExecStartPre=/usr/bin/docker pull coco/coco-splunk-http-forwarder
 ExecStartPre=/usr/bin/docker pull coco/coco-logfilter
 ExecStart=/bin/bash -c "\
       export FORWARD_URL=$(/usr/bin/etcdctl get /ft/_credentials/splunk-forwarder/splunk_url); \
-      /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --rm coco/coco-logfilter | docker run -i --rm --name %p-%i --env=\"FORWARD_URL=$FORWARD_URL\" coco/coco-splunk-http-forwarder"
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+      /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --rm coco/coco-logfilter | docker run -i --rm --name %p --env=\"FORWARD_URL=$FORWARD_URL\" coco/coco-splunk-http-forwarder"
+ExecStop=/usr/bin/docker stop -t 3 %p
 
 [Install]
 WantedBy=multi-user.target

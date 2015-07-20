@@ -53,8 +53,6 @@ services:
   - name: kafka-sidekick.service
   - name: zookeeper.service
   - name: zookeeper-sidekick.service
-  - name: splunk.service
-  - name: splunk-sidekick.service
   - name: cadvisor.service 
   - name: cadvisor-dns.service 
   - name: splunk-forwarder.service

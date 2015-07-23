@@ -11,7 +11,7 @@ services:
   - name: cms-notifier-sidekick@.service
     count: 2
   - name: methode-content-importer@.service
-    version: v20
+    version: v21
     count: 2
   - name: methode-content-importer-sidekick@.service
     count: 2
@@ -26,12 +26,12 @@ services:
   - name: binary-writer-sidekick@.service
     count: 2
   - name: methode-image-binary-transformer@.service
-    version: v14 
+    version: v15
     count: 2
   - name: methode-image-binary-transformer-sidekick@.service
     count: 2
   - name: methode-image-model-transformer@.service
-    version: v15 
+    version: v19
     count: 2
   - name: methode-image-model-transformer-sidekick@.service
     count: 2

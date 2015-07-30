@@ -57,8 +57,6 @@ services:
   - name: splunk-forwarder.service
   - name: skydns.service
   - name: vulcan.service
-  - name: image-cleaner.service
-  - name: image-cleaner.timer
   - name: methodeapi-endpoint.service
   - name: dashing-forwarder.service
   - name: deployer.service

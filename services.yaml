@@ -7,39 +7,39 @@ services:
   - name: mongodb-configurator.service
   - name: cms-notifier@.service
     version: v19
-    count: 2
+    count: 1
   - name: cms-notifier-sidekick@.service
-    count: 2
+    count: 1
   - name: methode-content-importer@.service
     version: v23
-    count: 2
+    count: 1
   - name: methode-content-importer-sidekick@.service
-    count: 2
+    count: 1
   - name: binary-ingester@.service
     version: v31
-    count: 2
+    count: 1
   - name: binary-ingester-sidekick@.service
-    count: 2
+    count: 1
   - name: binary-writer@.service
     version: v36
-    count: 2
+    count: 1
   - name: binary-writer-sidekick@.service
-    count: 2
+    count: 1
   - name: methode-image-binary-transformer@.service
     version: v17
-    count: 2
+    count: 1
   - name: methode-image-binary-transformer-sidekick@.service
-    count: 2
+    count: 1
   - name: methode-image-model-transformer@.service
     version: v21
-    count: 2
+    count: 1
   - name: methode-image-model-transformer-sidekick@.service
-    count: 2
+    count: 1
   - name: nativerw@.service
     version: v24
-    count: 2
+    count: 1
   - name: nativerw-sidekick@.service
-    count: 2
+    count: 1
   - name: aggregate-healthcheck@.service
     count: 1
     version: v30

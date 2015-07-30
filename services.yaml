@@ -17,9 +17,9 @@ services:
     count: 1
   - name: binary-ingester@.service
     version: v31
-    count: 2
+    count: 1
   - name: binary-ingester-sidekick@.service
-    count: 2
+    count: 1
   - name: binary-writer@.service
     version: v36
     count: 1

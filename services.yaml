@@ -6,47 +6,48 @@ services:
     count: 3
   - name: mongodb-configurator.service
   - name: cms-notifier@.service
-    version: v15
+    version: v19
     count: 2
   - name: cms-notifier-sidekick@.service
     count: 2
   - name: methode-content-importer@.service
-    version: v21
+    version: v23
     count: 2
   - name: methode-content-importer-sidekick@.service
     count: 2
   - name: binary-ingester@.service
-    version: v27
+    version: v31
     count: 2
   - name: binary-ingester-sidekick@.service
     count: 2
   - name: binary-writer@.service
-    version: v30 
+    version: v36
     count: 2
   - name: binary-writer-sidekick@.service
     count: 2
   - name: methode-image-binary-transformer@.service
-    version: v15
+    version: v17
     count: 2
   - name: methode-image-binary-transformer-sidekick@.service
     count: 2
   - name: methode-image-model-transformer@.service
-    version: v19
+    version: v21
     count: 2
   - name: methode-image-model-transformer-sidekick@.service
     count: 2
   - name: nativerw@.service
-    version: v22 
+    version: v24
     count: 2
   - name: nativerw-sidekick@.service
     count: 2
   - name: aggregate-healthcheck@.service
     count: 1
+    version: v30
   - name: aggregate-healthcheck-sidekick@.service
     count: 1
   - name: synthetic-image-publication-monitor@.service
     count: 1
-    version: v25
+    version: v27
   - name: synthetic-image-publication-monitor-sidekick@.service
     count: 1
   - name: kafka.service

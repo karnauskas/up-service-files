@@ -47,7 +47,7 @@ services:
     count: 1
   - name: synthetic-image-publication-monitor@.service
     count: 1
-    version: v27
+    version: v28
   - name: synthetic-image-publication-monitor-sidekick@.service
     count: 1
   - name: kafka.service

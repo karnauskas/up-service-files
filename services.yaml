@@ -41,13 +41,13 @@ services:
   - name: nativerw-sidekick@.service
     count: 1
   - name: aggregate-healthcheck@.service
-    count: 1
     version: v30
+    count: 1
   - name: aggregate-healthcheck-sidekick@.service
     count: 1
   - name: synthetic-image-publication-monitor@.service
-    count: 1
     version: v28
+    count: 1
   - name: synthetic-image-publication-monitor-sidekick@.service
     count: 1
   - name: kafka.service

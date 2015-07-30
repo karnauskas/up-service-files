@@ -10,7 +10,7 @@ ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/coco-aggregate-healthcheck
 
 ExecStart=/bin/bash -c 'docker run --rm --name %p-%i -p 8080 \
-	--env="ETCD_PEERS=http://$HOSTNAME:2379" \
+	--env="ETCD_PEERS=http://$HOSTNAME:4001" \
 	--env="KEY_PREFIX=/ft/healthcheck" \
 	--env="VULCAND_ADDRESS=$HOSTNAME:8080" \
 	up-registry.ft.com/coco/coco-aggregate-healthcheck'

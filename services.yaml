@@ -58,7 +58,6 @@ services:
   - name: skydns.service
   - name: vulcan.service
   - name: methodeapi-endpoint.service
-  - name: dashing-forwarder.service
   - name: deployer.service
   - name: deployer.timer
   - name: diamond.service

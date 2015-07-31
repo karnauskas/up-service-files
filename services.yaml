@@ -16,7 +16,7 @@ services:
   - name: methode-content-importer-sidekick@.service
     count: 1
   - name: binary-ingester@.service
-    version: v31
+    version: v32
     count: 1
   - name: binary-ingester-sidekick@.service
     count: 1

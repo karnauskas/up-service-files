@@ -4,7 +4,7 @@ Wants=docker.socket
 
 [Service]
 Type=oneshot
-ExecStart=-/bin/sh -c "docker run --rm -v /usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock coco/coco-docker-gc;"
+ExecStart=-/bin/sh -c "docker run --rm -v /usr:/usr -v /var/run/docker.sock:/var/run/docker.sock coco/coco-docker-gc;"
 Nice=5
 IOSchedulingClass=best-effort
 IOSchedulingPriority=7

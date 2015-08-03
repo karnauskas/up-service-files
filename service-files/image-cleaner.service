@@ -1,10 +1,15 @@
 [Unit]
 Description=Job to clean up docker images + containers on hosts
+Requires=docker.service
 Wants=docker.socket
 
 [Service]
 Type=oneshot
-ExecStart=-/bin/sh -c "docker run --rm -v /usr:/usr -v /var/run/docker.sock:/var/run/docker.sock coco/coco-docker-gc;"
+TimeoutStartSec=600
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-docker-gc"
+ExecStart=/bin/sh -c "docker run --name %p --rm -v /usr:/usr -v /var/run/docker.sock:/var/run/docker.sock coco/coco-docker-gc;"
 Nice=5
 IOSchedulingClass=best-effort
 IOSchedulingPriority=7

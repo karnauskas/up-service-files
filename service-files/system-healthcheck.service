@@ -1,0 +1,30 @@
+[Unit]
+Description=System(CPU, memory, disk) healthcheck monitoring service
+Requires=docker.socket
+After=docker.socket
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+Environment="PROC_DIR=host_proc"
+ExecStartPre=-/usr/bin/docker kill %p-%H
+ExecStartPre=-/usr/bin/docker rm %p-%H
+ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION
+ExecStart=/bin/bash -c " \
+  etcdctl set /vulcand/backends/system-healthcheck-%H/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/system-healthcheck-health-%H/frontend '{\"Type\":\"http\", \"BackendId\":\"system-healthcheck-%H\", \"Route\":\"PathRegexp(`/health/system-healthcheck-%H/.*`)\"}'; \
+  etcdctl set /vulcand/frontends/system-healthcheck-health-%H/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/system-healthcheck-%H(.*)\", \"Replacement\":\"$1\"}}'; \
+  etcdctl set /ft/healthcheck/system-healthcheck-%H /__health; \
+  export PORT=$(echo $(/usr/bin/docker port system-healthcheck-%H 8080) | cut -d':' -f2); \
+  etcdctl set /vulcand/backends/system-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\"; \
+  /usr/bin/docker run --rm --name=%p-%H -e PROC_DIR=$PROC_DIR -v /:/$PROC_DIR:ro up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION"
+ExecStopPost=-/usr/bin/docker rm -f %p-%H
+ExecStopPost=/usr/bin/etcdctl rm --recursive /vulcand/backends/system-healthcheck-%H/servers/srv%H
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+

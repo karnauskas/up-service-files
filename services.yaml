@@ -62,4 +62,5 @@ services:
   - name: deployer.timer
   - name: diamond.service
   - name: elb-presence.service
+  - name: system-healthcheck.service
 

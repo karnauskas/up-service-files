@@ -5,8 +5,8 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull wurstmeister/zookeeper
 ExecStart=/usr/bin/docker run --name %p -p 2181:2181 wurstmeister/zookeeper
 ExecStop=/usr/bin/docker stop %p

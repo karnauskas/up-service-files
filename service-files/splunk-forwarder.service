@@ -3,10 +3,10 @@ Description=Splunk forwarder
 
 [Service]
 TimeoutStartSec=1200
-ExecStartPre=-/usr/bin/docker kill %p-filter
-ExecStartPre=-/usr/bin/docker kill %p-http
-ExecStartPre=-/usr/bin/docker rm %p-filter
-ExecStartPre=-/usr/bin/docker rm %p-http
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'-filter
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'-http
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'-filter
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'-http
 ExecStartPre=/usr/bin/docker pull coco/coco-splunk-http-forwarder
 ExecStartPre=/usr/bin/docker pull coco/coco-logfilter
 ExecStart=/bin/bash -c "\

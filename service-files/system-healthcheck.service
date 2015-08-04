@@ -6,11 +6,11 @@ After=docker.socket
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
 Environment="PROC_DIR=host_proc"
-ExecStartPre=-/usr/bin/docker kill %p-%H
-ExecStartPre=-/usr/bin/docker rm %p-%H
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
 ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION
-ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p-%H -e PROC_DIR=$PROC_DIR -v /:/$PROC_DIR:ro up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION"
-ExecStopPost=-/usr/bin/docker rm -f %p-%H
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -e PROC_DIR=$PROC_DIR -v /:/$PROC_DIR:ro up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION"
+ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
 RestartSec=60
 

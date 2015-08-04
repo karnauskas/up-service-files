@@ -67,4 +67,6 @@ services:
   - name: deployer.timer
   - name: diamond.service
   - name: elb-presence.service
+  - name: image-cleaner.service
+  - name: image-cleaner.timer
 

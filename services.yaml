@@ -63,4 +63,5 @@ services:
   - name: diamond.service
   - name: elb-presence.service
   - name: system-healthcheck.service
+  - name: system-healthcheck-sidekick.service
 

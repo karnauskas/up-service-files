@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c "\
     etcdctl set /vulcand/backends/system-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/system-healthcheck/servers/srv%H
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/system-healthcheck-%H/servers/srv%H
 
 [X-Fleet]
 Global=true

@@ -45,10 +45,15 @@ services:
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
     count: 1
-  - name: synthetic-image-publication-monitor@.service
-    version: v28
+  - name: synthetic-image-publication-monitor-ucs@.service
+    version: v31
     count: 1
-  - name: synthetic-image-publication-monitor-sidekick@.service
+  - name: synthetic-image-publication-monitor-ucs-sidekick@.service
+    count: 1
+  - name: synthetic-image-publication-monitor-aws@.service
+    version: v31
+    count: 1
+  - name: synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
   - name: kafka.service
   - name: kafka-sidekick.service

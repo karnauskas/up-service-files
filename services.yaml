@@ -6,40 +6,40 @@ services:
     count: 3
   - name: mongodb-configurator.service
   - name: cms-notifier@.service
-    version: v19
-    count: 1
+    version: v21
+    count: 2
   - name: cms-notifier-sidekick@.service
-    count: 1
+    count: 2
   - name: methode-content-importer@.service
     version: v23
-    count: 1
+    count: 2
   - name: methode-content-importer-sidekick@.service
-    count: 1
+    count: 2
   - name: binary-ingester@.service
-    version: v31
-    count: 1
+    version: v35
+    count: 2
   - name: binary-ingester-sidekick@.service
-    count: 1
+    count: 2
   - name: binary-writer@.service
-    version: v36
-    count: 1
+    version: v37
+    count: 2
   - name: binary-writer-sidekick@.service
-    count: 1
+    count: 2
   - name: methode-image-binary-transformer@.service
-    version: v17
-    count: 1
+    version: v18
+    count: 2
   - name: methode-image-binary-transformer-sidekick@.service
-    count: 1
+    count: 2
   - name: methode-image-model-transformer@.service
-    version: v21
-    count: 1
+    version: v22
+    count: 2
   - name: methode-image-model-transformer-sidekick@.service
-    count: 1
+    count: 2
   - name: nativerw@.service
-    version: v24
-    count: 1
+    version: v25
+    count: 2
   - name: nativerw-sidekick@.service
-    count: 1
+    count: 2
   - name: aggregate-healthcheck@.service
     version: v30
     count: 1
@@ -58,7 +58,6 @@ services:
   - name: skydns.service
   - name: vulcan.service
   - name: methodeapi-endpoint.service
-  - name: dashing-forwarder.service
   - name: deployer.service
   - name: deployer.timer
   - name: diamond.service

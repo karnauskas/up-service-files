@@ -6,8 +6,8 @@ Wants=kafka.service
 
 [Service]
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p-%i
-ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/wordpress-notifier
 
 ExecStart=/bin/sh -c '\

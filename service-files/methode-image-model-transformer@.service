@@ -6,8 +6,8 @@ Requires=docker.service
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p-%i
-ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'
 Restart=on-failure
 RestartSec=60

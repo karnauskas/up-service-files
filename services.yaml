@@ -41,7 +41,7 @@ services:
   - name: nativerw-sidekick@.service
     count: 2
   - name: aggregate-healthcheck@.service
-    version: v30
+    version: v31
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
     count: 1

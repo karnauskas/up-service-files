@@ -5,8 +5,8 @@ Requires=docker.service zookeeper.service
 
 [Service]
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull wurstmeister/kafka:0.8.2.0
 #IP needs to be editted to grep out on the interface of the host vm
 ExecStart=/bin/bash -c "\

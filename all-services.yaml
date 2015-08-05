@@ -181,9 +181,13 @@ services:
     count: 1
   - name: dashing-forwarder.service
     version: latest
-  - name: synthetic-image-publication-monitor@.service
+  - name: synthetic-image-publication-monitor-ucs@.service
     version: latest
     count: 1
-  - name: synthetic-image-publication-monitor-sidekick@.service
+  - name: synthetic-image-publication-monitor-ucs-sidekick@.service
+    count: 1
+  - name: synthetic-image-publication-monitor-aws@.service
     version: latest
+    count: 1
+  - name: synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1

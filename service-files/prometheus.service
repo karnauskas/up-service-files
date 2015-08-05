@@ -5,8 +5,8 @@ After=docker.socket
 
 [Service]
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/bin/sh -c "docker history coco/coco-prometheus >/dev/null 2>&1 || docker pull coco/coco-prometheus"
 ExecStart=/bin/bash -c "\
   export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \

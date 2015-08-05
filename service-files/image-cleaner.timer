@@ -1,8 +1,9 @@
 [Unit]
-Description=Run image-cleaner at 3 am every day
+Description=Runs docker garbage collector
 
 [Timer]
-OnCalendar=*-*-* 03:00:00
+OnBootSec=2h
+OnUnitActiveSec=10m
 Persistent=true
 
 [Install]

@@ -1,5 +1,5 @@
 [Unit]
-Description=Synthetic Image Publication Monitor
+Description=Synthetic Image Publication Monitor UCS
 After=docker.service
 Requires=docker.service
 
@@ -10,8 +10,14 @@ ExecStartPre=-/usr/bin/docker kill %p-%i
 ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
-ExecStart=/bin/bash -c 'docker run --rm --name %p-%i -p 8080 \
-	--env "POST_ADDRESS=$HOSTNAME:8080" \
+ExecStart=/bin/bash -c '\
+  	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
+	docker run --rm --name %p-%i -p 8080 \
+	--env "POST_ADDRESS=cmsnotifier.ft.com" \
+	--env "BUCKET_ADDRESS=com.ft.imagepublish.prod" \
+	--env "DYN_ROUTING=false" \
+	--env "POST_CREDENTIALS=$POST_CREDENTIALS" \
+	--env "TEST_UUID=e97e511e-d786-4f20-a70b-91d09e1b34cb" \
 	up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

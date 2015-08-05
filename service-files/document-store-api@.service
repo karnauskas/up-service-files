@@ -8,8 +8,8 @@ Wants=mongodb@1.service
 
 [Service]
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p-%i
-ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/document-store-api
 
 ExecStart=/bin/sh -c '\

@@ -4,8 +4,8 @@ Requires=docker.socket
 After=docker.socket
 
 [Service]
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/coco-diamond
 ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -e GRAPHITE_HOST=graphite.ft.com -e GRAPHITE_PORT=2003 -e DOCKER_HOSTNAME=$HOSTNAME -e INTERVAL=60 -v /proc:/host_proc:ro -v /var/run/docker.sock:/var/run/docker.sock:ro coco/coco-diamond"
 ExecStopPost=-/usr/bin/docker rm -f %p

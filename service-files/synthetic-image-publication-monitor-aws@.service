@@ -1,0 +1,28 @@
+[Unit]
+Description=Synthetic Image Publication Monitor AWS
+After=docker.service
+Requires=docker.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=600
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/bash -c '\
+  	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
+	docker run --rm --name %p-%i -p 8080 \
+	--env "POST_ADDRESS=cmsnotifier.ft.com" \
+	--env "BUCKET_ADDRESS=com.ft.imagepublish.int" \
+	--env "DYN_ROUTING=false" \
+	--env "POST_CREDENTIALS=$POST_CREDENTIALS" \
+	--env "TEST_UUID=c94a3a57-3c99-423c-a6bd-ed8c4c10a3c3" \
+	up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

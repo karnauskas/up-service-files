@@ -5,8 +5,8 @@ After=docker.socket
 
 [Service]
 TimeoutStartSec=600
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/bin/sh -c "docker history skynetservices/skydns:latest >/dev/null 2>&1 || docker pull skynetservices/skydns:latest"
 ExecStartPre=/usr/bin/etcdctl set /skydns/config "{\"ttl\":3600, \"nameservers\": [\"172.31.0.2:53\"]}"
 ExecStart=/bin/bash -c "\

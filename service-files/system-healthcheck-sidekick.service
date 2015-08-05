@@ -1,0 +1,23 @@
+[Unit]
+Description=System healthcheck sidekick
+PartOf=system-healthcheck.service
+ReloadPropagatedFrom=system-healthcheck.service
+After=system-healthcheck.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$HOSTNAME; \
+  etcdctl set /vulcand/backends/system-healthcheck-%H/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/system-healthcheck-%H/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"system-healthcheck-%H\\\", \\\"Route\\\":\\\"Path(\`/health/system-healthcheck-%H/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/system-healthcheck-%H/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/system-healthcheck-%H(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /ft/healthcheck/system-healthcheck-%H /__health; \
+  \
+  while true; do \
+    export PORT=$(echo $(/usr/bin/docker port system-healthcheck-%H 8080) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/system-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
+    sleep 45; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/system-healthcheck-%H/servers/srv%H
+
+[X-Fleet]
+Global=true

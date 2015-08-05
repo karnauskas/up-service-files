@@ -8,7 +8,7 @@ Environment="DOCKER_APP_VERSION=latest"
 Environment="HOST_DIR=host_dir"
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
-ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION
+ExecStartPre=/bin/bash -c "/usr/bin/docker pull up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION"
 ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -e HOST_DIR=$HOST_DIR -v /:/$HOST_DIR:ro up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION"
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure

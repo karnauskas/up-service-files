@@ -13,7 +13,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/system-healthcheck-%H /__health; \
   \
   while true; do \
-    export PORT=$(echo $(/usr/bin/docker port system-healthcheck-%H 8080) | cut -d':' -f2); \
+    export PORT=$(echo $(/usr/bin/docker port system-healthcheck 8080) | cut -d':' -f2); \
     etcdctl set /vulcand/backends/system-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

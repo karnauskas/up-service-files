@@ -1,4 +1,5 @@
 ---
+serviceFilesUri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/
 services:
   - name: mongodb@.service
     count: 3

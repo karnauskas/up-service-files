@@ -55,6 +55,9 @@ services:
     count: 1
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
+  - name: system-healthcheck.service
+    version: v7
+  - name: system-healthcheck-sidekick.service
   - name: kafka.service
   - name: kafka-sidekick.service
   - name: zookeeper.service
@@ -67,8 +70,6 @@ services:
   - name: deployer.timer
   - name: diamond.service
   - name: elb-presence.service
-  - name: system-healthcheck.service
-  - name: system-healthcheck-sidekick.service
   - name: image-cleaner.service
   - name: image-cleaner.timer
 

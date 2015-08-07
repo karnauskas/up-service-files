@@ -1,75 +1,109 @@
 ---
-serviceFilesUri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/
 services:
   - name: mongodb@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongodb@.service
     count: 3
   - name: mongodb-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongodb-sidekick@.service
     count: 3
   - name: mongodb-configurator.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongodb-configurator.service
   - name: cms-notifier@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier@.service
     version: v21
     count: 2
   - name: cms-notifier-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier-sidekick@.service
     count: 2
   - name: methode-content-importer@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-content-importer@.service
     version: v23
     count: 2
   - name: methode-content-importer-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-content-importer-sidekick@.service
     count: 2
   - name: binary-ingester@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-ingester@.service
     version: v35
     count: 2
   - name: binary-ingester-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-ingester-sidekick@.service
     count: 2
   - name: binary-writer@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-writer@.service
     version: v37
     count: 2
   - name: binary-writer-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-writer-sidekick@.service
     count: 2
   - name: methode-image-binary-transformer@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-binary-transformer@.service
     version: v18
     count: 2
   - name: methode-image-binary-transformer-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-binary-transformer-sidekick@.service
     count: 2
   - name: methode-image-model-transformer@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-model-transformer@.service
     version: v22
     count: 2
   - name: methode-image-model-transformer-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-model-transformer-sidekick@.service
     count: 2
   - name: nativerw@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/nativerw@.service
     version: v25
     count: 2
   - name: nativerw-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/nativerw-sidekick@.service
     count: 2
   - name: aggregate-healthcheck@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/aggregate-healthcheck@.service
     version: v31
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/aggregate-healthcheck-sidekick@.service
     count: 1
   - name: synthetic-image-publication-monitor-ucs@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-ucs@.service
     version: v31
     count: 1
   - name: synthetic-image-publication-monitor-ucs-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-ucs-sidekick@.service
     count: 1
   - name: synthetic-image-publication-monitor-aws@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws@.service
     version: v31
     count: 1
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
   - name: kafka.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/kafka.service
   - name: kafka-sidekick.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/kafka-sidekick.service
   - name: zookeeper.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/zookeeper.service
   - name: zookeeper-sidekick.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/zookeeper-sidekick.service
   - name: splunk-forwarder.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/splunk-forwarder.service
   - name: skydns.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/skydns.service
   - name: vulcan.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/vulcan.service
   - name: methodeapi-endpoint.service
-  - name: deployer.service
-  - name: deployer.timer
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methodeapi-endpoint.service
   - name: diamond.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/diamond.service
   - name: elb-presence.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/elb-presence.service
   - name: system-healthcheck.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck.service
   - name: system-healthcheck-sidekick.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck-sidekick.service
   - name: image-cleaner.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/image-cleaner.service
   - name: image-cleaner.timer
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/image-cleaner.timer
 

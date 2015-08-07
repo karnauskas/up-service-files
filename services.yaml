@@ -56,7 +56,7 @@ services:
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
   - name: system-healthcheck.service
-    version: v7
+    version: v8
   - name: system-healthcheck-sidekick.service
   - name: kafka.service
   - name: kafka-sidekick.service

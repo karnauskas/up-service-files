@@ -52,7 +52,7 @@ services:
     count: 2
   - name: nativerw@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/nativerw@.service
-    version: v25
+    version: v27
     count: 2
   - name: nativerw-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/nativerw-sidekick@.service

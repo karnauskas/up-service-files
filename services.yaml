@@ -10,21 +10,21 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongodb-configurator.service
   - name: cms-notifier@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier@.service
-    version: v21
+    version: v23
     count: 2
   - name: cms-notifier-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier-sidekick@.service
     count: 2
   - name: methode-content-importer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-content-importer@.service
-    version: v23
+    version: v25
     count: 2
   - name: methode-content-importer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-content-importer-sidekick@.service
     count: 2
   - name: binary-ingester@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-ingester@.service
-    version: v35
+    version: v41
     count: 2
   - name: binary-ingester-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-ingester-sidekick@.service
@@ -44,14 +44,14 @@ services:
     count: 1
   - name: methode-image-binary-transformer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-binary-transformer@.service
-    version: v18
+    version: v19
     count: 2
   - name: methode-image-binary-transformer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-binary-transformer-sidekick@.service
     count: 2
   - name: methode-image-model-transformer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-model-transformer@.service
-    version: v22
+    version: v28
     count: 2
   - name: methode-image-model-transformer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-model-transformer-sidekick@.service
@@ -65,14 +65,14 @@ services:
     count: 2
   - name: aggregate-healthcheck@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/aggregate-healthcheck@.service
-    version: v37
+    version: v38
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/aggregate-healthcheck-sidekick@.service
     count: 1
   - name: synthetic-image-publication-monitor-ucs@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-ucs@.service
-    version: v31
+    version: v32
     count: 1
   - name: synthetic-image-publication-monitor-ucs-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-ucs-sidekick@.service
@@ -85,7 +85,7 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
   - name: system-healthcheck.service
-    version: v12
+    version: v14
   - name: system-healthcheck-sidekick.service
   - name: kafka.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/kafka.service

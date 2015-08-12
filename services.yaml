@@ -31,7 +31,7 @@ services:
     count: 2
   - name: binary-writer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-writer@.service
-    version: v37
+    version: v39
     count: 2
   - name: binary-writer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-writer-sidekick@.service

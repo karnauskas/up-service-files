@@ -38,6 +38,7 @@ services:
     count: 2
   - name: document-store-api@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/document-store-api@.service
+    version: v20
     count: 1
   - name: document-store-api-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/document-store-api-sidekick@.service

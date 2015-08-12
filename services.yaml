@@ -36,6 +36,12 @@ services:
   - name: binary-writer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-writer-sidekick@.service
     count: 2
+  - name: document-store-api@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/document-store-api@.service
+    count: 1
+  - name: document-store-api-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/document-store-api-sidekick@.service
+    count: 1
   - name: methode-image-binary-transformer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-binary-transformer@.service
     version: v18

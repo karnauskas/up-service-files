@@ -80,7 +80,7 @@ services:
     count: 1
   - name: synthetic-image-publication-monitor-aws@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws@.service
-    version: v31
+    version: v32
     count: 1
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws-sidekick@.service

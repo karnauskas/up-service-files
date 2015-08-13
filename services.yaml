@@ -73,14 +73,14 @@ services:
     count: 1
   - name: synthetic-image-publication-monitor-ucs@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-ucs@.service
-    version: v32
+    version: v33
     count: 1
   - name: synthetic-image-publication-monitor-ucs-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-ucs-sidekick@.service
     count: 1
   - name: synthetic-image-publication-monitor-aws@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws@.service
-    version: v32
+    version: v33
     count: 1
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws-sidekick@.service

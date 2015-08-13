@@ -8,7 +8,19 @@ TimeoutStartSec=0
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'-%i '
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'-%i > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/coco-mongodb-configurator
-ExecStart=/bin/bash -c "docker run --rm --name %p-%i --env=\"PEERS=http://$HOSTNAME:4001\" coco/coco-mongodb-configurator"
+ExecStart=/bin/bash -c "\
+  while true ; do \
+    echo \"configuring mongodb cluster\"; \
+    MONGOS=$(etcdctl ls /services/mongodb/); \
+    ALL=""; \
+    for m in $MONGOS ; do \
+      hostportadmin=$(etcdctl get $m/host):$(etcdctl get $m/port):$(etcdctl get $m/admin_port); \
+      ALL=\"$ALL $hostportadmin\"; \
+    done \
+    docker run --rm --name %p-%i --env=\"ARGS=$ARGS\" coco/coco-mongodb-configurator; \
+    echo \"waiting for mongodb changes\"; \
+    etcdctl watch --recursive /services/mongodb; \
+  done"
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

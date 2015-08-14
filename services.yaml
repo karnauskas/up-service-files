@@ -86,8 +86,10 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
   - name: system-healthcheck.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck.service
     version: v14
   - name: system-healthcheck-sidekick.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck-sidekick.service
   - name: kafka.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/kafka.service
   - name: kafka-sidekick.service

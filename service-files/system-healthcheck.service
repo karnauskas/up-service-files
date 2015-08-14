@@ -4,8 +4,7 @@ Requires=docker.socket
 After=docker.socket
 
 [Service]
-Environment="DOCKER_APP_VERSION=latest"
-Environment="HOST_DIR=host_dir"
+Environment="DOCKER_APP_VERSION=latest" "HOST_DIR=host_dir"
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull up-registry.ft.com/coco/system-healthcheck:$DOCKER_APP_VERSION"

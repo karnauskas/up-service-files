@@ -2,6 +2,7 @@
 Description=Semantic reader
 After=docker.service
 Requires=docker.service
+Wants=semantic-reader-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

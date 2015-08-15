@@ -2,6 +2,7 @@
 Description=Methode Image Binary Transformer
 After=docker.service
 Requires=docker.service
+Wants=methode-image-binary-transformer-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

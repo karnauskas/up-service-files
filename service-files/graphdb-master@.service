@@ -2,6 +2,7 @@
 Description=GraphDB Master
 After=docker.service
 Requires=docker.service
+Wants=graphdb-master-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

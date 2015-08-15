@@ -2,6 +2,7 @@
 Description=GraphDB Worker
 After=docker.service
 Requires=docker.service
+Wants=graphdb-worker-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

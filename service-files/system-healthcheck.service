@@ -2,6 +2,7 @@
 Description=System(CPU, memory, disk) healthcheck monitoring service
 Requires=docker.socket
 After=docker.socket
+Wants=system-healthcheck-sidekick.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest" "HOST_DIR=host_dir"

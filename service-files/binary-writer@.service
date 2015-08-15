@@ -2,6 +2,7 @@
 Description=Binary Writer
 After=vulcan.service
 Requires=docker.service
+Wants=binary-writer-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

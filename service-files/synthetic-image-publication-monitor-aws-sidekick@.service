@@ -1,7 +1,6 @@
 [Unit]
 Description=Synthetic Image Publication Monitor AWS Sidekick
-PartOf=synthetic-image-publication-monitor-aws@%i.service
-ReloadPropagatedFrom=synthetic-image-publication-monitor-aws@%i.service
+BindsTo=synthetic-image-publication-monitor-aws@%i.service
 After=synthetic-image-publication-monitor-aws@%i.service
 
 [Service]

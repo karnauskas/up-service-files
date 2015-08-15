@@ -2,6 +2,7 @@
 Description=Organisation Read API
 After=vulcan.service
 Requires=docker.service
+Wants=organisation-read-api-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

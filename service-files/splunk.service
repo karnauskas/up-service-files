@@ -2,6 +2,7 @@
 Description=Splunk
 Requires=docker.socket
 After=docker.socket
+Wants=splunk-sidekick.service
 
 [Service]
 TimeoutStartSec=600

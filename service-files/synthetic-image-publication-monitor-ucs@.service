@@ -2,6 +2,7 @@
 Description=Synthetic Image Publication Monitor UCS
 After=docker.service
 Requires=docker.service
+Wants=synthetic-image-publication-monitor-ucs-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

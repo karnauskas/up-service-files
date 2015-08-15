@@ -2,6 +2,7 @@
 Description=methode article transformer
 After=docker.service
 Requires=docker.service
+Wants=methode-article-transformer-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

@@ -2,6 +2,7 @@
 Description=Enriched Content Read API
 After=vulcan.service
 Requires=docker.service
+Wants=enriched-content-read-api-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

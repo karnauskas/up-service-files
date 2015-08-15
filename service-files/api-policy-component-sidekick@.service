@@ -1,7 +1,6 @@
 [Unit]
 Description=api policy component
-PartOf=api-policy-component@%i.service
-ReloadPropagatedFrom=api-policy-component@%i.service
+BindsTo=api-policy-component@%i.service
 After=api-policy-component@%i.service
 
 [Service]

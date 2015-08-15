@@ -1,7 +1,6 @@
 [Unit]
 Description=GraphDB Master Sidekick
-PartOf=graphdb-master@%i.service
-ReloadPropagatedFrom=graphdb-master@%i.service
+BindsTo=graphdb-master@%i.service
 After=graphdb-master@%i.service
 
 [Service]

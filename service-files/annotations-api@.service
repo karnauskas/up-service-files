@@ -2,6 +2,7 @@
 Description=Annotations API 
 After=vulcan.service
 Requires=docker.service
+Wants=annotations-api-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

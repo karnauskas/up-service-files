@@ -2,6 +2,7 @@
 Description=FastFTTransformer
 After=docker.service
 Requires=docker.service
+Wants=fastftxf-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

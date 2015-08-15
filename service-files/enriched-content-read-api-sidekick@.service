@@ -1,7 +1,6 @@
 [Unit]
 Description=Enriched Content Read API Sidekick
-PartOf=enriched-content-read-api@%i.service
-ReloadPropagatedFrom=enriched-content-read-api@%i.service
+BindsTo=enriched-content-read-api@%i.service
 After=enriched-content-read-api@%i.service
 
 [Service]

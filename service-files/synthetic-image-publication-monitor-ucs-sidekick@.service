@@ -1,7 +1,6 @@
 [Unit]
 Description=Synthetic Image Publication Monitor UCS Sidekick
-PartOf=synthetic-image-publication-monitor-ucs@%i.service
-ReloadPropagatedFrom=synthetic-image-publication-monitor-ucs@%i.service
+BindsTo=synthetic-image-publication-monitor-ucs@%i.service
 After=synthetic-image-publication-monitor-ucs@%i.service
 
 [Service]

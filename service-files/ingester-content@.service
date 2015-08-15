@@ -2,6 +2,7 @@
 Description=Content Ingester
 After=vulcan.service
 Requires=docker.service
+Wants=ingester-content-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

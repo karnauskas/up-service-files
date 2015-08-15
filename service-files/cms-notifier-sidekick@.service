@@ -1,7 +1,6 @@
 [Unit]
 Description=CMS Notifier Sidekick
-PartOf=cms-notifier@%i.service
-ReloadPropagatedFrom=cms-notifier@%i.service
+BindsTo=cms-notifier@%i.service
 After=cms-notifier@%i.service
 
 [Service]

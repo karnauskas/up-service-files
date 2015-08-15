@@ -2,6 +2,7 @@
 Description=People Read API
 After=vulcan.service
 Requires=docker.service
+Wants=people-read-api-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

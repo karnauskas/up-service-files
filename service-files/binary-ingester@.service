@@ -2,6 +2,7 @@
 Description=Binary Ingester
 After=vulcan.service
 Requires=docker.service
+Wants=binary-ingester-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

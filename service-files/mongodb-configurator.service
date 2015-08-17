@@ -6,6 +6,7 @@ After=docker.service
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=600
+<<<<<<< HEAD
 ExecStartPre=-/bin/bash -c "/usr/bin/docker kill %p > /dev/null 2>&1"
 ExecStartPre=-/bin/bash -c "/usr/bin/docker rm %p > /dev/null 2>&1"
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-mongodb-configurator:$DOCKER_APP_VERSION"

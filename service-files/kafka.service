@@ -2,6 +2,7 @@
 Description=Kafka
 After=docker.service zookeeper.service
 Requires=docker.service zookeeper.service
+Wants=kafka-sidekick.service
 
 [Service]
 TimeoutStartSec=600

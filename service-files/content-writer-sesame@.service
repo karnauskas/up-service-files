@@ -2,6 +2,7 @@
 Description=Content Writer Sesame
 After=docker.service 
 Requires=docker.service
+Wants=content-writer-sesame-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

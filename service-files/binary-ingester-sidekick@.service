@@ -1,7 +1,6 @@
 [Unit]
 Description=Binary Ingester Sidekick
-PartOf=binary-ingester@%i.service
-ReloadPropagatedFrom=binary-ingester@%i.service
+BindsTo=binary-ingester@%i.service
 After=binary-ingester@%i.service
 
 [Service]

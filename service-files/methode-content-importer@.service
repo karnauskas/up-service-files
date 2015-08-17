@@ -2,7 +2,7 @@
 Description=Methode Content Importer
 After=docker.service kafka.service
 Requires=docker.service
-Wants=kafka.service
+Wants=kafka.service methode-content-importer-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

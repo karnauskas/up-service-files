@@ -2,6 +2,7 @@
 Description=Wordpress Transformer 
 After=docker.service
 Requires=docker.service
+Wants=wp-transformer-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

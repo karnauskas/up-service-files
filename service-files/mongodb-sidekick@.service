@@ -1,7 +1,6 @@
 [Unit]
 Description=MongoDB Sidekick
-PartOf=mongodb@%i.service
-ReloadPropagatedFrom=mongodb@%i.service
+BindsTo=mongodb@%i.service
 After=mongodb@%i.service
 
 [Service]

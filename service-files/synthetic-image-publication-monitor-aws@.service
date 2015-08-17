@@ -2,6 +2,7 @@
 Description=Synthetic Image Publication Monitor AWS
 After=docker.service
 Requires=docker.service
+Wants=synthetic-image-publication-monitor-aws-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

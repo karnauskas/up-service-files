@@ -1,7 +1,6 @@
 [Unit]
 Description=Nativerw sidekick
-PartOf=nativerw@%i.service
-ReloadPropagatedFrom=nativerw@%i.service
+BindsTo=nativerw@%i.service
 After=nativerw@%i.service
 
 [Service]

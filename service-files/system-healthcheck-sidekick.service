@@ -1,7 +1,6 @@
 [Unit]
 Description=System healthcheck sidekick
-PartOf=system-healthcheck.service
-ReloadPropagatedFrom=system-healthcheck.service
+BindsTo=system-healthcheck.service
 After=system-healthcheck.service
 
 [Service]

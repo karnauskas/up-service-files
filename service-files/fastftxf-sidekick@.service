@@ -1,7 +1,6 @@
 [Unit]
 Description=FastFTXF Sidekick
-PartOf=fastftxf@%i.service
-ReloadPropagatedFrom=fastftxf@%i.service
+BindsTo=fastftxf@%i.service
 After=fastftxf@%i.service
 
 [Service]

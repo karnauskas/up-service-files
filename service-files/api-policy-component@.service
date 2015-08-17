@@ -2,6 +2,7 @@
 Description=api policy component
 After=docker.service
 Requires=docker.service
+Wants=api-policy-component-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

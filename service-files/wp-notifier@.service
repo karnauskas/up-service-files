@@ -2,7 +2,7 @@
 Description=Wordpress Notifier
 After=docker.service kafka.service
 Requires=docker.service
-Wants=kafka.service
+Wants=kafka.service wp-notifier-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

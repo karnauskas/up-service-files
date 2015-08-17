@@ -2,6 +2,7 @@
 Description=MongoDB 
 After=docker.service
 Requires=docker.service
+Wants=mongodb-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

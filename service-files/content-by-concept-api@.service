@@ -2,6 +2,7 @@
 Description=Content-By-Concept API
 After=vulcan.service
 Requires=docker.service
+Wants=content-by-concept-api-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

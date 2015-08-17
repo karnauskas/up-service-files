@@ -1,7 +1,6 @@
 [Unit]
 Description=Document store api sidekick
-PartOf=document-store-api@%i.service
-ReloadPropagatedFrom=document-store-api@%i.service
+BindsTo=document-store-api@%i.service
 After=document-store-api@%i.service
 
 [Service]

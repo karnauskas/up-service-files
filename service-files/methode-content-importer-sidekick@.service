@@ -1,7 +1,6 @@
 [Unit]
 Description=Methode Content Importer Sidekick
-PartOf=methode-content-importer@%i.service
-ReloadPropagatedFrom=methode-content-importer@%i.service
+BindsTo=methode-content-importer@%i.service
 After=methode-content-importer@%i.service
 
 [Service]

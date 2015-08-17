@@ -2,6 +2,7 @@
 Description=Aggregate Healthcheck
 After=docker.service
 Requires=docker.service
+Wants=aggregate-healthcheck-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

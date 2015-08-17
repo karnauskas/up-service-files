@@ -1,7 +1,6 @@
 [Unit]
 Description=wp-transformer Sidekick
-PartOf=wp-transformer@%i.service
-ReloadPropagatedFrom=wp-transformer@%i.service
+BindsTo=wp-transformer@%i.service
 After=wp-transformer@%i.service
 
 [Service]

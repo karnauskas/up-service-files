@@ -2,6 +2,7 @@
 Description=Varnish
 After=docker.service
 Requires=docker.service
+Wants=varnish-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=600

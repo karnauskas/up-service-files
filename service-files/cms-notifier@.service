@@ -2,6 +2,7 @@
 Description=CMS Notifier
 After=vulcan.service
 Requires=docker.service
+Wants=cms-notifier-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

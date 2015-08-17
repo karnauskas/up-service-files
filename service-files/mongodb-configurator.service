@@ -18,7 +18,7 @@ ExecStart=/bin/bash -c "\
       hostportadmin=$(etcdctl get $m/host):$(etcdctl get $m/port):$(etcdctl get $m/admin_port); \
       ALL=\"$ALL $hostportadmin\"; \
     done; \
-    docker run --rm --name %p --env=\"ARGS=$ARGS\" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION; \
+    docker run --rm --name %p --env=\"ARGS=$ALL\" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION; \
     echo \"INFO Waiting for mongodb changes\"; \
     etcdctl watch --recursive /services/mongodb; \
   done;"

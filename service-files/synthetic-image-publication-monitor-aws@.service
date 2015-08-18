@@ -15,7 +15,7 @@ ExecStart=/bin/bash -c '\
   	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
 	docker run --rm --name %p-%i -p 8080 \
 	--env "POST_ADDRESS=cmsnotifier.ft.com" \
-	--env "BUCKET_ADDRESS=com.ft.imagepublish.int" \
+	--env "BUCKET_ADDRESS=com.ft.coco-imagepublish.prod" \
 	--env "DYN_ROUTING=false" \
 	--env "POST_CREDENTIALS=$POST_CREDENTIALS" \
 	--env "TEST_UUID=c94a3a57-3c99-423c-a6bd-ed8c4c10a3c3" \

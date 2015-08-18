@@ -10,28 +10,28 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongodb-configurator.service
   - name: cms-notifier@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier@.service
-    version: v23
+    version: v26
     count: 2
   - name: cms-notifier-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier-sidekick@.service
     count: 2
   - name: methode-content-importer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-content-importer@.service
-    version: v25
+    version: v27
     count: 2
   - name: methode-content-importer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-content-importer-sidekick@.service
     count: 2
   - name: binary-ingester@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-ingester@.service
-    version: v41
+    version: v44
     count: 2
   - name: binary-ingester-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-ingester-sidekick@.service
     count: 2
   - name: binary-writer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-writer@.service
-    version: v39
+    version: v43
     count: 2
   - name: binary-writer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/binary-writer-sidekick@.service
@@ -45,14 +45,14 @@ services:
     count: 1
   - name: methode-image-binary-transformer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-binary-transformer@.service
-    version: v19
+    version: v21
     count: 2
   - name: methode-image-binary-transformer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-binary-transformer-sidekick@.service
     count: 2
   - name: methode-image-model-transformer@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-model-transformer@.service
-    version: v28
+    version: v29
     count: 2
   - name: methode-image-model-transformer-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/methode-image-model-transformer-sidekick@.service

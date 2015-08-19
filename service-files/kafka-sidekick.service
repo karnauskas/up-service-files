@@ -5,14 +5,9 @@ After=kafka.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  while true; do \
-    export KAFKA_PORT=$(/usr/bin/docker port kafka 9092 | cut -d':' -f2); \
     export KAFKA_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
-    etcdctl set /services/kafka/ip $KAFKA_IP --ttl 60; \
-    etcdctl set /services/kafka/port $KAFKA_PORT --ttl 60; \
-    sleep 45; \
-  done"
-ExecStop=/usr/bin/etcdctl rm --recursive /services/kafka
+    etcdctl set /services/kafka/ip $KAFKA_IP ; \
+    etcdctl set /services/kafka/port 9082 ; "
 
 [X-Fleet]
 MachineOf=kafka.service

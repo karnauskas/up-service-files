@@ -87,7 +87,7 @@ services:
     count: 1
   - name: system-healthcheck.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck.service
-    version: v16
+    version: v17
   - name: system-healthcheck-sidekick.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck-sidekick.service
   - name: kafka.service

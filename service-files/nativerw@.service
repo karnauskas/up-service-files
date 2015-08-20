@@ -8,7 +8,10 @@ Wants=mongodb@1.service nativerw-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-TimeoutStartSec=600
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/nativerw:$DOCKER_APP_VERSION'

@@ -3,6 +3,9 @@ Description=Splunk forwarder
 
 [Service]
 TimeoutStartSec=1200
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-filter > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-http > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-filter > /dev/null 2>&1'

@@ -14,7 +14,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/syntheti
 ExecStart=/bin/bash -c '\
   	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
 	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-aws/test-uuid); \
-	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \	
+	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i -p 8080 \
 	--env "POST_ADDRESS=cmsnotifier.ft.com" \
 	--env "BUCKET_ADDRESS=$BUCKET_ADDRESS" \

@@ -5,7 +5,10 @@ Requires=docker.service zookeeper.service
 Wants=kafka-sidekick.service
 
 [Service]
-TimeoutStartSec=600
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull wurstmeister/kafka:0.8.2.0

@@ -5,7 +5,10 @@ Wants=docker.socket
 
 [Service]
 Type=oneshot
-TimeoutStartSec=600
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull spotify/docker-gc"

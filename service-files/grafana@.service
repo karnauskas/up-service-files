@@ -3,7 +3,10 @@ Description=Grafana
 Requires=cadvisor.service
 
 [Service]
-TimeoutStartSec=600
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull kubernetes/heapster_grafana:v0.4

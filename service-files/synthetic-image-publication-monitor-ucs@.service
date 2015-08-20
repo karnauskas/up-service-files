@@ -13,12 +13,13 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/syntheti
 
 ExecStart=/bin/bash -c '\
   	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
+  	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-ucs/test-uuid); \
 	docker run --rm --name %p-%i -p 8080 \
 	--env "POST_ADDRESS=cmsnotifier.ft.com" \
 	--env "BUCKET_ADDRESS=com.ft.imagepublish.prod" \
 	--env "DYN_ROUTING=false" \
 	--env "POST_CREDENTIALS=$POST_CREDENTIALS" \
-	--env "TEST_UUID=e97e511e-d786-4f20-a70b-91d09e1b34cb" \
+	--env "TEST_UUID=$TEST_UUID" \
 	up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

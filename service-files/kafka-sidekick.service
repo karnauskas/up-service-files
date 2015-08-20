@@ -7,7 +7,7 @@ After=kafka.service
 ExecStart=/bin/sh -c "\
     export KAFKA_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
     etcdctl set /services/kafka/ip $KAFKA_IP ; \
-    etcdctl set /services/kafka/port 9082 ; "
+    etcdctl set /services/kafka/port 9092 ; "
 
 [X-Fleet]
 MachineOf=kafka.service

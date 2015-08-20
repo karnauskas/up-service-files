@@ -71,13 +71,6 @@ services:
   - name: aggregate-healthcheck-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/aggregate-healthcheck-sidekick@.service
     count: 1
-  - name: synthetic-image-publication-monitor-ucs@.service
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/synthetic-image-publication-monitor-ucs@.service
-    version: v33
-    count: 1
-  - name: synthetic-image-publication-monitor-ucs-sidekick@.service
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/synthetic-image-publication-monitor-ucs-sidekick@.service
-    count: 1
   - name: synthetic-image-publication-monitor-aws@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/synthetic-image-publication-monitor-aws@.service
     version: v33

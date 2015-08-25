@@ -15,8 +15,8 @@ ExecStart=/bin/sh -c "\
   \
   while true; do \
     export MONGO_WRITER_PORT=$(echo $(/usr/bin/docker port document-store-api-%i 8080) | cut -d':' -f2); \
-    etcdctl set /vulcand/backends/document-store-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$MONGO_WRITER_PORT\\\"}\" --ttl 60; \
-    sleep 45; \
+    etcdctl set /vulcand/backends/document-store-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$MONGO_WRITER_PORT\\\"}\" --ttl 600; \
+    sleep 120; \
   done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/document-store-api/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/document-store-api/servers/srv%i

@@ -13,9 +13,9 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-http > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/coco-splunk-http-forwarder
 ExecStartPre=/usr/bin/docker pull coco/coco-logfilter
 ExecStart=/bin/bash -c "\
-      export FORWARD_URL=$(/usr/bin/etcdctl get /ft/_credentials/splunk-forwarder/splunk_url); \
-      export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-      /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --env=ENV=$ENV --rm --name %p-filter coco/coco-logfilter | docker run -i --rm --name %p-http --env=\"FORWARD_URL=$FORWARD_URL\" up-registry.ft.com/coco/coco-splunk-http-forwarder"
+  export FORWARD_URL=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/splunk_url); \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --env=ENV=$ENV --rm --name %p-filter coco/coco-logfilter | docker run -i --rm --name %p-http --env=\"FORWARD_URL=$FORWARD_URL\" up-registry.ft.com/coco/coco-splunk-http-forwarder"
 ExecStop=/bin/bash -c "/usr/bin/docker stop -t 3 %p-filter && /usr/bin/docker stop -t 3 %p-http"
 Restart=on-failure
 RestartSec=60

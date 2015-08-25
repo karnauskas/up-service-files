@@ -13,11 +13,11 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/nativerw-%i /__health; \
   while true; do \
     NATIVERW_PORT=$(/usr/bin/docker port nativerw-%i 8080 | cut -d':' -f2); \
-    etcdctl set /services/nativerw/%i/host '%H' --ttl 60; \
-    etcdctl set /services/nativerw/%i/app_port $NATIVERW_PORT --ttl 60; \
-    etcdctl set /vulcand/backends/nativerw/servers/srv%i \"{\\\"url\\\": \\\"http://%H:$NATIVERW_PORT\\\"}\" --ttl 60; \
-    etcdctl set /vulcand/backends/nativerw-%i/servers/srv%i \"{\\\"url\\\": \\\"http://%H:$NATIVERW_PORT\\\"}\" --ttl 60; \
-    sleep 45; \
+    etcdctl set /services/nativerw/%i/host '%H' --ttl 600; \
+    etcdctl set /services/nativerw/%i/app_port $NATIVERW_PORT --ttl 600; \
+    etcdctl set /vulcand/backends/nativerw/servers/srv%i \"{\\\"url\\\": \\\"http://%H:$NATIVERW_PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/nativerw-%i/servers/srv%i \"{\\\"url\\\": \\\"http://%H:$NATIVERW_PORT\\\"}\" --ttl 600; \
+    sleep 120; \
   done"
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/nativerw/servers/srv%i
 

@@ -19,13 +19,13 @@ ExecStart=/bin/sh -c "\
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
     export ADMIN_PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2); \
-    etcdctl set /services/binary-writer/%i/host '%H' --ttl 60; \
-    etcdctl set /services/binary-writer/%i/app_port $PORT --ttl 60; \
-    etcdctl set /services/binary-writer/%i/admin_port $ADMIN_PORT --ttl 60; \
-    etcdctl set /vulcand/backends/binary-writer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
-    etcdctl set /vulcand/backends/binary-writer-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
-    etcdctl set /vulcand/backends/binary-writer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_PORT\\\"}\" --ttl 60; \
-    sleep 45; \
+    etcdctl set /services/binary-writer/%i/host '%H' --ttl 600; \
+    etcdctl set /services/binary-writer/%i/app_port $PORT --ttl 600; \
+    etcdctl set /services/binary-writer/%i/admin_port $ADMIN_PORT --ttl 600; \
+    etcdctl set /vulcand/backends/binary-writer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/binary-writer-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/binary-writer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_PORT\\\"}\" --ttl 600; \
+    sleep 120; \
   done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/binary-writer/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-writer/servers/srv%i

@@ -15,7 +15,7 @@ ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-mongodb-configurator:$
 ExecStart=/bin/bash -c "\
   while true; do \
     echo \"INFO Configuring mongodb cluster\"; \
-    MONGOS=$(etcdctl ls /services/mongodb/); \
+    MONGOS=$(etcdctl ls /ft/config/mongodb/); \
     ALL=\"\"; \
     for m in $MONGOS; do \
       hostportadmin=$(etcdctl get $m/host):$(etcdctl get $m/port):$(etcdctl get $m/admin_port); \
@@ -23,7 +23,7 @@ ExecStart=/bin/bash -c "\
     done; \
     docker run --rm --name %p --env=\"ARGS=$ALL\" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION; \
     echo \"INFO Waiting for mongodb changes\"; \
-    etcdctl watch --recursive /services/mongodb; \
+    etcdctl watch --recursive /ft/config/mongodb; \
   done;"
 ExecStop=/usr/bin/docker stop -t 3 %p
 Restart=on-failure

@@ -9,7 +9,7 @@ ExecStart=/bin/sh -c "\
   while true; do \
     export MONGODB_PORT=$(/usr/bin/docker port mongodb-%i 27017 | cut -d':' -f2); \
     export MONGODB_ADMIN_PORT=$(/usr/bin/docker port mongodb-%i 28017 | cut -d':' -f2); \
-    etcdctl mkdir /services/mongodb/%i --ttl 600; \
+    etcdctl mkdir /ft/config/mongodb/%i --ttl 600; \
     etcdctl set /ft/config/mongodb/%i/host $MONGODB_IP --ttl 600; \
     etcdctl set /ft/config/mongodb/%i/port $MONGODB_PORT --ttl 600; \
     etcdctl set /ft/config/mongodb/%i/admin_port $MONGODB_ADMIN_PORT --ttl 600; \

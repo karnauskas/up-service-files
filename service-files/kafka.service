@@ -19,7 +19,7 @@ ExecStop=/usr/bin/docker stop %p
 ExecStartPost=/bin/sh -c "\
   KAFKA_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   etcdctl set /ft/config/kafka/ip $KAFKA_IP; \
-  etcdctl set /ft/config/kafka/port 9092:"
+  etcdctl set /ft/config/kafka/port 9092;"
 Restart=on-failure
 RestartSec=120
 

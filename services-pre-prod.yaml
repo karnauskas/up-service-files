@@ -85,12 +85,8 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/system-healthcheck-sidekick.service
   - name: kafka.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/kafka.service
-  - name: kafka-sidekick.service
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/kafka-sidekick.service
   - name: zookeeper.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/zookeeper.service
-  - name: zookeeper-sidekick.service
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/zookeeper-sidekick.service
   - name: splunk-forwarder.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/splunk-forwarder.service
   - name: skydns.service

@@ -17,8 +17,8 @@ ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/cms-notifier:$DOC
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ADMIN_PORT=8081; \
-  export KAFKA_HOST=$(/usr/bin/etcdctl get /services/kafka/ip); \
-  export KAFKA_PORT=$(/usr/bin/etcdctl get /services/kafka/port); \
+  export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
+  export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
   /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'\
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure

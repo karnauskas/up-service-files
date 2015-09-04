@@ -83,6 +83,11 @@ services:
     version: v18
   - name: system-healthcheck-sidekick.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/system-healthcheck-sidekick.service
+  - name: fleet-unit-healthcheck.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/fleet-unit-healthcheck.service
+    version: v1
+  - name: fleet-unit-healthcheck-sidekick.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/fleet-unit-healthcheck-sidekick.service
   - name: kafka.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/kafka.service
   - name: zookeeper.service

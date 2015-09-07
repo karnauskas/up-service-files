@@ -5,7 +5,6 @@ Wants=docker.socket
 
 [Service]
 Type=oneshot
-RemainAfterExit=yes
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.

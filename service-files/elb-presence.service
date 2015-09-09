@@ -12,6 +12,8 @@ ExecStart=/bin/sh -c '\
   ELB_NAME=$(etcdctl get /ft/_credentials/elb_name); \
   /usr/bin/docker run --rm --name %p -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY -e AWS_SECRET_KEY=$AWS_SECRET_KEY -e AWS_REGION=eu-west-1 -e ELB_NAME=$ELB_NAME quay.io/coreos/elb-presence'
 ExecStop=/usr/bin/docker stop %p
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 Global=true

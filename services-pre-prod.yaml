@@ -66,7 +66,7 @@ services:
     count: 2
   - name: aggregate-healthcheck@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/aggregate-healthcheck@.service
-    version: v41
+    version: v42
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/aggregate-healthcheck-sidekick@.service

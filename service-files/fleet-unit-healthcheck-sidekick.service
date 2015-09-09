@@ -6,17 +6,17 @@ After=fleet-unit-healthcheck.service
 [Service]
 ExecStart=/bin/sh -c "\
   export HOST_IP=$HOSTNAME; \
-  etcdctl set /vulcand/backends/fleet-unit-healthcheck-%H/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/frontends/fleet-unit-healthcheck-%H/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"fleet-unit-healthcheck-%H\\\", \\\"Route\\\":\\\"Path(\`/health/fleet-unit-healthcheck-%H/__health\`)\\\"}\"; \
-  etcdctl set /vulcand/frontends/fleet-unit-healthcheck-%H/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/fleet-unit-healthcheck-%H(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  etcdctl set /ft/healthcheck/fleet-unit-healthcheck-%H /__health; \
+  etcdctl set /vulcand/backends/fleet-unit-healthcheck/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/fleet-unit-healthcheck/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"fleet-unit-healthcheck\\\", \\\"Route\\\":\\\"Path(\`/health/fleet-unit-healthcheck/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/fleet-unit-healthcheck/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/fleet-unit-healthcheck(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /ft/healthcheck/fleet-unit-healthcheck/__health; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port fleet-unit-healthcheck 8080) | cut -d':' -f2); \
-    etcdctl set /vulcand/backends/fleet-unit-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/fleet-unit-healthcheck/servers/srv \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 600; \
     sleep 120; \
   done"
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/fleet-unit-healthcheck-%H/servers/srv%H
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/fleet-unit-healthcheck/servers/srv
 
 [X-Fleet]
 MachineOf=fleet-unit-healthcheck.service

@@ -3,7 +3,7 @@ Description=Runs docker garbage collector
 
 [Timer]
 OnBootSec=2h
-OnUnitActiveSec=10m
+OnUnitActiveSec=1h
 Persistent=true
 
 [Install]

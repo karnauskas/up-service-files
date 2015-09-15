@@ -31,6 +31,17 @@ export GOPATH=$HOME/gopath
 export PATH=$PATH:$GOPATH/bin
 ```
 
+Run docker daemon, allowing insecure connections from our register (as root):
+
+```bash
+## Add your user to the docker group:
+sudo gpasswd -a [user] docker
+
+## services stop docker
+### In new terminal window
+sudo docker -d --insecure-registry up-registry.ft.com
+```
+
 Install fleet and etcd:
 
 ```bash
@@ -50,16 +61,6 @@ Run etcd and fleet daemons:
 $GOPATH/bin/etcd
 
 ### In new terminal window
-[sudo] $GOPTH/bin/fleetd
-```
-Run docker daemon, allowing insecure connections from our register (as root):
-
-```bash
-## Add your user to the docker group:
-## sudo gpasswd -a [user] docker
-
-## services stop docker
-### In new terminal window
-[sudo] docker -d --insecure-registry up-registry.ft.com
+sudo $GOPATH/bin/fleetd
 ```
 

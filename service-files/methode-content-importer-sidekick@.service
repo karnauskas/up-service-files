@@ -32,6 +32,8 @@ ExecStart=/bin/sh -c "\
 ExecStop=/usr/bin/etcdctl rm --recursive /services/methode-content-importer/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-content-importer/servers/srv%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-content-importer-admin/servers/srv%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=methode-content-importer@%i.service

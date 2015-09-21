@@ -30,6 +30,8 @@ ExecStart=/bin/sh -c "\
 ExecStop=/usr/bin/etcdctl rm --recursive /services/cms-notifier/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/cms-notifier/servers/srv%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/cms-notifier-admin/servers/srv%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=cms-notifier@%i.service

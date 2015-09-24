@@ -24,7 +24,7 @@ services:
     count: 2
   - name: binary-ingester@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/binary-ingester@.service
-    version: v44
+    version: v45
     count: 2
   - name: binary-ingester-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/binary-ingester-sidekick@.service

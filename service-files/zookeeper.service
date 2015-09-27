@@ -2,6 +2,7 @@
 Description=Zookeeper
 After=docker.service
 Requires=docker.service
+Wants=kafka.service
 
 [Service]
 TimeoutStartSec=0

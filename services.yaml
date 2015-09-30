@@ -10,7 +10,7 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongodb-configurator.service
   - name: cms-notifier@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier@.service
-    version: v26
+    version: v27
     count: 2
   - name: cms-notifier-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/cms-notifier-sidekick@.service

@@ -91,7 +91,7 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck-sidekick.service
   - name: fleet-unit-healthcheck.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/fleet-unit-healthcheck.service
-    version: v3
+    version: v4
   - name: fleet-unit-healthcheck-sidekick.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/fleet-unit-healthcheck-sidekick.service
   - name: kafka.service

@@ -12,8 +12,8 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c "/usr/bin/docker pull up-registry.ft.com/coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
-ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -p 8080 --env=\"FLEET_ENDPOINT=http://$HOSTNAME:49153\" up-registry.ft.com/coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
+ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -p 8080 --env=\"FLEET_ENDPOINT=http://$HOSTNAME:49153\" coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
 RestartSec=60

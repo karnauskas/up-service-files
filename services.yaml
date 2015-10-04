@@ -110,10 +110,6 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/diamond.service
   - name: elb-presence.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/elb-presence.service
-  - name: system-healthcheck.service
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck.service
-  - name: system-healthcheck-sidekick.service
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck-sidekick.service
   - name: image-cleaner.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/image-cleaner.service
   - name: image-cleaner.timer

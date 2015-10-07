@@ -1,0 +1,25 @@
+[Unit]
+Description=Service tracking all MongoDB instances
+
+[Service]
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=/bin/sh -c "\
+  ALL=$(fleetctl list-units | grep mongodb-sidekick | wc -l); \
+  RUNNING=$(fleetctl list-units | grep mongodb-sidekick | grep running | wc -l); \
+  echo \"$RUNNING out of $ALL instances are running\"; \
+  test $ALL -eq 0 || test $ALL -ne $RUNNING && exit 1; \
+  exit 0;"
+ExecStart=/bin/sh -c "\
+  while true; do \
+    ALL=$(fleetctl list-units | grep mongodb-sidekick | wc -l); \
+    RUNNING=$(fleetctl list-units | grep mongodb-sidekick | grep running | wc -l); \
+    echo \"$RUNNING out of $ALL instances are running\"; \
+    test $ALL -eq 0 || test $ALL -ne $RUNNING && exit 1; \
+    sleep 120; \
+  done"
+ExecStop=/bin/sh -c "echo \"Stopped service\""
+Restart=on-failure
+RestartSec=10
+

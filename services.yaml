@@ -112,4 +112,6 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/image-cleaner.service
   - name: image-cleaner.timer
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/image-cleaner.timer
+  - name: mongodb-all.service
+    uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/master/service-files/mongodb-all.service
 

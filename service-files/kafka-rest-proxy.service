@@ -1,0 +1,23 @@
+[Unit]
+Description=Kafka Rest Proxy
+After=docker.service zookeeper.service
+Requires=docker.service zookeeper.service
+Wants=kafka-rest-proxy-sidekick.service
+
+[Service]
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
+ExecStartPre=/usr/bin/docker pull coco/kafka-proxy
+#IP needs to be editted to grep out on the interface of the host vm
+ExecStart=/bin/bash -c "\
+  /usr/bin/docker run --rm --name %p -p 8082 --link zookeeper:zk -e RP_ZOOKEEPER_CONNECT=%H:2181 coco/kafka-proxy"
+ExecStop=/usr/bin/docker stop %p
+Restart=on-failure
+RestartSec=120
+
+[X-Fleet]
+MachineOf=zookeeper.service

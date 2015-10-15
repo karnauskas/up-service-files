@@ -84,6 +84,11 @@ services:
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
+  - name: kafka-rest-proxy.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/kafka-rest-proxy.service
+  - name: kafka-rest-proxy-sidekick.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/kafka-rest-proxy-sidekick.service
+  - name: mongodb-all.service          
   - name: system-healthcheck.service
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/system-healthcheck.service
   - name: system-healthcheck-sidekick.service

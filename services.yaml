@@ -120,8 +120,7 @@ services:
   - name: mongodb-all.service
     uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/master/service-files/mongodb-all.service
   - name: mongo-backup.service
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/mongo-backup.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongo-backup.service
     desiredState: loaded
   - name: mongo-backup.timer
-    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/mongo-backup.timer
-
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/master/service-files/mongo-backup.timer

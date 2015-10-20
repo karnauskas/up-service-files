@@ -111,4 +111,16 @@ services:
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/image-cleaner.service
   - name: image-cleaner.timer
     uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/image-cleaner.timer
-
+  - name: tunnel-registrator.service
+    uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/pre-prod/service-files/tunnel-registrator.service
+  - name: kafka-rest-proxy.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/kafka-rest-proxy.service
+  - name: kafka-rest-proxy-sidekick.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/kafka-rest-proxy-sidekick.service
+  - name: mongodb-all.service
+    uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/master/service-files/mongodb-all.service
+  - name: mongo-backup.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/mongo-backup.service
+    desiredState: loaded
+  - name: mongo-backup.timer
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/pre-prod/service-files/mongo-backup.timer

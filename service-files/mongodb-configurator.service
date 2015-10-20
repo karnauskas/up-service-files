@@ -1,7 +1,7 @@
 [Unit]
 Description=MongoDB cluster configurator
 Requires=docker.service
-After=docker.service
+After=docker.service mongodb-all.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -9,11 +9,12 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
+Type=oneshot
+RemainAfterExit=yes
 ExecStartPre=-/bin/bash -c "/usr/bin/docker kill %p > /dev/null 2>&1"
 ExecStartPre=-/bin/bash -c "/usr/bin/docker rm %p > /dev/null 2>&1"
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-mongodb-configurator:$DOCKER_APP_VERSION"
 ExecStart=/bin/bash -c "\
-  while true; do \
     echo \"INFO Configuring mongodb cluster\"; \
     MONGOS=$(etcdctl ls /ft/config/mongodb/); \
     ALL=\"\"; \
@@ -21,11 +22,6 @@ ExecStart=/bin/bash -c "\
       hostportadmin=$(etcdctl get $m/host):$(etcdctl get $m/port):$(etcdctl get $m/admin_port); \
       ALL=\"$ALL $hostportadmin\"; \
     done; \
-    docker run --rm --name %p --env=\"ARGS=$ALL\" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION; \
-    echo \"INFO Waiting for mongodb changes\"; \
-    etcdctl watch --recursive /ft/config/mongodb; \
-  done;"
+    docker run --rm --name %p --env=\"ARGS=$ALL\" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION;"
 ExecStop=/usr/bin/docker stop -t 3 %p
-Restart=on-failure
-RestartSec=60
 

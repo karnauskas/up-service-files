@@ -19,5 +19,5 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=elasticsearch@*.service
+Conflicts=%p@*.service
 MachineMetadata=persistent_tag=%i

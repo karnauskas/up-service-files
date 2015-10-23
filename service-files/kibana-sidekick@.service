@@ -1,0 +1,23 @@
+[Unit]
+Description=Kibana Sidekick
+BindsTo=kibana@%i.service
+After=kibana@%i.service
+
+[Service]
+ExecStartPre=/bin/sh -c "\
+  etcdctl set /vulcand/backends/kibana/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/kibana-header/frontend '{\"Type\": \"http\", \"BackendId\": \"kibana\", \"Route\": \"PathRegexp(`/.*`) && Host(`kibana`)\"}'; \
+  etcdctl set /vulcand/frontends/kibana-path/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"kibana\\\", \\\"Route\\\":\\\"PathRegexp(\`/kibana/.*\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/kibana-path/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/kibana/(.*)\\\", \\\"Replacement\\\":\\\"\\$1\\\"}}\"; " 
+ExecStart=/bin/sh -c "\
+   while true; do \
+    export PORT=$(echo $(/usr/bin/docker port kibana-%i 5601) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/kibana/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/kibana/servers/srv%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=kibana@%i.service

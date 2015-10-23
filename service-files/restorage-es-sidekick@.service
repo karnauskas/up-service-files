@@ -1,0 +1,23 @@
+[Unit]
+Description=Restorage elastic search sidekick
+BindsTo=restorage-es@%i.service
+After=restorage-es@%i.service
+
+[Service]
+ExecStartPre=/bin/sh -c "\
+  etcdctl set /vulcand/backends/restorage-es/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/restorage-es-header/frontend '{\"Type\": \"http\", \"BackendId\": \"restorage-es\", \"Route\": \"PathRegexp(`/.*`) && Host(`restorage-es`)\"}'; \
+  etcdctl set /vulcand/frontends/restorage-es-path/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"restorage-es\\\", \\\"Route\\\":\\\"PathRegexp(\`/restorage-es/.*\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/restorage-es-path/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/restorage-es/(.*)\\\", \\\"Replacement\\\":\\\"\\$1\\\"}}\"; " 
+ExecStart=/bin/sh -c "\
+   while true; do \
+    export PORT=$(echo $(/usr/bin/docker port restorage-es-%i 8080) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/restorage-es/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/restorage-es/servers/srv%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=restorage-es@%i.service

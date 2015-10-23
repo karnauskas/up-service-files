@@ -1,0 +1,25 @@
+[Unit]
+Description=UP REST Storage - Elasticsearch
+After=docker.service kafka.service
+Requires=docker.service
+Wants=elasticsearch-sidekick@%i.service
+
+[Service]
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/usr/bin/docker pull coco/up-restorage
+
+ExecStart=/bin/sh -c '\
+    export ES_HOST=$(/usr/bin/etcdctl get /ft/config/elasticsearch/1/host); \
+    export ES_PORT=$(/usr/bin/etcdctl get /ft/config/elasticsearch/1/port); \
+    /usr/bin/docker run --rm --name %p-%i -P --env "ES_HOST=$ES_HOST" --env "ES_PORT=$ES_PORT" coco/up-restorage /bin/sh /run-elastic.sh'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

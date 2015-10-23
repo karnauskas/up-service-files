@@ -18,7 +18,6 @@ ExecStart=/bin/sh -c "\
     etcdctl set /vulcand/backends/document-store-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$MONGO_WRITER_PORT\\\"}\" --ttl 600; \
     sleep 120; \
   done"
-ExecStop=/usr/bin/etcdctl rm --recursive /services/document-store-api/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/document-store-api/servers/srv%i
 
 [X-Fleet]

@@ -127,5 +127,5 @@ services:
   - name: tunnel-registrator.service
     uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/master/service-files/tunnel-registrator.service
   - name: publish-availability-monitor.service
-    uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/pre-prod/service-files/publish-availability-monitor.service
+    uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/pre-prod/publish-availability-monitor.service
 

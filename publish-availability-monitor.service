@@ -1,0 +1,27 @@
+[Unit]
+Description=Publish Availability Monitor
+After=docker.service
+Requires=docker.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker pull coco/publish-availability-monitor:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/bash -c '\
+	docker run --rm --name %p -p 8080 \
+	--env "QUEUE_ADDR=http://%H:8080" \
+	--env "URLS=http://contentannotator-api-pr-uk-int.svc.ft.com/content/,http://com.ft.imagepublish.int.s3.amazonaws.com/" \
+	coco/publish-availability-monitor:$DOCKER_APP_VERSION'
+
+ExecStop=/usr/bin/docker stop -t 3 %p
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p.service

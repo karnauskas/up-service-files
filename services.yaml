@@ -82,3 +82,4 @@ services:
   - name: mongo-backup.timer
   - name: tunnel-registrator.service
   - name: publish-availability-monitor.service
+  - name: vulcan-config-builder.service

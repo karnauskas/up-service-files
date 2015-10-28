@@ -69,7 +69,6 @@ services:
   - name: kafka.service
   - name: zookeeper.service
   - name: splunk-forwarder.service
-  - name: skydns.service
   - name: vulcan.service
   - name: methodeapi-endpoint.service
   - name: diamond.service

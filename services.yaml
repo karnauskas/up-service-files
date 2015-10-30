@@ -30,6 +30,13 @@ services:
     count: 1
   - name: document-store-api-sidekick@.service
     count: 1
+  - name: notifications-rw@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/dynpub/service-files/notifications-rw@.service
+    version: v8
+    count: 2
+  - name: notifications-rw-sidekick@.service
+    uri: https://raw.githubusercontent.com/Financial-Times/fleet/dynpub/service-files/notifications-rw-sidekick@.service
+    count: 2
   - name: methode-image-binary-transformer@.service
     version: v21
     count: 2

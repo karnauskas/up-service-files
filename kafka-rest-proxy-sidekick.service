@@ -5,10 +5,10 @@ After=kafka-rest-proxy.service
 [Service]
 ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/backends/kafka-rest-proxy/backend '{\"Type\": \"http\"}' ; \
-  etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';" 
+  etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';"
 
 ExecStart=/bin/sh -c "\
-  export KAFKA_PROXY_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  export KAFKA_PROXY_IP=$(hostname); \
   while true; do \
     export KAFKA_PROXY_PORT=$(/usr/bin/docker port kafka-rest-proxy 8082 | cut -d':' -f2); \
     etcdctl set /ft/config/kafka-rest-proxy/1/host '%H' --ttl 600; \

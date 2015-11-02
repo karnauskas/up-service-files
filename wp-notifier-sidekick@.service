@@ -5,7 +5,7 @@ After=wp-notifier@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export WP_NOTIFIER_IP=$(hostname); \
+  export WP_NOTIFIER_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/wp-notifier/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/wp-notifier/frontend '{\"Type\": \"http\", \"BackendId\": \"wp-notifier\", \"Route\": \"PathRegexp(`/.*`) && Host(`wp-notifier`)\"}'; \
   \

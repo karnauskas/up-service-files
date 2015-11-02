@@ -5,7 +5,7 @@ After=splunk.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export SPLUNK_IP=$(hostname); \
+  export SPLUNK_IP=$HOSTNAME; \
   while true; do \
     etcdctl set /ft/splunk_host $SPLUNK_IP --ttl 60; \
     sleep 45; \

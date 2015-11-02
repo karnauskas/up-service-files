@@ -6,7 +6,7 @@ After=cadvisor.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$(hostname); \
+  export HOST_IP=$HOSTNAME; \
   export HOST_NAME=$(echo $HOSTNAME | cut -d '.' -f1); \
   while true; do \
     etcdctl set /skydns/local/skydns/cadvisor/$HOST_NAME \"{\\\"host\\\":\\\"$HOST_IP\\\",\\\"port\\\":8081}\" --ttl 60; \

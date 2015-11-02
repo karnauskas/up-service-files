@@ -5,7 +5,7 @@ After=content-writer-sesame@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$(hostname); \
+  export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/content-writer-sesame/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/content-writer-sesame/frontend '{\"Type\": \"http\", \"BackendId\": \"content-writer-sesame\", \"Route\": \"PathRegexp(`/.*`) && Host(`content-writer-sesame`)\"}'; \
   etcdctl setdir /services/content-writer-sesame --ttl 60; \

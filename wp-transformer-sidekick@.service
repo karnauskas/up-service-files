@@ -5,7 +5,7 @@ After=wp-transformer@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$(hostname); \
+  export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/wp-transformer/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/wp-transformer/frontend \"{\\\"Type\\\": \\\"http\\\", \\\"BackendId\\\": \\\"wp-transformer\\\", \\\"Route\\\": \\\"PathRegexp(\`/.*\`) && Host(\`wp-transformer\`)\\\"}\" ; \
   \

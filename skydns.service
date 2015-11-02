@@ -13,7 +13,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/bin/sh -c "docker history skynetservices/skydns:latest >/dev/null 2>&1 || docker pull skynetservices/skydns:latest"
 ExecStartPre=/usr/bin/etcdctl set /skydns/config "{\"ttl\":3600, \"nameservers\": [\"172.31.0.2:53\"]}"
 ExecStart=/bin/bash -c "\
-  export HOST_IP=$(hostname); \
+  export HOST_IP=$HOSTNAME; \
   docker run --rm --net=host -e SKYDNS_NAMESERVERS='172.31.0.2:53' -e SKYDNS_ADDR=$HOST_IP:53 -e ETCD_MACHINES='http://127.0.0.1:2379' --name %p skynetservices/skydns"
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure

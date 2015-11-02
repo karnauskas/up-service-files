@@ -15,16 +15,15 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /ft/healthcheck/cms-notifier-%i /__health; "
 
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$HOSTNAME; \
    while true; do \
     export CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8080) | cut -d':' -f2); \
     export ADMIN_CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8081) | cut -d':' -f2); \
     etcdctl set /services/cms-notifier/%i/host '%H' --ttl 600; \
     etcdctl set /services/cms-notifier/%i/app_port $CMS_NOTIFIER_PORT --ttl 600; \
     etcdctl set /services/cms-notifier/%i/admin_port $ADMIN_CMS_NOTIFIER_PORT --ttl 600; \
-    etcdctl set /vulcand/backends/cms-notifier/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/cms-notifier-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/cms-notifier-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$ADMIN_CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/cms-notifier/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/cms-notifier-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/cms-notifier-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ADMIN_CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
     sleep 120; \
   done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/cms-notifier/%i

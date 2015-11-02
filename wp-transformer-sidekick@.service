@@ -5,7 +5,7 @@ After=wp-transformer@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  export HOST_IP=$(hostname); \
   etcdctl set /vulcand/backends/wp-transformer/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/wp-transformer/frontend \"{\\\"Type\\\": \\\"http\\\", \\\"BackendId\\\": \\\"wp-transformer\\\", \\\"Route\\\": \\\"PathRegexp(\`/.*\`) && Host(\`wp-transformer\`)\\\"}\" ; \
   \
@@ -26,4 +26,3 @@ ExecStop=/usr/bin/etcdctl rm /vulcand/backends/wp-transformer/servers/srv%i
 
 [X-Fleet]
 MachineOf=wp-transformer@%i.service
-

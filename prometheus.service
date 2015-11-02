@@ -12,7 +12,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/bin/sh -c "docker history coco/coco-prometheus >/dev/null 2>&1 || docker pull coco/coco-prometheus"
 ExecStart=/bin/bash -c "\
-  export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  export HOST_IP=$(hostname); \
   docker run --rm --dns=$HOST_IP -p 9090:9090 --name %p coco/coco-prometheus"
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
@@ -20,4 +20,3 @@ RestartSec=60
 
 [Install]
 WantedBy=multi-user.target
-

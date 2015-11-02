@@ -5,7 +5,7 @@ After=methode-article-transformer@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export MAT_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  export MAT_IP=$(hostname); \
   etcdctl set /vulcand/backends/methode-article-transformer/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/methode-article-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-article-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-article-transformer`)\"}'; \
   \

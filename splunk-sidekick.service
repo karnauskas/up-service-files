@@ -5,7 +5,7 @@ After=splunk.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export SPLUNK_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  export SPLUNK_IP=$(hostname); \
   while true; do \
     etcdctl set /ft/splunk_host $SPLUNK_IP --ttl 60; \
     sleep 45; \
@@ -14,4 +14,3 @@ ExecStop=/usr/bin/etcdctl rm /ft/splunk_host
 
 [X-Fleet]
 MachineOf=splunk.service
-

@@ -6,7 +6,7 @@ After=cadvisor.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  export HOST_IP=$(hostname); \
   export HOST_NAME=$(echo $HOSTNAME | cut -d '.' -f1); \
   while true; do \
     etcdctl set /skydns/local/skydns/cadvisor/$HOST_NAME \"{\\\"host\\\":\\\"$HOST_IP\\\",\\\"port\\\":8081}\" --ttl 60; \
@@ -21,4 +21,3 @@ WantedBy=multi-user.target
 
 [X-Fleet]
 Global=true
-

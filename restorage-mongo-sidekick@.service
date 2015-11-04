@@ -1,0 +1,21 @@
+[Unit]
+Description=Restorage mongodb sidekick
+BindsTo=restorage-mongo@%i.service
+After=restorage-mongo@%i.service
+
+[Service]
+ExecStartPre=/bin/sh -c "\
+  etcdctl set   /ft/services/restorage-mongo/healthcheck     true \
+  etcdctl mkdir /ft/services/restorage-mongo/servers
+ExecStart=/bin/sh -c "\
+   while true; do \
+    export PORT=$(echo $(/usr/bin/docker port restorage-mongo-%i 8080) | cut -d':' -f2); \
+    etcdctl set /ft/services/restorage-mongo/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/restorage-mongo/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=restorage-mongo@%i.service

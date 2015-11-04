@@ -76,6 +76,10 @@ services:
   - name: image-cleaner.service
   - name: image-cleaner.timer
   - name: mongodb-all.service
+  - name: restorage-mongo@.service
+    count: 1
+  - name: restorage-mongo-sidekick@.service
+    count: 1
   - name: mongo-backup.service
     desiredState: loaded
   - name: mongo-backup.timer

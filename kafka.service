@@ -11,13 +11,11 @@ KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull wurstmeister/kafka:0.8.2.0
-#IP needs to be editted to grep out on the interface of the host vm
 ExecStart=/bin/bash -c "\
-  export IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
-  /usr/bin/docker run --rm --name %p -p 9092:9092 --link zookeeper:zk --env \"KAFKA_ADVERTISED_HOST_NAME=$IP\" --env=\"KAFKA_MESSAGE_MAX_BYTES=16777216\" --env=\"KAFKA_REPLICA_FETCH_MAX_BYTES=16777216\" -v /var/run/docker.sock:/var/run/docker.sock wurstmeister/kafka:0.8.2.0"
+  /usr/bin/docker run --rm --name %p -p 9092:9092 --link zookeeper:zk --env \"KAFKA_ADVERTISED_HOST_NAME=$$HOSTNAME\" --env=\"KAFKA_MESSAGE_MAX_BYTES=16777216\" --env=\"KAFKA_REPLICA_FETCH_MAX_BYTES=16777216\" -v /var/run/docker.sock:/var/run/docker.sock wurstmeister/kafka:0.8.2.0"
 ExecStop=/usr/bin/docker stop %p
 ExecStartPost=/bin/sh -c "\
-  KAFKA_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
+  KAFKA_IP=$HOSTNAME; \
   etcdctl set /ft/config/kafka/ip $KAFKA_IP; \
   etcdctl set /ft/config/kafka/port 9092;"
 Restart=on-failure

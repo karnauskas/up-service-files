@@ -14,8 +14,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull wurstmeister/zookeeper
 ExecStart=/usr/bin/docker run --name %p -p 2181:2181 wurstmeister/zookeeper
 ExecStartPost=/bin/sh -c "\
-  ZOOKEEPER_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
-  etcdctl set /ft/config/zookeeper/ip $ZOOKEEPER_IP; \
+  etcdctl set /ft/config/zookeeper/ip $HOSTNAME; \
   etcdctl set /ft/config/zookeeper/port 2181;"
 ExecStop=/usr/bin/docker stop %p
 Restart=on-failure

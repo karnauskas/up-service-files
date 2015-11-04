@@ -6,7 +6,7 @@ services:
     count: 3
   - name: mongodb-configurator.service
   - name: cms-notifier@.service
-    version: v27
+    version: v28
     count: 2
   - name: cms-notifier-sidekick@.service
     count: 2
@@ -81,3 +81,4 @@ services:
   - name: mongo-backup.timer
   - name: tunnel-registrator.service
   - name: publish-availability-monitor.service
+  - name: vulcan-config-builder.service

@@ -2,7 +2,7 @@
 Description=Kibana
 After=docker.service kafka.service
 Requires=docker.service
-Wants=elasticsearch-sidekick@%i.service
+Wants=elasticsearch-sidekick@%i.service kibana-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=0

@@ -1,0 +1,30 @@
+[Unit]
+Description=Kafka Rest Proxy Sidekick
+BindsTo=coco-kafka-bridge@%i.service
+After=coco-kafka-bridge@%i.service
+
+[Service]
+ExecStartPre=/bin/sh -c "\
+  etcdctl set /vulcand/backends/kafka-bridge/backend '{\"Type\": \"http\"}' ; \
+  etcdctl set /vulcand/backends/kafka-bridge-%i/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/kafka-bridge/frontend '{\"Type\": \"http\", \"BackendId\": \"kafka-bridge\", \"Route\": \"PathRegexp(`/.*`) && Host(`bridge`)\"}'; \
+  etcdctl set /vulcand/frontends/kafka-bridge-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"kafka-bridge-%i\", \"Route\":\"Path(`/health/kafka-bridge-%i/__health`)\"}'; \
+  etcdctl set /vulcand/frontends/kafka-bridge-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/kafka-bridge-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /ft/healthcheck/kafka-bridge-%i /__health; "
+
+ExecStart=/bin/sh -c "\
+  while true; do \
+    export KAFKA_BRIDGE_PORT=$(/usr/bin/docker port coco-kafka-bridge-%i 8080 | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/kafka-bridge/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$KAFKA_BRIDGE_PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/kafka-bridge-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$KAFKA_BRIDGE_PORT\\\"}\" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm --recursive /services/kafka-bridge/%i
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/kafka-bridge/servers/srv%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=coco-kafka-bridge@%i.service
+

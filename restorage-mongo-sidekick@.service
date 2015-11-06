@@ -6,7 +6,8 @@ After=restorage-mongo@%i.service
 [Service]
 ExecStartPre=/bin/sh -c "\
   etcdctl set   /ft/services/restorage-mongo/healthcheck     true \
-  etcdctl mkdir /ft/services/restorage-mongo/servers
+  etcdctl mkdir /ft/services/restorage-mongo/servers"
+
 ExecStart=/bin/sh -c "\
    while true; do \
     export PORT=$(echo $(/usr/bin/docker port restorage-mongo-%i 8080) | cut -d':' -f2); \

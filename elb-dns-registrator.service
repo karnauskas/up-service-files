@@ -1,0 +1,24 @@
+[Unit]
+Description=Registers ELB CNAME in DYN via Konstructor
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+TimeoutStartSec=30
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStart=/bin/sh -c " \
+  ENV=$(etcdctl get /ft/config/environment_tag); \
+  KONSTRUCTOR_API_KEY=$(etcdctl get /ft/_credentials/konstructor/api-key); \
+  KONSTRUCTOR_DNS_ENDPOINT=https://konstructor.ft.com/v1/dns/; \
+  ELB_NAME=$(etcdctl get /ft/_credentials/elb_name); \
+  AWS_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
+  AWS_SECRET_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
+  ELB_CNAME=$(docker run coco/up-elb-dnsname-retriever -e \"AWS_REGION=$AWS_REGION\" -e \"ELB_NAME=$ELB_NAME\" -e \"AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY\" -e \"AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY\"); \
+  curl -s -L -X DELETE -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/delete?zone=ft.com&name=$ENV-up\"; \
+  curl -s -L -X POST -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/create?zone=ft.com&name=$ENV-up&rdata=$ELB_CNAME&ttl=600\";"
+
+[Install]
+WantedBy=multi-user.target
+

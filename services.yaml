@@ -41,7 +41,7 @@ services:
   - name: methode-image-model-transformer-sidekick@.service
     count: 2
   - name: nativerw@.service
-    version: v27
+    version: v35
     count: 2
   - name: nativerw-sidekick@.service
     count: 2

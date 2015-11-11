@@ -5,11 +5,16 @@ After=notifications-rw@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
+  etcdctl set /ft/healthcheck/notifications-rw-%i /__health; \
+  \
   export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/notifications-rw/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/backends/notifications-rw-%i/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/notifications-rw/frontend '{\"Type\": \"http\", \"BackendId\": \"notifications-rw\", \"Route\": \"PathRegexp(`/.*`) && Host(`notifications-rw`)\"}'; \
   etcdctl set /vulcand/frontends/notifications-rw/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"notifications-rw\\\", \\\"Route\\\":\\\"Path(\`/health/notifications-rw/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/notifications-rw-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"notifications-rw-%i\\\", \\\"Route\\\":\\\"Path(\`/health/notifications-rw-%i/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/notifications-rw-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/notifications-rw(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /vulcand/frontends/notifications-rw-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/notifications-rw-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\";" \
   \
   while true; do \
     export MONGO_WRITER_PORT=$(echo $(/usr/bin/docker port notifications-rw-%i 8080) | cut -d':' -f2); \

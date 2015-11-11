@@ -9,22 +9,20 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c '/usr/bin/docker pull coco/publish-availability-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   	export BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
-	docker run --rm --name %p -p 8080 \
+	docker run --rm --name %p-%i -p 8080 \
 	--env "QUEUE_ADDR=http://%H:8080" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
 	--env "URLS=http://$BUCKET.s3.amazonaws.com/" \
 	coco/publish-availability-monitor:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/docker stop -t 3 %p
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60
 
-[X-Fleet]
-Conflicts=%p.service

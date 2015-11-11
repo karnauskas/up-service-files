@@ -5,8 +5,8 @@ After=methode-article-transformer@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/nativerw/healthcheck     true \
-    etcdctl mkdir /ft/services/methode-article-transformer/servers \
+  etcdctl set   /ft/services/nativerw/healthcheck     true; \
+    etcdctl mkdir /ft/services/methode-article-transformer/servers; \
     etcdctl set /ft/healthcheck/methode-article-transformer-%i /__health; \\
   while true; do \
       PORT=$(/usr/bin/docker port methode-article-transformer-%i 8080 | cut -d':' -f2); \

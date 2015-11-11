@@ -61,6 +61,7 @@ services:
     count: 1
   - name: coco-kafka-bridge@.service
     count: 2
+    version: v4
   - name: coco-kafka-bridge-sidekick@.service
     count: 2
   - name: kafka-rest-proxy.service

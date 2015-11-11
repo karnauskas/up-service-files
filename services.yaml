@@ -35,6 +35,11 @@ services:
     count: 2
   - name: notifications-rw-sidekick@.service
     count: 2
+  - name: ingester-notifications@.service
+    version: v1
+	count: 2
+  - name: ingester-notifications-sidekick@.service
+    count: 2
   - name: methode-article-transformer@.service
     version: v14
     count: 2

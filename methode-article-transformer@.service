@@ -14,9 +14,9 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/methode-article-transformer
 
 ExecStart=/bin/sh -c '\
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "SEMANTIC_READER=%H:8080" --env "METHODEAPI=%H:8080" coco/methode-article-transformer'
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "NATIVERW=http://%H:8080" coco/methode-article-transformer'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [X-Fleet]
-Conflicts=coco/methode-article-transformer@*.service
+Conflicts=%p@*.service

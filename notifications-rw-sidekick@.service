@@ -1,0 +1,22 @@
+[Unit]
+Description=Notifications Read/Write Service sidekick
+BindsTo=notifications-rw@%i.service
+After=notifications-rw@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  export HOST_IP=$HOSTNAME; \
+  etcdctl set /vulcand/backends/notifications-rw/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/notifications-rw/frontend '{\"Type\": \"http\", \"BackendId\": \"notifications-rw\", \"Route\": \"PathRegexp(`/.*`) && Host(`notifications-rw`)\"}'; \
+  etcdctl set /vulcand/frontends/notifications-rw/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"notifications-rw\\\", \\\"Route\\\":\\\"Path(\`/health/notifications-rw/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/notifications-rw-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/notifications-rw(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  \
+  while true; do \
+    export MONGO_WRITER_PORT=$(echo $(/usr/bin/docker port notifications-rw-%i 8080) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/notifications-rw/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$MONGO_WRITER_PORT\\\"}\" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/notifications-rw/servers/srv%i
+
+[X-Fleet]
+MachineOf=notifications-rw@%i.service

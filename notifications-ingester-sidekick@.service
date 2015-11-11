@@ -1,5 +1,5 @@
 [Unit]
-Description=Notifications ingester store sidekick
+Description=Notifications Ingester Sidekick
 BindsTo=notifications-ingester@%i.service
 After=notifications-ingester@%i.service
 

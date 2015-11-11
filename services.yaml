@@ -37,7 +37,7 @@ services:
     count: 2
   - name: notifications-ingester@.service
     version: v1
-	count: 2
+    count: 2
   - name: notifications-ingester-sidekick@.service
     count: 2
   - name: methode-article-transformer@.service

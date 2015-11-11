@@ -5,23 +5,17 @@ After=methode-article-transformer@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  etcdctl set /vulcand/backends/methode-article-transformer/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/frontends/methode-article-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-article-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-article-transformer`)\"}'; \
-  \
-  etcdctl set /vulcand/frontends/methode-article-transformer-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-article-transformer\\\", \\\"Route\\\":\\\"Path(\`/health/methode-article-transformer/__health\`)\\\"}\"; \
-  etcdctl set /vulcand/frontends/methode-article-transformer-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-article-transformer(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  \
+  etcdctl set   /ft/services/nativerw/healthcheck     true; \
+    etcdctl mkdir /ft/services/methode-article-transformer/servers; \
+    etcdctl set /ft/healthcheck/methode-article-transformer-%i /__health; \\
   while true; do \
-    export MAT_PORT=$(echo $(/usr/bin/docker port methode-article-transformer-%i 8080 ) | cut -d':' -f2); \
-    etcdctl set /services/methode-article-transformer/%i/host '%H' --ttl 60; \
-    etcdctl set /services/methode-article-transformer/%i/app_port $(echo $(/usr/bin/docker port methode-article-transformer-%i 8080 ) | cut -d':' -f2) --ttl 60; \
-    etcdctl set /services/methode-article-transformer/%i/admin_port $(echo $(/usr/bin/docker port methode-article-transformer-%i 8081 ) | cut -d':' -f2) --ttl 60; \
-    etcdctl set /services/methode-article-transformer/%i/healthcheck /__health --ttl 60; \
-    etcdctl set /vulcand/backends/methode-article-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$MAT_PORT\\\"}\" --ttl 60; \
-    sleep 45; \
-  done"
-ExecStop=/usr/bin/etcdctl rm --recursive /services/methode-article-transformer/%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-article-transformer/servers/srv%i
+      PORT=$(/usr/bin/docker port methode-article-transformer-%i 8080 | cut -d':' -f2); \
+      etcdctl set /ft/services/methode-article-transformer/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+      sleep 120; \
+    done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/methode-article-transformer/servers/%i
 
 [X-Fleet]
 MachineOf=methode-article-transformer@%i.service
+

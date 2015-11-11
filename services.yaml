@@ -91,4 +91,5 @@ services:
   - name: tunnel-registrator.service
   - name: elb-dns-registrator.service
   - name: publish-availability-monitor.service
+    version: 0.8.0
   - name: vulcan-config-builder.service

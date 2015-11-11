@@ -90,6 +90,9 @@ services:
   - name: mongo-backup.timer
   - name: tunnel-registrator.service
   - name: elb-dns-registrator.service
-  - name: publish-availability-monitor.service
+  - name: publish-availability-monitor@.service
+    count: 1
     version: 0.8.0
+  - name: publish-availability-monitor-sidekick@.service
+    count: 1
   - name: vulcan-config-builder.service

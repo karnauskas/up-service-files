@@ -5,7 +5,7 @@ After=methode-article-transformer@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/nativerw/healthcheck     true; \
+  etcdctl set   /ft/services/methode-article-transformer/healthcheck     true; \
     etcdctl mkdir /ft/services/methode-article-transformer/servers; \
     etcdctl set /ft/healthcheck/methode-article-transformer-%i /__health; \
   while true; do \

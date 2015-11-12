@@ -79,7 +79,6 @@ services:
   - name: diamond.service
   - name: elb-presence.service
   - name: image-cleaner.service
-  - name: image-cleaner.timer
   - name: mongodb-all.service
   - name: restorage-mongo@.service
     count: 1

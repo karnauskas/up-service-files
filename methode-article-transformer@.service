@@ -12,7 +12,6 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull coco/methode-article-transformer
 ExecStartPre=/bin/bash -c 'docker pull coco/methode-article-transformer:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\

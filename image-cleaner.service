@@ -4,14 +4,20 @@ Requires=docker.service
 Wants=docker.socket
 
 [Service]
-Type=oneshot
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
-ExecStart=/bin/sh -c "docker run --name %p --rm -v /var/run/docker.sock:/var/run/docker.sock coco/docker-gc || docker rmi coco/docker-gc"
+ExecStart=/bin/sh -c "\
+  while true; do \
+    docker run --name %p --rm -v /var/run/docker.sock:/var/run/docker.sock coco/docker-gc || docker rmi coco/docker-gc; \
+    sleep 600; \
+  done"
+ExecStop=/usr/bin/docker stop -t 3 %p
+Restart=on-failure
+RestartSec=60
 Nice=5
 IOSchedulingClass=best-effort
 IOSchedulingPriority=7

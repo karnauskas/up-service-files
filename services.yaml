@@ -73,10 +73,10 @@ services:
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
   - name: coco-kafka-bridge@.service
-    count: 2
+    count: 1
     version: v4
   - name: coco-kafka-bridge-sidekick@.service
-    count: 2
+    count: 1
   - name: kafka-rest-proxy.service
   - name: kafka-rest-proxy-sidekick.service
   - name: mongodb-all.service          

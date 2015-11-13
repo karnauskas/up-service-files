@@ -1,0 +1,20 @@
+[Unit]
+Description=Publish Availability Monitor sidekick
+BindsTo=publish-availability-monitor@%i.service
+After=publish-availability-monitor@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/publish-availability-monitor/healthcheck     true; \
+  etcdctl mkdir /ft/services/publish-availability-monitor/servers; \
+  etcdctl set /ft/healthcheck/publish-availability-monitor-%i /__health; \
+  while true; do \
+    PORT=$(/usr/bin/docker port publish-availability-monitor-%i 8080 | cut -d':' -f2); \
+    etcdctl set /ft/services/publish-availability-monitor/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/publish-availability-monitor/servers/%i
+
+[X-Fleet]
+MachineOf=publish-availability-monitor@%i.service
+

@@ -9,7 +9,7 @@ Environment="DOCKER_APP_VERSION=latest" "HOST_DIR=host_dir"
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-system-healthcheck:$DOCKER_APP_VERSION"
-ExecStart=/bin/bash -c "/usr/bin/docker run --rm --net=host --name=%p -P -e HOST_DIR=$HOST_DIR -v /:/$HOST_DIR:ro coco/coco-system-healthcheck:$DOCKER_APP_VERSION"
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -P -e HOST_DIR=$HOST_DIR -v /:/$HOST_DIR:ro coco/coco-system-healthcheck:$DOCKER_APP_VERSION"
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
 RestartSec=60

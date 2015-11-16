@@ -2,7 +2,7 @@
 Description=UP REST Storage - Mongodb
 After=docker.service kafka.service
 Requires=docker.service
-Wants=mongodb-sidekick@%i.service
+Wants=mongodb-sidekick@%i.service restorage-mongo-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=0

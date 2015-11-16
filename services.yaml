@@ -6,7 +6,7 @@ services:
     count: 3
   - name: mongodb-configurator.service
   - name: cms-notifier@.service
-    version: v28
+    version: v29
     count: 2
   - name: cms-notifier-sidekick@.service
     count: 2
@@ -31,7 +31,6 @@ services:
   - name: document-store-api-sidekick@.service
     count: 1
   - name: notifications-rw@.service
-    version: v8
     count: 2
   - name: notifications-rw-sidekick@.service
     count: 2
@@ -73,9 +72,10 @@ services:
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
   - name: coco-kafka-bridge@.service
-    count: 2
+    count: 1
+    version: v4
   - name: coco-kafka-bridge-sidekick@.service
-    count: 2
+    count: 1
   - name: kafka-rest-proxy.service
   - name: kafka-rest-proxy-sidekick.service
   - name: mongodb-all.service          
@@ -91,7 +91,6 @@ services:
   - name: diamond.service
   - name: elb-presence.service
   - name: image-cleaner.service
-  - name: image-cleaner.timer
   - name: mongodb-all.service
   - name: restorage-mongo@.service
     count: 1
@@ -102,5 +101,9 @@ services:
   - name: mongo-backup.timer
   - name: tunnel-registrator.service
   - name: elb-dns-registrator.service
-  - name: publish-availability-monitor.service
+  - name: publish-availability-monitor@.service
+    count: 1
+    version: 0.8.0
+  - name: publish-availability-monitor-sidekick@.service
+    count: 1
   - name: vulcan-config-builder.service

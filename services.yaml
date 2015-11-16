@@ -31,7 +31,6 @@ services:
   - name: document-store-api-sidekick@.service
     count: 1
   - name: notifications-rw@.service
-    version: v8
     count: 2
   - name: notifications-rw-sidekick@.service
     count: 2

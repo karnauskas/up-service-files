@@ -19,7 +19,25 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "VULCAN_HOST=%H:8080" --env "WRITER_HEADER=notifications-rw" --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" --env "KAFKA_GROUPNAME=notifications" --env "TRANSFORMER_PROXY=$HOSTNAME:8080" up-registry.ft.com/coco/notifications-ingester'
+  export WHITELIST="^http://(methode-article|methode-list|wordpress-article)-transformer-(pr|iw)-uk-.*\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$"; \
+  export WRITER_PATH_MAPPING='"/content": "/content/{uuid}"'; \
+  export WRITER_HEALTHCHECK_NAME="Can connect to the Notifications Reader/Writer"; \
+  export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"; \
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+      --env "VULCAN_HOST=%H:8080" \
+      --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
+      --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
+      --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
+      --env "KAFKA_GROUPNAME=notifications" \
+      --env "KAFKA_SYSTEM_ID=NotificationsIngester" \
+      --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
+      --env "WHITELIST=$WHITELIST" \
+      --env "WRITER_HEADER=notifications-rw" \
+      --env "WRITER_NAME=NotificationsReaderWriter" \
+      --env "WRITER_PATH_MAPPING=$WRITER_PATH_MAPPING" \
+      --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
+      --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
+      up-registry.ft.com/coco/notifications-ingester'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

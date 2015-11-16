@@ -26,10 +26,9 @@ services:
   - name: binary-writer-sidekick@.service
     count: 2
   - name: document-store-api@.service
-    version: v20
-    count: 1
+    count: 2
   - name: document-store-api-sidekick@.service
-    count: 1
+    count: 2
   - name: notifications-rw@.service
     count: 2
   - name: notifications-rw-sidekick@.service

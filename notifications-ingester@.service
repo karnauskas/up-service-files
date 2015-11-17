@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c '\
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
   export WHITELIST="^http://(methode-article|methode-list|wordpress-article)-transformer-(pr|iw)-uk-.*\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$"; \
-  export WRITER_PATH_MAPPING='"/content": "/content/{uuid}"'; \
+  export WRITER_PATH_MAPPING=\'\\"/content\\": \\"/content/{uuid}\\"\'; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Notifications Reader/Writer"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"; \
   /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \

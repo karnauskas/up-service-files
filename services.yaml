@@ -66,7 +66,7 @@ services:
     count: 2
   - name: kafka-rest-proxy.service
   - name: kafka-rest-proxy-sidekick.service
-  - name: mongodb-all.service          
+  - name: mongodb-all.service
   - name: system-healthcheck.service
   - name: system-healthcheck-sidekick.service
   - name: fleet-unit-healthcheck.service
@@ -91,7 +91,7 @@ services:
   - name: elb-dns-registrator.service
   - name: publish-availability-monitor@.service
     count: 1
-    version: 0.8.0
+    version: 0.11.0
   - name: publish-availability-monitor-sidekick@.service
     count: 1
   - name: vulcan-config-builder.service

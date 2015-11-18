@@ -9,11 +9,10 @@ ExecStart=/bin/sh -c "\
     etcdctl mkdir /ft/services/methode-list-transformer/servers; \
     etcdctl set /ft/healthcheck/methode-list-transformer-%i /__health; \
   while true; do \
-      PORT=$(/usr/bin/docker port methode-list-transformer-%i 8080 | cut -d':' -f2); \
+      export PORT=$(/usr/bin/docker port methode-list-transformer-%i 8080 | cut -d':' -f2); \
       etcdctl set /ft/services/methode-list-transformer/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
       sleep 120; \
     done"
-
 ExecStop=/usr/bin/etcdctl rm /ft/services/methode-list-transformer/servers/%i
 
 [X-Fleet]

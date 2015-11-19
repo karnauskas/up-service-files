@@ -27,10 +27,11 @@ ExecStart=/bin/sh -c "\
     etcdctl set /vulcand/backends/methode-image-binary-transformer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT\\\"}\" --ttl 600; \
     sleep 120; \
   done"
-
 ExecStop=/usr/bin/etcdctl rm --recursive /services/methode-image-binary-transformer/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-image-binary-transformer/servers/srv%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-image-binary-transformer-admin/servers/srv%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=methode-image-binary-transformer@%i.service

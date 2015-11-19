@@ -33,6 +33,10 @@ services:
     count: 2
   - name: notifications-rw-sidekick@.service
     count: 2
+  - name: notifications-ingester@.service
+    count: 2
+  - name: notifications-ingester-sidekick@.service
+    count: 2
   - name: methode-article-transformer@.service
     count: 2
   - name: methode-article-transformer-sidekick@.service

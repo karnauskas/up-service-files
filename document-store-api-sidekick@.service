@@ -19,6 +19,8 @@ ExecStart=/bin/sh -c "\
     sleep 120; \
   done"
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/document-store-api/servers/srv%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=document-store-api@%i.service

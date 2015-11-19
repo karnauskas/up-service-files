@@ -30,6 +30,8 @@ ExecStart=/bin/sh -c "\
 ExecStop=/usr/bin/etcdctl rm --recursive /services/binary-writer/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-writer/servers/srv%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-writer-admin/servers/srv%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=binary-writer@%i.service

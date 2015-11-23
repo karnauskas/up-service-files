@@ -29,6 +29,10 @@ services:
     count: 2
   - name: methode-article-transformer-sidekick@.service
     count: 2
+  - name: notifications-rw@.service
+    count: 2
+  - name: notifications-rw-sidekick@.service
+    count: 2
   - name: methode-image-binary-transformer@.service
     version: v21
     count: 2

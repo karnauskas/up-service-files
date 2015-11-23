@@ -26,21 +26,9 @@ services:
     count: 2
   - name: binary-writer-sidekick@.service
     count: 2
-  - name: document-store-api@.service
-    count: 2
-  - name: document-store-api-sidekick@.service
-    count: 2
-  - name: notifications-rw@.service
-    count: 2
-  - name: notifications-rw-sidekick@.service
-    count: 2
   - name: methode-article-transformer@.service
     count: 2
   - name: methode-article-transformer-sidekick@.service
-    count: 2
-  - name: methode-list-transformer@.service
-    count: 2
-  - name: methode-list-transformer-sidekick@.service
     count: 2
   - name: methode-image-binary-transformer@.service
     version: v21

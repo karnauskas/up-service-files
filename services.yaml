@@ -1,6 +1,5 @@
 ---
 services:
-
   - name: mongodb@.service
     count: 3
   - name: mongodb-sidekick@.service
@@ -58,6 +57,7 @@ services:
   - name: nativerw-sidekick@.service
     count: 2
   - name: aggregate-healthcheck@.service
+    version: pc
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
     count: 1

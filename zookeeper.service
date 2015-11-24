@@ -12,7 +12,7 @@ KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull wurstmeister/zookeeper
-ExecStart=/usr/bin/docker run --name %p -p 2181:2181 wurstmeister/zookeeper
+ExecStart=/usr/bin/docker run --name %p -v /vol/zk:/opt/zookeeper-3.4.6/data -p 2181:2181 wurstmeister/zookeeper
 ExecStartPost=/bin/sh -c "\
   etcdctl set /ft/config/zookeeper/ip $HOSTNAME; \
   etcdctl set /ft/config/zookeeper/port 2181;"

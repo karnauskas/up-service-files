@@ -37,6 +37,10 @@ services:
     count: 2
   - name: notifications-ingester-sidekick@.service
     count: 2
+  - name: document-store-api@.service
+    count: 2
+  - name: document-store-api-sidekick@.service
+    count: 2
   - name: methode-image-binary-transformer@.service
     version: v21
     count: 2

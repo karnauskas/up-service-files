@@ -4,6 +4,7 @@ Requires=docker.socket
 After=docker.socket
 
 [Service]
+TimeoutStartSec=0
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/coco-diamond

@@ -62,6 +62,7 @@ services:
   - name: coco-kafka-bridge@.service
     count: 2
     version: v4
+    sequentialDeployment: true
   - name: coco-kafka-bridge-sidekick@.service
     count: 2
   - name: kafka-rest-proxy.service

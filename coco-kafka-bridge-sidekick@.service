@@ -20,7 +20,6 @@ ExecStart=/bin/sh -c "\
     sleep 120; \
   done"
 
-ExecStop=/usr/bin/etcdctl rm --recursive /services/kafka-bridge/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/kafka-bridge/servers/srv%i
 Restart=on-failure
 RestartSec=60

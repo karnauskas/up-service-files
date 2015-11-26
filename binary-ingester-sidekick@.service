@@ -30,6 +30,8 @@ ExecStart=/bin/sh -c "\
 ExecStop=/usr/bin/etcdctl rm --recursive /services/binary-ingester/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-ingester/servers/srv%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/binary-ingester-admin/servers/srv%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=binary-ingester@%i.service

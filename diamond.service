@@ -1,5 +1,5 @@
 [Unit]
-Description=A diamond collector for docker containers
+Description=A diamond collector for docker containers 
 Requires=docker.socket
 After=docker.socket
 
@@ -9,7 +9,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/coco-diamond
 ExecStart=/bin/bash -c "\
   ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  IFS='.' read -r -a HOSTNAME_SLICED <<< "$HOSTNAME"; \
+  IFS='.' read -r -a HOSTNAME_SLICED <<< "$HOSTNAME" \
   /usr/bin/docker run --rm --name=%p -e GRAPHITE_HOST=graphite.ft.com -e GRAPHITE_PORT=2003 -e DOCKER_HOSTNAME=$ENV.${HOSTNAME_SLICED[0]} -e INTERVAL=60 -v /proc:/host_proc:ro -v /var/run/docker.sock:/var/run/docker.sock:ro coco/coco-diamond"
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
@@ -20,3 +20,4 @@ WantedBy=multi-user.target
 
 [X-Fleet]
 Global=true
+

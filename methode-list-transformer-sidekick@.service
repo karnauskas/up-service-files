@@ -1,5 +1,5 @@
 [Unit]
-Description=method list transformer sidekick
+Description=methode list transformer sidekick
 BindsTo=methode-list-transformer@%i.service
 After=methode-list-transformer@%i.service
 

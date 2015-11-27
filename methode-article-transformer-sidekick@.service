@@ -1,5 +1,5 @@
 [Unit]
-Description=method article transformer sidekick
+Description=methode article transformer sidekick
 BindsTo=methode-article-transformer@%i.service
 After=methode-article-transformer@%i.service
 

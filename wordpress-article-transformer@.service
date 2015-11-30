@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/wordpress-article
 
 ExecStart=/bin/sh -c '\
   export WORDPRESS_CONTENT_API_KEY=$(/usr/bin/etcdctl get /ft/_credentials/wordpress/content_api_key); \
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081  --env "WORDPRESS_CONTENT_API_KEY=$WORDPRESS_CONTENT_API_KEY" --env "VULCAN_HOST=%H:8080" up-registry.ft.com/coco/wordpress-article-transformer:$DOCKER_APP_VERSION'
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081  --env "WORDPRESS_CONTENT_API_KEY=$WORDPRESS_CONTENT_API_KEY" up-registry.ft.com/coco/wordpress-article-transformer:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure

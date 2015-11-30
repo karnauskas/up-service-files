@@ -33,6 +33,10 @@ services:
     count: 2
   - name: methode-list-transformer-sidekick@.service
     count: 2
+  - name: wordpress-article-transformer@.service
+    count: 2
+  - name: wordpress-article-transformer-sidekick@.service
+    count: 2
   - name: notifications-rw@.service
     count: 2
   - name: notifications-rw-sidekick@.service

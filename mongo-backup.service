@@ -25,9 +25,9 @@ ExecStart=/bin/sh -c "\
     MONGODB_HOST=$HOSTNAME; \
     AWS_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id);\
     AWS_SECRET_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
-    BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/mongo-backup/bucket); \
-    DATA_FOLDER=$(/usr/bin/etcdctl get /ft/config/mongo-backup/data_folder); \
-    S3_DOMAIN=$(/usr/bin/etcdctl get /ft/config/mongo-backup/s3_domain); \
+    BUCKET_NAME=com.ft.coco-mongo-backup.prod; \
+    DATA_FOLDER=/data/db; \
+    S3_DOMAIN=s3-eu-west-1.amazonaws.com; \
     ENV_TAG=$(usr/bin/etcdctl get /ft/config/environment_tag); \
      /usr/bin/docker run --rm --name %p \
         -e MONGODB_PORT=$MONGODB_PORT \

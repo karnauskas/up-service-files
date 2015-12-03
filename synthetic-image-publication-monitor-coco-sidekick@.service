@@ -1,0 +1,23 @@
+[Unit]
+Description=Synthetic Image Publication Monitor AWS - COCO Sidekick
+BindsTo=synthetic-image-publication-monitor-coco@%i.service
+After=synthetic-image-publication-monitor-coco@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set /vulcand/backends/synthetic-image-publication-monitor-coco/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/backends/synthetic-image-publication-monitor-coco-%i/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-coco/frontend '{\"Type\": \"http\", \"BackendId\": \"synthetic-image-publication-monitor-coco\", \"Route\": \"PathRegexp(`/.*`) && Host(`syn-pub-coco`)\"}'; \
+  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-coco-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"synthetic-image-publication-monitor-coco-%i\", \"Route\":\"PathRegexp(`/health/synthetic-image-publication-monitor-coco-%i/.*`)\"}'; \
+  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-coco-health-%i/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/synthetic-image-publication-monitor-coco-%i(.*)\", \"Replacement\":\"$1\"}}'; \
+  etcdctl set /ft/healthcheck/synthetic-image-publication-monitor-coco-%i /__health; \
+  while true; do \
+    export PORT=$(echo $(/usr/bin/docker port synthetic-image-publication-monitor-coco-%i 8080) | cut -d':' -f2); \
+    etcdctl set /vulcand/backends/synthetic-image-publication-monitor-coco/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
+    etcdctl set /vulcand/backends/synthetic-image-publication-monitor-coco-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/synthetic-image-publication-monitor-coco/servers/srv%i
+
+[X-Fleet]
+MachineOf=synthetic-image-publication-monitor-coco@%i.service

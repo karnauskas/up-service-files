@@ -106,3 +106,8 @@ services:
     version: v13
   - name: notifications-rw-sidekick@.service
     count: 2
+  - name: document-store-api@.service
+    count: 2
+    version: v27
+  - name: document-store-api-sidekick@.service
+    count: 2

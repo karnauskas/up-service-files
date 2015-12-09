@@ -1,0 +1,27 @@
+[Unit]
+Description=Logstash forwarder
+
+[Service]
+TimeoutStartSec=1200
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-filter > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-lumberjack > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-filter > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-lumberjack > /dev/null 2>&1'
+ExecStartPre=/usr/bin/docker pull coco/coco-logstash-forwarder
+ExecStartPre=/usr/bin/docker pull coco/coco-logfilter
+ExecStart=/bin/bash -c "\
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --log-driver=none --env=ENV=$ENV --rm --name %p-filter coco/coco-logfilter | docker run -i --log-driver=none --rm --name %p-lumberjack --volume /etc/ssl/logstash-forwarder:/etc/ssl coco/coco-logstash-forwarder"
+ExecStop=/bin/bash -c "/usr/bin/docker stop -t 3 %p-filter && /usr/bin/docker stop -t 3 %p-lumberjack"
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+

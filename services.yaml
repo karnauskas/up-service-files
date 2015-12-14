@@ -109,6 +109,6 @@ services:
     count: 2
   - name: document-store-api@.service
     count: 2
-    version: v27
+    version: v29
   - name: document-store-api-sidekick@.service
     count: 2

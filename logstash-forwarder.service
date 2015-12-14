@@ -14,7 +14,9 @@ ExecStartPre=/usr/bin/docker pull coco/coco-logstash-forwarder
 ExecStartPre=/usr/bin/docker pull coco/coco-logfilter
 ExecStart=/bin/bash -c "\
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --log-driver=none --env=ENV=$ENV --rm --name %p-filter coco/coco-logfilter | docker run -i --log-driver=none --rm --name %p-lumberjack --volume /etc/ssl/logstash-forwarder:/etc/ssl coco/coco-logstash-forwarder"
+  export LOGSTASH_CERT=$(/usr/bin/etcdctl get /ft/_credentials/logstash-forwarder/cert); \
+  /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --log-driver=none --env=ENV=$ENV --rm --name %p-filter coco/coco-logfilter | docker run -i --log-driver=none --rm --name %p-lumberjack --env=CERT=$LOGSTASH_CERT coco/coco-logstash-forwarder"
+  
 ExecStop=/bin/bash -c "/usr/bin/docker stop -t 3 %p-filter && /usr/bin/docker stop -t 3 %p-lumberjack"
 Restart=on-failure
 RestartSec=60

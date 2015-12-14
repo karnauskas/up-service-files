@@ -112,7 +112,7 @@ services:
   - name: document-store-api-sidekick@.service
     count: 2
   - name: methode-article-transformer@.service
-      count: 2
-      version: v29
+    count: 2
+    version: v29
   - name: methode-article-transformer-sidekick@.service
-      count: 2
+    count: 2

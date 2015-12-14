@@ -11,7 +11,7 @@ services:
   - name: cms-notifier-sidekick@.service
     count: 2
   - name: methode-content-importer@.service
-    version: v36
+    version: v40
     count: 2
   - name: methode-content-importer-sidekick@.service
     count: 2

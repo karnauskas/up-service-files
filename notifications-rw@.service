@@ -17,7 +17,11 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION"
 ExecStart=/bin/sh -c "\
   MONGO_ADDRESSES=$(for x in $(etcdctl ls /ft/config/mongodb); do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)\",\"; done);\
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env \"MONGO_ADDRESSES=$(echo $MONGO_ADDRESSES | sed s/.$//)\" --env \"API_HOST=api.ft.com\" up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION;"
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081\
+	--env \"MONGO_ADDRESSES=$(echo $MONGO_ADDRESSES | sed s/.$//)\" \
+	--env \"API_HOST=api.ft.com\" \
+	--env \"ARCHIVE_START_DATE=2006-02-09T02:00:42.999Z\" \
+	up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION;"
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

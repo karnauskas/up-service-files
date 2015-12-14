@@ -116,8 +116,8 @@ services:
     version: v29
   - name: methode-article-transformer-sidekick@.service
     count: 2
- -  name: notifications-ingester@.service
+  - name: notifications-ingester@.service
     count: 2
     version: v33
- -  name: notifications-ingester-sidekick@.service
+  - name: notifications-ingester-sidekick@.service
     count: 2

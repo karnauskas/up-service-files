@@ -131,3 +131,8 @@ services:
   - name: methode-list-transformer-sidekick@.service
     count: 2
     version: v8
+  - name: wordpress-article-transformer@.service
+    count: 2
+    version: v38
+  - name: wordpress-article-transformer-sidekick@.service
+    count: 2

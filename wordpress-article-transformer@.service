@@ -1,0 +1,26 @@
+[Unit]
+Description=wordpress article transformer
+After=docker.service
+Requires=docker.service
+Wants=wordpress-article-transformer-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/wordpress-article-transformer:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export WORDPRESS_CONTENT_API_KEY=$(/usr/bin/etcdctl get /ft/_credentials/wordpress/content_api_key); \
+  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081  --env "WORDPRESS_CONTENT_API_KEY=$WORDPRESS_CONTENT_API_KEY" up-registry.ft.com/coco/wordpress-article-transformer:$DOCKER_APP_VERSION'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

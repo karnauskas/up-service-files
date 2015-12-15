@@ -121,3 +121,8 @@ services:
     version: v33
   - name: notifications-ingester-sidekick@.service
     count: 2
+  - name: content-ingester@.service
+    count: 2
+    version: v33
+  - name: content-ingester-sidekick@.service
+    count: 2

@@ -10,7 +10,7 @@ services:
   - name: cms-notifier-sidekick@.service
     count: 2
   - name: methode-content-importer@.service
-    version: v36
+    version: v40
     count: 2
   - name: methode-content-importer-sidekick@.service
     count: 2
@@ -35,7 +35,7 @@ services:
   - name: methode-image-binary-transformer-sidekick@.service
     count: 2
   - name: methode-image-model-transformer@.service
-    version: v29
+    version: v37
     count: 2
   - name: methode-image-model-transformer-sidekick@.service
     count: 2
@@ -108,7 +108,7 @@ services:
     count: 2
   - name: document-store-api@.service
     count: 2
-    version: v27
+    version: v29
   - name: document-store-api-sidekick@.service
     count: 2
   - name: methode-article-transformer@.service

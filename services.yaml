@@ -103,7 +103,7 @@ services:
   - name: vulcan-config-builder.service
   - name: notifications-rw@.service
     count: 2
-    version: v13
+    version: v19
   - name: notifications-rw-sidekick@.service
     count: 2
   - name: document-store-api@.service

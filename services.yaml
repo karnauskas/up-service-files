@@ -1,4 +1,3 @@
----
 services:
   - name: mongodb@.service
     count: 3
@@ -104,11 +103,36 @@ services:
   - name: vulcan-config-builder.service
   - name: notifications-rw@.service
     count: 2
-    version: v13
+    version: v19
   - name: notifications-rw-sidekick@.service
     count: 2
   - name: document-store-api@.service
     count: 2
     version: v29
   - name: document-store-api-sidekick@.service
+    count: 2
+  - name: methode-article-transformer@.service
+    count: 2
+    version: v29
+  - name: methode-article-transformer-sidekick@.service
+    count: 2
+  - name: notifications-ingester@.service
+    count: 2
+    version: v33
+  - name: notifications-ingester-sidekick@.service
+    count: 2
+  - name: content-ingester@.service
+    count: 2
+    version: v33
+  - name: content-ingester-sidekick@.service
+    count: 2
+  - name: methode-list-transformer@.service
+    count: 2
+  - name: methode-list-transformer-sidekick@.service
+    count: 2
+    version: v8
+  - name: wordpress-article-transformer@.service
+    count: 2
+    version: v38
+  - name: wordpress-article-transformer-sidekick@.service
     count: 2

@@ -65,7 +65,7 @@ services:
     count: 1
   - name: coco-kafka-bridge@.service
     count: 2
-    version: v4
+    version: v5
     sequentialDeployment: true
   - name: coco-kafka-bridge-sidekick@.service
     count: 2

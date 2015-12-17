@@ -15,7 +15,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
-  	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
+  	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/vulcand/authorization_header); \
 	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-coco/test-uuid); \
 	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i -p 8080 \

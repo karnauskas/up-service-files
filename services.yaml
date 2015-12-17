@@ -128,9 +128,9 @@ services:
     count: 2
   - name: methode-list-transformer@.service
     count: 2
+    version: v9
   - name: methode-list-transformer-sidekick@.service
     count: 2
-    version: v9
   - name: wordpress-article-transformer@.service
     count: 2
     version: v38

@@ -65,7 +65,7 @@ services:
     count: 1
   - name: coco-kafka-bridge@.service
     count: 2
-    version: v4
+    version: v6
     sequentialDeployment: true
   - name: coco-kafka-bridge-sidekick@.service
     count: 2
@@ -113,7 +113,7 @@ services:
     count: 2
   - name: methode-article-transformer@.service
     count: 2
-    version: v29
+    version: v32
   - name: methode-article-transformer-sidekick@.service
     count: 2
   - name: notifications-ingester@.service
@@ -130,7 +130,7 @@ services:
     count: 2
   - name: methode-list-transformer-sidekick@.service
     count: 2
-    version: v8
+    version: v9
   - name: wordpress-article-transformer@.service
     count: 2
     version: v38

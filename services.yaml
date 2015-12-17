@@ -97,13 +97,13 @@ services:
   - name: elb-dns-registrator.service
   - name: publish-availability-monitor@.service
     count: 1
-    version: 0.11.0
+    version: 0.12.1
   - name: publish-availability-monitor-sidekick@.service
     count: 1
   - name: vulcan-config-builder.service
   - name: notifications-rw@.service
     count: 2
-    version: v19
+    version: v20
   - name: notifications-rw-sidekick@.service
     count: 2
   - name: document-store-api@.service

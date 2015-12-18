@@ -25,10 +25,11 @@ services:
   - name: binary-writer-sidekick@.service
     count: 2
   - name: document-store-api@.service
-    version: v20
-    count: 1
+    version: v31
+    count: 2
+    sequentialDeployment: true
   - name: document-store-api-sidekick@.service
-    count: 1
+    count: 2
   - name: methode-image-binary-transformer@.service
     version: v21
     count: 2
@@ -104,6 +105,7 @@ services:
   - name: notifications-rw@.service
     count: 2
     version: v20
+    sequentialDeployment: true
   - name: notifications-rw-sidekick@.service
     count: 2
   - name: document-store-api@.service

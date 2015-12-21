@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c "/usr/bin/docker pull up-registry.ft.com/coco/syntheti
 
 ExecStart=/bin/sh -c "\
   /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081\
-    --env "VULCAN_HOST=%H:8080"
+    --env "VULCAN_HOST=%H:8080" \
 	up-registry.ft.com/coco/synthetic-publication-monitor:$DOCKER_APP_VERSION;"
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

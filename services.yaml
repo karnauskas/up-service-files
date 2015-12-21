@@ -82,6 +82,10 @@ services:
     count: 1
   - name: synthetic-image-publication-monitor-aws-sidekick@.service
     count: 1
+  - name: synthetic-publication-monitor@.service
+    count: 1
+  - name: synthetic-publication-monitor-sidekick@.service
+    count: 1
   - name: coco-kafka-bridge@.service
     count: 1
     version: v4

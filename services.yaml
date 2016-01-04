@@ -135,6 +135,7 @@ services:
     count: 2
   - name: wordpress-article-transformer@.service
     count: 2
-    version: v38
+    version: v41
+	sequentialDeployment: true
   - name: wordpress-article-transformer-sidekick@.service
     count: 2

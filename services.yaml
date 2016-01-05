@@ -49,11 +49,6 @@ services:
     count: 1
   - name: aggregate-healthcheck-sidekick@.service
     count: 1
-  - name: synthetic-image-publication-monitor-ucs@.service
-    version: v33
-    count: 1
-  - name: synthetic-image-publication-monitor-ucs-sidekick@.service
-    count: 1
   - name: synthetic-image-publication-monitor-aws@.service
     version: v33
     count: 1

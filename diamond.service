@@ -8,9 +8,10 @@ TimeoutStartSec=0
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/coco-diamond
-ExecStart=/bin/bash -c "\
+ExecStart=/bin/bash -c '\
   ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  /usr/bin/docker run --rm --name=%p -e GRAPHITE_HOST=graphite.ft.com -e GRAPHITE_PORT=2003 -e DOCKER_HOSTNAME=$ENV.$HOSTNAME -e INTERVAL=60 -v /proc:/host_proc:ro -v /var/run/docker.sock:/var/run/docker.sock:ro coco/coco-diamond"
+  IFS=. read -r -a HOSTNAME_SLICED <<< "$HOSTNAME"; \
+  /usr/bin/docker run --rm --name=%p -e GRAPHITE_HOST=graphite.ft.com -e GRAPHITE_PORT=2003 -e DOCKER_HOSTNAME=$ENV.$HOSTNAME_SLICED -e INTERVAL=60 -v /proc:/host_proc:ro -v /var/run/docker.sock:/var/run/docker.sock:ro coco/coco-diamond'
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
 RestartSec=60

@@ -1,8 +1,8 @@
 [Unit]
-Description=Synthetic Image Publication Monitor UCS
+Description=Synthetic Image Publication Monitor AWS - COCO
 After=docker.service
 Requires=docker.service
-Wants=synthetic-image-publication-monitor-ucs-sidekick@%i.service
+Wants=synthetic-image-publication-monitor-coco-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -10,17 +10,18 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/usr/bin/docker kill %p-%i
-ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
-  	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
-  	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-ucs/test-uuid); \
+  	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/vulcand/authorization_header); \
+	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-coco/test-uuid); \
+	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i -p 8080 \
-	--env "POST_ADDRESS=cmsnotifier.ft.com" \
-	--env "BUCKET_ADDRESS=com.ft.imagepublish.prod" \
-	--env "DYN_ROUTING=false" \
+	--env "POST_ADDRESS=%H:8080" \
+	--env "BUCKET_ADDRESS=$BUCKET_ADDRESS" \
+	--env "DYN_ROUTING=true" \
 	--env "POST_CREDENTIALS=$POST_CREDENTIALS" \
 	--env "TEST_UUID=$TEST_UUID" \
 	up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'

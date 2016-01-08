@@ -97,6 +97,7 @@ services:
   - name: publish-availability-monitor-sidekick@.service
     count: 1
   - name: vulcan-config-builder.service
+    version: v1
   - name: notifications-rw@.service
     count: 2
     version: v20

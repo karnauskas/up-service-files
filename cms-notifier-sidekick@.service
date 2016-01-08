@@ -4,33 +4,16 @@ BindsTo=cms-notifier@%i.service
 After=cms-notifier@%i.service
 
 [Service]
-ExecStartPre=/bin/sh -c "\
-  etcdctl set /vulcand/backends/cms-notifier/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/backends/cms-notifier-%i/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/backends/cms-notifier-admin/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/frontends/cms-notifier/frontend '{\"Type\": \"http\", \"BackendId\": \"cms-notifier\", \"Route\": \"PathRegexp(`/.*`) && Host(`cms-notifier`)\"}'; \
-  etcdctl set /vulcand/frontends/cms-notifier-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"cms-notifier-admin\", \"Route\": \"PathRegexp(`/.*`) && Host(`cms-notifier-admin`)\"}'; \
-  etcdctl set /vulcand/frontends/cms-notifier-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"cms-notifier-%i\\\", \\\"Route\\\":\\\"Path(\`/health/cms-notifier-%i/__health\`)\\\"}\"; \
-  etcdctl set /vulcand/frontends/cms-notifier-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/cms-notifier-%i(.*)\\\", \\\"Replacement\\\":\\\"\\$1\\\"}}\"; \
-  etcdctl set /ft/healthcheck/cms-notifier-%i /__health; "
-
 ExecStart=/bin/sh -c "\
-   while true; do \
-    export CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8080) | cut -d':' -f2); \
-    export ADMIN_CMS_NOTIFIER_PORT=$(echo $(/usr/bin/docker port cms-notifier-%i 8081) | cut -d':' -f2); \
-    etcdctl set /services/cms-notifier/%i/host '%H' --ttl 600; \
-    etcdctl set /services/cms-notifier/%i/app_port $CMS_NOTIFIER_PORT --ttl 600; \
-    etcdctl set /services/cms-notifier/%i/admin_port $ADMIN_CMS_NOTIFIER_PORT --ttl 600; \
-    etcdctl set /vulcand/backends/cms-notifier/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/cms-notifier-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/cms-notifier-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ADMIN_CMS_NOTIFIER_PORT\\\"}\" --ttl 600; \
+  etcdctl set /ft/services/cms-notifier/healthcheck true; \
+  etcdctl mkdir /ft/services/cms-notifier/servers; \
+  etcdctl set /ft/healthcheck/cms-notifier-%i /__health; \
+  while true; do \
+    PORT=$(/usr/bin/docker port cms-notifier-%i 8080 | cut -d':' -f2); \
+    etcdctl set /ft/services/cms-notifier/servers/%i http://$HOSTNAME:$PORT --ttl 600; \
     sleep 120; \
   done"
-ExecStop=/usr/bin/etcdctl rm --recursive /services/cms-notifier/%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/cms-notifier/servers/srv%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/cms-notifier-admin/servers/srv%i
-Restart=on-failure
-RestartSec=60
+ExecStop=/usr/bin/etcdctl rm /ft/services/cms-notifier/servers/%i
 
 [X-Fleet]
 MachineOf=cms-notifier@%i.service

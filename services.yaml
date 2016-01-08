@@ -24,12 +24,6 @@ services:
     count: 2
   - name: binary-writer-sidekick@.service
     count: 2
-  - name: document-store-api@.service
-    version: v31
-    count: 2
-    sequentialDeployment: true
-  - name: document-store-api-sidekick@.service
-    count: 2
   - name: methode-image-binary-transformer@.service
     version: v21
     count: 2
@@ -67,7 +61,6 @@ services:
     count: 2
   - name: kafka-rest-proxy.service
   - name: kafka-rest-proxy-sidekick.service
-  - name: mongodb-all.service
   - name: system-healthcheck.service
   - name: system-healthcheck-sidekick.service
   - name: fleet-unit-healthcheck.service

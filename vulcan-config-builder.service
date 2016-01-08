@@ -7,7 +7,7 @@ After=docker.socket
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/vulcan-config-builder:auth"
-ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -P --env="ETCD_PEERS=http://$HOSTNAME:2379" coco/vulcan-config-builder"
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm --name=%p -P --env="ETCD_PEERS=http://$HOSTNAME:2379" coco/vulcan-config-builder:auth"
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
 RestartSec=60

@@ -134,3 +134,9 @@ services:
     version: v38
   - name: wordpress-article-transformer-sidekick@.service
     count: 2
+  - name: enriched-content-read-api@.service
+    count: 2
+    version: 32
+    sequentialDeployment: true
+  - name: enriched-content-read-api-sidekick@.service
+    count: 2

@@ -6,7 +6,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v77
+  version: v81
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -117,7 +117,7 @@ services:
 - name: system-healthcheck.service
 - name: tunnel-registrator.service
 - name: vulcan-config-builder.service
-  version: v1
+  version: v4
 - name: vulcan.service
 - name: wordpress-article-transformer-sidekick@.service
   count: 2

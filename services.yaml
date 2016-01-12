@@ -93,7 +93,7 @@ services:
   - name: elb-dns-registrator.service
   - name: publish-availability-monitor@.service
     count: 1
-    version: 0.12.1
+    version: 0.15.0
   - name: publish-availability-monitor-sidekick@.service
     count: 1
   - name: vulcan-config-builder.service

@@ -5,14 +5,16 @@ After=varnish@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  export VARNISH_IP=$HOSTNAME; \
+  etcdctl set   /ft/services/varnish/healthcheck true; \
+  etcdctl mkdir /ft/services/varnish/servers; \
+  etcdctl set /ft/healthcheck/varnish-%i /__health; \
+  
   while true; do \
-    export VARNISH_PORT=$(/usr/bin/docker port varnish-%i 80 | cut -d':' -f2); \
-    etcdctl set /services/varnish/%i/host $VARNISH_IP --ttl 60; \
-    etcdctl set /services/varnish/%i/port $VARNISH_PORT --ttl 60; \
+    export PORT=$(/usr/bin/docker port varnish-%i 80 | cut -d':' -f2); \
+    etcdctl set /ft/services/cms-notifier/servers/%i http://$HOSTNAME:$PORT --ttl 600; \
     sleep 45; \
   done"
-ExecStop=/usr/bin/etcdctl rm /services/varnish@%i
+ExecStop=/usr/bin/etcdctl rm /ft/services/varnish/servers/%i
 
 [X-Fleet]
 MachineOf=varnish@%i.service

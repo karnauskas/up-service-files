@@ -19,7 +19,10 @@ ExecStart=/bin/bash -c '\
 	docker run --rm --name %p-%i -p 8080 \
 	--env "QUEUE_ADDR=http://%H:8080" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
-	--env "URLS=http://$BUCKET.s3.amazonaws.com/" \
+	--env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \
+	--env "CONTENT_URL=http://%H:8080/__document-store-api/content-read/" \
+	--env "LISTS_URL=http://%H:8080/__document-store-api/lists/" \
+	--env "NOTIFICATIONS_URL=http://%H:8080/__notifications-rw/content/notifications" \
 	coco/publish-availability-monitor:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

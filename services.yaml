@@ -136,6 +136,6 @@ services:
     count: 2
   - name: varnish@.service
     count: 1
-    version: v34
+    version: v33
   - name: varnish-sidekick@.service
     count: 1	

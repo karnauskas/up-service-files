@@ -1,129 +1,127 @@
 services:
-  - name: mongodb@.service
-    count: 3
-  - name: mongodb-sidekick@.service
-    count: 3
-  - name: mongodb-configurator.service
-  - name: cms-notifier@.service
-    version: v29
-    count: 2
-  - name: cms-notifier-sidekick@.service
-    count: 2
-  - name: methode-content-importer@.service
-    version: v40
-    count: 2
-  - name: methode-content-importer-sidekick@.service
-    count: 2
-  - name: binary-ingester@.service
-    version: v77
-    count: 2
-  - name: binary-ingester-sidekick@.service
-    count: 2
-  - name: binary-writer@.service
-    version: v43
-    count: 2
-  - name: binary-writer-sidekick@.service
-    count: 2
-  - name: methode-image-binary-transformer@.service
-    version: v21
-    count: 2
-  - name: methode-image-binary-transformer-sidekick@.service
-    count: 2
-  - name: methode-image-model-transformer@.service
-    version: v37
-    count: 2
-  - name: methode-image-model-transformer-sidekick@.service
-    count: 2
-  - name: nativerw@.service
-    version: v35
-    count: 2
-  - name: nativerw-sidekick@.service
-    count: 2
-  - name: aggregate-healthcheck@.service
-    count: 1
-  - name: aggregate-healthcheck-sidekick@.service
-    count: 1
-  - name: synthetic-image-publication-monitor-aws@.service
-    version: v33
-    count: 1
-  - name: synthetic-image-publication-monitor-aws-sidekick@.service
-    count: 1
-  - name: synthetic-image-publication-monitor-coco@.service
-    version: v33
-    count: 1
-  - name: synthetic-image-publication-monitor-coco-sidekick@.service
-    count: 1
-  - name: coco-kafka-bridge@.service
-    count: 2
-    version: v6
-    sequentialDeployment: true
-  - name: coco-kafka-bridge-sidekick@.service
-    count: 2
-  - name: kafka-rest-proxy.service
-  - name: kafka-rest-proxy-sidekick.service
-  - name: system-healthcheck.service
-  - name: system-healthcheck-sidekick.service
-  - name: fleet-unit-healthcheck.service
-  - name: fleet-unit-healthcheck-sidekick.service
-  - name: kafka.service
-  - name: zookeeper.service
-  - name: splunk-forwarder.service
-  - name: logstash-forwarder.service  
-  - name: vulcan.service
-  - name: methodeapi-endpoint.service
-  - name: diamond.service
-  - name: elb-presence.service
-  - name: image-cleaner.service
-  - name: mongodb-all.service
-  - name: restorage-mongo@.service
-    count: 1
-  - name: restorage-mongo-sidekick@.service
-    count: 1
-  - name: mongo-backup.service
-    desiredState: loaded
-  - name: mongo-backup.timer
-  - name: tunnel-registrator.service
-  - name: elb-dns-registrator.service
-  - name: publish-availability-monitor@.service
-    count: 1
-    version: 0.12.1
-  - name: publish-availability-monitor-sidekick@.service
-    count: 1
-  - name: vulcan-config-builder.service
-    version: v1
-  - name: notifications-rw@.service
-    count: 2
-    version: v20
-    sequentialDeployment: true
-  - name: notifications-rw-sidekick@.service
-    count: 2
-  - name: document-store-api@.service
-    count: 2
-    version: v29
-  - name: document-store-api-sidekick@.service
-    count: 2
-  - name: methode-article-transformer@.service
-    count: 2
-    version: v32
-  - name: methode-article-transformer-sidekick@.service
-    count: 2
-  - name: notifications-ingester@.service
-    count: 2
-    version: v33
-  - name: notifications-ingester-sidekick@.service
-    count: 2
-  - name: content-ingester@.service
-    count: 2
-    version: v33
-  - name: content-ingester-sidekick@.service
-    count: 2
-  - name: methode-list-transformer@.service
-    count: 2
-    version: v9
-  - name: methode-list-transformer-sidekick@.service
-    count: 2
-  - name: wordpress-article-transformer@.service
-    count: 2
-    version: v38
-  - name: wordpress-article-transformer-sidekick@.service
-    count: 2
+- name: aggregate-healthcheck-sidekick@.service
+  count: 1
+- name: aggregate-healthcheck@.service
+  count: 1
+- name: binary-ingester-sidekick@.service
+  count: 2
+- name: binary-ingester@.service
+  version: v81
+  count: 2
+- name: binary-writer-sidekick@.service
+  count: 2
+- name: binary-writer@.service
+  version: v43
+  count: 2
+- name: cms-notifier-sidekick@.service
+  count: 2
+- name: cms-notifier@.service
+  version: v29
+  count: 2
+- name: coco-kafka-bridge-sidekick@.service
+  count: 2
+- name: coco-kafka-bridge@.service
+  version: v6
+  count: 2
+- name: content-ingester-sidekick@.service
+  count: 2
+- name: content-ingester@.service
+  version: v33
+  count: 2
+- name: diamond.service
+- name: document-store-api-sidekick@.service
+  count: 2
+- name: document-store-api@.service
+  version: v29
+  count: 2
+- name: elb-dns-registrator.service
+- name: elb-presence.service
+- name: fleet-unit-healthcheck-sidekick.service
+- name: fleet-unit-healthcheck.service
+- name: image-cleaner.service
+- name: kafka-rest-proxy-sidekick.service
+- name: kafka-rest-proxy.service
+- name: kafka.service
+- name: logstash-forwarder.service
+- name: methode-article-transformer-sidekick@.service
+  count: 2
+- name: methode-article-transformer@.service
+  version: v32
+  count: 2
+- name: methode-content-importer-sidekick@.service
+  count: 2
+- name: methode-content-importer@.service
+  version: v40
+  count: 2
+- name: methode-image-binary-transformer-sidekick@.service
+  count: 2
+- name: methode-image-binary-transformer@.service
+  version: v21
+  count: 2
+- name: methode-image-model-transformer-sidekick@.service
+  count: 2
+- name: methode-image-model-transformer@.service
+  version: v37
+  count: 2
+- name: methode-list-transformer-sidekick@.service
+  count: 2
+- name: methode-list-transformer@.service
+  version: v9
+  count: 2
+- name: methodeapi-endpoint.service
+- name: mongo-backup.service
+  desiredState: loaded
+- name: mongo-backup.timer
+- name: mongodb-all.service
+- name: mongodb-configurator.service
+- name: mongodb-sidekick@.service
+  count: 3
+- name: mongodb@.service
+  count: 3
+- name: nativerw-sidekick@.service
+  count: 2
+- name: nativerw@.service
+  version: v35
+  count: 2
+- name: notifications-ingester-sidekick@.service
+  count: 2
+- name: notifications-ingester@.service
+  version: v33
+  count: 2
+- name: notifications-rw-sidekick@.service
+  count: 2
+- name: notifications-rw@.service
+  version: v20
+  count: 2
+- name: publish-availability-monitor-sidekick@.service
+  count: 1
+- name: publish-availability-monitor@.service
+  version: 0.12.1
+  count: 1
+- name: restorage-mongo-sidekick@.service
+  count: 1
+- name: restorage-mongo@.service
+  count: 1
+- name: splunk-forwarder.service
+- name: synthetic-image-publication-monitor-aws-sidekick@.service
+  count: 1
+- name: synthetic-image-publication-monitor-aws@.service
+  version: v33
+  count: 1
+- name: synthetic-image-publication-monitor-coco-sidekick@.service
+  count: 1
+- name: synthetic-image-publication-monitor-coco@.service
+  version: v33
+  count: 1
+- name: system-healthcheck-sidekick.service
+- name: system-healthcheck.service
+- name: tunnel-registrator.service
+- name: vulcan-config-builder.service
+  version: v5
+- name: vulcan.service
+- name: wordpress-article-transformer-sidekick@.service
+  count: 2
+- name: wordpress-article-transformer@.service
+  version: v38
+  count: 2
+- name: zookeeper.service

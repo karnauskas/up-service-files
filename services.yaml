@@ -139,9 +139,3 @@ services:
     version: v33
   - name: varnish-sidekick@.service
     count: 1	
-  - name: enriched-content-read-api@.service
-    count: 2
-    version: v33
-    sequentialDeployment: true
-  - name: enriched-content-read-api-sidekick@.service
-    count: 2

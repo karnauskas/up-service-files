@@ -5,8 +5,9 @@ After=neo4j@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
+  etcdctl mkdir /ft/services/neo4j/servers; \
   while true; do \
-    export PORT=$(/usr/bin/docker port neo4j-%i 7474 | cut -d':' -f2); \
+    PORT=$(/usr/bin/docker port neo4j-%i 7474 | cut -d':' -f2); \
     etcdctl set /ft/services/neo4j/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
     sleep 120; \
   done"

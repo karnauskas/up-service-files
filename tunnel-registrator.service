@@ -14,7 +14,7 @@ ExecStart=/bin/sh -c " \
   KONSTRUCTOR_DNS_ENDPOINT=https://konstructor.ft.com/v1/dns/; \
   PUBLIC_IP=$(curl -s 169.254.169.254/latest/meta-data/public-ipv4); \
   ((`curl -s -L -w \"%{http_code}\" -X DELETE -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/delete?zone=ft.com&name=$ENV-tunnel-up\" -o /dev/null` == 200)) \
-  && curl -s -L -X POST -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/create?zone=ft.com&name=$ENV-tunnel-up&rdata=$PUBLIC_IP&ttl=600\";"
+  && ((`curl -s -L -w \"%{http_code}\" -X POST -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/create?zone=ft.com&name=$ENV-tunnel-up&rdata=$PUBLIC_IP&ttl=600\" -o /dev/null` == 200));"
 
 [Install]
 WantedBy=multi-user.target

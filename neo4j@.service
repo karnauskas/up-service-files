@@ -20,8 +20,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-<<<<<<< HEAD
 MachineMetadata=persistent_tag=2
-=======
-MachineMetadata=persistent_tag=%i
->>>>>>> master

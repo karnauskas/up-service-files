@@ -42,7 +42,6 @@ services:
 - name: kafka-rest-proxy-sidekick.service
 - name: kafka-rest-proxy.service
 - name: kafka.service
-- name: logstash-forwarder.service
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
@@ -125,3 +124,7 @@ services:
   version: v38
   count: 2
 - name: zookeeper.service
+- name: neo4j@.service
+  count: 1
+- name: neo4j-sidekick@.service
+  count: 1

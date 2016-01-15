@@ -6,7 +6,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v81
+  version: v77
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2

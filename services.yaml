@@ -99,7 +99,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: 0.12.1
+  version: 0.15.2
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

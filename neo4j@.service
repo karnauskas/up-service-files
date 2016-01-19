@@ -1,0 +1,23 @@
+[Unit]
+Description=Neo4j
+After=docker.service
+Requires=docker.service
+Wants=neo4j-sidekick@%i.service
+
+[Service]
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/usr/bin/docker pull neo4j:2.3.1
+ExecStart=/bin/sh -c "\
+  /usr/bin/docker run --rm --name %p-%i -v /vol/%p-%i/:/data -p 7474:7474 --env=NEO4J_AUTH=none neo4j:2.3.1"
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineMetadata=persistent_tag=2

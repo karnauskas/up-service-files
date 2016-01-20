@@ -121,7 +121,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v38
+  version: v45
   count: 2
 - name: zookeeper.service
 - name: neo4j@.service

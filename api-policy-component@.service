@@ -14,6 +14,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/api-policy-component:$DOCKER_APP_VERSION'
 
+# Through the port 8182 vulcan's api status endpoint can be accessed.
 ExecStart=/bin/sh -c '\
 /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "READ_ENDPOINT=$HOSTNAME:8080:8182" up-registry.ft.com/coco/api-policy-component:$DOCKER_APP_VERSION'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

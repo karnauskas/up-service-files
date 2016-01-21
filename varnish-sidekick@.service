@@ -14,8 +14,7 @@ ExecStart=/bin/sh -c "\
     sleep 45; \
   done"
 ExecStop=/bin/sh -c "\
-  etcdctl rm /ft/services/varnish/servers/%i; \
-  etcdctl rm /vulcand/frontends/varnish-public/frontend"
+  etcdctl rm /ft/services/varnish/servers/%i"
 
 [X-Fleet]
 MachineOf=varnish@%i.service

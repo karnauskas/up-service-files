@@ -3,6 +3,11 @@ services:
   count: 1
 - name: aggregate-healthcheck@.service
   count: 1
+- name: api-policy-component@.service
+  version: v17
+  count: 2
+- name: api-policy-component-sidekick@.service
+  count: 2
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
@@ -95,7 +100,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: 0.12.1
+  version: 0.15.0
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

@@ -12,7 +12,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/public-services-lists/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/lists/.*`) && Host(`public-services`)\"}'; \
   PORT=$(/usr/bin/docker port document-store-api-%i 8080 | cut -d':' -f2); \
   while true; do \
-    etcdctl set /ft/services/document-store-api/servers/%i "http://$HOSTNAME:$PORT" --ttl 5; \
+    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq .checks[].ok | grep -q false || etcdctl set /ft/services/document-store-api/servers/%i "http://%H:$PORT" --ttl 5; \
     sleep 4; \
   done"
 

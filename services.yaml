@@ -55,7 +55,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v40
+  version: v41
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -95,7 +95,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v20
+  version: v22
   count: 2
 - name: publish-availability-monitor-sidekick@.service
   count: 1

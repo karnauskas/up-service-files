@@ -4,7 +4,7 @@ services:
 - name: aggregate-healthcheck@.service
   count: 1
 - name: api-policy-component@.service
-  version: v17
+  version: v19
   count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
@@ -37,7 +37,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v29
+  version: v34
   count: 2
 - name: elb-dns-registrator.service
 - name: elb-presence.service

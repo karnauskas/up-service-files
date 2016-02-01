@@ -34,7 +34,7 @@ services:
   version: v33
   count: 2
 - name: content-public-read@.service
-  count: 2pp
+  count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2

@@ -33,9 +33,9 @@ services:
 - name: content-ingester@.service
   version: v33
   count: 2
-- name: content-public-read-sidekick@.service
+- name: content-public-read-preview-sidekick@.service
   count: 2
-- name: content-public-read@.service
+- name: content-public-read-preview@.service
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service

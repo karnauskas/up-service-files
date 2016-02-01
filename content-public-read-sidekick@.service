@@ -1,0 +1,23 @@
+[Unit]
+Description=content-public-read sidekick
+BindsTo=content-public-read@%i.service
+After=content-public-read@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/content-public-read/healthcheck     true; \
+  etcdctl mkdir /ft/services/content-public-read/servers; \
+  etcdctl set /ft/healthcheck/content-public-read-%i /__health; \
+  etcdctl set /vulcand/frontends/public-services-preview/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-content-public-read\", \"Route\": \"PathRegexp(`/content-preview/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)\"}'; \
+  while true; do \
+      PORT=$(/usr/bin/docker port content-public-read-%i 8080 | cut -d':' -f2); \
+      etcdctl set /ft/services/content-public-read/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+      sleep 120; \
+    done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/content-public-read/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=content-public-read@%i.service

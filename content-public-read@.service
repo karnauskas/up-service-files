@@ -2,7 +2,7 @@
 Description=content public read
 After=docker.service
 Requires=docker.service
-# Wants=content-public-read-sidekick@%i.service
+Wants=content-public-read-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

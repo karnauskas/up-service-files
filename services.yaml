@@ -33,6 +33,8 @@ services:
 - name: content-ingester@.service
   version: v33
   count: 2
+- name: content-public-read-sidekick@.service
+  count: 2
 - name: content-public-read@.service
   count: 2
 - name: diamond.service

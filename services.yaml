@@ -36,7 +36,6 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v10
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service

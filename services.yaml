@@ -4,7 +4,7 @@ services:
 - name: aggregate-healthcheck@.service
   count: 1
 - name: api-policy-component@.service
-  version: v17
+  version: v20
   count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
@@ -31,7 +31,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v33
+  version: v34
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -50,7 +50,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v32
+  version: v34
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -90,17 +90,17 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v33
+  version: v34
   count: 2
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v22
+  version: v30
   count: 2
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: 0.15.0
+  version: 0.16.0
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -126,7 +126,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v45
+  version: v46
   count: 2
 - name: zookeeper.service
 - name: neo4j@.service

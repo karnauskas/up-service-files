@@ -10,8 +10,8 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/varnish-%i /__health; \
   while true; do \
     export PORT=$(/usr/bin/docker port varnish-%i 80 | cut -d':' -f2); \
-    etcdctl set /ft/services/varnish/servers/%i http://$HOSTNAME:$PORT --ttl 5; \
-    sleep 4; \
+    etcdctl set /ft/services/varnish/servers/%i http://$HOSTNAME:$PORT --ttl 600; \
+    sleep 45; \
   done"
 ExecStop=/bin/sh -c "\
   etcdctl rm /ft/services/varnish/servers/%i"

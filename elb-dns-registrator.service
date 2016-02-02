@@ -4,11 +4,12 @@ Description=Registers ELB CNAME in DYN via Konstructor
 [Service]
 Type=oneshot
 RemainAfterExit=yes
+Environment="DOCKER_APP_VERSION=latest"
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
 ExecStart=/bin/sh -c " \
-  docker run --rm --name %p --env=\"ETCD_PEERS=http://%H:2379\" coco/coco-elb-dns-registrator"
+  docker run --rm --name %p --env=\"ETCD_PEERS=http://%H:2379\" coco/coco-elb-dns-registrator:$DOCKER_APP_VERSION"
 
 [Install]
 WantedBy=multi-user.target

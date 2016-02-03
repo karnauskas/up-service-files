@@ -101,7 +101,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: 0.16.0
+  version: 0.16.1
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -121,6 +121,11 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
 - name: tunnel-registrator.service
+- name: varnish-sidekick@.service
+  count: 2
+- name: varnish@.service
+  version: v35
+  count: 2
 - name: vulcan-config-builder.service
   version: v5
 - name: vulcan.service

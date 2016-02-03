@@ -23,15 +23,10 @@ services:
 - name: cms-notifier@.service
   version: v29
   count: 2
-- name: cms-kafka-bridge-sidekick@.service
+- name: coco-kafka-bridge-sidekick@.service
   count: 2
-- name: cms-kafka-bridge@.service
-  version: v7
-  count: 2
-- name: cms-metadata-kafka-bridge-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge@.service
-  version: v7
+- name: coco-kafka-bridge@.service
+  version: v6
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2

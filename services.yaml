@@ -26,12 +26,12 @@ services:
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
-  version: v7
+  version: v8
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge@.service
-  version: v7
+  version: v8
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2

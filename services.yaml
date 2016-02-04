@@ -33,6 +33,11 @@ services:
 - name: cms-metadata-kafka-bridge@.service
   version: v9
   count: 2
+- name: concept-suggestions-kafka-bridge-sidekick@.service
+  count: 2
+- name: concept-suggestions-kafka-bridge@.service
+  version: v9
+  count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service

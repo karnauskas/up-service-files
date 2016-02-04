@@ -33,6 +33,11 @@ services:
 - name: cms-metadata-kafka-bridge@.service
   version: v9
   count: 2
+- name: concept-suggestions-kafka-bridge-sidekick@.service
+  count: 2
+- name: concept-suggestions-kafka-bridge@.service
+  version: v9
+  count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
@@ -126,6 +131,11 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
 - name: tunnel-registrator.service
+- name: varnish-sidekick@.service
+  count: 2
+- name: varnish@.service
+  version: v35
+  count: 2
 - name: vulcan-config-builder.service
   version: v5
 - name: vulcan.service

@@ -40,7 +40,7 @@ services:
   version: v34
   count: 2
 - name: elb-dns-registrator.service
-  version: v1.0.0
+  version: v2.0.0
 - name: elb-presence.service
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service

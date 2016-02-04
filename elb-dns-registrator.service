@@ -1,5 +1,5 @@
 [Unit]
-Description=Registers ELB CNAME in DYN via Konstructor
+Description=Registering ELB CNAME in DYN via Konstructor
 
 [Service]
 Type=oneshot
@@ -9,7 +9,8 @@ Environment="DOCKER_APP_VERSION=latest"
 # work correctly.
 KillMode=none
 ExecStart=/bin/sh -c " \
-  docker run --rm --name %p --env=\"ETCD_PEERS=http://%H:2379\" coco/coco-elb-dns-registrator:$DOCKER_APP_VERSION"
+  ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  docker run --rm --name %p --env=\"ETCD_PEERS=http://%H:2379\" --env=\"DOMAINS=$ENV-up,$ENV-up-read\" coco/coco-elb-dns-registrator:$DOCKER_APP_VERSION"
 
 [Install]
 WantedBy=multi-user.target

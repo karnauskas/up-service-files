@@ -42,10 +42,10 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v29
+  version: v34
   count: 2
 - name: elb-dns-registrator.service
-  version: v1.0.0
+  version: v2.0.0
 - name: elb-presence.service
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
@@ -106,7 +106,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: 0.16.1
+  version: v0.16.3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -116,12 +116,12 @@ services:
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-aws@.service
-  version: v33
+  version: fix-dup-containers
   count: 1
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v33
+  version: fix-dup-containers
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

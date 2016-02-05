@@ -1,5 +1,5 @@
 [Unit]
-Description=Synthetic Image Publication Monitor AWS - COCO - 03
+Description=Synthetic Image Publication Monitor AWS - COCO - 04
 After=docker.service
 Requires=docker.service
 Wants=synthetic-image-publication-monitor-coco-sidekick@%i.service

@@ -11,7 +11,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v77
+  version: v82
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -76,7 +76,7 @@ services:
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
 - name: methode-image-model-transformer@.service
-  version: v37
+  version: v42
   count: 2
 - name: methode-list-transformer-sidekick@.service
   count: 2

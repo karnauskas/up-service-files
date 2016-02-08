@@ -1,0 +1,26 @@
+[Unit]
+Description=Content Preview
+After=docker.service
+Requires=docker.service
+#Wants=content-preview-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker pull coco/content-preview:$DOCKER_APP_VERSION'
+
+
+ExecStart=/bin/sh -c "\
+    export MAPI_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/methode-api/authorization_key); \
+    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "MAPI_AUTH=$MAPI_AUTH" --env "MAPI_URI=https://methodeapi.glb.ft.com" --env "MAT_URI=$HOSTNAME:8080" coco/content-preview:$DOCKER_APP_VERSION;"
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=content-preview@*.service

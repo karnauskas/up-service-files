@@ -9,7 +9,6 @@ services:
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
   count: 2
-  sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
@@ -48,7 +47,6 @@ services:
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2
-  sequentialDeployment: true
 - name: document-store-api@.service
   version: v34
   count: 2
@@ -137,7 +135,6 @@ services:
 - name: tunnel-registrator.service
 - name: varnish-sidekick@.service
   count: 2
-  sequentialDeployment: true
 - name: varnish@.service
   version: v35
   count: 2

@@ -8,7 +8,6 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/content-preview/healthcheck true; \
   etcdctl mkdir /ft/services/content-preview/servers; \
   etcdctl set /ft/healthcheck/content-preview-%i /__health; \
-  etcdctl set /vulcand/frontends/public-services-preview/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-content-preview\", \"Route\": \"PathRegexp(`/content-preview/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)\"}'; \
   while true; do \
       export PORT=$(echo $(/usr/bin/docker port content-preview-%i 8080) | cut -d':' -f2); \
       etcdctl set /ft/services/content-preview/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \

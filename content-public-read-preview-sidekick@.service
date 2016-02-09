@@ -18,4 +18,3 @@ ExecStop=/usr/bin/etcdctl rm /ft/services/content-public-read-preview/servers/%i
 
 [X-Fleet]
 MachineOf=content-public-read-preview@%i.service
-Status API Training Shop Blog About Pricing

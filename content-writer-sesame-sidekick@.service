@@ -18,7 +18,8 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/content-writer-sesame/%i/host '%H' --ttl 60; \
     etcdctl set /services/content-writer-sesame/%i/app_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/content-writer-sesame/%i/admin_port $(echo $(/usr/bin/docker port content-writer-sesame-%i 8081) | cut -d':' -f2); \
-    etcdctl set /services/content-writer-sesame/%i/healthcheck /__health --ttl 60; \
+    etcdctl set /services/content-writer-sesame/%i/healthcheck/path /__health --ttl 60; \
+    etcdctl set /services/content-writer-sesame/%i/healthcheck/categories default --ttl 60; \
     etcdctl set /vulcand/backends/content-writer-sesame/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$CONTENT_WRITER_PORT\\\"}\"; \
     sleep 45; \
   done"

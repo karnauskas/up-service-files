@@ -7,7 +7,8 @@ After=enriched-content-read-api@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/enriched-content-read-api/healthcheck true; \
   etcdctl mkdir /ft/services/enriched-content-read-api/servers; \
-  etcdctl set /ft/healthcheck/enriched-content-read-api-%i /__health; \
+  etcdctl set /ft/healthcheck/enriched-content-read-api-%i/path /__health; \
+  etcdctl set /ft/healthcheck/enriched-content-read-api-%i/categories default; \
   etcdctl set /vulcand/frontends/public-services-enriched-content/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-enriched-content-read-api\", \"Route\": \"PathRegexp(`/enrichedContent/.*`) && Host(`public-services`)\"}'; \
   while true; do \
     export ENRICHED_CONTENT_READ_API_PORT=$(echo $(/usr/bin/docker port enriched-content-read-api-%i 8080) | cut -d':' -f2); \

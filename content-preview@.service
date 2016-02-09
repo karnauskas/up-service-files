@@ -2,7 +2,7 @@
 Description=Content Preview
 After=docker.service
 Requires=docker.service
-#Wants=content-preview-sidekick@%i.service
+Wants=content-preview-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

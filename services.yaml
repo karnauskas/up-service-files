@@ -35,6 +35,8 @@ services:
   count: 2
 - name: content-preview@.service
   count: 2
+- name: content-preview-sidekick@.service
+  count: 2
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service

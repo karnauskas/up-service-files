@@ -55,7 +55,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v34
+  version: v38
   count: 2
 - name: elb-dns-registrator.service
   version: v2.0.0
@@ -157,6 +157,6 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v46
+  version: v49
   count: 2
 - name: zookeeper.service

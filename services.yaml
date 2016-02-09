@@ -43,7 +43,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v34
+  version: v38
   count: 2
 - name: elb-dns-registrator.service
 - name: elb-presence.service

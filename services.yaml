@@ -6,8 +6,10 @@ services:
 - name: api-policy-component@.service
   version: v20
   count: 2
+  sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
   count: 2
+  sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
@@ -46,11 +48,13 @@ services:
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2
+  sequentialDeployment: true
 - name: document-store-api@.service
   version: v34
   count: 2
+  sequentialDeployment: true
 - name: elb-dns-registrator.service
-  version: v2.0.0
+  version: v2.0.1
 - name: elb-presence.service
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
@@ -133,9 +137,11 @@ services:
 - name: tunnel-registrator.service
 - name: varnish-sidekick@.service
   count: 2
+  sequentialDeployment: true
 - name: varnish@.service
   version: v35
   count: 2
+  sequentialDeployment: true
 - name: vulcan-config-builder.service
   version: v5
 - name: vulcan.service

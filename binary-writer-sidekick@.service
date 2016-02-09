@@ -14,7 +14,8 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/binary-writer-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"binary-writer-%i\\\", \\\"Route\\\":\\\"Path(\`/health/binary-writer-%i/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/binary-writer-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/binary-writer-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  etcdctl set /ft/healthcheck/binary-writer-%i /__health; \
+  etcdctl set /ft/healthcheck/binary-writer-%i/path /__health; \
+  etcdctl set /ft/healthcheck/binary-writer-%i/categories default; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \

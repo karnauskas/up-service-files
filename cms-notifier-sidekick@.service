@@ -7,7 +7,8 @@ After=cms-notifier@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/cms-notifier/healthcheck true; \
   etcdctl mkdir /ft/services/cms-notifier/servers; \
-  etcdctl set /ft/healthcheck/cms-notifier-%i /__health; \
+  etcdctl set /ft/healthcheck/cms-notifier-%i/path /__health; \
+  etcdctl set /ft/healthcheck/cms-notifier-%i/categories default; \
   etcdctl set /ft/services/cms-notifier/auth true; \
   while true; do \
     PORT=$(/usr/bin/docker port cms-notifier-%i 8080 | cut -d':' -f2); \

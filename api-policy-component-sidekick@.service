@@ -7,7 +7,8 @@ After=api-policy-component@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/api-policy-component/healthcheck true; \
   etcdctl mkdir /ft/services/api-policy-component/servers; \
-  etcdctl set /ft/healthcheck/api-policy-component-%i /__health; \
+  etcdctl set /ft/healthcheck/api-policy-component-%i/path /__health; \
+  etcdctl set /ft/healthcheck/api-policy-component-%i/categories default,read; \
   while true; do \
     PORT=$(/usr/bin/docker port api-policy-component-%i 8080 | cut -d':' -f2); \
     etcdctl set /ft/services/api-policy-component/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \

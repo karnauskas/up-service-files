@@ -17,7 +17,8 @@ Restart=on-failure
 RestartSec=60
 
 ExecStart=/bin/sh -c '\
-  /usr/bin/docker run --rm --name %p-%i -P --env "VULCAN_HOST=%H" up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'
+  BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
+  /usr/bin/docker run --rm --name %p-%i -P --env "VULCAN_HOST=%H" --env "S3_URL=http://$BUCKET.s3.amazonaws.com/" up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 

@@ -158,6 +158,6 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v49
+  version: v50
   count: 2
 - name: zookeeper.service

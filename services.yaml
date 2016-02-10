@@ -123,6 +123,11 @@ services:
 - name: subjects-rw-neo4j@.service
   version: v1.0.0
   count: 2
+- name: subjects-transformer-sidekick@.service
+  count: 2
+- name: subjects-transformer@.service
+  version: v1.0.0
+  count: 2
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-aws@.service

@@ -22,7 +22,7 @@ services:
   count: 2
 - name: cms-notifier@.service
   version: v29
-  count: 2
+  count: 1
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service

@@ -1,0 +1,24 @@
+[Unit]
+Description=Subjects rw neo4j Sidekick
+BindsTo=subjects-rw-neo4j@%i.service
+After=subjects-rw-neo4j@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/subjects-rw-neo4j/healthcheck true; \
+  etcdctl mkdir /ft/services/subjects-rw-neo4j/servers; \
+  etcdctl set /ft/healthcheck/subjects-rw-neo4j-%i /__health; \
+  while true; do \
+    export PORT=$(/usr/bin/docker port subjects-rw-neo4j-%i 8080 | cut -d':' -f2); \
+    etcdctl set /ft/services/subjects-rw-neo4j/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/subjects-rw-neo4j/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=subjects-rw-neo4j@%i.service
+
+

@@ -10,7 +10,8 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/frontends/kafka-bridge/frontend '{\"Type\": \"http\", \"BackendId\": \"kafka-bridge\", \"Route\": \"PathRegexp(`/.*`) && Host(`bridge`)\"}'; \
   etcdctl set /vulcand/frontends/kafka-bridge-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"kafka-bridge-%i\", \"Route\":\"Path(`/health/kafka-bridge-%i/__health`)\"}'; \
   etcdctl set /vulcand/frontends/kafka-bridge-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/kafka-bridge-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  etcdctl set /ft/healthcheck/kafka-bridge-%i /__health; "
+  etcdctl set /ft/healthcheck/kafka-bridge-%i/path __health; \
+  etcdctl set /ft/healthcheck/kafka-bridge-%i/categories default; "
 
 ExecStart=/bin/sh -c "\
   while true; do \

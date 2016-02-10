@@ -20,7 +20,9 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/ingester-semantic/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/ingester-semantic/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 60; \
     sleep 45; \
-  done"
+  done \
+  etcdctl set /ft/healthcheck/semantic-ingester-%i/path /__health; \
+  etcdctl set /ft/healthcheck/semantic-ingester-%i/categories default;"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/ingester-semantic/%i
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/ingester-semantic/servers/srv%i
 

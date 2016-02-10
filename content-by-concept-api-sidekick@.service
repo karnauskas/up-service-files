@@ -14,7 +14,8 @@ ExecStart=/bin/sh -c "\
   \
   while true; do \
     export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port content-by-concept-api-%i 8080) | cut -d':' -f2); \
-    etcdctl set /services/content-by-concept-api/%i/healthcheck /__health --ttl 60; \
+    etcdctl set /services/content-by-concept-api/%i/healthcheck/path /__health --ttl 60; \
+    etcdctl set /services/content-by-concept-api/%i/healthcheck/categories default --ttl 60; \
     etcdctl set /vulcand/backends/content-by-concept-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \
     sleep 45; \
   done"

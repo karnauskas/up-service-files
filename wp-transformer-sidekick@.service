@@ -16,7 +16,8 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/wp-transformer/%i/host '%H' --ttl 60; \
     etcdctl set /services/wp-transformer/%i/app_port $(echo $(/usr/bin/docker port wp-transformer-%i 8080) | cut -d':' -f2) --ttl 60; \
     etcdctl set /services/wp-transformer/%i/admin_port $(echo $(/usr/bin/docker port wp-transformer-%i 8081) | cut -d':' -f2) --ttl 60; \
-    etcdctl set /services/wp-transformer/%i/healthcheck /__health --ttl 60; \
+    etcdctl set /services/wp-transformer/%i/healthcheck/path /__health --ttl 60; \
+    etcdctl set /services/wp-transformer/%i/healthcheck/categories default --ttl 60; \
     etcdctl set /vulcand/backends/wp-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$WP_TRANSFORMER_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

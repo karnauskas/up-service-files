@@ -19,7 +19,7 @@ services:
   version: v43
   count: 2
 - name: cms-notifier-sidekick@.service
-  count: 2
+  count: 1
 - name: cms-notifier@.service
   version: v29
   count: 1

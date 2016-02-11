@@ -82,6 +82,10 @@ services:
 - name: nativerw@.service
   version: v35
   count: 2
+- name: neo4j-sidekick@.service
+  count: 1
+- name: neo4j@.service
+  count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
@@ -115,6 +119,11 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
 - name: tunnel-registrator.service
+- name: v1-suggestor-sidekick@.service
+  count: 2
+- name: v1-suggestor@.service
+  version: v0.0.1
+  count: 2
 - name: vulcan-config-builder.service
   version: v5
 - name: vulcan.service
@@ -124,7 +133,3 @@ services:
   version: v38
   count: 2
 - name: zookeeper.service
-- name: neo4j@.service
-  count: 1
-- name: neo4j-sidekick@.service
-  count: 1

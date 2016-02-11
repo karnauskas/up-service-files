@@ -1,0 +1,22 @@
+[Unit]
+Description=V1 Metadata Suggestor sidekick
+BindsTo=v1-suggestor@%i.service
+After=v1-suggestor@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/v1-suggestor/healthcheck     true; \
+  etcdctl mkdir /ft/services/v1-suggestor/servers; \
+  etcdctl set /ft/healthcheck/v1-suggestor-%i /__health; \
+  PORT=$(/usr/bin/docker port v1-suggestor-%i 8080 | cut -d':' -f2); \
+  while true; do \
+    etcdctl set /ft/services/v1-suggestor/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/v1-suggestor/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=v1-suggestor@%i.service
+

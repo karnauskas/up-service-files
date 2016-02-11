@@ -6,8 +6,8 @@ After=subjects-transformer@%i.service
 [Service]
 ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/subjects-transformer/servers; \
+  export PORT=$(/usr/bin/docker port subjects-transformer-%i 8080 | cut -d':' -f2); \
   while true; do \
-    export PORT=$(/usr/bin/docker port subjects-transformer-%i 8080 | cut -d':' -f2); \
     etcdctl set /ft/services/subjects-transformer/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
     sleep 120; \
   done"

@@ -131,6 +131,10 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
 - name: tunnel-registrator.service
+- name: v2-annotations-rw-sidekick@.service
+  count: 2
+- name: v2-annotations-rw@.service
+  count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service

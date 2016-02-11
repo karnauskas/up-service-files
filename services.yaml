@@ -151,11 +151,14 @@ services:
   count: 2
 - name: v1-suggestor@.service
   version: v0.0.1
+- name: v2-annotations-rw-sidekick@.service
+  count: 2
+- name: v2-annotations-rw@.service
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v2
+  version: v3
   count: 2
 - name: varnish-sidekick@.service
   count: 2

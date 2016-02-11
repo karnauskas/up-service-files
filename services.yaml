@@ -63,7 +63,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v34
+  version: v37
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -147,6 +147,7 @@ services:
 - name: vulcan-config-builder.service
   version: v5
 - name: vulcan.service
+  version: v1.0.1
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service

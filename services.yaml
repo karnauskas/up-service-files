@@ -151,6 +151,7 @@ services:
   count: 2
 - name: v1-suggestor@.service
   version: v0.0.1
+  count: 2  
 - name: v2-annotations-rw-sidekick@.service
   count: 2
 - name: v2-annotations-rw@.service

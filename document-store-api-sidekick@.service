@@ -8,7 +8,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/document-store-api/healthcheck     true; \
   etcdctl mkdir /ft/services/document-store-api/servers; \
   etcdctl set /ft/healthcheck/document-store-api-%i/path /__health; \
-  etcdctl set /ft/healthcheck/document-store-api-%i/categries default,read; \
+  etcdctl set /ft/healthcheck/document-store-api-%i/categories default,read; \
   etcdctl set /vulcand/frontends/public-services-content/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/content/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)\"}'; \
   etcdctl set /vulcand/frontends/public-services-lists/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/lists/.*`) && Host(`public-services`)\"}'; \
   etcdctl set /vulcand/frontends/varnish-public-content-endpoint/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-varnish\", \"Route\":\"PathRegexp(`/content/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && MethodRegexp(`GET|HEAD`) && HeaderRegexp(`X-VarnishPassThrough`, `^$`)\"}'; \

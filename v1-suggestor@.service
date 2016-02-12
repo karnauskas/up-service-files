@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker pull coco/v1-suggestor:$DOCKER_APP_VE
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
 	docker run --rm --name %p-%i -p 8080 \
-	--env "SRC_ADDR=http://%H:8080,http://%H:8080" \
+	--env "SRC_ADDR=http://%H:8080" \
 	--env "SRC_GROUP=v1Suggestor" \
 	--env "SRC_TOPIC=NativeCmsMetadataPublicationEvents" \
 	--env "SRC_QUEUE=kafka" \

@@ -159,7 +159,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v3
+  version: v4
   count: 2
 - name: varnish-sidekick@.service
   count: 2

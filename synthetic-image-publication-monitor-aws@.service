@@ -12,7 +12,7 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
   	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
@@ -24,7 +24,7 @@ ExecStart=/bin/bash -c '\
 	--env "DYN_ROUTING=false" \
 	--env "POST_CREDENTIALS=$POST_CREDENTIALS" \
 	--env "TEST_UUID=$TEST_UUID" \
-	up-registry.ft.com/coco/synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
+	coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure

@@ -138,12 +138,12 @@ services:
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-aws@.service
-  version: fix-dup-containers
+  version: v36
   count: 1
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: fix-dup-containers
+  version: v36
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

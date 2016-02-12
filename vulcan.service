@@ -4,17 +4,18 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull coco/ft-vulcan
+ExecStartPre=-/bin/bash -c '/usr/bin/docker history coco/ft-vulcan:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/ft-vulcan:$DOCKER_APP_VERSION'
 ExecStart=/bin/bash -c "\
   export ETCD_IP=$(/usr/bin/ifconfig docker0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   echo $ETCD_IP; \
-  /usr/bin/docker run --rm --name %p -p 8080:8080 -p 8182:8182 coco/ft-vulcan /vulcand -apiInterface=0.0.0.0 -etcd=http://$ETCD_IP:2379 -port=8080 -apiPort=8182"
+  /usr/bin/docker run --rm --name %p -p 8080:8080 -p 8182:8182 coco/ft-vulcan:$DOCKER_APP_VERSION /vulcand -apiInterface=0.0.0.0 -etcd=http://$ETCD_IP:2379 -port=8080 -apiPort=8182"
 ExecStop=/bin/bash -c 'usr/bin/docker kill %p > /dev/null 2>&1'
 Restart=on-failure
 RestartSec=60

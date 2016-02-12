@@ -156,6 +156,7 @@ services:
 - name: v2-annotations-rw-sidekick@.service
   count: 2
 - name: v2-annotations-rw@.service
+  version: v0.0.6  
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2

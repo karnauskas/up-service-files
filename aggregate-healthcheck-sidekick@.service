@@ -11,7 +11,9 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /ft/healthcheck-categories/default/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/default/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/read/period_seconds 4; \
-  etcdctl set /ft/healthcheck-categories/read/is_resilient true;"
+  etcdctl set /ft/healthcheck-categories/read/is_resilient true; \
+  etcdctl set /ft/healthcheck-categories/system/period_seconds 60; \
+  etcdctl set /ft/healthcheck-categories/system/is_resilient false;
 ExecStart=/bin/sh -c "\
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080) | cut -d':' -f2); \

@@ -9,10 +9,9 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker pull coco/v1-suggestor:$DOCKER_APP_VERSION'
-
+ExecStartPre=-/bin/bash -c 'docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/v1-suggestor:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/v1-suggestor:$DOCKER_APP_VERSION'
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
 	docker run --rm --name %p-%i -p 8080 \

@@ -1,0 +1,26 @@
+[Unit]
+Description=Subjects transformer
+After=vulcan.service
+Requires=docker.service
+Wants=subjects-transformer-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=v1.0.0"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/subjects-transformer:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/subjects-transformer:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export PORT=8080; \
+  export USER=$(/usr/bin/etcdctl get /ft/_credentials/metadata-services/username); \
+  export PASS=$(/usr/bin/etcdctl get /ft/_credentials/metadata-services/password); \
+  /usr/bin/docker run --rm --name %p-%i -p $PORT --env "BASE_URL=http://%H:8080/transformers/subjects/" --env "STRUCTURE_SERVICE_BASE_URL=https://metadata-services.ft.com" --env "STRUCTURE_SERVICE_USERNAME=$USER" --env "STRUCTURE_SERVICE_PASSWORD=$PASS" --env "PRINCIPAL_HEADER=app-preditor" coco/subjects-transformer:$DOCKER_APP_VERSION;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=subjects-transformer@*.service

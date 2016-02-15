@@ -8,8 +8,8 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/v2-content-annotator/healthcheck     true; \
   etcdctl mkdir /ft/services/v2-content-annotator/servers; \
   etcdctl set /ft/healthcheck/v2-content-annotator-%i /__health; \
+  V2_CONTENT_ANNOTATOR_PORT=$(/usr/bin/docker port v2-content-annotator-%i 8080 | cut -d':' -f2); \
   while true; do \
-    export V2_CONTENT_ANNOTATOR_PORT=$(/usr/bin/docker port v2-content-annotator-%i 8080 | cut -d':' -f2); \
     etcdctl set /ft/services/v2-content-annotator/servers/%i "http://$HOSTNAME:$V2_CONTENT_ANNOTATOR_PORT" --ttl 600; \
     sleep 120; \
   done"

@@ -98,18 +98,18 @@ services:
   count: 3
 - name: native-ingester-content@.service
   count: 2
-  version: v0.0.1
+  version: v0.0.2
 - name: native-ingester-content-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
   count: 2
-  version: v0.0.1
+  version: v0.0.2
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v35
+  version: v36
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

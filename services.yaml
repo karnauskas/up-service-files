@@ -96,11 +96,6 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
-- name: native-ingester-content@.service
-  count: 2
-  version: v0.0.2
-- name: native-ingester-content-sidekick@.service
-  count: 2
 - name: native-ingester-metadata@.service
   count: 2
   version: v0.0.2

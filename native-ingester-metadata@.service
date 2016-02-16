@@ -22,7 +22,7 @@ ExecStart=/bin/bash -c '\
 	--env "SRC_CONCURRENT_PROCESSING=true" \
 	--env "SRC_UUID_FIELD=uuid" \
 	--env "DEST_ADDRESS=http://%H:8080" \
-	--env "DEST_COLLECTION=methode-metadata" \
+	--env "DEST_COLLECTION=v1-metadata" \
 	--env "DEST_HEADER=nativerw" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
 	coco/native-ingester:$DOCKER_APP_VERSION'

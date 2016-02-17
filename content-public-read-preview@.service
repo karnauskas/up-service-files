@@ -15,17 +15,14 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION'
 
 # Setting the proper API_HOST parameter according to the current environment
-#ExecStartPre=/bin/bash -c '\\
-#ENV_TAG=$(etcdctl get /ft/config/environment_tag) \\
-#if [ $ENV_TAG -eq "dynpub-uk" ] then export ENV_API_HOST=dynpub-coco-up-read.ft.com \\
-#elif [ $ENV_TAG -eq "pre-prod" ] then export ENV_API_HOST=test.api.ft.com	\\
-#else export ENV_API_HOST=api.ft.com \\
-#fi \\
-#'
-
 ExecStart=/bin/sh -c "\
-/usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "VULCAN_HOST=$HOSTNAME:8080:8081" --env "CONTENT_PATH=content-preview/" --env "HOST_HEADER=content-preview" --env "API_HOST=$ENV_API_HOST" up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;"
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+if [ $(etcdctl get /ft/config/environment_tag) = "dynpub-uk" ] ; \
+    then ENV_API_HOST=dynpub-coco-up-read.ft.com ; \
+elif [ $(etcdctl get /ft/config/environment_tag) = "pre-prod" ] ; \
+    then ENV_API_HOST=test.api.ft.com ; \
+else ENV_API_HOST=api.ft.com ; \
+fi ; \
+/usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "VULCAN_HOST=$HOSTNAME:8080:8081" --env "CONTENT_PATH=content-preview/" --env "HOST_HEADER=content-preview" --env "API_HOST=$ENV_API_HOST" up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;"ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60
 

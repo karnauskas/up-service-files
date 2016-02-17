@@ -96,10 +96,15 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+- name: native-ingester-metadata@.service
+  count: 2
+  version: v0.0.2
+- name: native-ingester-metadata-sidekick@.service
+  count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v35
+  version: v37
   count: 2
 - name: neo4j-sidekick@.service
   count: 1

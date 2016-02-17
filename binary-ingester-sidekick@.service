@@ -15,8 +15,8 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/frontends/binary-ingester-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"binary-ingester-%i\\\", \\\"Route\\\":\\\"Path(\`/health/binary-ingester-%i/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/binary-ingester-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/binary-ingester-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   etcdctl set /ft/healthcheck/binary-ingester-%i/path /__health; \
-  etcdctl set /ft/healthcheck/binary-ingester-%i/categories default; \
-  \"
+  etcdctl set /ft/healthcheck/binary-ingester-%i/categories default "
+
 ExecStart=/bin/sh -c "\
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port binary-ingester-%i 8080) | cut -d':' -f2); \

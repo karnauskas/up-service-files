@@ -7,7 +7,8 @@ After=concept-suggestions-kafka-bridge@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/concept-suggestions-kafka-bridge/healthcheck     true; \
   etcdctl mkdir /ft/services/concept-suggestions-kafka-bridge/servers; \
-  etcdctl set /ft/healthcheck/concept-suggestions-kafka-bridge-%i /__health; \
+  etcdctl set /ft/healthcheck/concept-suggestions-kafka-bridge-%i/path /__health; \
+  etcdctl set /ft/healthcheck/concept-suggestions-kafka-bridge-%i/categories default; \
   while true; do \
     export CONCEPT_KAFKA_BRIDGE_PORT=$(/usr/bin/docker port concept-suggestions-kafka-bridge-%i 8080 | cut -d':' -f2); \
     etcdctl set /ft/services/concept-suggestions-kafka-bridge/servers/%i "http://$HOSTNAME:$CONCEPT_KAFKA_BRIDGE_PORT" --ttl 600; \

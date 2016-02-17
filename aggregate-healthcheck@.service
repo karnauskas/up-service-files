@@ -5,7 +5,7 @@ Requires=docker.service
 Wants=aggregate-healthcheck-sidekick@%i.service
 
 [Service]
-Environment="DOCKER_APP_VERSION=categories"
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.

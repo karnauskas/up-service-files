@@ -24,7 +24,7 @@ elif [ $ENV_TAG = "pre-prod" ] ; \
 then \
     ENV_API_HOST=test.api.ft.com ; \
 else \
-    ENV_API_HOST=$ENV_TAG-coco-up-read.ft.com ; \
+    ENV_API_HOST=$ENV_TAG-up-read.ft.com ; \
 fi ; \
 /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \

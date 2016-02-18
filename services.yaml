@@ -96,10 +96,15 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+- name: native-ingester-metadata@.service
+  count: 2
+  version: v0.0.2
+- name: native-ingester-metadata-sidekick@.service
+  count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v35
+  version: v37
   count: 2
 - name: neo4j-sidekick@.service
   count: 1
@@ -156,16 +161,17 @@ services:
 - name: v2-annotations-rw-sidekick@.service
   count: 2
 - name: v2-annotations-rw@.service
+  version: v0.0.11
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v4
+  version: v10
   count: 2
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v35
+  version: v37
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

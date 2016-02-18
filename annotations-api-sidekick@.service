@@ -15,7 +15,7 @@ ExecStart=/bin/sh -c "\
   while true; do \
     export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port annotations-api-%i 8080) | cut -d':' -f2); \
     etcdctl set /services/api-policy-component/%i/healthcheck/path /__health --ttl 60; \
-    etcdctl set /services/api-policy-component/%i/healthcheck/categories/ default,read --ttl 60; \
+    etcdctl set /services/api-policy-component/%i/healthcheck/categories default,read --ttl 60; \
     etcdctl set /vulcand/backends/annotations-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \
     sleep 45; \
   done"

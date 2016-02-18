@@ -1,5 +1,5 @@
 [Unit]
-Description=Synthetic Image Publication Monitor AWS
+Description=Synthetic Image Publication Monitor AWS - 03
 After=docker.service
 Requires=docker.service
 Wants=synthetic-image-publication-monitor-aws-sidekick@%i.service

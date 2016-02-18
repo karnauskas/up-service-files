@@ -7,7 +7,8 @@ After=v1-suggestor@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/v1-suggestor/healthcheck     true; \
   etcdctl mkdir /ft/services/v1-suggestor/servers; \
-  etcdctl set /ft/healthcheck/v1-suggestor-%i /__health; \
+  etcdctl set /ft/healthcheck/v1-suggestor-%i/path /__health; \
+  etcdctl set /ft/healthcheck/v1-suggestor-%i/categories default; \
   PORT=$(/usr/bin/docker port v1-suggestor-%i 8080 | cut -d':' -f2); \
   while true; do \
     etcdctl set /ft/services/v1-suggestor/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \

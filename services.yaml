@@ -96,11 +96,20 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+- name: native-ingester-metadata@.service
+  count: 2
+  version: v0.0.2
+- name: native-ingester-metadata-sidekick@.service
+  count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v35
+  version: v37
   count: 2
+- name: neo4j-sidekick@.service
+  count: 1
+- name: neo4j@.service
+  count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
@@ -144,6 +153,21 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
 - name: tunnel-registrator.service
+- name: v1-suggestor-sidekick@.service
+  count: 2
+- name: v1-suggestor@.service
+  version: v0.0.2
+  count: 2  
+- name: v2-annotations-rw-sidekick@.service
+  count: 2
+- name: v2-annotations-rw@.service
+  version: v0.0.6  
+  count: 2
+- name: v2-content-annotator-sidekick@.service
+  count: 2
+- name: v2-content-annotator@.service
+  version: v8
+  count: 2
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
@@ -153,13 +177,10 @@ services:
 - name: vulcan-config-builder.service
   version: v5
 - name: vulcan.service
+  version: v1.0.1
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
   version: v46
   count: 2
 - name: zookeeper.service
-- name: neo4j@.service
-  count: 1
-- name: neo4j-sidekick@.service
-  count: 1

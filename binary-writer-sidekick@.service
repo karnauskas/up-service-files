@@ -5,7 +5,6 @@ After=binary-writer@%i.service
 
 [Service]
 ExecStartPre=/bin/sh -c "\
-  export HOST_IP=$HOSTNAME; \
   etcdctl set /vulcand/backends/binary-writer/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/binary-writer-%i/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/binary-writer-admin/backend '{\"Type\": \"http\"}'; \
@@ -19,8 +18,9 @@ ExecStartPre=/bin/sh -c "\
   \"
 ExecStart=/bin/sh -c "\
   while true; do \
-    export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
-    export ADMIN_PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2); \
+    HOST_IP=$HOSTNAME; \
+    PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
+    ADMIN_PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2); \
     etcdctl set /services/binary-writer/%i/host '%H' --ttl 600; \
     etcdctl set /services/binary-writer/%i/app_port $PORT --ttl 600; \
     etcdctl set /services/binary-writer/%i/admin_port $ADMIN_PORT --ttl 600; \

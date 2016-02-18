@@ -8,6 +8,7 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/backends/aggregate-healthcheck/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/aggregate-healthcheck/frontend '{\"Type\": \"http\", \"BackendId\": \"aggregate-healthcheck\", \"Route\": \"Host(`aggregate-healthcheck`)\"}'; \
   etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend '{\"Type\":\"http\", \"BackendId\":\"aggregate-healthcheck\", \"Route\":\"Path(`/__health`)\"}'; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public-gtg/frontend '{\"Type\":\"http\", \"BackendId\":\"aggregate-healthcheck\", \"Route\":\"Path(`/__gtg`)\"}'; \
   etcdctl set /ft/healthcheck-categories/default/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/default/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/read/period_seconds 4; \

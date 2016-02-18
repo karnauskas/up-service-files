@@ -17,8 +17,8 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /ft/healthcheck/binary-ingester-%i/categories default; \
   \"
 ExecStart=/bin/sh -c "\
+  HOST_IP=$HOSTNAME; \
   while true; do \
-    HOST_IP=$HOSTNAME; \
     PORT=$(echo $(/usr/bin/docker port binary-ingester-%i 8080) | cut -d':' -f2); \
     ADMIN_PORT=$(echo $(/usr/bin/docker port binary-ingester-%i 8081) | cut -d':' -f2); \
     etcdctl set /services/binary-ingester/%i/host '%H' --ttl 600; \

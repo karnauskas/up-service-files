@@ -8,9 +8,9 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/api-policy-component/healthcheck true; \
   etcdctl mkdir /ft/services/api-policy-component/servers; \
   etcdctl set /ft/healthcheck/api-policy-component-%i /__health; \
-  PORT=$(/usr/bin/docker port api-policy-component-%i 8080 | cut -d':' -f2); \
   while true; do \
-    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq .checks[].ok | grep -q false || etcdctl set /ft/services/api-policy-component/servers/%i "http://%H:$PORT" --ttl 5; \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port api-policy-component-%i 8080 | cut -d':' -f2)`; \
+    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq -e '[.checks[].ok] | all' && etcdctl set /ft/services/api-policy-component/servers/%i http://%H:$PORT --ttl 5; \
     sleep 4; \
   done"
 

@@ -10,9 +10,9 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/document-store-api-%i /__health; \
   etcdctl set /vulcand/frontends/public-services-content/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/content/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)\"}'; \
   etcdctl set /vulcand/frontends/public-services-lists/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/lists/.*`) && Host(`public-services`)\"}'; \
-  PORT=$(/usr/bin/docker port document-store-api-%i 8080 | cut -d':' -f2); \
   while true; do \
-    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq .checks[].ok | grep -q false || etcdctl set /ft/services/document-store-api/servers/%i "http://%H:$PORT" --ttl 5; \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port document-store-api-%i 8080 | cut -d':' -f2)`; \
+    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq -e '[.checks[].ok] | all' && etcdctl set /ft/services/document-store-api/servers/%i http://%H:$PORT --ttl 5; \
     sleep 4; \
   done"
 

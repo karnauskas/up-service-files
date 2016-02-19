@@ -3,7 +3,7 @@ services:
   count: 1
 - name: aggregate-healthcheck@.service
   count: 1
-  version: v1.0.3
+  version: v1.0.4
 - name: api-policy-component@.service
   version: v20
   count: 2

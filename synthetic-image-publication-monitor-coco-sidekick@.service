@@ -11,7 +11,6 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-coco-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"synthetic-image-publication-monitor-coco-%i\", \"Route\":\"PathRegexp(`/health/synthetic-image-publication-monitor-coco-%i/.*`)\"}'; \
   etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-coco-health-%i/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/synthetic-image-publication-monitor-coco-%i(.*)\", \"Replacement\":\"$1\"}}'; \
   etcdctl set /ft/healthcheck/synthetic-image-publication-monitor-coco-%i/path /__health; \
-  etcdctl set /ft/healthcheck/synthetic-image-publication-monitor-coco-%i/categories default; \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port synthetic-image-publication-monitor-coco-%i 8080) | cut -d':' -f2); \
     etcdctl set /vulcand/backends/synthetic-image-publication-monitor-coco/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \

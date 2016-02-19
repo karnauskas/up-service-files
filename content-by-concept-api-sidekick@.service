@@ -11,11 +11,9 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/content-by-concept-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"content-by-concept-api\\\", \\\"Route\\\":\\\"Path(\`/health/content-by-concept-api/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/content-by-concept-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/content-by-concept-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  \
+  etcdctl set /services/content-by-concept-api/%i/healthcheck/path /__health; \
   while true; do \
     export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port content-by-concept-api-%i 8080) | cut -d':' -f2); \
-    etcdctl set /services/content-by-concept-api/%i/healthcheck/path /__health --ttl 60; \
-    etcdctl set /services/content-by-concept-api/%i/healthcheck/categories default --ttl 60; \
     etcdctl set /vulcand/backends/content-by-concept-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \
     sleep 45; \
   done"

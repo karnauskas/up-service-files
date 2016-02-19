@@ -16,7 +16,6 @@ ExecStartPre=/bin/sh -c "\
 
 ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/methode-content-importer-%i/path /__health; \
-  etcdctl set /ft/healthcheck/methode-content-importer-%i/categories default; \
   while true; do \
     export METHODE_CONTENT_IMPORTER_PORT=$(/usr/bin/docker port methode-content-importer-%i 8080 | cut -d':' -f2); \
     export ADMIN_METHODE_CONTENT_IMPORTER_PORT=$(/usr/bin/docker port methode-content-importer-%i 8081 | cut -d':' -f2); \

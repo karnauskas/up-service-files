@@ -17,7 +17,6 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker pull coco/aggregate-healthcheck:$DOCK
 ExecStart=/bin/bash -c 'ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   docker run --rm --name %p-%i -p 8080 \
 	--env="ETCD_PEERS=http://$HOSTNAME:2379" \
-	--env="KEY_PREFIX=/ft/healthcheck" \
 	--env="VULCAND_ADDRESS=$HOSTNAME:8080" \
 	--env="GRAPHITE_HOST=graphite.ft.com" \
 	--env="GRAPHITE_PORT=2003" \

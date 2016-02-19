@@ -8,7 +8,6 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/v2-annotations-rw/healthcheck     true; \
   etcdctl mkdir /ft/services/v2-annotations-rw/servers; \
   etcdctl set /ft/healthcheck/v2-annotations-rw-%i/path /__health; \
-  etcdctl set /ft/healthcheck/v2-annotations-rw-%i/categories default; \
   while true; do \
     export V2_ANNOTATIONS_RW_PORT=$(/usr/bin/docker port v2-annotations-rw-%i 8080 | cut -d':' -f2); \
     etcdctl set /ft/services/v2-annotations-rw/servers/%i "http://$HOSTNAME:$V2_ANNOTATIONS_RW_PORT" --ttl 600; \

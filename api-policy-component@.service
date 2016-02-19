@@ -16,6 +16,7 @@ ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/api-policy-compon
 
 # Through the port 8182 vulcan's api status endpoint can be accessed.
 ExecStart=/bin/sh -c '\
+ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
 /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "READ_ENDPOINT=$HOSTNAME:8080:8182" --env "GRAPHITE_HOST=graphite.ft.com" --env "GRAPHITE_PORT=2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.api-policy-component.%i" up-registry.ft.com/coco/api-policy-component:$DOCKER_APP_VERSION'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure

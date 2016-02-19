@@ -8,7 +8,6 @@ ExecStart=/bin/sh -c "\
   etcdctl set ft/services/content-ingester/healthcheck true; \
   etcdctl mkdir /ft/services/content-ingester/servers; \
   etcdctl set /ft/healthcheck/content-ingester-%i/path /__health; \
-  etcdctl set /ft/healthcheck/content-ingester-%i/categories default; \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port content-ingester-%i 8080) | cut -d':' -f2); \
     etcdctl set /ft/services/content-ingester/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \

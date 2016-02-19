@@ -3,15 +3,17 @@ services:
   count: 1
 - name: aggregate-healthcheck@.service
   count: 1
+  version: v1.0.2
 - name: api-policy-component@.service
-  version: v17
+  version: v20
   count: 2
+  sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v77
+  version: v82
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -19,27 +21,39 @@ services:
   version: v43
   count: 2
 - name: cms-notifier-sidekick@.service
-  count: 2
+  count: 1
 - name: cms-notifier@.service
   version: v29
+  count: 1
+- name: cms-kafka-bridge-sidekick@.service
   count: 2
-- name: coco-kafka-bridge-sidekick@.service
+- name: cms-kafka-bridge@.service
+  version: v9
   count: 2
-- name: coco-kafka-bridge@.service
-  version: v6
+- name: cms-metadata-kafka-bridge-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge@.service
+  version: v9
+  count: 2
+- name: concept-suggestions-kafka-bridge-sidekick@.service
+  count: 2
+- name: concept-suggestions-kafka-bridge@.service
+  version: v9
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v33
+  version: v34
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v29
+  version: v34
   count: 2
+  sequentialDeployment: true
 - name: elb-dns-registrator.service
+  version: v2.0.1
 - name: elb-presence.service
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
@@ -50,12 +64,12 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v32
+  version: v37
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v40
+  version: v41
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -65,7 +79,7 @@ services:
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
 - name: methode-image-model-transformer@.service
-  version: v37
+  version: v42
   count: 2
 - name: methode-list-transformer-sidekick@.service
   count: 2
@@ -82,54 +96,101 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+- name: native-ingester-metadata@.service
+  count: 2
+  version: v0.0.2
+- name: native-ingester-metadata-sidekick@.service
+  count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v35
+  version: v37
   count: 2
+- name: neo4j-sidekick@.service
+  count: 1
+- name: neo4j@.service
+  count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v33
+  version: v34
   count: 2
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v20
+  version: v30
   count: 2
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: 0.15.0
+  version: v0.16.3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
   count: 1
 - name: splunk-forwarder.service
+- name: subjects-rw-neo4j-sidekick@.service
+  count: 2
+- name: subjects-rw-neo4j@.service
+  version: v1.0.0
+  count: 2
+- name: subjects-transformer-sidekick@.service
+  count: 2
+- name: subjects-transformer@.service
+  version: v1.0.0
+  count: 2
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-aws@.service
-  version: v33
+  version: v36
   count: 1
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v33
+  version: v36
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
+- name: topics-rw-neo4j-sidekick@.service
+  count: 2
+- name: topics-rw-neo4j@.service
+  version: v1.0.0
+  count: 2
+- name: topics-transformer-sidekick@.service
+  count: 2
+- name: topics-transformer@.service
+  version: v1.0.0
+  count: 2
 - name: tunnel-registrator.service
+- name: v1-suggestor-sidekick@.service
+  count: 2
+- name: v1-suggestor@.service
+  version: v0.0.2
+  count: 2
+- name: v2-annotations-rw-sidekick@.service
+  count: 2
+- name: v2-annotations-rw@.service
+  version: v0.0.11
+  count: 2
+- name: v2-content-annotator-sidekick@.service
+  count: 2
+- name: v2-content-annotator@.service
+  version: v10
+  count: 2
+- name: varnish-sidekick@.service
+  count: 2
+- name: varnish@.service
+  version: v37
+  count: 2
+  sequentialDeployment: true
 - name: vulcan-config-builder.service
   version: v5
 - name: vulcan.service
+  version: v1.0.1
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v45
+  version: v46
   count: 2
 - name: zookeeper.service
-- name: neo4j@.service
-  count: 1
-- name: neo4j-sidekick@.service
-  count: 1

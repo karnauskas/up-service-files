@@ -5,7 +5,7 @@ Requires=docker.service
 Wants=topics-transformer-sidekick@%i.service
 
 [Service]
-Environment="DOCKER_APP_VERSION=v1.0.0"
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none

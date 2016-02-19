@@ -8,7 +8,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/varnish/healthcheck true; \
   etcdctl mkdir /ft/services/varnish/servers; \
   etcdctl set /ft/healthcheck/varnish-%i/path /__health; \
-  etcdctl set /ft/healthcheck/varnish-%i/categories default,read; \
+  etcdctl set /ft/healthcheck/varnish-%i/categories read; \
   etcdctl set /vulcand/frontends/varnish-public-endpoint/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-varnish\", \"Route\":\"PathRegexp(`/.*`) && MethodRegexp(`GET|HEAD`) && HostRegexp(`.*-up-read\\\\.ft\\\\.com`)\"}'; \
   while true; do \
     export PORT=$(/usr/bin/docker port varnish-%i 80 | cut -d':' -f2); \

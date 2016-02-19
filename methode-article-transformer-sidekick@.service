@@ -8,7 +8,6 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/methode-article-transformer/healthcheck     true; \
     etcdctl mkdir /ft/services/methode-article-transformer/servers; \
     etcdctl set /ft/healthcheck/methode-article-transformer-%i/path /__health; \
-    etcdctl set /ft/healthcheck/methode-article-transformer-%i/categories default; \
   while true; do \
       PORT=$(/usr/bin/docker port methode-article-transformer-%i 8080 | cut -d':' -f2); \
       etcdctl set /ft/services/methode-article-transformer/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \

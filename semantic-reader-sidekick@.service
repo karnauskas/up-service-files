@@ -18,7 +18,6 @@ ExecStart=/bin/sh -c "\
     etcdctl set /services/semantic-reader/%i/app_port $(echo $(/usr/bin/docker port semantic-reader-%i 8080) | cut -d':' -f2) --ttl 60; \
     etcdctl set /services/semantic-reader/%i/admin_port $(echo $(/usr/bin/docker port semantic-reader-%i 8081) | cut -d':' -f2) --ttl 60; \
     etcdctl set /services/semantic-reader/%i/healthcheck/path /__health --ttl 60; \
-    etcdctl set /services/semantic-reader/%i/healthcheck/categories default --ttl 60; \
     etcdctl set /vulcand/backends/semantic-reader/servers/srv%i \"{\\\"url\\\": \\\"http://$HOST_IP:$SEMANTIC_READER_PORT\\\"}\" --ttl 60; \
     sleep 45; \
   done"

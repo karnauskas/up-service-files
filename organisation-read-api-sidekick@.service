@@ -12,11 +12,10 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/organisation-read-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"organisation-read-api\\\", \\\"Route\\\":\\\"Path(\`/health/organisation-read-api/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/organisation-read-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/organisation-read-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  \
+  etcdctl set /services/organisation-read-api/%i/healthcheck/path /__health; \
+  etcdctl set /services/organisation-read-api/%i/healthcheck/categories default,read; \
   while true; do \
     export ORGANISATION_READ_API_PORT=$(echo $(/usr/bin/docker port organisation-read-api-%i 8080) | cut -d':' -f2); \
-    etcdctl set /services/organisation-read-api/%i/healthcheck/path /__health --ttl 60; \
-    etcdctl set /services/organisation-read-api/%i/healthcheck/categories default,read --ttl 60; \
     etcdctl set /vulcand/backends/organisation-read-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ORGANISATION_READ_API_PORT\\\"}\"; \
     sleep 45; \
   done"

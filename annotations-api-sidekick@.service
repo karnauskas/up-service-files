@@ -11,11 +11,10 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/annotations-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"annotations-api\\\", \\\"Route\\\":\\\"Path(\`/health/annotations-api/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/annotations-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/annotations-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  \
+  etcdctl set /services/api-policy-component/%i/healthcheck/path /__health; \
+  etcdctl set /services/api-policy-component/%i/healthcheck/categories default,read; \
   while true; do \
     export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port annotations-api-%i 8080) | cut -d':' -f2); \
-    etcdctl set /services/api-policy-component/%i/healthcheck/path /__health --ttl 60; \
-    etcdctl set /services/api-policy-component/%i/healthcheck/categories default,read --ttl 60; \
     etcdctl set /vulcand/backends/annotations-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \
     sleep 45; \
   done"

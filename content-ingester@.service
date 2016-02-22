@@ -5,13 +5,14 @@ Requires=docker.service
 Wants=content-ingester-sidekick@%i.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/ingester
+ExecStartPre=/usr/bin/docker pull up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ADMIN_PORT=8080; \
@@ -35,7 +36,7 @@ ExecStart=/bin/sh -c '\
       --env "WRITER_NAME=DocumentStore" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
-      up-registry.ft.com/coco/ingester'
+      up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

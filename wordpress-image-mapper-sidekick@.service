@@ -1,0 +1,19 @@
+[Unit]
+Description=wordpress image mapper sidekick
+BindsTo=wordpress-image-mapper@%i.service
+After=wordpress-image-mapper@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/wordpress-image-mapper/healthcheck     true; \
+    etcdctl mkdir /ft/services/wordpress-image-mapper/servers; \
+    etcdctl set /ft/healthcheck/wordpress-image-mapper-%i /__health; \
+  while true; do \
+      export PORT=$(/usr/bin/docker port wordpress-image-mapper-%i 8080 | cut -d':' -f2); \
+      etcdctl set /ft/services/wordpress-image-mapper/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+      sleep 120; \
+    done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/wordpress-image-mapper/servers/%i
+
+[X-Fleet]
+MachineOf=wordpress-image-mapper@%i.service

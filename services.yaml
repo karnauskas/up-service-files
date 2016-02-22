@@ -160,4 +160,9 @@ services:
 - name: wordpress-article-transformer@.service
   version: v51
   count: 2
+- name: wordpress-image-mapper-sidekick@.service
+  count: 2
+- name: wordpress-image-mapper@.service
+  version: v11
+  count: 2
 - name: zookeeper.service

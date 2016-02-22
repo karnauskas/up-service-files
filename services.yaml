@@ -163,6 +163,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v11
+  version: v12
   count: 2
 - name: zookeeper.service

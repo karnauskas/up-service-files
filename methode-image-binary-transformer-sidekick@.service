@@ -17,8 +17,8 @@ ExecStartPre=/bin/sh -c "\
 ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/methode-image-binary-transformer-%i/path /__health; \
   while true; do \
-    export METHODE_IMAGE_BINARY_TRANSFORMER_PORT=$(/usr/bin/docker port methode-image-binary-transformer-%i 8080 | cut -d':' -f2); \
-    export ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT=$(/usr/bin/docker port methode-image-binary-transformer-%i 8081 | cut -d':' -f2); \
+    METHODE_IMAGE_BINARY_TRANSFORMER_PORT=`[ $METHODE_IMAGE_BINARY_TRANSFORMER_PORT ] && echo $METHODE_IMAGE_BINARY_TRANSFORMER_PORT || echo $(/usr/bin/docker port methode-image-binary-transformer-%i 8080 | cut -d':' -f2)`; \
+    ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT=`[ $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT ] && echo $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT || echo $(/usr/bin/docker port methode-image-binary-transformer-%i 8081 | cut -d':' -f2)`; \
     etcdctl set /services/methode-image-binary-transformer/%i/host '%H' --ttl 600; \
     etcdctl set /services/methode-image-binary-transformer/%i/app_port $METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 600; \
     etcdctl set /services/methode-image-binary-transformer/%i/admin_port $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 600; \

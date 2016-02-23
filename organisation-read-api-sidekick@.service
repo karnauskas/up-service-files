@@ -15,7 +15,10 @@ ExecStart=/bin/sh -c "\
   etcdctl set /services/organisation-read-api/%i/healthcheck true; \
   while true; do \
     ORGANISATION_READ_API_PORT=`[ $ORGANISATION_READ_API_PORT ] && echo $ORGANISATION_READ_API_PORT || echo $(/usr/bin/docker port organisation-read-api-%i 8080 | cut -d':' -f2)`; \
+<<<<<<< HEAD
     etcdctl set /services/organisation-read-api/%i/healthcheck /__health --ttl 60; \
+=======
+>>>>>>> port-setting-fix
     etcdctl set /vulcand/backends/organisation-read-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ORGANISATION_READ_API_PORT\\\"}\"; \
     sleep 45; \
   done"

@@ -15,7 +15,7 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /ft/healthcheck-categories/system/is_resilient false"
 ExecStart=/bin/sh -c "\
   while true; do \
-    export PORT=$(echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080) | cut -d':' -f2); \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /vulcand/backends/aggregate-healthcheck/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
     sleep 120; \
   done"

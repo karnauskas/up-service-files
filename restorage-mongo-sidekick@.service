@@ -10,7 +10,7 @@ ExecStartPre=/bin/sh -c "\
 
 ExecStart=/bin/sh -c "\
    while true; do \
-    export PORT=$(echo $(/usr/bin/docker port restorage-mongo-%i 8080) | cut -d':' -f2); \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port restorage-mongo-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /ft/services/restorage-mongo/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
     sleep 120; \
   done"

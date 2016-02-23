@@ -9,7 +9,7 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/nativerw/servers; \
   etcdctl set /ft/healthcheck/nativerw-%i/path /__health; \
   while true; do \
-    PORT=$(/usr/bin/docker port nativerw-%i 8080 | cut -d':' -f2); \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port nativerw-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /ft/services/nativerw/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
     sleep 120; \
   done"

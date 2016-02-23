@@ -15,7 +15,7 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/frontends/methode-image-model-transformer-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-image-model-transformer-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\";"
 
 ExecStart=/bin/sh -c "\
-  etcdctl set /ft/healthcheck/methode-image-model-transformer-%i /__health; \
+  etcdctl set /ft/healthcheck/methode-image-model-transformer-%i/path /__health; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port methode-image-model-transformer-%i 8080 | cut -d':' -f2)`; \
     ADMIN_PORT=`[ $ADMIN_PORT ] && echo $ADMIN_PORT || echo $(/usr/bin/docker port methode-image-model-transformer-%i 8081 | cut -d':' -f2)`; \

@@ -15,7 +15,7 @@ ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/frontends/methode-content-importer-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-content-importer-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\";"
 
 ExecStart=/bin/sh -c "\
-  etcdctl set /ft/healthcheck/methode-content-importer-%i /__health; \
+  etcdctl set /ft/healthcheck/methode-content-importer-%i/path /__health; \
   while true; do \
     METHODE_CONTENT_IMPORTER_PORT=`[ $METHODE_CONTENT_IMPORTER_PORT ] && echo $METHODE_CONTENT_IMPORTER_PORT|| echo $(/usr/bin/docker port  methode-content-importer-%i 8080 | cut -d':' -f2)`; \
     ADMIN_METHODE_CONTENT_IMPORTER_PORT=`[ $ADMIN_METHODE_CONTENT_IMPORTER_PORT ] && echo $ADMIN_METHODE_CONTENT_IMPORTER_PORT || echo $(/usr/bin/docker port methode-content-importer-%i 8081 | cut -d':' -f2)`; \

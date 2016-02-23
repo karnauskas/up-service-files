@@ -7,7 +7,7 @@ After=native-ingester-metadata@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/native-ingester-metadata/healthcheck     true; \
   etcdctl mkdir /ft/services/native-ingester-metadata/servers; \
-  etcdctl set /ft/healthcheck/native-ingester-metadata-%i /__health; \
+  etcdctl set /ft/healthcheck/native-ingester-metadata-%i/path /__health; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port native-ingester-metadata-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /ft/services/native-ingester-metadata/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \

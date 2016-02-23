@@ -12,10 +12,9 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/people-read-api-health/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"people-read-api\\\", \\\"Route\\\":\\\"Path(\`/health/people-read-api/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/people-read-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/people-read-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  \
+  etcdctl set /services/people-read-api/%i/healthcheck true; \
   while true; do \
     export PEOPLE_READ_API_PORT=$(echo $(/usr/bin/docker port people-read-api-%i 8080) | cut -d':' -f2); \
-    etcdctl set /services/people-read-api/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/people-read-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PEOPLE_READ_API_PORT\\\"}\"; \
     sleep 45; \
   done"

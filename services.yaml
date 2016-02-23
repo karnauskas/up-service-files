@@ -3,9 +3,9 @@ services:
   count: 1
 - name: aggregate-healthcheck@.service
   count: 1
-  version: v1.0.2
+  version: v1.0.6
 - name: api-policy-component@.service
-  version: v20
+  version: v22
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service

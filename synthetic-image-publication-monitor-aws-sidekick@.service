@@ -12,7 +12,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-aws-health-%i/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/synthetic-image-publication-monitor-aws-%i(.*)\", \"Replacement\":\"$1\"}}'; \
   etcdctl set /ft/healthcheck/synthetic-image-publication-monitor-aws-%i/path /__health; \
   while true; do \
-    export PORT=$(echo $(/usr/bin/docker port synthetic-image-publication-monitor-aws-%i 8080) | cut -d':' -f2); \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port synthetic-image-publication-monitor-aws-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /vulcand/backends/synthetic-image-publication-monitor-aws/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
     etcdctl set /vulcand/backends/synthetic-image-publication-monitor-aws-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
     sleep 120; \

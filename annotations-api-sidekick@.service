@@ -13,7 +13,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/annotations-api-health/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/annotations-api(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   \
   while true; do \
-    export ANNOTATIONS_API_PORT=$(echo $(/usr/bin/docker port annotations-api-%i 8080) | cut -d':' -f2); \
+    ANNOTATIONS_API_PORT=`[ $ANNOTATIONS_API_PORT ] && echo $ANNOTATIONS_API_PORT || echo $(/usr/bin/docker port annotations-api-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /services/api-policy-component/%i/healthcheck /__health --ttl 60; \
     etcdctl set /vulcand/backends/annotations-api/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ANNOTATIONS_API_PORT\\\"}\"; \
     sleep 45; \

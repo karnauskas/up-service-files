@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/binary-writer-%i /__health; \
   \
   while true; do \
-    export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port binary-writer-%i 8080 | cut -d':' -f2)`; \
     export ADMIN_PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2); \
     etcdctl set /services/binary-writer/%i/host '%H' --ttl 600; \
     etcdctl set /services/binary-writer/%i/app_port $PORT --ttl 600; \

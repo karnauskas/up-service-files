@@ -9,7 +9,8 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/backends/system-healthcheck-%H/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/system-healthcheck-%H/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"system-healthcheck-%H\\\", \\\"Route\\\":\\\"Path(\`/health/system-healthcheck-%H/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/system-healthcheck-%H/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/system-healthcheck-%H(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  etcdctl set /ft/healthcheck/system-healthcheck-%H /__health; \
+  etcdctl set /ft/healthcheck/system-healthcheck-%H/path /__health; \
+  etcdctl set /ft/healthcheck/system-healthcheck-%H/categories system; \
   \
   while true; do \
     export PORT=$(echo $(/usr/bin/docker port system-healthcheck 8080) | cut -d':' -f2); \

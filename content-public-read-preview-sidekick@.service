@@ -1,0 +1,24 @@
+[Unit]
+Description=Content Public Read sidekick
+BindsTo=content-public-read-preview@%i.service
+After=content-public-read-preview@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set /ft/services/content-public-read-preview/healthcheck true; \
+  etcdctl mkdir /ft/services/content-public-read-preview/servers; \
+  etcdctl set /ft/healthcheck/content-public-read-preview-%i /__health; \
+  etcdctl set /vulcand/frontends/public-services-preview/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-content-public-read-preview\", \"Route\": \"PathRegexp(`/content-preview/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)\"}'; \
+  export USERNAME=$(echo $(etcdctl get /ft/_credentials/vulcand/username)); \
+  export PASSWORD=$(echo $(etcdctl get /ft/_credentials/vulcand/password)); \
+  etcdctl set /vulcand/frontends/public-services-preview/middlewares/auth1 '{\"Type\": \"sauth\", \"Middleware\":{\"Username\": \"'$USERNAME'\", \"Password\": \"'$PASSWORD'\"}}'; \
+  etcdctl set /ft/services/content-public-read-preview/auth true; \
+  while true; do \
+      export PORT=$(echo $(/usr/bin/docker port content-public-read-preview-%i 8080) | cut -d':' -f2); \
+      etcdctl set /ft/services/content-public-read-preview/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+      sleep 120; \
+    done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/content-public-read-preview/servers/%i
+
+[X-Fleet]
+MachineOf=content-public-read-preview@%i.service

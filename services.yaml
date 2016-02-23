@@ -166,7 +166,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.2
+  version: v0.0.3
   count: 2
 - name: v2-annotations-rw-sidekick@.service
   count: 2

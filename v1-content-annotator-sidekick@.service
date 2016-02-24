@@ -1,0 +1,19 @@
+[Unit]
+Description=V1 Content Annotator Service Sidekick
+BindsTo=v1-content-annotator@%i.service
+After=v1-content-annotator@%i.service
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/v1-content-annotator/healthcheck     true; \
+  etcdctl mkdir /ft/services/v1-content-annotator/servers; \
+  etcdctl set /ft/healthcheck/v1-content-annotator-%i /__health; \
+  while true; do \
+    export V1_CONTENT_ANNOTATOR_PORT=$(/usr/bin/docker port v1-content-annotator-%i 8080 | cut -d':' -f2); \
+    etcdctl set /ft/services/v1-content-annotator/servers/%i "http://$HOSTNAME:$V1_CONTENT_ANNOTATOR_PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/v1-content-annotator/servers/%i
+Restart=on-failure
+RestartSec=60
+[X-Fleet]
+MachineOf=v1-content-annotator@%i.service

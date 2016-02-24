@@ -13,17 +13,17 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v82
+  version: v84
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: v43
+  version: v47
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v29
+  version: v32
   count: 1
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
@@ -49,7 +49,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v34
+  version: v41
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -64,7 +64,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v37
+  version: v39
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -74,17 +74,17 @@ services:
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service
-  version: v21
+  version: v23
   count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
 - name: methode-image-model-transformer@.service
-  version: v42
+  version: v43
   count: 2
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v9
+  version: v12
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service

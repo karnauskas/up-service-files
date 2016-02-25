@@ -44,6 +44,7 @@ services:
   version: v36
   count: 2
 - name: content-preview@.service
+  version: metrics
   count: 2
 - name: content-preview-sidekick@.service
   count: 2

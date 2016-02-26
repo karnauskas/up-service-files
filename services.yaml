@@ -50,6 +50,11 @@ services:
 - name: content-preview@.service
   version: v0.0.1
   count: 2
+- name: content-public-read-preview-sidekick@.service
+  count: 2
+- name: content-public-read-preview@.service
+  version: v31
+  count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2

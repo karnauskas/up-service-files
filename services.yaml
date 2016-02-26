@@ -171,7 +171,7 @@ services:
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v11
+  version: v12
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2

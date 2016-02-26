@@ -7,9 +7,9 @@ After=cms-metadata-kafka-bridge@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/cms-metadata-kafka-bridge/healthcheck     true; \
   etcdctl mkdir /ft/services/cms-metadata-kafka-bridge/servers; \
-  etcdctl set /ft/healthcheck/cms-metadata-kafka-bridge-%i /__health; \
+  etcdctl set /ft/healthcheck/cms-metadata-kafka-bridge-%i/path /__health; \
   while true; do \
-    export CMS_METADATA_KAFKA_BRIDGE_PORT=$(/usr/bin/docker port cms-metadata-kafka-bridge-%i 8080 | cut -d':' -f2); \
+    CMS_METADATA_KAFKA_BRIDGE_PORT=`[ $CMS_METADATA_KAFKA_BRIDGE_PORT ] && echo $CMS_METADATA_KAFKA_BRIDGE_PORT || echo $(/usr/bin/docker port cms-metadata-kafka-bridge-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /ft/services/cms-metadata-kafka-bridge/servers/%i "http://$HOSTNAME:$CMS_METADATA_KAFKA_BRIDGE_PORT" --ttl 600; \
     sleep 120; \
   done"

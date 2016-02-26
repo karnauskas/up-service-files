@@ -9,7 +9,7 @@ ExecStartPre=/bin/sh -c "\
 
 ExecStart=/bin/sh -c "\
   while true; do \
-    export KAFKA_PROXY_PORT=$(/usr/bin/docker port kafka-rest-proxy 8082 | cut -d':' -f2); \
+    KAFKA_PROXY_PORT=`[ $KAFKA_PROXY_PORT ] && echo $KAFKA_PROXY_PORT || echo $(/usr/bin/docker port kafka-rest-proxy 8082 | cut -d':' -f2)`; \
     etcdctl set /ft/config/kafka-rest-proxy/1/host '%H' --ttl 600; \
     etcdctl set /ft/config/kafka-rest-proxy/1/app_port $KAFKA_PROXY_PORT --ttl 600; \
     etcdctl set /vulcand/backends/kafka-rest-proxy/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$KAFKA_PROXY_PORT\\\"}\" --ttl 600; \

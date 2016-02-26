@@ -7,10 +7,10 @@ After=notifications-rw@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set ft/services/notifications-rw/healthcheck true; \
   etcdctl mkdir /ft/services/notifications-rw/servers; \
-  etcdctl set /ft/healthcheck/notifications-rw-%i /__health; \
+  etcdctl set /ft/healthcheck/notifications-rw-%i/path /__health; \
   etcdctl set /vulcand/frontends/public-services-notifications/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-notifications-rw\", \"Route\": \"PathRegexp(`/content/notifications.*`) && Host(`public-services`)\"}'; \
   while true; do \
-    export PORT=$(echo $(/usr/bin/docker port notifications-rw-%i 8080) | cut -d':' -f2); \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port notifications-rw-%i 8080 | cut -d':' -f2)`; \
     etcdctl set /ft/services/notifications-rw/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
     sleep 120; \
   done"

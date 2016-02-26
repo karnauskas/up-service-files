@@ -4,8 +4,7 @@ BindsTo=binary-writer@%i.service
 After=binary-writer@%i.service
 
 [Service]
-ExecStart=/bin/sh -c "\
-  export HOST_IP=$HOSTNAME; \
+ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/backends/binary-writer/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/binary-writer-%i/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/backends/binary-writer-admin/backend '{\"Type\": \"http\"}'; \
@@ -14,11 +13,12 @@ ExecStart=/bin/sh -c "\
   \
   etcdctl set /vulcand/frontends/binary-writer-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"binary-writer-%i\\\", \\\"Route\\\":\\\"Path(\`/health/binary-writer-%i/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/binary-writer-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/binary-writer-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
-  etcdctl set /ft/healthcheck/binary-writer-%i /__health; \
-  \
+  etcdctl set /ft/healthcheck/binary-writer-%i/path /__health; "
+ExecStart=/bin/sh -c "\
+  HOST_IP=$HOSTNAME; \
   while true; do \
-    export PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8080) | cut -d':' -f2); \
-    export ADMIN_PORT=$(echo $(/usr/bin/docker port binary-writer-%i 8081) | cut -d':' -f2); \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port binary-writer-%i 8080 | cut -d':' -f2)`; \
+    ADMIN_PORT=`[ $ADMIN_PORT ] && echo $ADMIN_PORT || echo $(/usr/bin/docker port binary-writer-%i 8081 | cut -d':' -f2)`; \
     etcdctl set /services/binary-writer/%i/host '%H' --ttl 600; \
     etcdctl set /services/binary-writer/%i/app_port $PORT --ttl 600; \
     etcdctl set /services/binary-writer/%i/admin_port $ADMIN_PORT --ttl 600; \

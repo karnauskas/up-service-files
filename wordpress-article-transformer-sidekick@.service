@@ -7,9 +7,9 @@ After=wordpress-article-transformer@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/wordpress-article-transformer/healthcheck     true; \
     etcdctl mkdir /ft/services/wordpress-article-transformer/servers; \
-    etcdctl set /ft/healthcheck/wordpress-article-transformer-%i /__health; \
+    etcdctl set /ft/healthcheck/wordpress-article-transformer-%i/path /__health; \
   while true; do \
-      export PORT=$(/usr/bin/docker port wordpress-article-transformer-%i 8080 | cut -d':' -f2); \
+      PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port wordpress-article-transformer-%i 8080 | cut -d':' -f2)`; \
       etcdctl set /ft/services/wordpress-article-transformer/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
       sleep 120; \
     done"

@@ -1,0 +1,22 @@
+[Unit]
+Description=Topics Transformer Sidekick
+BindsTo=topics-transformer@%i.service
+After=topics-transformer@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl mkdir /ft/services/topics-transformer/servers; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port topics-transformer-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/topics-transformer/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/topics-transformer/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=topics-transformer@%i.service
+
+

@@ -9,14 +9,7 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/varnish/servers; \
   etcdctl set /ft/healthcheck/varnish-%i/path /__health; \
   etcdctl set /ft/healthcheck/varnish-%i/categories read; \
-  UP_USERNAME=`/usr/bin/etcdctl get /ft/_credentials/public-access/up/username`; \
-  UP_PASSWORD=`/usr/bin/etcdctl get /ft/_credentials/public-access/up/password`; \
-  etcdctl set /vulcand/frontends/varnish-public-up-endpoint/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-varnish\", \"Route\":\"PathRegexp(`/.*`) && MethodRegexp(`GET|HEAD`) && HostRegexp(`.*-up-read\\\\.ft\\\\.com`)\"}'; \
-  etcdctl set /vulcand/frontends/varnish-public-up-endpoint/middlewares/auth \"{\\\"Type\\\": \\\"sauth\\\", \\\"Middleware\\\":{\\\"Username\\\": \\\"$UP_USERNAME\\\",\\\"Password\\\": \\\"$UP_PASSWORD\\\"}}\"; \
-  NEXT_USERNAME=`/usr/bin/etcdctl get /ft/_credentials/public-access/next/username`; \
-  NEXT_PASSWORD=`/usr/bin/etcdctl get /ft/_credentials/public-access/next/password`; \
-  etcdctl set /vulcand/frontends/varnish-public-next-endpoint/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-varnish\", \"Route\":\"PathRegexp(`/.*`) && MethodRegexp(`GET|HEAD`) && HostRegexp(`.*-up-read\\\\.ft\\\\.com`)\"}'; \
-  etcdctl set /vulcand/frontends/varnish-public-next-endpoint/middlewares/auth \"{\\\"Type\\\": \\\"sauth\\\", \\\"Middleware\\\":{\\\"Username\\\": \\\"$NEXT_USERNAME\\\", \\\"Password\\\": \\\"$NEXT_PASSWORD\\\"}}\"; \
+  etcdctl set /vulcand/frontends/varnish-public-endpoint/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-varnish\", \"Route\":\"PathRegexp(`/.*`) && MethodRegexp(`GET|HEAD`) && HostRegexp(`.*-up-read\\\\.ft\\\\.com`)\"}'; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port varnish-%i 80 | cut -d':' -f2)`; \
     etcdctl set /ft/services/varnish/servers/%i http://%H:$PORT --ttl 5; \

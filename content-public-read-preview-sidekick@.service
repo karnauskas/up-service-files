@@ -7,7 +7,8 @@ After=content-public-read-preview@%i.service
 ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/content-public-read-preview/healthcheck true; \
   etcdctl mkdir /ft/services/content-public-read-preview/servers; \
-  etcdctl set /ft/healthcheck/content-public-read-preview-%i /__health; \
+  etcdctl set /ft/healthcheck/content-public-read-preview-%i/path /__health; \
+  etcdctl set /ft/healthcheck/content-public-read-preview-%i/categories read; \
   etcdctl set /vulcand/frontends/public-services-preview/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-content-public-read-preview\", \"Route\": \"PathRegexp(`/content-preview/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)\"}'; \
   export USERNAME=$(echo $(etcdctl get /ft/_credentials/vulcand/username)); \
   export PASSWORD=$(echo $(etcdctl get /ft/_credentials/vulcand/password)); \

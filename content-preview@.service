@@ -17,7 +17,20 @@ ExecStartPre=/bin/bash -c 'docker pull coco/content-preview:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c "\
     export MAPI_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/methode-api/authorization_key); \
-    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 --env "APP_PORT=8080" --env "SOURCE_APP_AURTH=$MAPI_AUTH" --env "SOURCE_APP_URI=https://methodeapi.glb.ft.com/eom-file/" --env "TRANSFORM_APP_URI=http://$HOSTNAME:8080/content-transform/" --env "TRANSFORM_APP_HOST_HEADER=methode-article-transformer" --env "SOURCE_APP_HEALTH_URI=https://methodeapi.glb.ft.com/build-info" --env "TRANSFORM_APP_HEALTH_URI=http://$HOSTNAME:8080/__health" coco/content-preview:$DOCKER_APP_VERSION;"
+    export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+    --env "APP_PORT=8080" \
+    --env "SOURCE_APP_AUTH=$MAPI_AUTH" \
+    --env "SOURCE_APP_URI=https://methodeapi.glb.ft.com/eom-file/" \
+    --env "TRANSFORM_APP_URI=http://$HOSTNAME:8080/content-transform/" \
+    --env "TRANSFORM_APP_HOST_HEADER=methode-article-transformer" \
+    --env "SOURCE_APP_HEALTH_URI=https://methodeapi.glb.ft.com/build-info" \
+    --env "TRANSFORM_APP_HEALTH_URI=http://$HOSTNAME:8080/__health" \
+    --env "SOURCE_APP_NAME=MAPI" \
+    --env "TRANSFORM_APP_NAME=MAT" \
+    --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
+    --env "GRAPHITE_PREFIX=coco.services.$ENV.content-preview.%i" \
+    coco/content-preview:$DOCKER_APP_VERSION;"
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

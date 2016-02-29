@@ -45,14 +45,13 @@ services:
 - name: content-ingester@.service
   version: v36
   count: 2
-- name: content-public-read-preview-sidekick@.service
-  count: 2
-- name: content-public-read-preview@.service
-  count: 2
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: test-metrics
+  count: 2
+- name: content-public-read-preview-sidekick@.service
+  count: 2
+- name: content-public-read-preview@.service
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -189,17 +188,17 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.2
+  version: v0.0.4
   count: 2
 - name: v2-annotations-rw-sidekick@.service
   count: 2
 - name: v2-annotations-rw@.service
-  version: v0.0.11
+  version: v0.0.12
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v10
+  version: v11
   count: 2
 - name: varnish-sidekick@.service
   count: 2

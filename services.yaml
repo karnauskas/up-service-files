@@ -191,12 +191,12 @@ services:
 - name: v2-annotations-rw-sidekick@.service
   count: 2
 - name: v2-annotations-rw@.service
-  version: v0.0.11
+  version: v0.0.12
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v10
+  version: v11
   count: 2
 - name: varnish-sidekick@.service
   count: 2

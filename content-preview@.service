@@ -18,7 +18,7 @@ ExecStartPre=/bin/bash -c 'docker pull coco/content-preview:$DOCKER_APP_VERSION'
 ExecStart=/bin/sh -c "\
     export MAPI_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/methode-api/authorization_key); \
     export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081
     --env "APP_PORT=8080" \
     --env "SOURCE_APP_AUTH=$MAPI_AUTH" \
     --env "SOURCE_APP_URI=https://methodeapi.glb.ft.com/eom-file/" \

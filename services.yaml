@@ -52,7 +52,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: metrics-metrics
+  version: test-metrics
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service

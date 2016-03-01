@@ -48,6 +48,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
+  version: v0.0.1
   count: 2
 - name: content-public-read-preview-sidekick@.service
   count: 2
@@ -57,7 +58,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v41
+  version: v42
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

@@ -1,0 +1,22 @@
+[Unit]
+Description=Public Annotations API Service Sidekick
+BindsTo=public-annotations-api@%i.service
+After=public-annotations-api@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/public-annotations-api/healthcheck     true; \
+  etcdctl mkdir /ft/services/public-annotations-api/servers; \
+  etcdctl set /ft/healthcheck/public-annotations-api-%i/path /__health; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port public-annotations-api-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/public-annotations-api/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/public-annotations-api/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=public-annotations-api@%i.service

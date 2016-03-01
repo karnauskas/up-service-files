@@ -45,10 +45,10 @@ services:
 - name: content-ingester@.service
   version: v34
   count: 2
+- name: content-preview-sidekick@.service
+  count: 2
 - name: content-preview@.service
   version: v0.0.1
-  count: 2
-- name: content-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview-sidekick@.service
   count: 2
@@ -94,7 +94,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v12
+  version: v13
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service

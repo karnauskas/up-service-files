@@ -142,7 +142,7 @@ services:
 - name: sections-rw-neo4j-sidekick@.service
   count: 2
 - name: sections-rw-neo4j@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 2
 - name: sections-transformer-sidekick@.service
   count: 2
@@ -153,7 +153,7 @@ services:
 - name: subjects-rw-neo4j-sidekick@.service
   count: 2
 - name: subjects-rw-neo4j@.service
-  version: v1.0.0
+  version: v1.0.3
   count: 2
 - name: subjects-transformer-sidekick@.service
   count: 2

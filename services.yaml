@@ -181,7 +181,7 @@ services:
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v12
+  version: v17
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -196,7 +196,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v12
+  version: v17
   count: 2
 - name: varnish-sidekick@.service
   count: 2
@@ -214,3 +214,4 @@ services:
   version: v46
   count: 2
 - name: zookeeper.service
+ 

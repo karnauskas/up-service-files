@@ -14,6 +14,7 @@ services:
   count: 2
 - name: binary-ingester@.service
   version: v87
+  sequentialDeployment: true
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2

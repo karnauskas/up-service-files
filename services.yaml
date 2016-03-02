@@ -5,7 +5,7 @@ services:
   count: 1
   version: v1.0.6
 - name: api-policy-component@.service
-  version: v23
+  version: v24
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service

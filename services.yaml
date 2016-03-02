@@ -66,6 +66,12 @@ services:
 - name: elb-dns-registrator.service
   version: v2.0.1
 - name: elb-presence.service
+- name: enriched-content-read-api-sidekick@.service
+  count: 2
+- name: enriched-content-read-api@.service
+  version: v33
+  count: 2
+  sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
 - name: image-cleaner.service

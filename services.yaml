@@ -198,7 +198,7 @@ services:
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v17
+  version: v18
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -213,7 +213,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v17
+  version: v18
   count: 2
 - name: varnish-sidekick@.service
   count: 2

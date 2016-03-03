@@ -134,7 +134,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.3
+  version: v0.0.4
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service

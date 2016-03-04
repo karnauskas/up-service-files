@@ -9,6 +9,7 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/enriched-content-read-api/servers; \
   etcdctl set /ft/healthcheck/enriched-content-read-api-%i/path /__health; \
   etcdctl set /ft/healthcheck/enriched-content-read-api-%i/categories read; \
+  etcdctl set /vulcand/frontends/public-services-enrichedcontent/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-enriched-content-read-api\", \"Route\": \"PathRegexp(`/enrichedcontent/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$`) && Host(`public-services`)\"}'; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port enriched-content-read-api-%i 8080 | cut -d':' -f2)`; \
     curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq -e '[.checks[].ok] | all' 2>&1>/dev/null && etcdctl set /ft/services/enriched-content-read-api/servers/%i http://%H:$PORT --ttl 5; \

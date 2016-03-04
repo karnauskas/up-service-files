@@ -1,7 +1,8 @@
 [Unit]
 Description=Publish Availability Monitor
-After=docker.service
+After=vulcan.service
 Requires=docker.service
+Wants=publish-availability-monitor-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

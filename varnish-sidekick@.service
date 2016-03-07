@@ -11,7 +11,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/varnish-%i/categories read; \
   ACCESS_CREDENTIALS=`/usr/bin/etcdctl get /ft/_credentials/public-access`; \
   etcdctl set /vulcand/frontends/varnish-public-endpoint/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-varnish\", \"Route\":\"PathRegexp(`/.*`) && MethodRegexp(`GET|HEAD`) && HostRegexp(`.*-up-read\\\\.ft\\\\.com`)\"}'; \
-  etcdctl set /vulcand/frontends/varnish-public-endpoint/middlewares/auth \"{\\\"Type\\\": \\\"sauth\\\", \\\"Middleware\\\":{\\\"Credentials\\\": \\\"$ACCESS_CREDENTIALS\\\"}}\"; \
+  etcdctl set /vulcand/frontends/varnish-public-endpoint/middlewares/auth '{\"Type\": \"sauth\", \"Middleware\": {\"Credentials\": \"'$ACCESS_CREDENTIALS'\"}}'; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port varnish-%i 80 | cut -d':' -f2)`; \
     etcdctl set /ft/services/varnish/servers/%i http://%H:$PORT --ttl 5; \

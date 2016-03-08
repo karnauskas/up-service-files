@@ -49,7 +49,6 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: v0.0.2
   count: 2
 - name: content-public-read-preview-sidekick@.service
   count: 2

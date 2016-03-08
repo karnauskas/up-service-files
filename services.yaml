@@ -56,6 +56,11 @@ services:
 - name: content-public-read-preview@.service
   version: v31
   count: 2
+- name: content-rw-neo4j-sidekick@.service
+  count: 2
+- name: content-rw-neo4j@.service
+  version: 0.0.22
+  count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2

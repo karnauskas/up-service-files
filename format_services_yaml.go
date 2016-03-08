@@ -50,9 +50,10 @@ func (s services) Swap(a, b int) {
 }
 
 type service struct {
-	Name         string `yaml:"name"`
-	Version      string `yaml:"version,omitempty"`
-	Count        int    `yaml:"count,omitempty"`
-	URI          string `yaml:"uri,omitempty"`
-	DesiredState string `yaml:"desiredState,omitempty"`
+	Name                 string `yaml:"name"`
+	Version              string `yaml:"version,omitempty"`
+	Count                int    `yaml:"count,omitempty"`
+	URI                  string `yaml:"uri,omitempty"`
+	DesiredState         string `yaml:"desiredState,omitempty"`
+	SequentialDeployment bool   `yaml:"sequentialDeployment,omitempty"`
 }

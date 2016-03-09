@@ -237,9 +237,9 @@ services:
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service
-  version: v5
+  version: v1.0.6
 - name: vulcan.service
-  version: v1.0.1
+  version: v1.1.0
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service

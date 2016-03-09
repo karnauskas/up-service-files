@@ -49,12 +49,12 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: v0.0.1
+  version: v0.0.3
   count: 2
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v31
+  version: v36
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service

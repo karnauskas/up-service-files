@@ -2,30 +2,25 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 1
 - name: aggregate-healthcheck@.service
-  count: 1
   version: v1.0.6
+  count: 1
+- name: api-policy-component-sidekick@.service
+  count: 2
 - name: api-policy-component@.service
   version: v22
   count: 2
   sequentialDeployment: true
-- name: api-policy-component-sidekick@.service
-  count: 2
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
   version: v87
-  sequentialDeployment: true
   count: 2
+  sequentialDeployment: true
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
   version: v47
   count: 2
-- name: cms-notifier-sidekick@.service
-  count: 1
-- name: cms-notifier@.service
-  version: v32
-  count: 1
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
@@ -36,6 +31,11 @@ services:
 - name: cms-metadata-kafka-bridge@.service
   version: v9
   count: 2
+- name: cms-notifier-sidekick@.service
+  count: 1
+- name: cms-notifier@.service
+  version: v32
+  count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
@@ -118,10 +118,10 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
-- name: native-ingester-metadata@.service
-  count: 2
-  version: v0.0.2
 - name: native-ingester-metadata-sidekick@.service
+  count: 2
+- name: native-ingester-metadata@.service
+  version: v0.0.2
   count: 2
 - name: nativerw-sidekick@.service
   count: 2
@@ -214,7 +214,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.5
+  version: v0.0.6
   count: 2
 - name: v2-annotations-rw-sidekick@.service
   count: 2
@@ -242,4 +242,3 @@ services:
   version: v46
   count: 2
 - name: zookeeper.service
- 

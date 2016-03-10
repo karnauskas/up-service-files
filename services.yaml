@@ -44,7 +44,7 @@ services:
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: test
+  version: v34
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
@@ -64,7 +64,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 0.0.22
+  version: test
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service

@@ -41,6 +41,11 @@ services:
 - name: concept-suggestions-kafka-bridge@.service
   version: v9
   count: 2
+- name: content-ingester-neo4j-sidekick@.service
+  count: 2
+- name: content-ingester-neo4j@.service
+  version: v34
+  count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
@@ -56,11 +61,16 @@ services:
 - name: content-public-read-preview@.service
   version: v31
   count: 2
+- name: content-rw-neo4j-sidekick@.service
+  count: 2
+- name: content-rw-neo4j@.service
+  version: 0.0.22
+  count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v41
+  version: v45
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -156,7 +166,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: v1.0.3
+  version: v1.0.4
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service
@@ -215,7 +225,7 @@ services:
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v18
+  version: v22
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -230,7 +240,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v18
+  version: v22
   count: 2
 - name: varnish-sidekick@.service
   count: 2
@@ -239,9 +249,9 @@ services:
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service
-  version: v5
+  version: v1.0.6
 - name: vulcan.service
-  version: v1.0.1
+  version: v1.1.0
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service

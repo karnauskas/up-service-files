@@ -156,7 +156,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: v1.0.3
+  version: v1.0.4
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service

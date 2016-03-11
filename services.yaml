@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v22
+  version: v24
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -60,7 +60,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v41
+  version: v45
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -146,6 +146,12 @@ services:
   count: 2
 - name: public-annotations-api@.service
   version: v0.0.4
+  count: 2
+  sequentialDeployment: true
+- name: public-content-by-concept-api-sidekick@.service
+  count: 2
+- name: public-content-by-concept-api@.service
+  version: v0.0.1
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
@@ -242,7 +248,3 @@ services:
   version: v46
   count: 2
 - name: zookeeper.service
-<<<<<<< HEAD
- 
-=======
->>>>>>> v22ContentAnnotator

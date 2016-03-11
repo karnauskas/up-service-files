@@ -41,6 +41,11 @@ services:
 - name: concept-suggestions-kafka-bridge@.service
   version: v9
   count: 2
+- name: content-ingester-neo4j-sidekick@.service
+  count: 2
+- name: content-ingester-neo4j@.service
+  version: v34
+  count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
@@ -55,6 +60,11 @@ services:
   count: 2
 - name: content-public-read-preview@.service
   version: v31
+  count: 2
+- name: content-rw-neo4j-sidekick@.service
+  count: 2
+- name: content-rw-neo4j@.service
+  version: v0.0.23
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service

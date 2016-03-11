@@ -64,7 +64,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 0.0.22
+  version: v0.0.23
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service

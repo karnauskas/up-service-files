@@ -1,0 +1,17 @@
+[Unit]
+Description=Elasticsearch Sidekick
+BindsTo=elasticsearch.service
+After=elasticsearch.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  while true; do \
+    export PORT=$(/usr/bin/docker port elasticsearch 9200 | cut -d':' -f2); \
+    etcdctl set /ft/services/elasticsearch/servers/3 "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/elasticsearch/servers/3
+
+[X-Fleet]
+MachineOf=elasticsearch.service
+

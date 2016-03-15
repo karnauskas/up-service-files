@@ -79,7 +79,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v48
+  version: v49
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service

@@ -9,9 +9,9 @@ ExecStart=/bin/sh -c '\
   etcdctl mkdir /ft/services/public-content-by-concept-api/servers; \
   etcdctl set 	/ft/healthcheck/public-content-by-concept-api-%i/path 		/__health; \
   etcdctl set 	/ft/healthcheck/public-content-by-concept-api-%i/categories 	read; \
-  etcdctl set 	/vulcand/frontends/public-services-content-by-concept/frontend 	\'{"Type": "http", "BackendId": "vcb-public-content-by-concept-api", "Route": "PathRegexp(\"/content.*\?.*isAnnotatedBy=.*$\") && Host(\"public-services\")"}\'; \
+  etcdctl set 	/vulcand/frontends/public-services-content-by-concept/frontend 	\'{"Type": "http", "BackendId": "vcb-public-content-by-concept-api", "Route": "PathRegexp(`/content.*\?.*isAnnotatedBy=.*$`) && Host(`public-services`)"}\'; \
   while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port public-content-by-concept-api-%i 8080 | cut -d':' -f2)`; \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port public-content-by-concept-api-%i 8080 | cut -d":" -f2)`; \
     curl -s -H "Accept: application/json" 0.0.0.0:$PORT/__health | jq -e \'[.checks[].ok] | all\' 2>&1>/dev/null && etcdctl set /ft/services/public-content-by-concept-api/servers/%i http://%H:$PORT --ttl 5; \
     sleep 4; \
   done'

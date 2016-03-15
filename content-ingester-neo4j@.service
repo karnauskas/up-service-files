@@ -24,6 +24,7 @@ ExecStart=/bin/sh -c '\
   export WRITER_HEALTHCHECK_NAME="Can connect to the Content RW Neo4j"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Content rw neo4j returns a 200 response"; \
   /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+      --env "DOCKER_FIX=" \
       --env "VULCAN_HOST=%H:8080" \
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
       --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \

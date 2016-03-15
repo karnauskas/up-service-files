@@ -171,6 +171,8 @@ services:
   version: v1.0.4
   count: 2
   sequentialDeployment: true
+- name: restorage-elasticsearch-sidekick.service
+- name: restorage-elasticsearch.service
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

@@ -14,7 +14,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/up-restorage
 
 ExecStart=/bin/bash -c 'export ELASTICSEARCHURL=$(etcdctl get /ft/services/elasticsearch/servers/3) \
-    && /usr/bin/docker run --rm --name %p -P coco/up-restorage /bin/bash -c "/up-restorage --id-map=things:uuid elastic --index-name=things URL=$ELASTICSEARCHURL"'
+    && /usr/bin/docker run --rm --name %p -P coco/up-restorage /bin/bash -c "/up-restorage --id-map=organisations:uuid elastic --index-name=things $ELASTICSEARCHURL"'
 ExecStop=/usr/bin/docker stop -t 3 %p
 Restart=on-failure
 RestartSec=60

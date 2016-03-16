@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v24
+  version: v25
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -49,7 +49,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v34
+  version: v36
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -73,6 +73,8 @@ services:
   version: v45
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v2.0.1
 - name: elb-presence.service
@@ -145,7 +147,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v34
+  version: v36
   count: 2
 - name: notifications-rw-sidekick@.service
   count: 2
@@ -169,6 +171,8 @@ services:
   version: v1.0.4
   count: 2
   sequentialDeployment: true
+- name: restorage-elasticsearch-sidekick.service
+- name: restorage-elasticsearch.service
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
@@ -203,6 +207,10 @@ services:
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
   version: v36
+  count: 1
+- name: synthetic-publication-monitor-sidekick@.service
+  count: 1
+- name: synthetic-publication-monitor@.service
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
@@ -255,6 +263,11 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v46
+  version: v51
+  count: 2
+- name: wordpress-image-mapper-sidekick@.service
+  count: 2
+- name: wordpress-image-mapper@.service
+  version: v12
   count: 2
 - name: zookeeper.service

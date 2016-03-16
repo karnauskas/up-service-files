@@ -19,6 +19,8 @@ ExecStart=/bin/sh -c "\
   done"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/document-store-api/servers/%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=document-store-api@%i.service

@@ -246,7 +246,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: entrypoint4
+  version: v39
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

@@ -9,6 +9,7 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
+MemoryLimit=512M
 ExecStartPre=-/bin/bash -c 'docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/native-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/native-ingester:$DOCKER_APP_VERSION'

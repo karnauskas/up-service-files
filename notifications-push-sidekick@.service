@@ -9,8 +9,7 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/notifications-push/servers; \
   etcdctl set /ft/healthcheck/notifications-push-%i/path /__health; \
   while true; do \
-    NOTIFICATIONS_PUSH_PORT=`[ $NOTIFICATIONS_PUSH_PORT ] && echo $NOTIFICATIONS_PUSH_PORT || echo $(/usr/bin/docker port notifications-push-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/notifications-push/servers/%i "http://$HOSTNAME:$NOTIFICATIONS_PUSH_PORT" --ttl 600; \
+    etcdctl set /ft/services/notifications-push/servers/%i "http://$HOSTNAME:33000" --ttl 600; \
     sleep 120; \
   done"
 

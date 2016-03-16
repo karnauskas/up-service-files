@@ -152,7 +152,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v0.1.1
+  version: v0.1.2
   count: 2
 - name: notifications-rw-sidekick@.service
   count: 2

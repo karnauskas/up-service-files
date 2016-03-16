@@ -147,6 +147,11 @@ services:
 - name: notifications-ingester@.service
   version: v34
   count: 2
+- name: notifications-push-sidekick@.service
+  count: 2
+- name: notifications-push@.service
+  version: v0.1.0
+  count: 2
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service

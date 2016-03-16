@@ -76,6 +76,8 @@ services:
 - name: elb-dns-registrator.service
   version: v2.0.1
 - name: elb-presence.service
+- name: elb-presence-4-notifications-push@.service
+  count: 2
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service

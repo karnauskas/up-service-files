@@ -64,7 +64,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v0.0.23
+  version: v0.0.25
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -168,6 +168,12 @@ services:
   version: v0.0.4
   count: 2
   sequentialDeployment: true
+- name: public-content-by-concept-api-sidekick@.service
+  count: 2
+- name: public-content-by-concept-api@.service
+  version: v0.0.2
+  count: 2
+  sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
@@ -176,7 +182,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: v1.0.4
+  version: v1.0.5
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service

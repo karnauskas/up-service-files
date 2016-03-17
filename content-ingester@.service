@@ -30,7 +30,6 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
       --env "KAFKA_GROUPNAME=content" \
       --env "KAFKA_SYSTEM_ID=ContentIngester" \
-      --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_HEADER=document-store-api" \
       --env "WRITER_NAME=DocumentStore" \

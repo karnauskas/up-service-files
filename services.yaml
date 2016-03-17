@@ -219,7 +219,7 @@ services:
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata@.service
   count: 1
-  version: v0.0.1
+  version: v0.0.2
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
 - name: v1-annotations-rw-sidekick@.service

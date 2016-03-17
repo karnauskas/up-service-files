@@ -81,7 +81,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v46
+  version: v51
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
@@ -238,7 +238,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.6
+  version: v0.0.7
   count: 2
 - name: v2-annotations-rw-sidekick@.service
   count: 2

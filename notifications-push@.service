@@ -25,4 +25,4 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=notifications-push@*.service
-MachineOf=varnish.service
+MachineOf=varnish@%i.service

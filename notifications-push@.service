@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/notifications-push:$DOCKER_APP_VE
 ExecStart=/bin/sh -c '\
 	export PORT=8080; \
   export QUEUE_PROXY_ADDRS=$(/usr/bin/etcdctl get /ft/config/kafka-bridge/ucs_queue_proxy_addrs); \
-  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-notifications-push"; \
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-notifications-push-%i"; \
   export AUTHORIZATION_KEY=$(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge/authorization_key); \
 	/usr/bin/docker run --rm --name %p-%i -p 33000:8080 --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" --env "GROUP_ID=$GROUP_ID" --env "AUTHORIZATION_KEY=$AUTHORIZATION_KEY" --env "TOPIC=CmsPublicationEvents" coco/notifications-push:$DOCKER_APP_VERSION;'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

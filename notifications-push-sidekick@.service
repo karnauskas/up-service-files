@@ -8,8 +8,9 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/notifications-push/healthcheck true; \
   etcdctl mkdir /ft/services/notifications-push/servers; \
   etcdctl set /ft/healthcheck/notifications-push-%i/path /__health; \
+  NOTIFICATIONS_PUSH_PORT=33000; \
   while true; do \
-    etcdctl set /ft/services/notifications-push/servers/%i "http://$HOSTNAME:33000" --ttl 600; \
+    etcdctl set /ft/services/notifications-push/servers/%i "http://$HOSTNAME:$NOTIFICATIONS_PUSH_PORT" --ttl 600; \
     sleep 120; \
   done"
 

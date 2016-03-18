@@ -66,6 +66,11 @@ services:
 - name: content-rw-neo4j@.service
   version: v0.0.25
   count: 2
+- name: people-rw-neo4j-sidekick@.service
+  count: 2
+- name: people-rw-neo4j@.service
+  version: v0.0.54
+  count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2
@@ -262,7 +267,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v39
+  version: v44
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

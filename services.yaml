@@ -184,6 +184,11 @@ services:
   count: 1
 - name: restorage-mongo@.service
   count: 1
+- name: roles-rw-neo4j-sidekick@.service
+  count: 2
+- name: roles-rw-neo4j@.service
+  version: v0.0.18
+  count: 2
 - name: sections-rw-neo4j-sidekick@.service
   count: 2
 - name: sections-rw-neo4j@.service

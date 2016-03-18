@@ -9,8 +9,8 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/people-rw-neo4j/servers; \
   etcdctl set /ft/healthcheck/people-rw-neo4j-%i/path /__health; \
   while true; do \
-    CONTENT_RW_PORT=`[ $CONTENT_RW_PORT ] && echo $CONTENT_RW_PORT || echo $(/usr/bin/docker port people-rw-neo4j-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/people-rw-neo4j/servers/%i "http://$HOSTNAME:$CONTENT_RW_PORT" --ttl 600; \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port people-rw-neo4j-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/people-rw-neo4j/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
     sleep 120; \
   done"
 

@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export NEO_HOST_PORT=$(/usr/bin/etcdctl get /ft/services/neo4j/servers/1); \
-  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT --env "NEO_URL=$NEO_HOST_PORT/db/data" --env "APP_PORT=$APP_PORT" --env "BATCH_SIZE=50" --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.people-rw-neo4j.%i" coco/people-rw-neo4j:$DOCKER_APP_VERSION;'
+  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT --env "NEO_URL=$NEO_HOST_PORT/db/data" --env "APP_PORT=$APP_PORT" --env "BATCH_SIZE=600" --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.people-rw-neo4j.%i" coco/people-rw-neo4j:$DOCKER_APP_VERSION;'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

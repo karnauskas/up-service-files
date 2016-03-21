@@ -1,0 +1,22 @@
+[Unit]
+Description=Content Reader-Writer for Red Neo4j Service Sidekick
+BindsTo=content-rw-neo4j-red@%i.service
+After=content-rw-neo4j-red@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/content-rw-neo4j-red/healthcheck     true; \
+  etcdctl mkdir /ft/services/content-rw-neo4j-red/servers; \
+  etcdctl set /ft/healthcheck/content-rw-neo4j-red-%i/path /__health; \
+  while true; do \
+    CONTENT_RW_PORT=`[ $CONTENT_RW_PORT ] && echo $CONTENT_RW_PORT || echo $(/usr/bin/docker port content-rw-neo4j-red-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/content-rw-neo4j-red/servers/%i "http://$HOSTNAME:$CONTENT_RW_PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/content-rw-neo4j-red/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=content-rw-neo4j-red@%i.service

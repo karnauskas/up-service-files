@@ -229,6 +229,10 @@ services:
   count: 1
 - name: restorage-mongo@.service
   count: 1
+- name: restorage-mongo-native-sidekick@.service
+  count: 1
+- name: restorage-mongo-native@.service
+  count: 1
 - name: sections-rw-neo4j-red-sidekick@.service
   count: 2
 - name: sections-rw-neo4j-red@.service

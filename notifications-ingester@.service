@@ -30,6 +30,7 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
       --env "KAFKA_GROUPNAME=notifications" \
       --env "KAFKA_SYSTEM_ID=NotificationsIngester" \
+      --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_HEADER=notifications-rw" \
       --env "WRITER_NAME=NotificationsReaderWriter" \

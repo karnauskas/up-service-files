@@ -41,6 +41,11 @@ services:
 - name: concept-suggestions-kafka-bridge@.service
   version: v9
   count: 2
+- name: content-ingester-neo4j-red-sidekick@.service
+  count: 1
+- name: content-ingester-neo4j-red@.service
+  version: v34
+  count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
@@ -61,15 +66,15 @@ services:
 - name: content-public-read-preview@.service
   version: v36
   count: 2
+- name: content-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: content-rw-neo4j-red@.service
+  version: v0.0.23
+  count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
   version: v0.0.25
-  count: 2
-- name: people-rw-neo4j-sidekick@.service
-  count: 2
-- name: people-rw-neo4j@.service
-  version: v0.0.54
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -90,6 +95,11 @@ services:
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
+- name: genres-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: genres-rw-neo4j-red@.service
+  version: v1.0.0
+  count: 1
 - name: genres-rw-neo4j-sidekick@.service
   count: 1
 - name: genres-rw-neo4j@.service
@@ -99,6 +109,11 @@ services:
 - name: kafka-rest-proxy-sidekick.service
 - name: kafka-rest-proxy.service
 - name: kafka.service
+- name: locations-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: locations-rw-neo4j-red@.service
+  version: v1.0.0
+  count: 2
 - name: locations-rw-neo4j-sidekick@.service
   count: 2
 - name: locations-rw-neo4j@.service
@@ -154,6 +169,10 @@ services:
 - name: nativerw@.service
   version: v37
   count: 2
+- name: neo4j-red-sidekick@.service
+  count: 1
+- name: neo4j-red@.service
+  count: 1
 - name: neo4j-sidekick@.service
   count: 1
 - name: neo4j@.service
@@ -167,6 +186,16 @@ services:
   count: 2
 - name: notifications-rw@.service
   version: v30
+  count: 2
+- name: people-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: people-rw-neo4j-red@.service
+  version: v0.0.54
+  count: 2
+- name: people-rw-neo4j-sidekick@.service
+  count: 2
+- name: people-rw-neo4j@.service
+  version: v0.0.54
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -191,10 +220,20 @@ services:
   version: v1.0.5
   count: 2
   sequentialDeployment: true
+- name: publish-availability-monitor-sidekick@.service
+  count: 1
+- name: publish-availability-monitor@.service
+  version: v0.16.3
+  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
   count: 1
+- name: sections-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: sections-rw-neo4j-red@.service
+  version: v1.0.1
+  count: 2
 - name: sections-rw-neo4j-sidekick@.service
   count: 2
 - name: sections-rw-neo4j@.service
@@ -206,6 +245,11 @@ services:
   version: v1.0.0
   count: 2
 - name: splunk-forwarder.service
+- name: subjects-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: subjects-rw-neo4j-red@.service
+  version: v1.0.3
+  count: 2
 - name: subjects-rw-neo4j-sidekick@.service
   count: 2
 - name: subjects-rw-neo4j@.service
@@ -228,6 +272,11 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
+- name: topics-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: topics-rw-neo4j-red@.service
+  version: v1.0.0
+  count: 2
 - name: topics-rw-neo4j-sidekick@.service
   count: 2
 - name: topics-rw-neo4j@.service
@@ -239,11 +288,21 @@ services:
   version: v1.0.0
   count: 2
 - name: tunnel-registrator.service
+- name: v1-annotations-rw-red-sidekick@.service
+  count: 2
+- name: v1-annotations-rw-red@.service
+  version: v0.0.12
+  count: 2
 - name: v1-annotations-rw-sidekick@.service
   count: 2
 - name: v1-annotations-rw@.service
   version: v0.0.12
   count: 2
+- name: v1-content-annotator-red-sidekick@.service
+  count: 1
+- name: v1-content-annotator-red@.service
+  version: v22
+  count: 1
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
@@ -254,11 +313,21 @@ services:
 - name: v1-suggestor@.service
   version: v0.0.7
   count: 2
+- name: v2-annotations-rw-red-sidekick@.service
+  count: 2
+- name: v2-annotations-rw-red@.service
+  version: v0.0.12
+  count: 2
 - name: v2-annotations-rw-sidekick@.service
   count: 2
 - name: v2-annotations-rw@.service
   version: v0.0.12
   count: 2
+- name: v2-content-annotator-red-sidekick@.service
+  count: 1
+- name: v2-content-annotator-red@.service
+  version: v22
+  count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service

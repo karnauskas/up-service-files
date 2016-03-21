@@ -44,17 +44,17 @@ services:
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v38
+  version: v34
   count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: v38
+  version: v34
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v38
+  version: v34
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -132,7 +132,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v45
+  version: v41
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -180,7 +180,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v38
+  version: v34
   count: 2
 - name: notifications-rw-sidekick@.service
   count: 2
@@ -219,13 +219,13 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.16.3
   count: 1
-- name: restorage-mongo-native-sidekick@.service
-  count: 1
-- name: restorage-mongo-native@.service
-  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
+  count: 1
+- name: restorage-mongo-native-sidekick@.service
+  count: 1
+- name: restorage-mongo-native@.service
   count: 1
 - name: sections-rw-neo4j-red-sidekick@.service
   count: 2
@@ -286,10 +286,10 @@ services:
   version: v1.0.0
   count: 2
 - name: tunnel-registrator.service
-- name: up-queue-sender-v1-metadata-sidekick@.service
-  count: 1
 - name: up-queue-sender-v1-metadata@.service
+  count: 1
   version: v0.0.2
+- name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
 - name: v1-annotations-rw-red-sidekick@.service
   count: 2

@@ -1,0 +1,22 @@
+[Unit]
+Description=People Reader-Writer for Neo4j Service Sidekick
+BindsTo=people-rw-neo4j@%i.service
+After=people-rw-neo4j@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/people-rw-neo4j/healthcheck     true; \
+  etcdctl mkdir /ft/services/people-rw-neo4j/servers; \
+  etcdctl set /ft/healthcheck/people-rw-neo4j-%i/path /__health; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port people-rw-neo4j-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/people-rw-neo4j/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/people-rw-neo4j/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=people-rw-neo4j@%i.service

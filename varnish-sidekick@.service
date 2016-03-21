@@ -4,21 +4,14 @@ BindsTo=varnish@%i.service
 After=varnish@%i.service
 
 [Service]
-ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/varnish/healthcheck true; \
-  etcdctl mkdir /ft/services/varnish/servers; \
-  etcdctl set /ft/healthcheck/varnish-%i/path /__health; \
-  etcdctl set /ft/healthcheck/varnish-%i/categories read; \
-  ACCESS_CREDENTIALS=`/usr/bin/etcdctl get /ft/_credentials/public-access`; \
-  etcdctl set /vulcand/frontends/varnish-public-endpoint/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-varnish\", \"Route\":\"PathRegexp(`/.*`) && MethodRegexp(`GET|HEAD`) && HostRegexp(`.*-up-read\\\\.ft\\\\.com`)\"}'; \
-  etcdctl set /vulcand/frontends/varnish-public-endpoint/middlewares/auth '{\"Type\": \"sauth\", \"Middleware\": {\"Credentials\": \"'$ACCESS_CREDENTIALS'\"}}'; \
+ExecStart=/bin/sh -c '\
   while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port varnish-%i 80 | cut -d':' -f2)`; \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port varnish-%i 80 | cut -d":" -f2)`; \
     etcdctl set /ft/services/varnish/servers/%i http://%H:$PORT --ttl 5; \
     sleep 4; \
-  done"
-ExecStop=/bin/sh -c "\
-  etcdctl rm /ft/services/varnish/servers/%i"
+  done'
+
+ExecStop=/bin/sh -c "etcdctl rm /ft/services/varnish/servers/%i"
 
 [X-Fleet]
 MachineOf=varnish@%i.service

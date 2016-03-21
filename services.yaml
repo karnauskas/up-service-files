@@ -314,7 +314,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.7
+  version: support-locations
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2

@@ -1,0 +1,22 @@
+[Unit]
+Description=V1 Annotations Reader-Writer for Red Neo4j Service Sidekick
+BindsTo=v1-annotations-rw-red@%i.service
+After=v1-annotations-rw-red@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/v1-annotations-rw-red/healthcheck     true; \
+  etcdctl mkdir /ft/services/v1-annotations-rw-red/servers; \
+  etcdctl set /ft/healthcheck/v1-annotations-rw-red-%i/path /__health; \
+  while true; do \
+    V1_ANNOTATIONS_RW_PORT=`[ $V1_ANNOTATIONS_RW_PORT ] && echo $V1_ANNOTATIONS_RW_PORT || echo $(/usr/bin/docker port v1-annotations-rw-red-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/v1-annotations-rw-red/servers/%i "http://$HOSTNAME:$V1_ANNOTATIONS_RW_PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/v1-annotations-rw-red/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=v1-annotations-rw-red@%i.service

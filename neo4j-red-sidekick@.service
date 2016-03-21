@@ -1,0 +1,18 @@
+[Unit]
+Description=Neo4j Red Sidekick
+BindsTo=neo4j-red@%i.service
+After=neo4j-red@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl mkdir /ft/services/neo4j-red/servers; \
+  etcdctl set /vulcand/frontends/neo4j-red-db/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-neo4j-red\", \"Route\": \"HeaderRegexp(`Referer`, `*/__neo4j*`)\", \"Settings\": { \"TrustForwardHeader\": true, \"PassHostHeader\": true }}'; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port neo4j-red-%i 7474 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/neo4j-red/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/neo4j-red/servers/%i
+
+[X-Fleet]
+MachineOf=neo4j-red@%i.service

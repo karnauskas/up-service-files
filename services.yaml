@@ -182,7 +182,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.0.63
+  version: v0.0.64
   count: 2
 - name: public-things-api-sidekick@.service
   count: 2

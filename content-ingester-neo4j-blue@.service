@@ -1,8 +1,8 @@
 [Unit]
-Description=Content Ingester for Neo4j
+Description=Content Ingester for Blue Neo4j
 After=vulcan.service
 Requires=docker.service
-Wants=content-ingester-neo4j-sidekick@%i.service
+Wants=content-ingester-neo4j-blue-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -29,11 +29,11 @@ ExecStart=/bin/sh -c '\
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
       --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
-      --env "KAFKA_GROUPNAME=content-neo4j" \
+      --env "KAFKA_GROUPNAME=content-neo4j-blue" \
       --env "KAFKA_SYSTEM_ID=ContentIngesterNeo4j" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
-      --env "WRITER_HEADER=content-rw-neo4j" \
+      --env "WRITER_HEADER=content-rw-neo4j-blue" \
       --env "WRITER_NAME=ContentRWNeo4j" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \

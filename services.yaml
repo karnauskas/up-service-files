@@ -246,9 +246,9 @@ services:
 - name: roles-rw-neo4j-red@.service
   version: v0.0.18
   count: 2
-- name: roles-rw-neo4j-sidekick@.service
+- name: roles-rw-neo4j-blue-sidekick@.service
   count: 2
-- name: roles-rw-neo4j@.service
+- name: roles-rw-neo4j-blue@.service
   version: v0.0.18
   count: 2
 - name: sections-rw-neo4j-red-sidekick@.service

@@ -161,7 +161,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v1.0.0
+  version: v1.0.2
   count: 2
 - name: notifications-rw-sidekick@.service
   count: 2
@@ -261,7 +261,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v49
+  version: v54
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

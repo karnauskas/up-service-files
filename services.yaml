@@ -169,6 +169,8 @@ services:
 - name: nativerw@.service
   version: v37
   count: 2
+- name: neo4j-read-red-sidekick@.service
+  count: 1
 - name: neo4j-red-sidekick@.service
   count: 1
 - name: neo4j-red@.service

@@ -1,0 +1,22 @@
+[Unit]
+Description=V2 Annotations Reader-Writer for Blue Neo4j Service Sidekick
+BindsTo=v2-annotations-rw-blue@%i.service
+After=v2-annotations-rw-blue@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/v2-annotations-rw-blue/healthcheck     true; \
+  etcdctl mkdir /ft/services/v2-annotations-rw-blue/servers; \
+  etcdctl set /ft/healthcheck/v2-annotations-rw-blue-%i/path /__health; \
+  while true; do \
+    V2_ANNOTATIONS_RW_PORT=`[ $V2_ANNOTATIONS_RW_PORT ] && echo $V2_ANNOTATIONS_RW_PORT || echo $(/usr/bin/docker port v2-annotations-rw-blue-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/v2-annotations-rw-blue/servers/%i "http://$HOSTNAME:$V2_ANNOTATIONS_RW_PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/v2-annotations-rw-blue/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=v2-annotations-rw-blue@%i.service

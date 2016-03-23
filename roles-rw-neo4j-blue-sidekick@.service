@@ -1,0 +1,22 @@
+[Unit]
+Description=Roles Reader-Writer for Blue Neo4j Service Sidekick
+BindsTo=roles-rw-neo4j-blue@%i.service
+After=roles-rw-neo4j-blue@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/roles-rw-neo4j-blue/healthcheck     true; \
+  etcdctl mkdir /ft/services/roles-rw-neo4j-blue/servers; \
+  etcdctl set /ft/healthcheck/roles-rw-neo4j-blue-%i/path /__health; \
+  while true; do \
+    ROLES_RW_PORT=`[ $ROLES_RW_PORT ] && echo $ROLES_RW_PORT || echo $(/usr/bin/docker port roles-rw-neo4j-blue-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/roles-rw-neo4j-blue/servers/%i "http://$HOSTNAME:$ROLES_RW_PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/roles-rw-neo4j-blue/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=roles-rw-neo4j-blue@%i.service

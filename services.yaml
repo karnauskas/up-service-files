@@ -132,7 +132,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v41
+  version: v45
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -169,6 +169,8 @@ services:
 - name: nativerw@.service
   version: v37
   count: 2
+- name: neo4j-read-red-sidekick@.service
+  count: 1
 - name: neo4j-red-sidekick@.service
   count: 1
 - name: neo4j-red@.service
@@ -186,6 +188,16 @@ services:
   count: 2
 - name: notifications-rw@.service
   version: v30
+  count: 2
+- name: organisations-rw-neo4j-sidekick@.service
+  count: 2
+- name: organisations-rw-neo4j@.service
+  version: v0.0.34
+  count: 2
+- name: organisations-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: organisations-rw-neo4j-red@.service
+  version: v0.0.34
   count: 2
 - name: people-rw-neo4j-red-sidekick@.service
   count: 2
@@ -340,7 +352,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v44
+  version: v52
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

@@ -1,0 +1,20 @@
+[Unit]
+Description=UP Queue sender for V1 metadata
+BindsTo=up-queue-sender-v1-metadata@%i.service
+After=up-queue-sender-v1-metadata@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl mkdir /ft/services/up-queue-sender-v1-metadata/servers; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port up-queue-sender-v1-metadata-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/up-queue-sender-v1-metadata/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/up-queue-sender-v1-metadata/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=up-queue-sender-v1-metadata@%i.service
+

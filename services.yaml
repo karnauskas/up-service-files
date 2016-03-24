@@ -189,7 +189,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v1.0.5
+  version: v1.0.6
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

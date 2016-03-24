@@ -1,0 +1,18 @@
+[Unit]
+Description=Neo4j Blue Sidekick
+BindsTo=neo4j-blue@%i.service
+After=neo4j-blue@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl mkdir /ft/services/neo4j-blue/servers; \
+  etcdctl set /vulcand/frontends/neo4j-blue-db/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-neo4j-blue\", \"Route\": \"HeaderRegexp(`Referer`, `.*__neo4j-blue.*`)\", \"Settings\": { \"TrustForwardHeader\": true, \"PassHostHeader\": true }}'; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port neo4j-blue-%i 7474 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/neo4j-blue/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/neo4j-blue/servers/%i
+
+[X-Fleet]
+MachineOf=neo4j-blue@%i.service

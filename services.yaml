@@ -173,6 +173,8 @@ services:
   count: 1
 - name: neo4j-blue@.service
   count: 1
+- name: neo4j-read-blue-sidekick@.service
+  count: 1
 - name: neo4j-read-red-sidekick@.service
   count: 1
 - name: neo4j-red-sidekick@.service
@@ -221,6 +223,12 @@ services:
   version: v0.0.2
   count: 2
   sequentialDeployment: true
+- name: public-organisations-api-sidekick@.service
+  count: 2
+- name: public-organisations-api@.service
+  version: v0.0.41
+  count: 2
+  sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
@@ -237,12 +245,6 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.16.3
   count: 1
-- name: public-organisations-api-sidekick@.service
-  count: 2
-- name: public-organisations-api@.service
-  version: v0.0.41
-  count: 2
-  sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

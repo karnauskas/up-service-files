@@ -167,7 +167,7 @@ services:
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v37
+  version: v40
   count: 2
 - name: neo4j-blue-sidekick@.service
   count: 1

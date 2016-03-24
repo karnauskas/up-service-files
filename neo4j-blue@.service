@@ -2,7 +2,7 @@
 Description=Neo4j Blue
 After=docker.service
 Requires=docker.service
-Wants=neo4j-blue-sidekick@%i.service
+Wants=neo4j-blue-sidekick@%i.service neo4j-read-blue-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=0

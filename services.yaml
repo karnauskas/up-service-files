@@ -44,7 +44,7 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v34
+  version: v38
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1

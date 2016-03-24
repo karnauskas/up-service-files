@@ -49,12 +49,12 @@ services:
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v34
+  version: v38
   count: 1
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v34
+  version: v38
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -182,7 +182,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v34
+  version: v38
   count: 2
 - name: notifications-rw-sidekick@.service
   count: 2

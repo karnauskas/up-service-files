@@ -262,7 +262,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v54
+  version: v56
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

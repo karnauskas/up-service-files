@@ -2,7 +2,7 @@
 Description=Neo4j Red
 After=docker.service
 Requires=docker.service
-Wants=neo4j-red-sidekick@%i.service
+Wants=neo4j-red-sidekick@%i.service neo4j-read-red-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=0

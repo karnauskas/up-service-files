@@ -191,6 +191,7 @@ services:
 - name: notifications-push@.service
   version: v1.0.5
   count: 2
+  sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service

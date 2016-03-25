@@ -1,5 +1,5 @@
 [Unit]
-Description=Nativerw sidekick
+Description=Nativerw  sidekick
 BindsTo=nativerw@%i.service
 After=nativerw@%i.service
 

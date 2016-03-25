@@ -1,0 +1,19 @@
+[Unit]
+Description=Neo4j Read Blue Sidekick
+BindsTo=neo4j-blue@%i.service
+After=neo4j-blue@%i.service
+
+[Service]
+ExecStart=/bin/sh -c '\
+  etcdctl set /vulcand/backends/neo4j-read/backend \'{"Type": "http"}\'; \
+  etcdctl set /vulcand/frontends/neo4j-read/frontend \'{"Type": "http", "BackendId\": "neo4j-read", "Route": "PathRegexp(`/__neo4j-read/.*`)"}\'; \
+  etcdctl set /vulcand/frontends/neo4j-read/middlewares/rewrite \'{"Id":"rewrite", "Type":"rewrite", "Priority":1, "Middleware": {"Regexp":"/__neo4j-read(/.*)", "Replacement":"$1"}}\'; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port neo4j-blue-%i 7474 | cut -d":" -f2)`; \
+    etcdctl set /vulcand/backends/neo4j-read/servers/2 "{\"url\": \"http://$HOSTNAME:$PORT\"}" --ttl 5; \
+    sleep 4; \
+  done'
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/neo4j-read/servers/2
+
+[X-Fleet]
+MachineOf=neo4j-blue@%i.service

@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v24
+  version: v25
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -169,6 +169,7 @@ services:
 - name: nativerw@.service
   version: v40
   count: 2
+  sequentialDeployment: true
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service

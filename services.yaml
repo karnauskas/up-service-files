@@ -167,7 +167,7 @@ services:
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v40
+  version: v41
   count: 2
   sequentialDeployment: true
 - name: neo4j-blue-sidekick@.service

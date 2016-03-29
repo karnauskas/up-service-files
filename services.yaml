@@ -390,4 +390,9 @@ services:
 - name: wordpress-article-transformer@.service
   version: v46
   count: 2
+- name: wordpress-image-mapper-sidekick@.service
+  count: 2
+- name: wordpress-image-mapper@.service
+  version: v22
+  count: 2
 - name: zookeeper.service

@@ -357,7 +357,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.8
+  version: v0.0.10
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2

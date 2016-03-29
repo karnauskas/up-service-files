@@ -1,0 +1,22 @@
+[Unit]
+Description=notifications-push Sidekick
+BindsTo=notifications-push@%i.service
+After=notifications-push@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set /ft/services/notifications-push/healthcheck true; \
+  etcdctl mkdir /ft/services/notifications-push/servers; \
+  etcdctl set /ft/healthcheck/notifications-push-%i/path /__health; \
+  NOTIFICATIONS_PUSH_PORT=8548; \
+  while true; do \
+    etcdctl set /ft/services/notifications-push/servers/%i "http://$HOSTNAME:$NOTIFICATIONS_PUSH_PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/notifications-push/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=notifications-push@%i.service

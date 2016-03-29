@@ -17,7 +17,7 @@ ExecStartPre=/bin/sh -c 'docker history up-registry.ft.com/coco/varnish:$DOCKER_
 
 ExecStart=/bin/sh -c '\
   HTPASSWD=`etcdctl get /ft/_credentials/varnish/htpasswd`; \
-  docker run --rm --name %p-%i -p 80:80 -e "VARNISH_BACKEND_HOST=%H" -e "VARNISH_BACKEND_PORT=8080" -e "HOST_HEADER=api-policy-component" -e "HTPASSWD=$HTPASSWD" up-registry.ft.com/coco/varnish:$DOCKER_APP_VERSION'
+  docker run --rm --name %p-%i -p 80:80 -e "VARNISH_BACKEND_HOST=%H" -e "VARNISH_BACKEND_PORT=8080" -e "NOTIFICATIONS_PUSH_PORT=8548" -e "HOST_HEADER=api-policy-component" -e "HTPASSWD=$HTPASSWD" up-registry.ft.com/coco/varnish:$DOCKER_APP_VERSION'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 
 [X-Fleet]

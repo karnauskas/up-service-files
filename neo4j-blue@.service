@@ -1,8 +1,8 @@
 [Unit]
-Description=Neo4j Red
+Description=Neo4j Blue
 After=docker.service
 Requires=docker.service
-Wants=neo4j-red-sidekick@%i.service neo4j-read-red-sidekick@%i.service
+Wants=neo4j-blue-sidekick@%i.service neo4j-read-blue-sidekick@%i.service
 
 [Service]
 TimeoutStartSec=0
@@ -20,4 +20,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineMetadata=persistent_tag=3
+MachineMetadata=persistent_tag=2

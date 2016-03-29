@@ -1,8 +1,8 @@
 [Unit]
-Description=Notifications Ingester
+Description=Content Ingester for Blue Neo4j
 After=vulcan.service
 Requires=docker.service
-Wants=notifications-ingester-sidekick@%i.service
+Wants=content-ingester-neo4j-blue-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -21,19 +21,21 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export WHITELIST="^http://(methode-article|methode-list|wordpress-article)-transformer-(pr|iw)-uk-.*\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$"; \
-  export WRITER_HEALTHCHECK_NAME="Can connect to the Notifications Reader/Writer"; \
-  export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"; \
+  export WHITELIST="^http://(methode|wordpress)(-article|-image-model|-list)?-transformer-(pr|iw)-uk-.*\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model|lists)/[\\w-]+.*$"; \
+  export WRITER_HEALTHCHECK_NAME="Can connect to the Content RW Neo4j"; \
+  export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Content rw neo4j returns a 200 response"; \
   /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+      --env "DOCKER_FIX=" \
       --env "VULCAN_HOST=%H:8080" \
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
       --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
-      --env "KAFKA_GROUPNAME=notifications" \
-      --env "KAFKA_SYSTEM_ID=NotificationsIngester" \
+      --env "KAFKA_GROUPNAME=content-neo4j-blue" \
+      --env "KAFKA_SYSTEM_ID=ContentIngesterNeo4j" \
+      --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
-      --env "WRITER_HEADER=notifications-rw" \
-      --env "WRITER_NAME=NotificationsReaderWriter" \
+      --env "WRITER_HEADER=content-rw-neo4j-blue" \
+      --env "WRITER_NAME=ContentRWNeo4j" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'

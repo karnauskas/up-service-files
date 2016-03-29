@@ -5,6 +5,7 @@ After=neo4j-blue@%i.service
 
 [Service]
 ExecStart=/bin/sh -c '\
+   etcdctl set /vulcand/backends/neo4j-read/backend \'{"Type": "http"}\'; \
    etcdctl set /vulcand/frontends/neo4j-read/frontend \'{"Type": "http", "BackendId\": "neo4j-read", "Route": "PathRegexp(`/__neo4j-read/.*`)", "Settings": { "TrustForwardHeader": true, "PassHostHeader": true }}\'; \
    etcdctl set /vulcand/frontends/neo4j-read/middlewares/rewrite \'{"Id":"rewrite", "Type":"rewrite", "Priority":1, "Middleware": {"Regexp":"/__neo4j-read(/.*)", "Replacement":"$1"}}\'; \
    etcdctl set /vulcand/frontends/neo4j-read-db/frontend \'{"Type": "http", "BackendId": "neo4j-read", "Route": "PathRegexp(`^/db/data/.*`) && Header(`User-Agent`, `neoism`)", "Settings": { "TrustForwardHeader": true, "PassHostHeader": true }}\'; \

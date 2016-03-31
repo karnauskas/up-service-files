@@ -4,14 +4,15 @@ Requires=docker.socket
 After=docker.socket
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull coco/coco-diamond
+ExecStartPre=-/bin/sh -c 'docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/sh -c 'docker rm %p > /dev/null 2>&1'
+ExecStartPre=/bin/sh -c 'docker history angelx/diamond:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull angelx/diamond:$DOCKER_APP_VERSION'
 ExecStart=/bin/bash -c '\
   ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   IFS=. read -r -a HOSTNAME_SLICED <<< "$HOSTNAME"; \
-  /usr/bin/docker run --rm --name=%p -e GRAPHITE_HOST=graphite.ft.com -e GRAPHITE_PORT=2003 -e DOCKER_HOSTNAME=$ENV.$HOSTNAME_SLICED -e INTERVAL=60 -v /proc:/host_proc:ro -v /var/run/docker.sock:/var/run/docker.sock:ro coco/coco-diamond'
+  /usr/bin/docker run --rm --name=%p -e GRAPHITE_HOST=graphite.ft.com -e GRAPHITE_PORT=2003 -e DOCKER_HOSTNAME=$ENV.$HOSTNAME_SLICED -e INTERVAL=60 -v /proc:/host_proc:ro -v /var/run/docker.sock:/var/run/docker.sock:ro angelx/diamond:$DOCKER_APP_VERSION'
 ExecStopPost=-/usr/bin/docker rm -f %p
 Restart=on-failure
 RestartSec=60

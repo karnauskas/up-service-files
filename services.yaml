@@ -44,17 +44,17 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v38
+  version: v39
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v38
+  version: v39
   count: 1
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v38
+  version: v39
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -90,7 +90,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v55
+  version: v56
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
@@ -185,7 +185,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v38
+  version: v39
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -244,7 +244,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: v1.0.4
+  version: v1.0.9
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service

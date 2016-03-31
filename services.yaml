@@ -90,7 +90,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v51
+  version: v56
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
@@ -221,7 +221,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.4
+  version: v0.0.10
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
@@ -250,7 +250,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.16.3
+  version: v0.17.0
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

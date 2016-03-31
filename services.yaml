@@ -127,7 +127,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v39
+  version: v40
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2

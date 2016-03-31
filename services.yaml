@@ -127,7 +127,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v39
+  version: v40
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -244,7 +244,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: v1.0.9
+  version: v1.0.10
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
@@ -382,7 +382,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v56
+  version: v59
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

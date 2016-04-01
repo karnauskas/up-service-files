@@ -362,12 +362,12 @@ services:
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v2-annotations-rw-blue@.service
-  version: v0.0.12
+  version: v0.0.19
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
 - name: v2-annotations-rw-red@.service
-  version: v0.0.12
+  version: v0.0.19
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1

@@ -221,7 +221,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.10
+  version: v0.0.11
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

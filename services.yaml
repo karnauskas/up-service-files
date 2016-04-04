@@ -347,12 +347,12 @@ services:
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service
-  version: v22
+  version: v24
   count: 1
 - name: v1-content-annotator-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-red@.service
-  version: v22
+  version: v24
   count: 1
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -362,22 +362,22 @@ services:
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v2-annotations-rw-blue@.service
-  version: v0.0.12
+  version: v0.0.19
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
 - name: v2-annotations-rw-red@.service
-  version: v0.0.12
+  version: v0.0.19
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
 - name: v2-content-annotator-blue@.service
-  version: v22
+  version: v24
   count: 1
 - name: v2-content-annotator-red-sidekick@.service
   count: 1
 - name: v2-content-annotator-red@.service
-  version: v22
+  version: v24
   count: 1
 - name: varnish-sidekick@.service
   count: 2
@@ -393,5 +393,10 @@ services:
   count: 2
 - name: wordpress-article-transformer@.service
   version: v46
+  count: 2
+- name: wordpress-image-mapper-sidekick@.service
+  count: 2
+- name: wordpress-image-mapper@.service
+  version: v23
   count: 2
 - name: zookeeper.service

@@ -1,0 +1,24 @@
+[Unit]
+Description=Public Concordances API Service Sidekick
+BindsTo=public-concordances-api@%i.service
+After=public-concordances-api@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/public-concordances-api/healthcheck     true; \
+  etcdctl mkdir /ft/services/public-concordances-api/servers; \
+  etcdctl set /ft/healthcheck/public-concordances-api-%i/path /__health; \
+  etcdctl set /ft/healthcheck/public-concordances-api-%i/categories read; \
+  etcdctl set /vulcand/frontends/public-services-concordances/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-public-concordances-api\", \"Route\": \"PathRegexp(`/concordances/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$`) && Host(`public-services`)\"}'; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port public-concordances-api-%i 8080 | cut -d':' -f2)`; \
+    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq -e '[.checks[].ok] | all' 2>&1>/dev/null && etcdctl set /ft/services/public-concordances-api/servers/%i http://%H:$PORT --ttl 5; \
+    sleep 4; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/public-concordances-api/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=public-concordances-api@%i.service

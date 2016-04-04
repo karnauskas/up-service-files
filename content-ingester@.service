@@ -21,7 +21,7 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export WHITELIST="^http://(methode|wordpress)(-article|-image-model|-list)?-transformer-(pr|iw)-uk-.*\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model|lists)/[\\w-]+.*$"; \
+  export WHITELIST="^http://(methode|wordpress)(-article|-image-model|-list|-image)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model|lists)/[\\w-]+.*$"; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Document Store"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Document Store returns a 200 response"; \
   /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \

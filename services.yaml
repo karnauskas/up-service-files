@@ -224,6 +224,12 @@ services:
   version: v0.0.11
   count: 2
   sequentialDeployment: true
+- name: public-concordances-api-sidekick@.service
+  count: 2
+- name: public-concordances-api@.service
+  version: v0.0.8
+  count: 2
+  sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service

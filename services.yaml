@@ -237,7 +237,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.0.8
+  version: v0.0.9
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

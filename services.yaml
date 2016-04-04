@@ -311,10 +311,6 @@ services:
 - name: synthetic-image-publication-monitor-coco@.service
   version: v36
   count: 1
-- name: synthetic-publication-monitor-sidekick@.service
-  count: 1
-- name: synthetic-publication-monitor@.service
-  count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
 - name: topics-rw-neo4j-blue-sidekick@.service

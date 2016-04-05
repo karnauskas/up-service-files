@@ -37,7 +37,6 @@ services:
 - name: cms-notifier@.service
   version: v32
   count: 1
-  sequentialDeployment: true
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service

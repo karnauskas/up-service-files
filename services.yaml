@@ -109,7 +109,7 @@ services:
 - name: instance-data-ingester-sidekick@.service
   count: 1
 - name: instance-data-ingester@.service
-  version: v1
+  version: v2
   count: 1
 - name: kafka-rest-proxy-sidekick.service
 - name: kafka-rest-proxy.service

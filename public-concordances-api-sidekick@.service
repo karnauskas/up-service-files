@@ -10,7 +10,7 @@ ExecStart=/bin/sh -c '\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
-  etcdctl set /vulcand/frontends/public-services-concordances/frontend \
+  etcdctl set /vulcand/frontends/$SERVICE/frontend \
   \'{"Type": "http", "BackendId": "vcb-'$SERVICE'", "Route": "Path(`/concordances`) && Host(`public-services`)"}\'; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d":" -f2)`; \

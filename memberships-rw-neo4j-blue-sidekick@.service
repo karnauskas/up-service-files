@@ -1,0 +1,22 @@
+[Unit]
+Description=Memberships Reader-Writer for Blue Neo4j Service Sidekick
+BindsTo=memberships-rw-neo4j-blue@%i.service
+After=memberships-rw-neo4j-blue@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/memberships-rw-neo4j-blue/healthcheck     true; \
+  etcdctl mkdir /ft/services/memberships-rw-neo4j-blue/servers; \
+  etcdctl set /ft/healthcheck/memberships-rw-neo4j-blue-%i/path /__health; \
+  while true; do \
+    MEMBERSHIPS_RW_PORT=`[ $MEMBERSHIPS_RW_PORT ] && echo $MEMBERSHIPS_RW_PORT || echo $(/usr/bin/docker port memberships-rw-neo4j-blue-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/memberships-rw-neo4j-blue/servers/%i "http://$HOSTNAME:$MEMBERSHIPS_RW_PORT" --ttl 600; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/memberships-rw-neo4j-blue/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=memberships-rw-neo4j-blue@%i.service

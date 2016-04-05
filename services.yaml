@@ -21,6 +21,7 @@ services:
 - name: binary-writer@.service
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
@@ -36,6 +37,7 @@ services:
 - name: cms-notifier@.service
   version: v32
   count: 1
+  sequentialDeployment: true
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
@@ -61,21 +63,25 @@ services:
 - name: content-preview@.service
   version: v0.0.3
   count: 2
+  sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
   version: v36
   count: 2
+  sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: content-rw-neo4j-blue@.service
   version: v0.0.25
   count: 2
+  sequentialDeployment: true
 - name: content-rw-neo4j-red-sidekick@.service
   count: 2
 - name: content-rw-neo4j-red@.service
   version: v0.0.25
   count: 2
+  sequentialDeployment: true
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2
@@ -119,51 +125,61 @@ services:
 - name: locations-rw-neo4j-blue@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: locations-rw-neo4j-red-sidekick@.service
   count: 2
 - name: locations-rw-neo4j-red@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: locations-transformer-sidekick@.service
   count: 2
 - name: locations-transformer@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j-blue@.service
   version: v0.0.30
   count: 2
+  sequentialDeployment: true
 - name: memberships-rw-neo4j-red-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j-red@.service
   version: v0.0.30
   count: 2
+  sequentialDeployment: true
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
   version: v40
   count: 2
+  sequentialDeployment: true
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
   version: v45
   count: 2
+  sequentialDeployment: true
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service
   version: v23
   count: 2
+  sequentialDeployment: true
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
 - name: methode-image-model-transformer@.service
   version: v43
   count: 2
+  sequentialDeployment: true
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
   version: v13
   count: 2
+  sequentialDeployment: true
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service
   desiredState: loaded
@@ -213,26 +229,31 @@ services:
 - name: notifications-rw@.service
   version: v30
   count: 2
+  sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-blue@.service
   version: v0.0.34
   count: 2
+  sequentialDeployment: true
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-red@.service
   version: v0.0.34
   count: 2
+  sequentialDeployment: true
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: people-rw-neo4j-blue@.service
   version: v0.0.54
   count: 2
+  sequentialDeployment: true
 - name: people-rw-neo4j-red-sidekick@.service
   count: 2
 - name: people-rw-neo4j-red@.service
   version: v0.0.54
   count: 2
+  sequentialDeployment: true
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
@@ -256,6 +277,7 @@ services:
 - name: public-people-api@.service
   version: v0.0.64
   count: 2
+  sequentialDeployment: true
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
@@ -280,42 +302,50 @@ services:
 - name: roles-rw-neo4j-blue@.service
   version: v0.0.18
   count: 2
+  sequentialDeployment: true
 - name: roles-rw-neo4j-red-sidekick@.service
   count: 2
 - name: roles-rw-neo4j-red@.service
   version: v0.0.18
   count: 2
+  sequentialDeployment: true
 - name: sections-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: sections-rw-neo4j-blue@.service
   version: v1.0.1
   count: 2
+  sequentialDeployment: true
 - name: sections-rw-neo4j-red-sidekick@.service
   count: 2
 - name: sections-rw-neo4j-red@.service
   version: v1.0.1
   count: 2
+  sequentialDeployment: true
 - name: sections-transformer-sidekick@.service
   count: 2
 - name: sections-transformer@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: splunk-forwarder.service
 - name: subjects-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: subjects-rw-neo4j-blue@.service
   version: v1.0.3
   count: 2
+  sequentialDeployment: true
 - name: subjects-rw-neo4j-red-sidekick@.service
   count: 2
 - name: subjects-rw-neo4j-red@.service
   version: v1.0.3
   count: 2
+  sequentialDeployment: true
 - name: subjects-transformer-sidekick@.service
   count: 2
 - name: subjects-transformer@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-aws@.service
@@ -328,21 +358,25 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
+  version: 1.0.1
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-blue@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: topics-rw-neo4j-red-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-red@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: topics-transformer-sidekick@.service
   count: 2
 - name: topics-transformer@.service
   version: v1.0.0
   count: 2
+  sequentialDeployment: true
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
@@ -354,11 +388,13 @@ services:
 - name: v1-annotations-rw-blue@.service
   version: v0.0.12
   count: 2
+  sequentialDeployment: true
 - name: v1-annotations-rw-red-sidekick@.service
   count: 2
 - name: v1-annotations-rw-red@.service
   version: v0.0.12
   count: 2
+  sequentialDeployment: true
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service
@@ -379,11 +415,13 @@ services:
 - name: v2-annotations-rw-blue@.service
   version: v0.0.19
   count: 2
+  sequentialDeployment: true
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
 - name: v2-annotations-rw-red@.service
   version: v0.0.19
   count: 2
+  sequentialDeployment: true
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
 - name: v2-content-annotator-blue@.service
@@ -409,9 +447,11 @@ services:
 - name: wordpress-article-transformer@.service
   version: v46
   count: 2
+  sequentialDeployment: true
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
   version: v23
   count: 2
+  sequentialDeployment: true
 - name: zookeeper.service

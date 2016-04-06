@@ -269,13 +269,13 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.17.0
   count: 1
-- name: restorage-mongo-sidekick@.service
-  count: 1
-- name: restorage-mongo@.service
-  count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1
 - name: restorage-mongo-native@.service
+  count: 1
+- name: restorage-mongo-sidekick@.service
+  count: 1
+- name: restorage-mongo@.service
   count: 1
 - name: roles-rw-neo4j-blue-sidekick@.service
   count: 2

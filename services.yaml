@@ -9,13 +9,11 @@ services:
 - name: api-policy-component@.service
   version: v25
   count: 2
-  sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
   version: v87
   count: 2
-  sequentialDeployment: true
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
@@ -36,7 +34,6 @@ services:
 - name: cms-notifier@.service
   version: v32
   count: 1
-  sequentialDeployment: true
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
@@ -83,7 +80,6 @@ services:
 - name: document-store-api@.service
   version: v47
   count: 2
-  sequentialDeployment: true
 - name: elb-dns-registrator.service
   version: v2.0.1
 - name: elb-presence@.service
@@ -93,7 +89,6 @@ services:
 - name: enriched-content-read-api@.service
   version: v56
   count: 2
-  sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
 - name: genres-rw-neo4j-blue-sidekick@.service
@@ -150,7 +145,6 @@ services:
 - name: methode-content-importer@.service
   version: v45
   count: 2
-  sequentialDeployment: true
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service
@@ -186,7 +180,6 @@ services:
 - name: nativerw@.service
   version: v42
   count: 2
-  sequentialDeployment: true
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
@@ -209,7 +202,6 @@ services:
 - name: notifications-push@.service
   version: v1.0.6
   count: 2
-  sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
@@ -240,19 +232,16 @@ services:
 - name: public-annotations-api@.service
   version: v0.0.11
   count: 2
-  sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
   version: v0.0.2
   count: 2
-  sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
   version: v0.0.41
   count: 2
-  sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
@@ -263,7 +252,6 @@ services:
 - name: public-things-api@.service
   version: v1.0.10
   count: 2
-  sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
@@ -401,7 +389,6 @@ services:
 - name: varnish@.service
   version: v59
   count: 2
-  sequentialDeployment: true
 - name: vulcan-config-builder.service
   version: v1.0.6
 - name: vulcan.service

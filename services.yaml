@@ -108,6 +108,7 @@ services:
 - name: image-cleaner.service
 - name: kafka-rest-proxy-sidekick.service
 - name: kafka-rest-proxy.service
+  version: v1.0.0
 - name: kafka.service
 - name: locations-rw-neo4j-blue-sidekick@.service
   count: 2

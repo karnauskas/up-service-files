@@ -5,6 +5,7 @@ Requires=docker.service zookeeper.service
 Wants=kafka-rest-proxy-sidekick.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -14,7 +15,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull coco/kafka-proxy
 #IP needs to be editted to grep out on the interface of the host vm
 ExecStart=/bin/bash -c "\
-  /usr/bin/docker run --rm --name %p -p 8082 --link zookeeper:zk -e RP_FETCH_MESSAGE_MAX_BYTES=16777216 -e RP_CONSUMER_REQUEST_MAX_BYTES=17825792 -e RP_ZOOKEEPER_CONNECT=%H:2181 coco/kafka-proxy"
+  /usr/bin/docker run --rm --name %p -p 8082 --link zookeeper:zk -e RP_FETCH_MESSAGE_MAX_BYTES=16777216 -e RP_CONSUMER_REQUEST_MAX_BYTES=17825792 -e RP_ZOOKEEPER_CONNECT=%H:2181 coco/kafka-proxy:$DOCKER_APP_VERSION"
 ExecStop=/usr/bin/docker stop %p
 Restart=on-failure
 RestartSec=120

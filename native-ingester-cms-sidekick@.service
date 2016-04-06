@@ -1,0 +1,22 @@
+[Unit]
+Description=Native Ingester for NativeCmsPublicationEvents sidekick
+BindsTo=native-ingester-cms@%i.service
+After=native-ingester-cms@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/native-ingester-cms/healthcheck     true; \
+  etcdctl mkdir /ft/services/native-ingester-cms/servers; \
+  etcdctl set /ft/healthcheck/native-ingester-cms-%i/path /__health; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port native-ingester-cms-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/native-ingester-cms/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm /ft/services/native-ingester-cms/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=native-ingester-cms@%i.service
+

@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 1
 - name: aggregate-healthcheck@.service
-  version: v1.0.6
+  version: v1.0.7
   count: 1
 - name: api-policy-component-sidekick@.service
   count: 2
@@ -237,6 +237,12 @@ services:
   count: 2
 - name: public-annotations-api@.service
   version: v0.0.11
+  count: 2
+  sequentialDeployment: true
+- name: public-concordances-api-sidekick@.service
+  count: 2
+- name: public-concordances-api@.service
+  version: v0.0.9
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

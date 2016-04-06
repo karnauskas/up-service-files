@@ -150,6 +150,7 @@ services:
 - name: methode-content-importer@.service
   version: v45
   count: 2
+  sequentialDeployment: true
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service

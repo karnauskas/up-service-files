@@ -10,8 +10,8 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/public-annotations-api-%i/path /__health; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port public-annotations-api-%i 8080 | cut -d':' -f2)`; \
-    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq -e '[.checks[].ok] | all' 2>&1>/dev/null && etcdctl set /ft/services/public-annotations-api/servers/%i http://%H:$PORT --ttl 5; \
-    sleep 4; \
+    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq -e '[.checks[].ok] | all' 2>&1>/dev/null && etcdctl set /ft/services/public-annotations-api/servers/%i http://%H:$PORT --ttl 10; \
+    sleep 5; \
   done"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/public-annotations-api/servers/%i

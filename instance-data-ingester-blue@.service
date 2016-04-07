@@ -1,8 +1,8 @@
 [Unit]
-Description=Instance data ingester
+Description=Instance data ingester Blue
 After=docker.service
 Requires=docker.service
-Wants=instance-data-ingester-sidekick@%i.service
+Wants=instance-data-ingester-blue-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

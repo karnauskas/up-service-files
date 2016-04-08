@@ -109,12 +109,12 @@ services:
 - name: instance-data-ingester-blue-sidekick@.service
   count: 1
 - name: instance-data-ingester-blue@.service
-  version: v3
+  version: v6
   count: 1
 - name: instance-data-ingester-red-sidekick@.service
   count: 1
 - name: instance-data-ingester-red@.service
-  version: v3
+  version: v6
   count: 1
 - name: kafka-rest-proxy-sidekick.service
 - name: kafka-rest-proxy.service

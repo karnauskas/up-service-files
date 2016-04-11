@@ -1,0 +1,21 @@
+[Unit]
+Description=Instance data ingester Red sidekick
+BindsTo=instance-data-ingester-red@%i.service
+After=instance-data-ingester-red@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/instance-data-ingester-red/healthcheck     true; \
+    etcdctl mkdir /ft/services/instance-data-ingester-red/servers; \
+    etcdctl set /ft/healthcheck/instance-data-ingester-red-%i/path /__health; \
+  while true; do \
+      PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port instance-data-ingester-red-%i 8080 | cut -d':' -f2)`; \
+      etcdctl set /ft/services/instance-data-ingester-red/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+      sleep 120; \
+    done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/instance-data-ingester-red/servers/%i
+
+[X-Fleet]
+MachineOf=instance-data-ingester-red@%i.service
+

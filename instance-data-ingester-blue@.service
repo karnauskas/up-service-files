@@ -1,0 +1,31 @@
+[Unit]
+Description=Instance data ingester Blue
+After=docker.service
+Requires=docker.service
+Wants=instance-data-ingester-blue-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+MemoryLimit=1G
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/instance-data-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull up-registry.ft.com/coco/instance-data-ingester:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export PORT=8080; \
+  export ADMIN_PORT=8081; \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
+  export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
+  /usr/bin/docker run --rm --name %p-%i -p $PORT -p $ADMIN_PORT --env "GRAPHITE_HOST=graphite.ft.com" --env "GRAPHITE_PORT=2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.%p.%i" --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" --env "VULCAN_HOST=%H" --env "NEO4J_INSTANCE_CODE=blue" up-registry.ft.com/coco/instance-data-ingester:$DOCKER_APP_VERSION'
+
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

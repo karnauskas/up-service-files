@@ -1,0 +1,24 @@
+[Unit]
+Description=Special Reports rw neo4j red Sidekick
+BindsTo=special-reports-rw-neo4j-red@%i.service
+After=special-reports-rw-neo4j-red@%i.service
+
+[Service]
+ExecStart=/bin/sh -c "\
+  etcdctl set   /ft/services/special-reports-rw-neo4j-red/healthcheck true; \
+  etcdctl mkdir /ft/services/special-reports-rw-neo4j-red/servers; \
+  etcdctl set /ft/healthcheck/special-reports-rw-neo4j-red-%i/path /__health; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port special-reports-rw-neo4j-red-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/special-reports-rw-neo4j-red/servers/%i "http://$HOSTNAME:$PORT" --ttl 150; \
+    sleep 120; \
+  done"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/special-reports-rw-neo4j-red/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=special-reports-rw-neo4j-red@%i.service
+
+

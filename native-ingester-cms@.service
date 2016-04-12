@@ -23,7 +23,7 @@ ExecStart=/bin/bash -c '\
 	--env "SRC_CONCURRENT_PROCESSING=true" \
 	--env "SRC_UUID_FIELD=uuid" \
 	--env "DEST_ADDRESS=http://%H:8080" \
-	--env "DEST_COLLECTION=native-store" \
+	--env "DEST_COLLECTIONS_BY_ORIGINS=[{\"originId\": \"http://cmdb.ft.com/systems/methode-web-pub\", \"collection\": \"methode\"},{\"originId\": \"http://cmdb.ft.com/systems/wordpress\", \"collection\": \"wordpress\"}]" \
 	--env "DEST_HEADER=nativerw" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
 	coco/native-ingester:$DOCKER_APP_VERSION'

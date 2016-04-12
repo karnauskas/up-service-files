@@ -5,7 +5,7 @@ Requires=update-engine.service
 [Service]
 Environment="LOCATION=https://raw.githubusercontent.com/Financial-Times/coreos-upgrade/master/os-upgrade.sh"
 Type=oneshot
-ExecStartPre=/bin/sh -c "curl -sSL --retry 5 --retry-delay 2 -o /tmp/os-upgrade.sh $LOCATIOIN"
+ExecStartPre=/bin/sh -c "curl -sSL --retry 5 --retry-delay 2 -o /tmp/os-upgrade.sh $LOCATION"
 ExecStart=/bin/sh /tmp/os-upgrade.sh
 
 [X-Fleet]

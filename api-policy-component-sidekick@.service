@@ -4,16 +4,19 @@ BindsTo=api-policy-component@%i.service
 After=api-policy-component@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set /ft/services/api-policy-component/healthcheck true; \
-  etcdctl mkdir /ft/services/api-policy-component/servers; \
-  etcdctl set /ft/healthcheck/api-policy-component-%i/path /__health; \
-  etcdctl set /ft/healthcheck/api-policy-component-%i/categories read; \
-  while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port api-policy-component-%i 8080 | cut -d':' -f2)`; \
-    curl -s -H \"Accept: application/json\" 0.0.0.0:$PORT/__health | jq -e '[.checks[].ok] | all' 2>&1>/dev/null && etcdctl set /ft/services/api-policy-component/servers/%i http://%H:$PORT --ttl 10; \
+  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
+  while [ -z $PORT ]; do \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+    echo 'Port not set, retrying'; \
     sleep 5; \
-  done"
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/api-policy-component/servers/%i
 

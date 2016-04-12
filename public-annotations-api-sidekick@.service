@@ -6,15 +6,16 @@ After=public-annotations-api@%i.service
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/public-annotations-api/healthcheck     true; \
-  etcdctl mkdir /ft/services/public-annotations-api/servers; \
-  etcdctl set /ft/healthcheck/public-annotations-api-%i/path /__health; \
+  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
-    PORT=`echo $(/usr/bin/docker port public-annotations-api-%i 8080 | cut -d':' -f2)`; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
     echo 'Port not set, retrying'; \
     sleep 5; \
   done; \
-  etcdctl set /ft/services/public-annotations-api/servers/%i http://%H:$PORT;"
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 Restart=on-failure
 RestartSec=60

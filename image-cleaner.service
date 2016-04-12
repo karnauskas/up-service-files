@@ -4,6 +4,7 @@ Requires=docker.service
 Wants=docker.socket
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -12,7 +13,7 @@ ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
 ExecStart=/bin/sh -c "\
   while true; do \
-    docker run --name %p --rm -v /var/run/docker.sock:/var/run/docker.sock coco/docker-gc || docker rmi coco/docker-gc; \
+    docker run --name %p --rm -v /var/run/docker.sock:/var/run/docker.sock coco/docker-gc:$DOCKER_APP_VERSION || docker rmi coco/docker-gc:$DOCKER_APP_VERSION; \
     sleep 3600; \
   done"
 ExecStop=/usr/bin/docker stop -t 3 %p

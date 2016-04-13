@@ -173,7 +173,7 @@ services:
 - name: native-ingester-cms-sidekick@.service
   count: 2
 - name: native-ingester-cms@.service
-  version: v0.0.4
+  version: v0.0.5
   count: 2
 - name: native-ingester-metadata-sidekick@.service
   count: 2

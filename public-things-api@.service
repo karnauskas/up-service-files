@@ -16,7 +16,14 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/public-things-api:$DOCKE
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" --env "APP_PORT=$APP_PORT" --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.public-things-api.%i" --env "LOG_METRICS=false" --env "CACHE_DURATION=30s" coco/public-things-api:$DOCKER_APP_VERSION;'
+  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT \
+  -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" \
+  -e "APP_PORT=$APP_PORT" \
+  -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+  -e "GRAPHITE_PREFIX=coco.services.$ENV.public-things-api.%i" \
+  -e "LOG_METRICS=false" \
+  -e "CACHE_DURATION=30s" \
+  coco/public-things-api:$DOCKER_APP_VERSION;'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

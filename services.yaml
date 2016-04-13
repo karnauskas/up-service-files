@@ -109,6 +109,7 @@ services:
   version: v1.0.0
   count: 1
 - name: image-cleaner.service
+  version: 1.0.0
 - name: instance-data-ingester-blue-sidekick@.service
   count: 1
 - name: instance-data-ingester-blue@.service
@@ -412,7 +413,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v61
+  version: v62
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

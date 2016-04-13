@@ -95,6 +95,7 @@ services:
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
+  version: 1.0.1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
@@ -230,6 +231,8 @@ services:
 - name: organisations-rw-neo4j-red@.service
   version: v0.0.34
   count: 2
+- name: os-upgrade.service
+  desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: people-rw-neo4j-blue@.service

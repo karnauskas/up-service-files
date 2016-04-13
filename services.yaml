@@ -242,7 +242,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.11
+  version: v0.0.13
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
@@ -271,7 +271,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: v1.0.10
+  version: 0.0.13
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service

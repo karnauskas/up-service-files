@@ -15,6 +15,3 @@ ExecStart=/bin/sh -c '\
 ExecStop=/usr/bin/docker stop %p
 Restart=on-failure
 RestartSec=60
-
-[X-Fleet]
-MachineOf=varnish@%i.service

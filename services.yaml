@@ -184,7 +184,7 @@ services:
 - name: native-ingester-cms-sidekick@.service
   count: 2
 - name: native-ingester-cms@.service
-  version: 0.0.3
+  version: v0.0.3
   count: 2
 - name: native-ingester-metadata-sidekick@.service
   count: 2

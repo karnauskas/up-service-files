@@ -421,7 +421,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v46
+  version: v75
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

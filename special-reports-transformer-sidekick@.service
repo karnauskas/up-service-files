@@ -18,5 +18,3 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=special-reports-transformer@%i.service
-
-

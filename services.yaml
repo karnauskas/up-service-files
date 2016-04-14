@@ -24,12 +24,12 @@ services:
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
-  version: v11
+  version: v11.0.2
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge@.service
-  version: v11
+  version: v11.0.2
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -39,7 +39,7 @@ services:
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
-  version: v11
+  version: v11.0.2
   count: 2
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1

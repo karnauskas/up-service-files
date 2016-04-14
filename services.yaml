@@ -181,10 +181,15 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+- name: native-ingester-cms-sidekick@.service
+  count: 2
+- name: native-ingester-cms@.service
+  version: v1.0.0
+  count: 2
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
-  version: v0.0.2
+  version: v1.0.0
   count: 2
 - name: nativerw-sidekick@.service
   count: 2

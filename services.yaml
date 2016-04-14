@@ -135,6 +135,11 @@ services:
 - name: locations-transformer@.service
   version: v1.0.0
   count: 2
+- name: special-reports-transformer-sidekick@.service
+  count: 2
+- name: special-reports-transformer@.service
+  version: v1.0.0
+  count: 2
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j-blue@.service

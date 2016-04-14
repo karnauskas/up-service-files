@@ -13,9 +13,9 @@ MemoryLimit=1G
 ExecStartPre=-/bin/bash -c 'docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/native-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/native-ingester:$DOCKER_APP_VERSION'
-ExecStartPre=/bin/bash -c 'export DEST_COLLECTIONS_BY_ORIGINS="[{\"originId\": \"http://cmdb.ft.com/systems/methode-web-pub\", \"collection\": \"methode\"},{\"originId\": \"http://cmdb.ft.com/systems/wordpress\", \"collection\": \"wordpress\"}]"'
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    export DEST_COLLECTIONS_BY_ORIGINS="[{\"originId\": \"http://cmdb.ft.com/systems/methode-web-pub\", \"collection\": \"methode\"},{\"originId\": \"http://cmdb.ft.com/systems/wordpress\", \"collection\": \"wordpress\"}]" \
 	docker run --rm --name %p-%i -p 8080 \
 	--env "SRC_ADDR=http://%H:8080" \
 	--env "SRC_GROUP=nativeIngesterCms" \

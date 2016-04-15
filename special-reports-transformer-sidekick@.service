@@ -4,6 +4,7 @@ BindsTo=special-reports-transformer@%i.service
 After=special-reports-transformer@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
@@ -14,7 +15,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/$SERVICE/servers/%i
+ExecStop=/usr/bin/etcdctl rm /ft/services/special-reports-transformer/servers/%i
 Restart=on-failure
 RestartSec=60
 

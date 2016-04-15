@@ -1,5 +1,5 @@
 [Unit]
-Description=Native Ingester for Metadata
+Description=Native Ingester for NativeCmsPublicationEvents
 After=docker.service
 Requires=docker.service
 
@@ -15,11 +15,11 @@ ExecStartPre=-/bin/bash -c 'docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/native-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/native-ingester:$DOCKER_APP_VERSION'
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    export DEST_COLLECTIONS_BY_ORIGINS="{\\"http://cmdb.ft.com/systems/methode-web-pub\\": \\"v1-metadata\\"}"; \
+    export DEST_COLLECTIONS_BY_ORIGINS="{\\"http://cmdb.ft.com/systems/methode-web-pub\\": \\"methode\\", \\"http://cmdb.ft.com/systems/wordpress\\": \\"wordpress\\"}"; \
 	docker run --rm --name %p-%i -p 8080 \
 	--env "SRC_ADDR=http://%H:8080" \
-	--env "SRC_GROUP=nativeIngesterMetadata" \
-	--env "SRC_TOPIC=NativeCmsMetadataPublicationEvents" \
+	--env "SRC_GROUP=nativeIngesterCms" \
+	--env "SRC_TOPIC=NativeCmsPublicationEvents" \
 	--env "SRC_QUEUE=kafka" \
 	--env "SRC_CONCURRENT_PROCESSING=true" \
 	--env "SRC_UUID_FIELD=uuid" \
@@ -34,4 +34,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=native-ingester-metadata@*.service
+Conflicts=native-ingester-cms@*.service

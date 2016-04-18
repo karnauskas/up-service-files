@@ -435,7 +435,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v75
+  version: v76
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

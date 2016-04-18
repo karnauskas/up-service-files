@@ -24,12 +24,12 @@ services:
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
-  version: v11.0.1
+  version: v11
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge@.service
-  version: v11.0.1
+  version: v11
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -39,7 +39,7 @@ services:
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
-  version: v11.0.1
+  version: v11
   count: 2
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
@@ -69,12 +69,12 @@ services:
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: content-rw-neo4j-blue@.service
-  version: v0.0.26
+  version: v0.0.29
   count: 2
 - name: content-rw-neo4j-red-sidekick@.service
   count: 2
 - name: content-rw-neo4j-red@.service
-  version: v0.0.26
+  version: v0.0.29
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -90,11 +90,12 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v56
+  version: v60
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
+  version: 1.0.1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
@@ -106,15 +107,16 @@ services:
   version: v1.0.0
   count: 1
 - name: image-cleaner.service
+  version: 1.0.0
 - name: instance-data-ingester-blue-sidekick@.service
   count: 1
 - name: instance-data-ingester-blue@.service
-  version: v6
+  version: v9
   count: 1
 - name: instance-data-ingester-red-sidekick@.service
   count: 1
 - name: instance-data-ingester-red@.service
-  version: v6
+  version: v9
   count: 1
 - name: kafka-rest-proxy-sidekick.service
 - name: kafka-rest-proxy.service
@@ -133,6 +135,11 @@ services:
 - name: locations-transformer-sidekick@.service
   count: 2
 - name: locations-transformer@.service
+  version: v1.0.0
+  count: 2
+- name: special-reports-transformer-sidekick@.service
+  count: 2
+- name: special-reports-transformer@.service
   version: v1.0.0
   count: 2
 - name: memberships-rw-neo4j-blue-sidekick@.service
@@ -180,10 +187,15 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+- name: native-ingester-cms-sidekick@.service
+  count: 2
+- name: native-ingester-cms@.service
+  version: v1.0.1
+  count: 2
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
-  version: v0.0.2
+  version: v1.0.1
   count: 2
 - name: nativerw-sidekick@.service
   count: 2
@@ -229,6 +241,8 @@ services:
 - name: organisations-rw-neo4j-red@.service
   version: v0.0.34
   count: 2
+- name: os-upgrade.service
+  desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: people-rw-neo4j-blue@.service
@@ -242,36 +256,36 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.11
+  version: v0.0.13
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.0.9
+  version: v0.0.10
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v0.0.2
+  version: v0.0.6
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: v0.0.41
+  version: v0.0.43
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.0.64
+  version: v0.0.65
   count: 2
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: v1.0.10
+  version: 0.0.13
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
@@ -310,6 +324,16 @@ services:
 - name: sections-transformer-sidekick@.service
   count: 2
 - name: sections-transformer@.service
+  version: v1.0.0
+  count: 2
+- name: special-reports-rw-neo4j-blue-sidekick@.service
+  count: 2
+- name: special-reports-rw-neo4j-blue@.service
+  version: v1.0.0
+  count: 2
+- name: special-reports-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: special-reports-rw-neo4j-red@.service
   version: v1.0.0
   count: 2
 - name: splunk-forwarder.service
@@ -365,12 +389,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v1-annotations-rw-blue@.service
-  version: v0.0.12
+  version: v0.0.21
   count: 2
 - name: v1-annotations-rw-red-sidekick@.service
   count: 2
 - name: v1-annotations-rw-red@.service
-  version: v0.0.12
+  version: v0.0.21
   count: 2
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
@@ -385,17 +409,17 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.10
+  version: v0.0.11
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v2-annotations-rw-blue@.service
-  version: v0.0.19
+  version: v0.0.21
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
 - name: v2-annotations-rw-red@.service
-  version: v0.0.19
+  version: v0.0.21
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
@@ -410,7 +434,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v61
+  version: v62
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

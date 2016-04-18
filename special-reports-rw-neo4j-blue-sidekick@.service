@@ -1,13 +1,13 @@
 [Unit]
-Description=Public Annotations API Service Sidekick
-BindsTo=public-annotations-api@%i.service
-After=public-annotations-api@%i.service
+Description=Special Reports rw neo4j blue Sidekick
+BindsTo=special-reports-rw-neo4j-blue@%i.service
+After=special-reports-rw-neo4j-blue@%i.service
 
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
-  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl set   /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
@@ -17,9 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/public-annotations-api/servers/%i
+ExecStop=/usr/bin/etcdctl rm /ft/services/special-reports-rw-neo4j-blue/servers/%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=public-annotations-api@%i.service
+MachineOf=special-reports-rw-neo4j-blue@%i.service

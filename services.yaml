@@ -69,12 +69,12 @@ services:
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: content-rw-neo4j-blue@.service
-  version: v0.0.30
+  version: v0.0.31
   count: 2
 - name: content-rw-neo4j-red-sidekick@.service
   count: 2
 - name: content-rw-neo4j-red@.service
-  version: v0.0.30
+  version: v0.0.31
   count: 2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -145,12 +145,12 @@ services:
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j-blue@.service
-  version: v0.0.31
+  version: v0.0.32
   count: 2
 - name: memberships-rw-neo4j-red-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j-red@.service
-  version: v0.0.31
+  version: v0.0.32
   count: 2
 - name: methode-article-transformer-sidekick@.service
   count: 2
@@ -229,24 +229,24 @@ services:
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-blue@.service
-  version: v0.0.35
+  version: v0.0.36
   count: 2
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-red@.service
-  version: v0.0.35
+  version: v0.0.36
   count: 2
 - name: os-upgrade.service
   desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: people-rw-neo4j-blue@.service
-  version: v0.0.55
+  version: v0.0.56
   count: 2
 - name: people-rw-neo4j-red-sidekick@.service
   count: 2
 - name: people-rw-neo4j-red@.service
-  version: v0.0.55
+  version: v0.0.56
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -280,7 +280,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 0.0.14
+  version: 0.0.15
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
@@ -295,12 +295,12 @@ services:
 - name: roles-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: roles-rw-neo4j-blue@.service
-  version: v0.0.18
+  version: v0.0.19
   count: 2
 - name: roles-rw-neo4j-red-sidekick@.service
   count: 2
 - name: roles-rw-neo4j-red@.service
-  version: v0.0.18
+  version: v0.0.19
   count: 2
 - name: sections-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -380,12 +380,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v1-annotations-rw-blue@.service
-  version: v0.0.22
+  version: v0.0.23
   count: 2
 - name: v1-annotations-rw-red-sidekick@.service
   count: 2
 - name: v1-annotations-rw-red@.service
-  version: v0.0.22
+  version: v0.0.23
   count: 2
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
@@ -405,12 +405,12 @@ services:
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v2-annotations-rw-blue@.service
-  version: v0.0.22
+  version: v0.0.23
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
 - name: v2-annotations-rw-red@.service
-  version: v0.0.22
+  version: v0.0.23
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1

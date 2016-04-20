@@ -9,7 +9,7 @@ Type=oneshot
 Environment="DOCKER_APP_VERSION=latest"
 
 # should start up instantly, so start timeout can be 0
-TimeoutStartSec=0
+TimeoutStartSec=1
 
 # let Docker remove work correctly.
 KillMode=none

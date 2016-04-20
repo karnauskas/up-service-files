@@ -38,7 +38,6 @@ ExecStart=/bin/sh -c "\
         -e DATA_FOLDER=$DATA_FOLDER \
         -e S3_DOMAIN=$S3_DOMAIN \
         -e ENV_TAG=$ENV_TAG \
-        -e FOO=$BAR \
         -v /vol/mongodb:$DATA_FOLDER \
         up-registry.ft.com/coco/mongodb-backup:$DOCKER_APP_VERSION; "
 

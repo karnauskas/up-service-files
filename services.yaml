@@ -92,7 +92,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v58
+  version: v60
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
@@ -157,6 +157,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
+  version: v43
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -403,7 +404,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.10
+  version: v0.0.11
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
@@ -428,7 +429,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v62
+  version: v63
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

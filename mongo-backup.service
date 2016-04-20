@@ -1,5 +1,5 @@
 [Unit]
-Description=Job to backup mongo DB data files to S4
+Description=Job to backup mongo DB data files to S3
 
 [Service]
 # process will be short-lived and that systemd should wait for the process to
@@ -9,7 +9,7 @@ Type=oneshot
 Environment="DOCKER_APP_VERSION=latest"
 
 # should start up instantly, so start timeout can be 0
-TimeoutStartSec=1
+TimeoutStartSec=0
 
 # let Docker remove work correctly.
 KillMode=none

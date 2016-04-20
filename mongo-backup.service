@@ -1,5 +1,5 @@
 [Unit]
-Description=Job to backup mongo DB data files to S3
+Description=Job to backup mongo DB data files to S4
 
 [Service]
 # process will be short-lived and that systemd should wait for the process to

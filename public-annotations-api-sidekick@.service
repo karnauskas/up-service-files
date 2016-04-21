@@ -17,7 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/public-annotations-api/servers/%i
+ExecStop=/bin/sh -c '\
+  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
+  etcdctl rm /ft/services/$SERVICE/servers/%i;'
 Restart=on-failure
 RestartSec=60
 

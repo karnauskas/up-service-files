@@ -108,6 +108,16 @@ services:
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
+- name: industry-classification-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: industry-classification-rw-neo4j-blue@.service
+  version: v0.0.3
+  count: 1
+- name: industry-classification-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: industry-classification-rw-neo4j-red@.service
+  version: v0.0.3
+  count: 1
 - name: instance-data-ingester-blue-sidekick@.service
   count: 1
 - name: instance-data-ingester-blue@.service

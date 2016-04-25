@@ -1,5 +1,5 @@
 [Unit]
-Description=Industry Classifications Reader-Writer for Blue Neo4j Service Sidekick
+Description=Industry Classification Reader-Writer for blue Neo4j Service Sidekick
 BindsTo=industry-classifications-rw-neo4j-blue@%i.service
 After=industry-classifications-rw-neo4j-blue@%i.service
 
@@ -9,8 +9,8 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/industry-classifications-rw-neo4j-blue/servers; \
   etcdctl set /ft/healthcheck/industry-classifications-rw-neo4j-blue-%i/path /__health; \
   while true; do \
-    industry-classifications_RW_PORT=`[ $industry-classifications_RW_PORT ] && echo $industry-classifications_RW_PORT || echo $(/usr/bin/docker port industry-classifications-rw-neo4j-blue-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/industry-classifications-rw-neo4j-blue/servers/%i "http://$HOSTNAME:$industry-classifications_RW_PORT" --ttl 600; \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port industry-classifications-rw-neo4j-blue-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/industry-classifications-rw-neo4j-blue/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
     sleep 120; \
   done"
 
@@ -20,3 +20,4 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=industry-classifications-rw-neo4j-blue@%i.service
+

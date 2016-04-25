@@ -10,17 +10,14 @@ ExecStart=/bin/sh -c '\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set 	/ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set 	/ft/healthcheck/$SERVICE-%i/categories 	read; \
-  etcdctl set   /ft/services/$SERVICE/path-regex/content /content.*isAnnotatedBy=.*$; \
+  etcdctl set 	/vulcand/frontends/$SERVICE/frontend '{"Type": "http", "BackendId": "vcb-public-content-by-concept-api", "Route": "PathRegexp(`^\/content.*isAnnotatedBy=.*$`) && Host(`public-services`)"}\'; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d":" -f2)`; \
     curl -s -H "Accept: application/json" 0.0.0.0:$PORT/__health | jq -e \'[.checks[].ok] | all\' 2>&1>/dev/null && etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT --ttl 10; \
     sleep 5; \
   done'
 
-ExecStop=/bin/sh -c '\
-  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
-  etcdctl rm /ft/services/$SERVICE/servers/%i;'
-
+ExecStop=/usr/bin/etcdctl rm /ft/services/public-content-by-concept-api/servers/%i
 Restart=on-failure
 RestartSec=60
 

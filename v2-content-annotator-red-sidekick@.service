@@ -4,15 +4,18 @@ BindsTo=v2-content-annotator-red@%i.service
 After=v2-content-annotator-red@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/v2-content-annotator-red/healthcheck     true; \
-  etcdctl mkdir /ft/services/v2-content-annotator-red/servers; \
-  etcdctl set /ft/healthcheck/v2-content-annotator-red-%i/path /__health; \
-  while true; do \
-    V2_CONTENT_ANNOTATOR_PORT=`[ $V2_CONTENT_ANNOTATOR_PORT ] && echo $V2_CONTENT_ANNOTATOR_PORT || echo $(/usr/bin/docker port v2-content-annotator-red-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/v2-content-annotator-red/servers/%i "http://$HOSTNAME:$V2_CONTENT_ANNOTATOR_PORT" --ttl 600; \
-    sleep 120; \
-  done"
+  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+    echo 'Port not set, retrying'; \
+    sleep 5; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/v2-content-annotator-red/servers/%i
 Restart=on-failure

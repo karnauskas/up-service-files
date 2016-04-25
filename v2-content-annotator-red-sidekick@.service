@@ -6,7 +6,7 @@ After=v2-content-annotator-red@%i.service
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \

@@ -10,7 +10,8 @@ ExecStart=/bin/sh -c '\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
-  etcdctl set /vulcand/frontends/$SERVICE/frontend '{"Type": "http", "BackendId": "vcb-public-concordances-api", "Route": "Path(`/concordances`) && Host(`public-services`)"}\'; \
+  etcdctl set /vulcand/frontends/$SERVICE/frontend \
+  \'{"Type": "http", "BackendId": "vcb-public-concordances-api", "Route": "Path(`/concordances`) && Host(`public-services`)"}\'; \
   while true; do \
     PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d":" -f2)`; \
     curl -s -H "Accept: application/json" 0.0.0.0:$PORT/__health | jq -e "[.checks[].ok] | all" 2>&1>/dev/null && \

@@ -1,0 +1,26 @@
+[Unit]
+Description=Industry Classification Reader-Writer for blue Neo4j Service
+After=vulcan.service
+Requires=docker.service
+Wants=industry-classifications-rw-neo4j-blue-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/industry-classifications-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/industry-classifications-rw-neo4j:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-blue/db/data" --env "APP_PORT=$APP_PORT" --env "BATCH_SIZE=60" --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.industry-classifications-rw-neo4j-blue.%i" coco/industry-classifications-rw-neo4j:$DOCKER_APP_VERSION;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=industry-classifications-rw-neo4j-blue@*.service
+

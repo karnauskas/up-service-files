@@ -8,11 +8,11 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull wurstmeister/kafka:0.8.2.0
-ExecStart=/bin/bash -c "\
-  /usr/bin/docker run --rm --name %p -p 9092:9092 --link zookeeper:zk --env \"KAFKA_ADVERTISED_HOST_NAME=$$HOSTNAME\" --env=\"KAFKA_MESSAGE_MAX_BYTES=16777216\" --env=\"KAFKA_REPLICA_FETCH_MAX_BYTES=16777216\" -v /vol/kafka:/kafka -v /var/run/docker.sock:/var/run/docker.sock wurstmeister/kafka:0.8.2.0"
+ExecStartPre=-/bin/sh -c '/usr/bin/docker kill %p >/dev/null 2>&1'
+ExecStartPre=-/bin/sh -c '/usr/bin/docker rm %p >/dev/null 2>&1'
+ExecStartPre=/bin/sh -c 'docker history coco/kafka-docker:0.9.0.1 >/dev/null 2>&1 || docker pull coco/kafka-docker:0.9.0.1'
+ExecStart=/bin/sh -c '\
+  docker run --rm --name %p -p 9092:9092 --link zookeeper:zk -e="KAFKA_ADVERTISED_HOST_NAME=$$HOSTNAME" -e="KAFKA_MESSAGE_MAX_BYTES=16777216" -e="KAFKA_REPLICA_FETCH_MAX_BYTES=16777216" -v /vol/kafka:/kafka -v /var/run/docker.sock:/var/run/docker.sock coco/kafka-docker:0.9.0.1'
 ExecStop=/usr/bin/docker stop %p
 ExecStartPost=/bin/sh -c "\
   KAFKA_IP=$HOSTNAME; \

@@ -9,10 +9,10 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull wurstmeister/zookeeper
-ExecStart=/usr/bin/docker run --name %p -v /vol/zk:/opt/zookeeper-3.4.6/data -p 2181:2181 wurstmeister/zookeeper
+ExecStartPre=-/bin/sh -c 'docker kill %p >/dev/null 2>&1'
+ExecStartPre=-/bin/sh -c 'docker rm %p >/dev/null 2>&1'
+ExecStartPre=/bin/sh -c 'docker history coco/zookeeper-docker:3.4.6-30d7482 >/dev/null 2>&1 || docker pull coco/zookeeper-docker:3.4.6-30d7482'
+ExecStart=/usr/bin/docker run --name %p -v /vol/zk:/opt/zookeeper-3.4.6/data -p 2181:2181 coco/zookeeper-docker:3.4.6-30d7482
 ExecStartPost=/bin/sh -c "\
   etcdctl set /ft/config/zookeeper/ip $HOSTNAME; \
   etcdctl set /ft/config/zookeeper/port 2181;"

@@ -4,16 +4,21 @@ BindsTo=nativerw@%i.service
 After=nativerw@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/nativerw/healthcheck     true; \
-  etcdctl mkdir /ft/services/nativerw/servers; \
-  etcdctl set /ft/healthcheck/nativerw-%i/path /__health; \
-  while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port nativerw-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/nativerw/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
-    sleep 120; \
-  done"
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
 ExecStop=/usr/bin/etcdctl rm /ft/services/nativerw/servers/%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=nativerw@%i.service

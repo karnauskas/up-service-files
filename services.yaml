@@ -1,9 +1,9 @@
 services:
 - name: aggregate-healthcheck-sidekick@.service
-  count: 1
+  count: 2
 - name: aggregate-healthcheck@.service
   version: v1.0.8
-  count: 1
+  count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
@@ -145,11 +145,6 @@ services:
 - name: locations-transformer-sidekick@.service
   count: 2
 - name: locations-transformer@.service
-  version: v1.0.0
-  count: 2
-- name: special-reports-transformer-sidekick@.service
-  count: 2
-- name: special-reports-transformer@.service
   version: v1.0.0
   count: 2
 - name: memberships-rw-neo4j-blue-sidekick@.service
@@ -335,6 +330,11 @@ services:
 - name: special-reports-rw-neo4j-red-sidekick@.service
   count: 2
 - name: special-reports-rw-neo4j-red@.service
+  version: v1.0.0
+  count: 2
+- name: special-reports-transformer-sidekick@.service
+  count: 2
+- name: special-reports-transformer@.service
   version: v1.0.0
   count: 2
 - name: splunk-forwarder.service

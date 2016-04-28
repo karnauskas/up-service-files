@@ -233,7 +233,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v30
+  version: v31
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -296,7 +296,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.17.0
+  version: v0.17.2
   count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1
@@ -458,6 +458,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v23
+  version: v25
   count: 2
 - name: zookeeper.service

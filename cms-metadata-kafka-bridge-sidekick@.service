@@ -4,15 +4,17 @@ BindsTo=cms-metadata-kafka-bridge@%i.service
 After=cms-metadata-kafka-bridge@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/cms-metadata-kafka-bridge/healthcheck     true; \
-  etcdctl mkdir /ft/services/cms-metadata-kafka-bridge/servers; \
-  etcdctl set /ft/healthcheck/cms-metadata-kafka-bridge-%i/path /__health; \
-  while true; do \
-    CMS_METADATA_KAFKA_BRIDGE_PORT=`[ $CMS_METADATA_KAFKA_BRIDGE_PORT ] && echo $CMS_METADATA_KAFKA_BRIDGE_PORT || echo $(/usr/bin/docker port cms-metadata-kafka-bridge-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/cms-metadata-kafka-bridge/servers/%i "http://$HOSTNAME:$CMS_METADATA_KAFKA_BRIDGE_PORT" --ttl 600; \
-    sleep 120; \
-  done"
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/cms-metadata-kafka-bridge/servers/%i
 Restart=on-failure

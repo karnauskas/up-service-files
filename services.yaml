@@ -1,9 +1,9 @@
 services:
 - name: aggregate-healthcheck-sidekick@.service
-  count: 1
+  count: 2
 - name: aggregate-healthcheck@.service
   version: v1.0.7
-  count: 1
+  count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service

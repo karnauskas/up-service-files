@@ -4,32 +4,19 @@ BindsTo=methode-image-binary-transformer@%i.service
 After=methode-image-binary-transformer@%i.service
 
 [Service]
-ExecStartPre=/bin/sh -c "\
-  etcdctl set /vulcand/backends/methode-image-binary-transformer/backend '{\"Type\": \"http\"}' ; \
-  etcdctl set /vulcand/backends/methode-image-binary-transformer-%i/backend '{\"Type\": \"http\"}' ; \
-  etcdctl set /vulcand/backends/methode-image-binary-transformer-admin/backend '{\"Type\": \"http\"}' ; \
-  etcdctl set /vulcand/frontends/methode-image-binary-transformer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-image-binary-transformer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-image-binary-transformer`)\"}'; \
-  etcdctl set /vulcand/frontends/methode-image-binary-transformer-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-image-binary-transformer-admin\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-image-binary-transformer-admin`)\"}'; \
-  \
-  etcdctl set /vulcand/frontends/methode-image-binary-transformer-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-image-binary-transformer-%i\\\", \\\"Route\\\":\\\"Path(\`/health/methode-image-binary-transformer-%i/__health\`)\\\"}\"; \
-  etcdctl set /vulcand/frontends/methode-image-binary-transformer-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-image-binary-transformer-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\";"
-
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set /ft/healthcheck/methode-image-binary-transformer-%i/path /__health; \
-  while true; do \
-    METHODE_IMAGE_BINARY_TRANSFORMER_PORT=`[ $METHODE_IMAGE_BINARY_TRANSFORMER_PORT ] && echo $METHODE_IMAGE_BINARY_TRANSFORMER_PORT || echo $(/usr/bin/docker port methode-image-binary-transformer-%i 8080 | cut -d':' -f2)`; \
-    ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT=`[ $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT ] && echo $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT || echo $(/usr/bin/docker port methode-image-binary-transformer-%i 8081 | cut -d':' -f2)`; \
-    etcdctl set /services/methode-image-binary-transformer/%i/host '%H' --ttl 600; \
-    etcdctl set /services/methode-image-binary-transformer/%i/app_port $METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 600; \
-    etcdctl set /services/methode-image-binary-transformer/%i/admin_port $ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT --ttl 600; \
-    etcdctl set /vulcand/backends/methode-image-binary-transformer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$METHODE_IMAGE_BINARY_TRANSFORMER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/methode-image-binary-transformer-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$METHODE_IMAGE_BINARY_TRANSFORMER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/methode-image-binary-transformer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ADMIN_METHODE_IMAGE_BINARY_TRANSFORMER_PORT\\\"}\" --ttl 600; \
-    sleep 120; \
-  done"
-ExecStop=/usr/bin/etcdctl rm --recursive /services/methode-image-binary-transformer/%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-image-binary-transformer/servers/srv%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-image-binary-transformer-admin/servers/srv%i
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+ExecStop=/usr/bin/etcdctl rm /services/methode-image-binary-transformer/%i
 Restart=on-failure
 RestartSec=60
 

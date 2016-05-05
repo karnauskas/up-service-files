@@ -4,33 +4,19 @@ BindsTo=methode-content-importer@%i.service
 After=methode-content-importer@%i.service
 
 [Service]
-ExecStartPre=/bin/sh -c "\
-  etcdctl set /vulcand/backends/methode-content-importer/backend '{\"Type\": \"http\"}' ; \
-  etcdctl set /vulcand/backends/methode-content-importer-%i/backend '{\"Type\": \"http\"}' ; \
-  etcdctl set /vulcand/backends/methode-content-importer-admin/backend '{\"Type\": \"http\"}' ; \
-  etcdctl set /vulcand/frontends/methode-content-importer/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-content-importer\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-content-importer`)\"}'; \
-  etcdctl set /vulcand/frontends/methode-content-importer-admin/frontend '{\"Type\": \"http\", \"BackendId\": \"methode-content-importer-admin\", \"Route\": \"PathRegexp(`/.*`) && Host(`methode-content-importer-admin`)\"}'; \
-  \
-  etcdctl set /vulcand/frontends/methode-content-importer-health-%i/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"methode-content-importer-%i\\\", \\\"Route\\\":\\\"Path(\`/health/methode-content-importer-%i/__health\`)\\\"}\"; \
-  etcdctl set /vulcand/frontends/methode-content-importer-health-%i/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/methode-content-importer-%i(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\";"
-
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set /ft/healthcheck/methode-content-importer-%i/path /__health; \
-  while true; do \
-    METHODE_CONTENT_IMPORTER_PORT=`[ $METHODE_CONTENT_IMPORTER_PORT ] && echo $METHODE_CONTENT_IMPORTER_PORT|| echo $(/usr/bin/docker port  methode-content-importer-%i 8080 | cut -d':' -f2)`; \
-    ADMIN_METHODE_CONTENT_IMPORTER_PORT=`[ $ADMIN_METHODE_CONTENT_IMPORTER_PORT ] && echo $ADMIN_METHODE_CONTENT_IMPORTER_PORT || echo $(/usr/bin/docker port methode-content-importer-%i 8081 | cut -d':' -f2)`; \
-    etcdctl set /services/methode-content-importer/%i/host '%H' --ttl 600; \
-    etcdctl set /services/methode-content-importer/%i/app_port $METHODE_CONTENT_IMPORTER_PORT --ttl 600; \
-    etcdctl set /services/methode-content-importer/%i/admin_port $ADMIN_METHODE_CONTENT_IMPORTER_PORT --ttl 600; \
-    etcdctl set /vulcand/backends/methode-content-importer/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$METHODE_CONTENT_IMPORTER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/methode-content-importer-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$METHODE_CONTENT_IMPORTER_PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/methode-content-importer-admin/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$ADMIN_METHODE_CONTENT_IMPORTER_PORT\\\"}\" --ttl 600; \
-    sleep 120; \
-  done"
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm --recursive /services/methode-content-importer/%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-content-importer/servers/srv%i
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methode-content-importer-admin/servers/srv%i
+ExecStop=/usr/bin/etcdctl rm /services/methode-content-importer/%i
 Restart=on-failure
 RestartSec=60
 

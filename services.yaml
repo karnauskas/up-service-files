@@ -13,7 +13,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v89
+  version: v90
   count: 2
   sequentialDeployment: true
 - name: binary-writer-sidekick@.service

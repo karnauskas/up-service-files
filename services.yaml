@@ -15,12 +15,12 @@ services:
 - name: binary-ingester@.service
   version: v90
   count: 2
-  sequentialDeployment: true
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service

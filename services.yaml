@@ -25,9 +25,19 @@ services:
 - name: cms-kafka-bridge@.service
   version: v11.0.6
   count: 2
+- name: cms-kafka-bridge-prod-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-prod@.service
+  version: v11.0.6
+  count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge@.service
+  version: v11.0.6
+  count: 2
+- name: cms-metadata-kafka-bridge-prod-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-prod@.service
   version: v11.0.6
   count: 2
 - name: cms-notifier-sidekick@.service
@@ -38,6 +48,11 @@ services:
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
+  version: v11.0.6
+  count: 2
+- name: concept-suggestions-kafka-bridge-prod-sidekick@.service
+  count: 2
+- name: concept-suggestions-kafka-bridge-prod@.service
   version: v11.0.6
   count: 2
 - name: content-ingester-neo4j-blue-sidekick@.service

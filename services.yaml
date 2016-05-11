@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v25
+  version: v28
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -80,7 +80,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v47
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -441,7 +441,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v0.0.6
+  version: v1.0.0
   count: 2
 - name: vulcan-config-builder.service
   version: v1.1.0

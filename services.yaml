@@ -407,6 +407,11 @@ services:
 - name: v1-content-annotator-red@.service
   version: v24
   count: 1
+- name: v1-orgs-transformer-sidekick@.service
+  count: 1
+- name: v1-orgs-transformer@.service
+  version: latest
+  count: 1  
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service

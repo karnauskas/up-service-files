@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: v1.0.7
+  version: v1.0.8
   count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
@@ -13,14 +13,14 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v89
+  version: v90
   count: 2
-  sequentialDeployment: true
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
@@ -44,17 +44,17 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v39
+  version: v44
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v39
+  version: v44
   count: 1
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v39
+  version: v44
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -149,11 +149,6 @@ services:
 - name: locations-transformer@.service
   version: v1.0.0
   count: 2
-- name: special-reports-transformer-sidekick@.service
-  count: 2
-- name: special-reports-transformer@.service
-  version: v1.0.0
-  count: 2
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j-blue@.service
@@ -225,7 +220,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v39
+  version: v44
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -341,6 +336,11 @@ services:
 - name: special-reports-rw-neo4j-red@.service
   version: v1.0.0
   count: 2
+- name: special-reports-transformer-sidekick@.service
+  count: 2
+- name: special-reports-transformer@.service
+  version: v1.0.0
+  count: 2
 - name: splunk-forwarder.service
 - name: subjects-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -414,7 +414,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.11
+  version: v0.0.12
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2

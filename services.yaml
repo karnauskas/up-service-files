@@ -69,7 +69,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v39
+  version: v45
   count: 2
 - name: content-preview-sidekick@.service
   count: 2

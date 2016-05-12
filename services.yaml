@@ -54,7 +54,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v39
+  version: v45
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -441,7 +441,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.0.7
+  version: v1.0.8
   count: 2
 - name: vulcan-config-builder.service
   version: v1.1.0

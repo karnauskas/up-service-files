@@ -442,6 +442,11 @@ services:
   version: v63
   count: 2
   sequentialDeployment: true
+- name: video-mapper-sidekick@.service
+  count: 2
+- name: video-mapper@.service
+  version: v1.0.6
+  count: 2
 - name: vulcan-config-builder.service
   version: v1.2.0
 - name: vulcan.service

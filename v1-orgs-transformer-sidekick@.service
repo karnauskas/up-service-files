@@ -4,6 +4,7 @@ BindsTo=v1-orgs-transformer@%i.service
 After=v1-orgs-transformer@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl mkdir /ft/services/$SERVICE/servers; \

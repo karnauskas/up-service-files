@@ -1,5 +1,5 @@
 [Unit]
-Description=Locations transformer
+Description=V1 Organisations transformer
 After=vulcan.service
 Requires=docker.service
 Wants=v1-orgs-transformer-sidekick@%i.service

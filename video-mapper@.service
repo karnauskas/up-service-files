@@ -16,8 +16,8 @@ ExecStartPre=/bin/bash -c 'docker history coco/video-mapper:$DOCKER_APP_VERSION 
 ExecStart=/bin/bash -c '\
   	export Q_AUTHORIZATION=$(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge/authorization_key); \
 	docker run --rm --name %p-%i -p 8080 \
-	--env "Q_ADDR=http://%H:8080" \
-	--env "Q_GROUP=videoMapper" \
+	--env "Q_ADDR=http://%H:8082" \
+	--env "Q_GROUP=video" \
 	--env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
 	--env "Q_READ_QUEUE=kafka" \
 	--env "Q_WRITE_TOPIC=CmsPublicationEvents" \

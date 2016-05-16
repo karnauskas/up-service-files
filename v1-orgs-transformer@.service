@@ -1,0 +1,27 @@
+[Unit]
+Description=V1 Organisations transformer
+After=vulcan.service
+Requires=docker.service
+Wants=v1-orgs-transformer-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/v1-orgs-transformer:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/v1-orgs-transformer:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export PORT=8080; \
+  export USER=$(/usr/bin/etcdctl get /ft/_credentials/tme/username); \
+  export PASS=$(/usr/bin/etcdctl get /ft/_credentials/tme/password); \
+  export TOKEN=$(/usr/bin/etcdctl get /ft/_credentials/tme/token); \
+  /usr/bin/docker run --rm --name %p-%i -p $PORT --env "BASE_URL=http://%H:8080/transformers/organisations/" --env "TME_BASE_URL=https://tme.ft.com" --env "TME_USERNAME=$USER" --env "TME_PASSWORD=$PASS" --env "TOKEN=$TOKEN" coco/v1-orgs-transformer:$DOCKER_APP_VERSION;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=v1-orgs-transformer@*.service

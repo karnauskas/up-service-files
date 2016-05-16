@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v25
+  version: v29
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -69,7 +69,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v44
+  version: v46
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -95,7 +95,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v47
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

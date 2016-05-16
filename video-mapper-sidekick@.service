@@ -4,19 +4,18 @@ BindsTo=video-mapper@%i.service
 After=video-mapper@%i.service
 
 [Service]
-RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
-  etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  while [ -z $PORT ]; do \
-    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
-    echo 'Port not set, retrying'; \
-    sleep 5; \
-  done; \
-  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
-  
+  etcdctl set   /ft/services/video-mapper/healthcheck     true; \
+  etcdctl mkdir /ft/services/video-mapper/servers; \
+  etcdctl set /ft/healthcheck/video-mapper-%i/path /__health; \
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port video-mapper-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /ft/services/video-mapper/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
+    sleep 120; \
+  done"
 ExecStop=/usr/bin/etcdctl rm /ft/services/video-mapper/servers/%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=video-mapper@%i.service

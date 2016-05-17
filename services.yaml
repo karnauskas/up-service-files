@@ -449,7 +449,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v85
+  version: v86
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

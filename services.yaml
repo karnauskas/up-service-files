@@ -167,7 +167,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v46
+  version: v49
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -231,7 +231,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v31
+  version: v32
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -443,7 +443,7 @@ services:
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service
-  version: v1.1.0
+  version: v1.2.0
 - name: vulcan.service
   version: v1.1.0
 - name: wordpress-article-transformer-sidekick@.service
@@ -454,6 +454,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v25
+  version: v27
   count: 2
 - name: zookeeper.service

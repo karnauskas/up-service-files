@@ -44,7 +44,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v32
+  version: v33
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2

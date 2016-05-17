@@ -180,7 +180,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v46
+  version: v49
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -479,6 +479,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v25
+  version: v27
   count: 2
 - name: zookeeper.service

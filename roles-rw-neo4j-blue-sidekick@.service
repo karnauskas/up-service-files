@@ -4,15 +4,17 @@ BindsTo=roles-rw-neo4j-blue@%i.service
 After=roles-rw-neo4j-blue@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/roles-rw-neo4j-blue/healthcheck     true; \
-  etcdctl mkdir /ft/services/roles-rw-neo4j-blue/servers; \
-  etcdctl set /ft/healthcheck/roles-rw-neo4j-blue-%i/path /__health; \
-  while true; do \
-    ROLES_RW_PORT=`[ $ROLES_RW_PORT ] && echo $ROLES_RW_PORT || echo $(/usr/bin/docker port roles-rw-neo4j-blue-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/roles-rw-neo4j-blue/servers/%i "http://$HOSTNAME:$ROLES_RW_PORT" --ttl 600; \
-    sleep 120; \
-  done"
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/roles-rw-neo4j-blue/servers/%i
 Restart=on-failure

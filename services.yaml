@@ -34,7 +34,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v32
+  version: v33
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
@@ -162,7 +162,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v44
+  version: v56
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -293,7 +293,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.17.1
+  version: v0.17.2
   count: 1
 - name: restorage-elasticsearch-sidekick.service
 - name: restorage-elasticsearch.service

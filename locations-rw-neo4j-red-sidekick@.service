@@ -4,15 +4,17 @@ BindsTo=locations-rw-neo4j-red@%i.service
 After=locations-rw-neo4j-red@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set   /ft/services/locations-rw-neo4j-red/healthcheck true; \
-  etcdctl mkdir /ft/services/locations-rw-neo4j-red/servers; \
-  etcdctl set /ft/healthcheck/locations-rw-neo4j-red-%i/path /__health; \
-  while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port locations-rw-neo4j-red-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/locations-rw-neo4j-red/servers/%i "http://$HOSTNAME:$PORT" --ttl 150; \
-    sleep 120; \
-  done"
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/locations-rw-neo4j-red/servers/%i
 Restart=on-failure

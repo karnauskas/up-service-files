@@ -95,7 +95,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v48
+  version: v49
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -426,11 +426,6 @@ services:
 - name: v1-content-annotator-red@.service
   version: v24
   count: 1
-- name: v1-orgs-transformer-sidekick@.service
-  count: 1
-- name: v1-orgs-transformer@.service
-  version: v0.0.2
-  count: 1  
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service

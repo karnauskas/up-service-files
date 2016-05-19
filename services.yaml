@@ -435,7 +435,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v63
+  version: v64
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

@@ -231,7 +231,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v32
+  version: v35
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2

@@ -175,7 +175,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v43
+  version: v44
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -459,7 +459,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v63
+  version: v64
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service
@@ -474,7 +474,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v76
+  version: v86
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

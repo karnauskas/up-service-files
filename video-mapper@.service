@@ -13,7 +13,6 @@ ExecStartPre=-/bin/bash -c 'docker kill %p-%i > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/video-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/video-mapper:$DOCKER_APP_VERSION'
 ExecStart=/bin/bash -c '\
-  	export Q_AUTHORIZATION=$(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge/authorization_key); \
 	docker run --rm --name %p-%i -p 8080 \
 	--env "Q_ADDR=http://%H:8080" \
 	--env "Q_GROUP=videoMapper" \
@@ -21,7 +20,6 @@ ExecStart=/bin/bash -c '\
 	--env "Q_READ_QUEUE=kafka" \
 	--env "Q_WRITE_TOPIC=CmsPublicationEvents" \
 	--env "Q_WRITE_QUEUE=kafka" \
-	--env "Q_AUTHORIZATION=$Q_AUTHORIZATION" \
 	coco/video-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

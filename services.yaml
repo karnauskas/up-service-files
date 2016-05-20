@@ -162,7 +162,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v56
+  version: v58
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -439,13 +439,13 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v63
+  version: v64
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service
   version: v1.2.0
 - name: vulcan.service
-  version: v1.1.0
+  version: v1.2.2
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service

@@ -465,7 +465,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.0.19
+  version: v1.0.20
   count: 2
 - name: vulcan-config-builder.service
   version: v1.2.1

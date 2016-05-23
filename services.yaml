@@ -175,12 +175,12 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v44
+  version: v58
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v46
+  version: v49
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -244,7 +244,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v32
+  version: v35
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -479,6 +479,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v25
+  version: v27
   count: 2
 - name: zookeeper.service

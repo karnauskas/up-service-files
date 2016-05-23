@@ -186,7 +186,6 @@ services:
 - name: mongo-backup.service
   desiredState: loaded
 - name: mongo-backup.timer
-- name: mongodb-all.service
 - name: mongodb-configurator.service
 - name: mongodb-sidekick@.service
   count: 3

@@ -13,14 +13,14 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v89
+  version: v90
   count: 2
-  sequentialDeployment: true
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
@@ -34,7 +34,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v32
+  version: v33
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
@@ -44,17 +44,17 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v39
+  version: v44
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v39
+  version: v44
   count: 1
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v39
+  version: v44
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -160,7 +160,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v44
+  version: v58
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -223,7 +223,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v39
+  version: v44
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -234,7 +234,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v31
+  version: v35
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -419,7 +419,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.11
+  version: v0.0.12
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
@@ -444,17 +444,17 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v63
+  version: v64
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service
   version: v1.2.0
 - name: vulcan.service
-  version: v1.1.0
+  version: v1.2.2
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v76
+  version: v86
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

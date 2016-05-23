@@ -249,7 +249,7 @@ services:
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-blue@.service
-  version: concordance-test
+  version: concordance-v2
   count: 2
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 2

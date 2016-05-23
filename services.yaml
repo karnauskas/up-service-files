@@ -31,6 +31,11 @@ services:
 - name: cms-metadata-kafka-bridge@.service
   version: v11.0.6
   count: 2
+- name: concept-kafka-bridge-sidekick@.service
+  count: 2
+- name: concept-kafka-bridge@.service
+  version: v11.0.6
+  count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service

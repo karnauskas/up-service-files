@@ -1,25 +1,28 @@
 [Unit]
-Description=Concept Kafka Bridge Sidekick
-BindsTo=concept-kafka-bridge@%i.service
-After=concept-kafka-bridge@%i.service
+Description=Concept Kafka Bridge
+After=vulcan.service
+Requires=docker.service
+Wants=concept-kafka-bridge-sidekick@%i.service
 
 [Service]
-RemainAfterExit=yes
-ExecStart=/bin/sh -c "\
-  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
-  etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  while [ -z $PORT ]; do \
-    sleep 5; \
-    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
-  done; \
-  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker pull coco/coco-kafka-bridge:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/concept-kafka-bridge/servers/%i
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export QUEUE_PROXY_ADDRS=$(/usr/bin/etcdctl get /ft/config/kafka-bridge/ucs_queue_proxy_addrs); \
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-kafka-bridge"; \
+  export AUTHORIZATION_KEY=$(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge/authorization_key); \
+  export VULCAN_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/vulcand/authorization_header); \
+  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" --env "GROUP_ID=$GROUP_ID" --env "CONSUMER_AUTOCOMMIT_ENABLE=true" --env "AUTHORIZATION_KEY=$AUTHORIZATION_KEY" --env "TOPIC=Concept" --env "PRODUCER_HOST=http://%H:8080" --env "PRODUCER_HOST_HEADER=kafka" --env "PRODUCER_VULCAN_AUTH=$VULCAN_AUTH" --env "PRODUCER_TYPE=proxy" coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=concept-kafka-bridge@%i.service
-
+Conflicts=concept-kafka-bridge@*.service

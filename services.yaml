@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v25
+  version: v29
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -49,17 +49,17 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v44
+  version: v46
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v44
+  version: v46
   count: 1
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v44
+  version: v46
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -85,7 +85,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v47
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -170,7 +170,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v46
+  version: v49
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -228,7 +228,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v44
+  version: v46
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -452,8 +452,13 @@ services:
   version: v64
   count: 2
   sequentialDeployment: true
+- name: video-mapper-sidekick@.service
+  count: 2
+- name: video-mapper@.service
+  version: v1.0.23
+  count: 2
 - name: vulcan-config-builder.service
-  version: v1.2.0
+  version: v1.2.1
 - name: vulcan.service
   version: v1.2.2
 - name: wordpress-article-transformer-sidekick@.service
@@ -464,6 +469,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v25
+  version: v27
   count: 2
 - name: zookeeper.service

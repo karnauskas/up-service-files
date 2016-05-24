@@ -16,7 +16,14 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/concept-ingester:$DOCKER
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT --env "APP_PORT=$APP_PORT" --env "PROXY_ADDR=http://$HOSTNAME:8080" --env "$GROUP_ID=BlueConcepts" --env "$TOPIC=Concept" --env "$SERVICES=people-rw-neo4j-blue,organisations-rw-neo4j-blue"
+  /usr/bin/docker run --rm --name %p-%i \
+  -p $APP_PORT \
+  -e "APP_PORT=$APP_PORT" \
+  -e "PROXY_ADDR=http://$HOSTNAME:8080" \
+  -e "$GROUP_ID=BlueConcepts" \
+  -e "$TOPIC=Concept" \
+  -e "$SERVICES=people-rw-neo4j-blue,organisations-rw-neo4j-blue" \
+  coco/concept-ingester:$DOCKER_APP_VERSION;'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

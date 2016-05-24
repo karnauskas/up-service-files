@@ -9,7 +9,7 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    PORT=`echo $(/usr/bin/docker port $SERVICE 8080 | cut -d':' -f2)`; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE 9200 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/elasticsearch/servers/s http://%H:$PORT;"
 ExecStop=/usr/bin/etcdctl rm /ft/services/elasticsearch/servers/s

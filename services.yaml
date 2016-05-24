@@ -46,6 +46,11 @@ services:
 - name: cms-notifier@.service
   version: v33
   count: 1
+- name: composite-orgs-transformer-sidekick@.service
+  count: 1
+- name: composite-orgs-transformer@.service
+  version: v0.0.1
+  count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service

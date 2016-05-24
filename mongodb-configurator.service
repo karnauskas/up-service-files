@@ -1,7 +1,7 @@
 [Unit]
 Description=MongoDB cluster configurator
 Requires=docker.service
-After=docker.service mongodb-all.service
+After=docker.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -14,14 +14,30 @@ RemainAfterExit=yes
 ExecStartPre=-/bin/bash -c "/usr/bin/docker kill %p > /dev/null 2>&1"
 ExecStartPre=-/bin/bash -c "/usr/bin/docker rm %p > /dev/null 2>&1"
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-mongodb-configurator:$DOCKER_APP_VERSION"
-ExecStart=/bin/bash -c "\
-    echo \"INFO Configuring mongodb cluster\"; \
-    MONGOS=$(etcdctl ls /ft/config/mongodb/); \
-    ALL=\"\"; \
-    for m in $MONGOS; do \
-      hostportadmin=$(etcdctl get $m/host):$(etcdctl get $m/port):$(etcdctl get $m/admin_port); \
-      ALL=\"$ALL $hostportadmin\"; \
+ExecStart=/bin/bash -c '\
+    EXPECTED_MONGOS=3; \
+    echo "INFO Waiting for all mongodb instances to start"; \
+    while true; do \
+      MONGOCOUNT=0; \
+      MONGOS=$(etcdctl ls /ft/config/mongodb/); \
+      ALL=""; \
+      for m in $MONGOS; do \
+	HOST=$(etcdctl get $m/host); \
+	PORT=$(etcdctl get $m/port); \
+	ADMIN_PORT=$(etcdctl get $m/admin_port); \
+	if [[ "$HOST" != "" && "$PORT" != "" && "$ADMIN_PORT" != "" ]]; then \
+	  (( MONGOCOUNT++ )) ; \
+          hostportadmin=$HOST:$PORT:$ADMIN_PORT; \
+          ALL="$ALL $hostportadmin"; \
+	fi ; \
+      done; \
+      if [ $MONGOCOUNT -eq $EXPECTED_MONGOS ]; then \
+        break; \
+      fi; \
+      curl -s --max-time 30 -L "http://$HOSTNAME:2379/v2/keys/ft/config/mongodb/?wait=true&recursive=true"; \
+      echo "INFO Still waiting for all mongodb instances to start"; \
     done; \
-    docker run --rm --name %p --env=\"ARGS=$ALL\" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION;"
+    echo "INFO Got all instances, configuring mongodb cluster"; \
+    docker run --rm --name %p --env="ARGS=$ALL" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION;'
 ExecStop=/usr/bin/docker stop -t 3 %p
 

@@ -4,6 +4,7 @@ BindsTo=elasticsearch.service
 After=elasticsearch.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl mkdir /ft/services/$SERVICE/servers; \

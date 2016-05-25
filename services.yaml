@@ -284,7 +284,7 @@ services:
 - name: public-six-degrees-sidekick@.service
   count: 2
 - name: public-six-degrees@.service
-  version: v0.0.6
+  version: 0.0.6
   count: 2
 - name: public-things-api-sidekick@.service
   count: 2

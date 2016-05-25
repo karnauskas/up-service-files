@@ -39,7 +39,7 @@ services:
 - name: composite-orgs-transformer-sidekick@.service
   count: 1
 - name: composite-orgs-transformer@.service
-  version: v0.0.1
+  version: v0.0.2
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2

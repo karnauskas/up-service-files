@@ -9,11 +9,11 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull elasticsearch
+ExecStartPre=-/bin/sh -c 'docker kill %p > /dev/null 2>&1'
+ExecStartPre=-/bin/sh -c 'docker rm %p > /dev/null 2>&1'
+ExecStartPre=/usr/bin/docker pull elasticsearch:2.3.3
 ExecStart=/bin/sh -c "\
-  /usr/bin/docker run --rm --name %p -v /vol/elasticsearch:/usr/share/elasticsearch/data -P elasticsearch -Dnetwork.host=0.0.0.0"
+  /usr/bin/docker run --rm --name %p -v /vol/elasticsearch:/usr/share/elasticsearch/data -P elasticsearch:2.3.3 -Dnetwork.host=0.0.0.0"
 ExecStop=/usr/bin/docker stop -t 3 %p
 Restart=on-failure
 RestartSec=60

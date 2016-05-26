@@ -4,13 +4,19 @@ BindsTo=elasticsearch.service
 After=elasticsearch.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  while true; do \
-    export PORT=$(/usr/bin/docker port elasticsearch 9200 | cut -d':' -f2); \
-    etcdctl set /ft/services/elasticsearch/servers/3 "http://$HOSTNAME:$PORT" --ttl 600; \
-    sleep 120; \
-  done"
-ExecStop=/usr/bin/etcdctl rm /ft/services/elasticsearch/servers/3
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE 9200 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/s http://%H:$PORT;"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/elasticsearch/servers/s
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=elasticsearch.service

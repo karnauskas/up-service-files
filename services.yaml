@@ -290,7 +290,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: videos
+  version: v0.18.0
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

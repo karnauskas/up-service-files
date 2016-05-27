@@ -18,7 +18,7 @@ ExecStart=/bin/sh -c '\
 	export NOTIFICATIONS_PUSH_PORT=8548; \
 	export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-notifications-push-%i"; \
 	/usr/bin/docker run --rm --name %p-%i -p $NOTIFICATIONS_PUSH_PORT:8080 \
-		--env "QUEUE_PROXY_ADDRS=%H:8080" \
+		--env "QUEUE_PROXY_ADDRS=http://%H:8080" \
 		--env "GROUP_ID=$GROUP_ID" \
 		--env "TOPIC=CmsPublicationEvents" \
 		--env "API_BASE_URL=http://api.ft.com" \

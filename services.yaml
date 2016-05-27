@@ -297,6 +297,10 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.17.2
   count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

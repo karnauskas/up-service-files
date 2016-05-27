@@ -1,7 +1,7 @@
 [Unit]
-Description=CMS Kafka Bridge Prod Sidekick
-BindsTo=cms-kafka-bridge-prod@%i.service
-After=cms-kafka-bridge-prod@%i.service
+Description=CMS Kafka Bridge UCS Test Sidekick
+BindsTo=cms-kafka-bridge-ucs-test@%i.service
+After=cms-kafka-bridge-ucs-test@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -16,11 +16,11 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/cms-kafka-bridge-prod/servers/%i
+ExecStop=/usr/bin/etcdctl rm /ft/services/cms-kafka-bridge-ucs-test/servers/%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=cms-kafka-bridge-prod@%i.service
+MachineOf=cms-kafka-bridge-ucs-test@%i.service
 
 

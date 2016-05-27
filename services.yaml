@@ -23,22 +23,22 @@ services:
   sequentialDeployment: true
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
-- name: cms-kafka-bridge@.service
+- name: cms-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-ucs-test@.service
   version: v11.0.6
   count: 2
-- name: cms-kafka-bridge-prod-sidekick@.service
-  count: 2
-- name: cms-kafka-bridge-prod@.service
+- name: cms-kafka-bridge@.service
   version: v11.0.6
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
-- name: cms-metadata-kafka-bridge@.service
+- name: cms-metadata-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-ucs-test@.service
   version: v11.0.6
   count: 2
-- name: cms-metadata-kafka-bridge-prod-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-prod@.service
+- name: cms-metadata-kafka-bridge@.service
   version: v11.0.6
   count: 2
 - name: cms-notifier-sidekick@.service
@@ -48,12 +48,12 @@ services:
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
-- name: concept-suggestions-kafka-bridge@.service
+- name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: concept-suggestions-kafka-bridge-ucs-test@.service
   version: v11.0.6
   count: 2
-- name: concept-suggestions-kafka-bridge-prod-sidekick@.service
-  count: 2
-- name: concept-suggestions-kafka-bridge-prod@.service
+- name: concept-suggestions-kafka-bridge@.service
   version: v11.0.6
   count: 2
 - name: content-ingester-neo4j-blue-sidekick@.service
@@ -434,7 +434,7 @@ services:
   count: 1
 - name: v1-orgs-transformer@.service
   version: v0.0.2
-  count: 1  
+  count: 1
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service

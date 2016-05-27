@@ -1,5 +1,5 @@
 [Unit]
-Description=Synthetic Image Publication Monitor AWS - COCO - 04
+Description=Synthetic Image Publication Monitor for CoCo cluster
 After=docker.service
 Requires=docker.service
 Wants=synthetic-image-publication-monitor-coco-sidekick@%i.service
@@ -15,14 +15,12 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
-  	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/vulcand/authorization_header); \
 	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-coco/test-uuid); \
 	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i -p 8080 \
 	--env "POST_ADDRESS=%H:8080" \
 	--env "BUCKET_ADDRESS=$BUCKET_ADDRESS" \
 	--env "DYN_ROUTING=true" \
-	--env "POST_CREDENTIALS=$POST_CREDENTIALS" \
 	--env "TEST_UUID=$TEST_UUID" \
 	coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 

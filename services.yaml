@@ -100,7 +100,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v54
+  version: v55
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -302,6 +302,11 @@ services:
   version: v0.0.66
   count: 2
   sequentialDeployment: true
+- name: public-six-degrees-sidekick@.service
+  count: 2
+- name: public-six-degrees@.service
+  version: 0.0.6
+  count: 2
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service

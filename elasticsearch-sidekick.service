@@ -12,9 +12,9 @@ ExecStart=/bin/sh -c "\
     sleep 5; \
     PORT=`echo $(/usr/bin/docker port $SERVICE 9200 | cut -d':' -f2)`; \
   done; \
-  etcdctl set /ft/services/$SERVICE/servers/s http://%H:$PORT;"
+  etcdctl set /ft/services/$SERVICE/servers/3 http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/elasticsearch/servers/s
+ExecStop=/usr/bin/etcdctl rm /ft/services/elasticsearch/servers/3
 Restart=on-failure
 RestartSec=60
 

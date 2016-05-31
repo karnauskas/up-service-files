@@ -1,5 +1,5 @@
 [Unit]
-Description=Synthetic Image Publication Monitor AWS - 03
+Description=Synthetic Image Publication Monitor for bridging UCS to CoCo
 After=docker.service
 Requires=docker.service
 Wants=synthetic-image-publication-monitor-aws-sidekick@%i.service

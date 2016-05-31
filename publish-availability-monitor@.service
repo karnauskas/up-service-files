@@ -24,6 +24,7 @@ ExecStart=/bin/bash -c '\
 	--env "CONTENT_URL=http://%H:8080/__document-store-api/content-read/" \
 	--env "LISTS_URL=http://%H:8080/__document-store-api/lists/" \
 	--env "NOTIFICATIONS_URL=http://%H:8080/__notifications-rw/content/notifications" \
+	--env "METHODE_ARTICLE_TRANSFORMER_URL=http://%H:8080/__methode-article-transformer/content-transform" \
 	coco/publish-availability-monitor:$DOCKER_APP_VERSION'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

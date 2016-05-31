@@ -5,7 +5,7 @@ After=restorage-elasticsearch-concepts@%i.service
 
 [Service]
 RemainAfterExit=yes
-ExecStartPre=/bin/sh -c "\
+ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
    while [ -z $PORT ]; do \

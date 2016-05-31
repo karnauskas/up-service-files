@@ -12,7 +12,7 @@ ExecStartPre=/bin/sh -c "\
    sleep 5; \
     PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
   done; \
-  etcdctl set /ft/services/$SERVICE/servers/%i "http://$HOSTNAME:$PORT"; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://$HOSTNAME:$PORT;"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/restorage-elasticsearch-concepts/servers/%i
 Restart=on-failure

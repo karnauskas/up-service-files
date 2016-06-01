@@ -182,7 +182,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v16
+  version: v17
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service

@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v29
+  version: v34
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -224,7 +224,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.1.1
+  version: v2.2.0
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -297,7 +297,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.17.2
+  version: v0.18.2
   count: 1
 - name: restorage-elasticsearch-concepts-sidekick@.service
   count: 1

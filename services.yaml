@@ -297,6 +297,7 @@ services:
 - name: restorage-elasticsearch-concepts-sidekick@.service
   count: 1
 - name: restorage-elasticsearch-concepts@.service
+  version: v0.0.1
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

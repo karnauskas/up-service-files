@@ -93,6 +93,8 @@ services:
   version: v54
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v2.0.1
 - name: elb-presence@.service
@@ -306,6 +308,11 @@ services:
   count: 1
 - name: publish-availability-monitor@.service
   version: v0.18.2
+  count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  version: v0.0.3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

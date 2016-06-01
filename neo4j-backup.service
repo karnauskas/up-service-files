@@ -36,7 +36,7 @@ ExecStart=/bin/sh -c "\
         -e TARGET_FOLDER=$TARGET_FOLDER \
         -e S3_DOMAIN=$S3_DOMAIN \
         -e ENVIRONMENT_TAG=$ENVIRONMENT_TAG \
-        -v /vol/neo4j-red-1:/data
+        -v /vol/neo4j-red-1:/data \
         coco/coco-neo4j-backup:${DOCKER_APP_VERSION}
 
 [Install]

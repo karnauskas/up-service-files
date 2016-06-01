@@ -39,7 +39,6 @@ ExecStart=/bin/sh -c "\
         -v /vol/neo4j-red-1:/data
         coco/coco-neo4j-backup:${DOCKER_APP_VERSION}
 
-
 [Install]
 # this sets user-level
 WantedBy=multi-user.target

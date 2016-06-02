@@ -48,4 +48,9 @@ WantedBy=multi-user.target
 [X-Fleet]
 # we only want this to run on neo4j machines
 # MachineMetadata=host_type=persistent
-MachineOf=neo4j-red@1.service
+# We tried using the MachineOf` tag but fleet stops
+# the service as soon as it detects that neo4j is stopped,
+# which is not what we want, so we have to use the same
+# tag as the neo4j-red@.service file.
+#MachineOf=neo4j-red@1.service
+MachineMetadata=persistent_tag=3

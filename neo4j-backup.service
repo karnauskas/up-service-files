@@ -28,6 +28,7 @@ ExecStart=/bin/sh -c "\
     TARGET_FOLDER=$(/usr/bin/etcdctl get /ft/config/neo4j-backup/target_folder); \
     S3_DOMAIN=$(/usr/bin/etcdctl get /ft/config/neo4j-backup/s3_domain); \
     ENV_TAG=$(usr/bin/etcdctl get /ft/config/environment_tag); \
+    FLEETCTL_ENDPOINT="http://$HOSTNAME:49153"; \
      /usr/bin/docker run --rm --name %p \
         -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY \
         -e AWS_SECRET_KEY=$AWS_SECRET_KEY \
@@ -36,6 +37,7 @@ ExecStart=/bin/sh -c "\
         -e TARGET_FOLDER=$TARGET_FOLDER \
         -e S3_DOMAIN=$S3_DOMAIN \
         -e ENVIRONMENT_TAG=$ENVIRONMENT_TAG \
+        -e FLEETCTL_ENDPOINT=$FLEETCTL_ENDPOINT \
         -v /vol/neo4j-red-1:/data \
         coco/coco-neo4j-backup:${DOCKER_APP_VERSION};"
 

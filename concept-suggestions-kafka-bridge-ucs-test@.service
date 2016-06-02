@@ -1,8 +1,8 @@
 [Unit]
-Description=Concept Suggestions Kafka Bridge Prod
+Description=Concept Suggestions Kafka Bridge UCS Test
 After=vulcan.service
 Requires=docker.service
-Wants=concept-suggestions-kafka-bridge-prod-sidekick@%i.service
+Wants=concept-suggestions-kafka-bridge-ucs-test-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -15,7 +15,7 @@ ExecStartPre=/bin/bash -c 'docker pull coco/coco-kafka-bridge:$DOCKER_APP_VERSIO
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
-  export QUEUE_PROXY_ADDRS=https://kafka-proxy-iw-uk-p-1.glb.ft.com,https://kafka-proxy-iw-uk-p-2.glb.ft.com; \
+  export QUEUE_PROXY_ADDRS=https://kafka-proxy-pr-uk-t-2.glb.ft.com,https://kafka-proxy-pr-uk-t-2.glb.ft.com; \
   export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-concept-suggestions-kafka-bridge-prod"; \
   export AUTHORIZATION_KEY=$(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge/authorization_key); \
   export VULCAN_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/vulcand/authorization_header); \
@@ -25,4 +25,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=concept-suggestions-kafka-bridge-prod@*.service
+Conflicts=concept-suggestions-kafka-bridge-ucs-test@*.service

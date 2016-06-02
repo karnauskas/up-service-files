@@ -42,12 +42,12 @@ services:
   version: v11.0.6
   count: 2
 - name: concept-ingester-red@.service
-  version: v0.0.11
+  version: v0.0.12
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-blue@.service
-  version: v0.0.11
+  version: v0.0.12
   count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1

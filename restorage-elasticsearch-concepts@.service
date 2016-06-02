@@ -1,6 +1,6 @@
 [Unit]
 Description=UP REST Storage - elasticsearch concepts
-After= vulcan.service docker.service elasticsearch.service
+After=vulcan.service docker.service elasticsearch.service
 Requires=docker.service
 Wants=elasticsearch-sidekick.service restorage-elasticsearch-concepts-sidekick@%i.service
 

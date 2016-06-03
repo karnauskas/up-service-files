@@ -138,8 +138,6 @@ services:
 - name: genres-rw-neo4j-red@.service
   version: v1.0.0
   count: 1
-- name: image-cleaner.service
-  version: 1.0.0
 - name: industry-classifications-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-blue@.service

@@ -1,0 +1,25 @@
+[Unit]
+Description=CMS Metadata Kafka Bridge Prod Publishing Cluster Sidekick
+BindsTo=cms-metadata-kafka-bridge-pub-prod@%i.service
+After=cms-metadata-kafka-bridge-pub-prod@%i.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/cms-metadata-kafka-bridge-pub-prod/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=cms-metadata-kafka-bridge-pub-prod@%i.service
+

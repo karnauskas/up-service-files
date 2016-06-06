@@ -1,0 +1,27 @@
+[Unit]
+Description=CMS Kafka Bridge Publishing Cluster Pre Prod
+After=vulcan.service
+Requires=docker.service
+Wants=cms-kafka-bridge-pub-pre-prod-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker pull coco/coco-kafka-bridge:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export QUEUE_PROXY_ADDRS="https://pub-pre-prod-up.ft.com/__kafka-rest-proxy"; \
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-kafka-bridge-pub-pre-prod"; \
+  export AUTHORIZATION_KEY="Basic $(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge-pub-pre-prod/authorization_key | tr --delete \n | base64)"; \
+  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" --env "GROUP_ID=$GROUP_ID" --env "CONSUMER_AUTOCOMMIT_ENABLE=false" --env "AUTHORIZATION_KEY=$AUTHORIZATION_KEY" --env "TOPIC=NativeCmsPublicationEvents" --env "PRODUCER_HOST=http://%H:8080" --env "PRODUCER_HOST_HEADER=cms-notifier" --env "PRODUCER_TYPE=plainHTTP" coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=cms-kafka-bridge-pub-pre-prod@*.service

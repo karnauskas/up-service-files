@@ -20,6 +20,16 @@ services:
 - name: binary-writer@.service
   version: v47
   count: 2
+- name: brands-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-blue@.service
+  version: v0.0.12
+  count: 1
+- name: brands-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-red@.service
+  version: v0.0.12
+  count: 1
   sequentialDeployment: true
 - name: cms-kafka-bridge-sidekick@.service
   count: 2

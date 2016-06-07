@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v29
+  version: v35
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -20,6 +20,16 @@ services:
 - name: binary-writer@.service
   version: v47
   count: 2
+- name: brands-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-blue@.service
+  version: v0.0.12
+  count: 1
+- name: brands-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-red@.service
+  version: v0.0.12
+  count: 1
   sequentialDeployment: true
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
@@ -64,7 +74,7 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v36
+  version: v40
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -222,7 +232,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.1.1
+  version: v2.2.0
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -281,6 +291,11 @@ services:
 - name: public-people-api@.service
   version: v0.0.66
   count: 2
+- name: public-six-degrees-sidekick@.service
+  count: 2
+- name: public-six-degrees@.service
+  version: 0.0.6
+  count: 2
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
@@ -290,7 +305,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.17.2
+  version: v0.18.2
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

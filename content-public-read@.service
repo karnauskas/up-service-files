@@ -1,8 +1,8 @@
 [Unit]
-Description=Content Public Read Preview
+Description=Content Public Read
 After=docker.service
 Requires=docker.service
-Wants=content-public-read-preview-sidekick@%i.service
+Wants=content-public-read-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -28,9 +28,9 @@ else \
 fi ; \
 /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \
-                    --env "CONTENT_PATH=content-preview/" \
-                    --env "HOST_HEADER=content-preview" \
-                    --env "CONTENT_HEALTHCHECK_PATH=/__ping" \
+                    --env "CONTENT_PATH=content/" \
+                    --env "HOST_HEADER=document-store-api" \
+                    --env "CONTENT_HEALTHCHECK_PATH=/__health" \
                     --env "API_HOST=$ENV_API_HOST" \
                     up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION ; "
 
@@ -39,4 +39,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=content-public-read-preview@*.service
+Conflicts=content-public-read@*.service

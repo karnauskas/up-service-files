@@ -23,19 +23,11 @@ ExecStartPre=-/usr/bin/docker rm %p
 ExecStart=/bin/sh -c "\
     AWS_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id);\
     AWS_SECRET_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
-    BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/neo4j-backup/bucket_name); \
-    DATA_FOLDER=$(/usr/bin/etcdctl get /ft/config/neo4j-backup/data_folder); \
-    TARGET_FOLDER=$(/usr/bin/etcdctl get /ft/config/neo4j-backup/target_folder); \
-    S3_DOMAIN=$(/usr/bin/etcdctl get /ft/config/neo4j-backup/s3_domain); \
     ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
     FLEETCTL_ENDPOINT="http://$HOSTNAME:49153"; \
      /usr/bin/docker run --rm --name %p \
         -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY \
         -e AWS_SECRET_KEY=$AWS_SECRET_KEY \
-        -e BUCKET_NAME=$BUCKET_NAME \
-        -e DATA_FOLDER=$DATA_FOLDER \
-        -e TARGET_FOLDER=$TARGET_FOLDER \
-        -e S3_DOMAIN=$S3_DOMAIN \
         -e ENVIRONMENT_TAG=$ENVIRONMENT_TAG \
         -v /vol/neo4j-red-1:/data \
         coco/coco-neo4j-backup:${DOCKER_APP_VERSION}

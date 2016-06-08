@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v29
+  version: v34
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -20,11 +20,31 @@ services:
 - name: binary-writer@.service
   version: v47
   count: 2
+- name: brands-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-blue@.service
+  version: v0.0.12
+  count: 1
+- name: brands-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-red@.service
+  version: v0.0.12
+  count: 1
   sequentialDeployment: true
+- name: cms-kafka-bridge-pub-prod-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-prod@.service
+  version: v11.0.7
+  count: 2
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
   version: v11.0.6
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod@.service
+  version: v11.0.7
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
@@ -40,6 +60,11 @@ services:
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
   version: v11.0.6
+  count: 2
+- name: concepts-kafka-bridge-pub-prod-sidekick@.service
+  count: 2
+- name: concepts-kafka-bridge-pub-prod@.service
+  version: v11.0.7
   count: 2
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
@@ -160,7 +185,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v58
+  version: v60
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -222,7 +247,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.1.1
+  version: v2.2.0
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -295,7 +320,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.17.2
+  version: v0.18.2
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

@@ -13,14 +13,14 @@ TimeoutStartSec=0
 KillMode=none
 
 # stop already running instance
-ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker kill %p-%i
 
 # remove existing instance
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/usr/bin/docker rm %p-%i
 
-ExecStart=/bin/sh -c "/usr/bin/docker run --name %p;"
+ExecStart=/bin/sh -c "/usr/bin/docker run --rm --name %p-%i -P coco/six-degrees-app:$DOCKER_APP_VERSION;"
 
-ExecStop=/usr/bin/docker stop -t 3 %p
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-fail
 RestartSec=60
 

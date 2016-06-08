@@ -140,7 +140,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v55
+  version: v57
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service
@@ -240,7 +240,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v20
+  version: v23
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service

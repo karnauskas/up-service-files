@@ -419,7 +419,7 @@ services:
 - name: topics-transformer-sidekick@.service
   count: 2
 - name: topics-transformer@.service
-  version: v1.0.4
+  version: v1.0.5
   count: 2
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata-sidekick@.service

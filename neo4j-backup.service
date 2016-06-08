@@ -1,0 +1,42 @@
+[Unit]
+Description=Job to backup neo4j DB data files to S3
+
+[Service]
+# process will be short-lived and that systemd should wait for the process to
+# exit before continuing on with other units.
+Type=oneshot
+
+Environment="DOCKER_APP_VERSION=latest"
+
+# should start up instantly, so start timeout can be 0
+TimeoutStartSec=0
+
+# let Docker remove work correctly.
+KillMode=none
+
+# stop already running instance
+ExecStartPre=-/usr/bin/docker kill %p
+
+# remove existing instance
+ExecStartPre=-/usr/bin/docker rm %p
+
+ExecStart=/bin/sh -c "\
+    AWS_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id);\
+    AWS_SECRET_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
+    ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    FLEETCTL_ENDPOINT="http://$HOSTNAME:49153"; \
+     /usr/bin/docker run --rm --name %p \
+        -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY \
+        -e AWS_SECRET_KEY=$AWS_SECRET_KEY \
+        -e ENVIRONMENT_TAG=$ENVIRONMENT_TAG \
+        -v /vol/neo4j-red-1:/data \
+        coco/coco-neo4j-backup:${DOCKER_APP_VERSION}
+
+[Install]
+# this sets user-level
+WantedBy=multi-user.target
+
+[X-Fleet]
+# we only want this to run on neo4j machines
+# MachineMetadata=host_type=persistent
+MachineOf=neo4j-red@1.service

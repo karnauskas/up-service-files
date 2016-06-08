@@ -1,7 +1,7 @@
 [Unit]
-Description=Concept Suggestions Kafka Bridge Prod Sidekick
-BindsTo=concept-suggestions-kafka-bridge-prod@%i.service
-After=concept-suggestions-kafka-bridge-prod@%i.service
+Description=CMS Metadata Kafka Bridge Pre Prod Publishing Cluster Sidekick
+BindsTo=cms-metadata-kafka-bridge-pub-pre-prod@%i.service
+After=cms-metadata-kafka-bridge-pub-pre-prod@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -16,10 +16,10 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/concept-suggestions-kafka-bridge-prod/servers/%i
+ExecStop=/usr/bin/etcdctl rm /ft/services/cms-metadata-kafka-bridge-pub-pre-prod/servers/%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=concept-suggestions-kafka-bridge-prod@%i.service
+MachineOf=cms-metadata-kafka-bridge-pub-pre-prod@%i.service
 

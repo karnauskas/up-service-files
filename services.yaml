@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v29
+  version: v35
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -20,25 +20,55 @@ services:
 - name: binary-writer@.service
   version: v47
   count: 2
+- name: brands-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-blue@.service
+  version: v0.0.12
+  count: 1
+- name: brands-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: brands-rw-neo4j-red@.service
+  version: v0.0.12
+  count: 1
   sequentialDeployment: true
+- name: cms-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-pre-prod@.service
+  version: v11.0.7
+  count: 2
+- name: cms-kafka-bridge-pub-prod-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-prod@.service
+  version: v11.0.7
+  count: 2
 - name: cms-kafka-bridge-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-ucs-test@.service
+  version: v11.0.6
   count: 2
 - name: cms-kafka-bridge@.service
   version: v11.0.6
   count: 2
-- name: cms-kafka-bridge-prod-sidekick@.service
+- name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
-- name: cms-kafka-bridge-prod@.service
-  version: v11.0.6
+- name: cms-metadata-kafka-bridge-pub-pre-prod@.service
+  version: v11.0.7
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod@.service
+  version: v11.0.7
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
-- name: cms-metadata-kafka-bridge@.service
+- name: cms-metadata-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-ucs-test@.service
   version: v11.0.6
   count: 2
-- name: cms-metadata-kafka-bridge-prod-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-prod@.service
+- name: cms-metadata-kafka-bridge@.service
   version: v11.0.6
   count: 2
 - name: cms-notifier-sidekick@.service
@@ -48,13 +78,23 @@ services:
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
+- name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: concept-suggestions-kafka-bridge-ucs-test@.service
+  version: v11.0.6
+  count: 2
 - name: concept-suggestions-kafka-bridge@.service
   version: v11.0.6
   count: 2
-- name: concept-suggestions-kafka-bridge-prod-sidekick@.service
+- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
-- name: concept-suggestions-kafka-bridge-prod@.service
-  version: v11.0.6
+- name: concepts-kafka-bridge-pub-pre-prod@.service
+  version: v11.0.7
+  count: 2
+- name: concepts-kafka-bridge-pub-prod-sidekick@.service
+  count: 2
+- name: concepts-kafka-bridge-pub-prod@.service
+  version: v11.0.7
   count: 2
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
@@ -79,7 +119,12 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v36
+  version: v41
+  count: 2
+- name: content-public-read-sidekick@.service
+  count: 2
+- name: content-public-read@.service
+  version: v41
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -95,9 +140,11 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v54
+  version: v57
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v2.0.1
 - name: elb-presence@.service
@@ -121,8 +168,6 @@ services:
 - name: genres-rw-neo4j-red@.service
   version: v1.0.0
   count: 1
-- name: image-cleaner.service
-  version: 1.0.0
 - name: industry-classifications-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-blue@.service
@@ -175,7 +220,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v58
+  version: v61
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -195,7 +240,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v13
+  version: v23
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service
@@ -217,6 +262,9 @@ services:
   version: v42
   count: 2
   sequentialDeployment: true
+- name: neo4j-backup.service
+  desiredState: loaded
+  version: 0.5.0
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
@@ -237,7 +285,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.1.1
+  version: v2.2.0
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -310,7 +358,12 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.17.2
+  version: v0.18.4
+  count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  version: v0.0.3
   count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1
@@ -430,11 +483,6 @@ services:
 - name: v1-content-annotator-red@.service
   version: v24
   count: 1
-- name: v1-orgs-transformer-sidekick@.service
-  count: 1
-- name: v1-orgs-transformer@.service
-  version: v0.0.2
-  count: 1  
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
@@ -469,7 +517,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.0.23
+  version: v1.1.1
   count: 2
 - name: vulcan-config-builder.service
   version: v1.2.2

@@ -320,7 +320,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.2
+  version: v0.18.3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

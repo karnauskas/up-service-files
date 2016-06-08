@@ -30,6 +30,7 @@ ExecStart=/bin/sh -c "\
         -e AWS_SECRET_KEY=$AWS_SECRET_KEY \
         -e ENVIRONMENT_TAG=$ENVIRONMENT_TAG \
         -v /vol/neo4j-red-1:/data \
+        -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" \
         coco/coco-neo4j-backup:${DOCKER_APP_VERSION};"
 
 [Install]

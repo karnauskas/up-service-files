@@ -123,6 +123,8 @@ services:
   version: v54
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v2.0.1
 - name: elb-presence@.service

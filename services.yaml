@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v34
+  version: v35
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -408,17 +408,17 @@ services:
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-blue@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: topics-rw-neo4j-red-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-red@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: topics-transformer-sidekick@.service
   count: 2
 - name: topics-transformer@.service
-  version: v1.0.0
+  version: v1.0.7
   count: 2
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata-sidekick@.service

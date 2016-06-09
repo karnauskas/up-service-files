@@ -12,7 +12,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
   etcdctl set /vulcand/frontends/public-services-content/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/content/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$`) && Host(`public-services`)\"}'; \
-  etcdctl set /vulcand/frontends/public-services-lists/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/lists/.*`) && Host(`public-services`)\"}'; \
+  etcdctl set /vulcand/frontends/public-services-lists/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/lists.*`) && Host(`public-services`)\"}'; \
   while [ -z $PORT ]; do \
     PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
     echo 'Port not set, retrying'; \

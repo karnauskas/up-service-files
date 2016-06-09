@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v34
+  version: v35
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -89,7 +89,7 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v36
+  version: v40
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -185,7 +185,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v60
+  version: v61
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2

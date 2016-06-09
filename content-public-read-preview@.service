@@ -32,6 +32,7 @@ fi ; \
                     --env "HOST_HEADER=content-preview" \
                     --env "CONTENT_HEALTHCHECK_PATH=/__ping" \
                     --env "API_HOST=$ENV_API_HOST" \
+                    --env "CONTENT_HEALTHCHECK_PATH=/__ping" \
                     up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION ; "
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

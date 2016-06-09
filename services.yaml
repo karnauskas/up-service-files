@@ -119,12 +119,12 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v42
+  version: v43
   count: 2
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v42
+  version: v43
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2

@@ -8,14 +8,14 @@ TimeoutStartSec=30
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStart=/bin/sh -c " \
+ExecStart=/bin/sh -c '\
   ENV=$(etcdctl get /ft/config/environment_tag); \
   KONSTRUCTOR_API_KEY=$(etcdctl get /ft/_credentials/konstructor/api-key); \
-  KONSTRUCTOR_DNS_ENDPOINT=https://konstructor.ft.com/v1/dns; \
+  KONSTRUCTOR_DNS_ENDPOINT=https://dns-api.in.ft.com/v2; \
   PUBLIC_IP=$(curl -s 169.254.169.254/latest/meta-data/public-ipv4); \
-  curl -s -L -X DELETE -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/delete?zone=ft.com&name=$ENV-tunnel-up\"; \
-  ((`curl -s -L -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/list/byname?zone=ft.com&name=$ENV-tunnel-up\" | jq .errorCode` == 404)) && \
-  ((`curl -s -L -w \"%{http_code}\" -X POST -H \"Content-Length: 0\" -H \"Accept: application/json\" -H \"Authorization: Basic $KONSTRUCTOR_API_KEY\" \"$KONSTRUCTOR_DNS_ENDPOINT/create?zone=ft.com&name=$ENV-tunnel-up&rdata=$PUBLIC_IP&ttl=600\" -o /dev/null` == 200));"
+  curl -s -L -d "{\"zone\": \"ft.com\", \"name\": \"$ENV-tunnel-up\"}" -X DELETE -H "Content-Type: application/json" -H "Accept: application/json" -H "x-api-key: $KONSTRUCTOR_API_KEY" "$KONSTRUCTOR_DNS_ENDPOINT"; \
+  ((`curl -s -L -H "Accept: application/json" -H "x-api-key: $KONSTRUCTOR_API_KEY" "$KONSTRUCTOR_DNS_ENDPOINT/name/ft.com/$ENV-tunnel-up" | jq .errorCode` == 404)) && \
+  ((`curl -s -L -w "%{http_code}" -X POST -d "{\"zone\": \"ft.com\", \"name\": \"$ENV-tunnel-up\",\"rdata\": \"$PUBLIC_IP\",\"ttl\": \"14400\" -H "Content-Type: application/json" -H "Accept: application/json" -H "x-api-key: $KONSTRUCTOR_API_KEY" "$KONSTRUCTOR_DNS_ENDPOINT" -o /dev/null` == 200));'
 
 [Install]
 WantedBy=multi-user.target

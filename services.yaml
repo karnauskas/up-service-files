@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v34
+  version: v35
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -104,7 +104,7 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v36
+  version: v40
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -120,7 +120,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v54
+  version: v55
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service
@@ -202,7 +202,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v60
+  version: v61
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -350,7 +350,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.2
+  version: v0.18.4
   count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1
@@ -432,12 +432,12 @@ services:
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-blue@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: topics-rw-neo4j-red-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-red@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: topics-transformer-sidekick@.service
   count: 2
@@ -498,7 +498,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v64
+  version: v69
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

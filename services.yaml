@@ -58,9 +58,13 @@ services:
   count: 1
 - name: concept-ingester-blue@.service
   version: v0.0.15
+  count: 1
+- name: concept-ingester-blue-sidekick@.service
   count: 1 
 - name: concept-ingester-red@.service
   version: v0.0.15
+  count: 1
+- name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2

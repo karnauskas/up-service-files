@@ -146,7 +146,7 @@ services:
 - name: elasticsearch-sidekick.service
 - name: elasticsearch.service
 - name: elb-dns-registrator.service
-  version: v2.0.1
+  version: v3.0.0
 - name: elb-presence@.service
   count: 2
 - name: enriched-content-read-api-sidekick@.service

@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v35
+  version: v37
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -110,7 +110,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v57
+  version: v58
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service
@@ -210,7 +210,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v23
+  version: v25
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service

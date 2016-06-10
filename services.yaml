@@ -76,6 +76,12 @@ services:
 - name: cms-notifier@.service
   version: v33
   count: 1
+- name: concept-ingester-blue@.service
+  version: v0.0.15
+  count: 1 
+- name: concept-ingester-red@.service
+  version: v0.0.15
+  count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service

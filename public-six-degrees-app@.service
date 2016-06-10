@@ -28,4 +28,4 @@ RestartSec=60
 WantedBy=multi-user.target
 
 [X-Fleet]
-Global=true
+Conflicts=%p@*.service

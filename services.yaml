@@ -262,9 +262,6 @@ services:
   version: v42
   count: 2
   sequentialDeployment: true
-- name: neo4j-backup.service
-  desiredState: loaded
-  version: 0.5.0
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service

@@ -465,6 +465,16 @@ services:
 - name: v1-annotations-rw-red@.service
   version: v0.0.25
   count: 2
+- name: v1-content-annotator-binding-service-blue-sidekick@.service
+  count: 1
+- name: v1-content-annotator-binding-service-blue@.service
+  version: v24
+  count: 1
+- name: v1-content-annotator-binding-service-red-sidekick@.service
+  count: 1
+- name: v1-content-annotator-binding-service-red@.service
+  version: v24
+  count: 1
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service

@@ -339,7 +339,7 @@ services:
 - name: public-six-degrees-app-sidekick@.service
   count: 2
 - name: public-six-degrees-app@.service
-  version: v0.1.1
+  version: v0.1.8
   count: 2
 - name: public-things-api-sidekick@.service
   count: 2

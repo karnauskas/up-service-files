@@ -134,7 +134,7 @@ services:
 - name: genres-transformer-sidekick@.service
   count: 2
 - name: genres-transformer@.service
-  version: v0.0.2
+  version: v0.0.3
   count: 2
 - name: image-cleaner.service
   version: 1.0.0

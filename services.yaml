@@ -167,7 +167,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v60
+  version: v61
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
@@ -457,12 +457,12 @@ services:
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-blue@.service
-  version: v1.1.0
+  version: v1.1.1
   count: 2
 - name: topics-rw-neo4j-red-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-red@.service
-  version: v1.1.0
+  version: v1.1.1
   count: 2
 - name: topics-transformer-sidekick@.service
   count: 2

@@ -420,7 +420,7 @@ services:
 - name: subjects-transformer-sidekick@.service
   count: 2
 - name: subjects-transformer@.service
-  version: v1.0.2
+  version: v1.0.3
   count: 2
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1

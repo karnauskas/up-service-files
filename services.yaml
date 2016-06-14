@@ -408,7 +408,7 @@ services:
 - name: sections-transformer-sidekick@.service
   count: 2
 - name: sections-transformer@.service
-  version: v1.0.0
+  version: v1.0.2
   count: 2
 - name: special-reports-rw-neo4j-blue-sidekick@.service
   count: 2

@@ -339,7 +339,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.0.10
+  version: v0.0.12
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

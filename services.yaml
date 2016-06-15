@@ -180,7 +180,7 @@ services:
 - name: locations-transformer-sidekick@.service
   count: 2
 - name: locations-transformer@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 2
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 2

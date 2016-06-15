@@ -7,7 +7,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v34
+  version: v37
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -89,7 +89,7 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v36
+  version: v40
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -105,11 +105,11 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v54
+  version: v57
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
-  version: v2.0.1
+  version: v3.0.0
 - name: elb-presence@.service
   count: 2
 - name: enriched-content-read-api-sidekick@.service
@@ -185,7 +185,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v60
+  version: v61
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -205,7 +205,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v13
+  version: v25
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service
@@ -323,7 +323,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.2
+  version: v0.18.4
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -401,17 +401,17 @@ services:
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-blue@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: topics-rw-neo4j-red-sidekick@.service
   count: 2
 - name: topics-rw-neo4j-red@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: topics-transformer-sidekick@.service
   count: 2
 - name: topics-transformer@.service
-  version: v1.0.0
+  version: v1.0.7
   count: 2
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata-sidekick@.service
@@ -429,6 +429,16 @@ services:
 - name: v1-annotations-rw-red@.service
   version: v0.0.25
   count: 2
+- name: v1-content-annotator-binding-service-blue-sidekick@.service
+  count: 1
+- name: v1-content-annotator-binding-service-blue@.service
+  version: v24
+  count: 1
+- name: v1-content-annotator-binding-service-red-sidekick@.service
+  count: 1
+- name: v1-content-annotator-binding-service-red@.service
+  version: v24
+  count: 1
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service
@@ -467,7 +477,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v64
+  version: v70
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

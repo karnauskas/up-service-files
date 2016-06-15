@@ -2,21 +2,23 @@
 Description=Splunk forwarder
 
 [Service]
+Environment="DOCKER_SPLUNK_HTTP_FWD_VERSION=latest"
+Environment="DOCKER_LOGFILTER_VERSION=1.0.2"
 TimeoutStartSec=1200
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-filter > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-http > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-filter > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-http > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull coco/coco-splunk-http-forwarder
-ExecStartPre=/usr/bin/docker pull coco/coco-logfilter
-ExecStart=/bin/bash -c "\
+ExecStartPre=-/bin/sh -c 'docker kill %p-filter > /dev/null 2>&1'
+ExecStartPre=-/bin/sh -c 'docker kill %p-http > /dev/null 2>&1'
+ExecStartPre=-/bin/sh -c 'docker rm %p-filter > /dev/null 2>&1'
+ExecStartPre=-/bin/sh -c 'docker rm %p-http > /dev/null 2>&1'
+ExecStartPre=/bin/sh -c 'docker history coco/coco-splunk-http-forwarder:$DOCKER_SPLUNK_HTTP_FWD_VERSION >/dev/null 2>&1 || docker pull coco/coco-splunk-http-forwarder:$DOCKER_SPLUNK_HTTP_FWD_VERSION'
+ExecStartPre=/bin/sh -c 'docker history coco/coco-logfilter:$DOCKER_LOGFILTER_VERSION >/dev/null 2>&1 || docker pull coco/coco-logfilter:$DOCKER_LOGFILTER_VERSION'
+ExecStart=/bin/sh -c '\
   export FORWARD_URL=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/splunk_url); \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  /usr/bin/journalctl -a -f --since=now --output=json | docker run -i --log-driver=none --env=ENV=$ENV --rm --name %p-filter coco/coco-logfilter | docker run -i --log-driver=none --rm --name %p-http --env=\"FORWARD_URL=$FORWARD_URL\" coco/coco-splunk-http-forwarder"
-ExecStop=/bin/bash -c "/usr/bin/docker stop -t 3 %p-filter && /usr/bin/docker stop -t 3 %p-http"
+  journalctl -a -f --since=now --output=json | docker run -i --log-driver=none -e=ENV=$ENV --rm --name %p-filter coco/coco-logfilter:$DOCKER_LOGFILTER_VERSION | docker run -i --log-driver=none --rm --name %p-http -e="FORWARD_URL=$FORWARD_URL" coco/coco-splunk-http-forwarder:$DOCKER_SPLUNK_HTTP_FWD_VERSION'
+ExecStop=/bin/sh -c "docker stop -t 3 %p-filter && docker stop -t 3 %p-http"
 Restart=on-failure
 RestartSec=60
 

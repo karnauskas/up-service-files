@@ -364,7 +364,7 @@ services:
 - name: special-reports-transformer-sidekick@.service
   count: 2
 - name: special-reports-transformer@.service
-  version: v1.0.0
+  version: v1.0.3
   count: 2
 - name: splunk-forwarder.service
 - name: subjects-rw-neo4j-blue-sidekick@.service

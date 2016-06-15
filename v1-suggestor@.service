@@ -2,6 +2,7 @@
 Description=V1 Metadata Suggestor
 After=docker.service
 Requires=docker.service
+Wants=v1-suggestor-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

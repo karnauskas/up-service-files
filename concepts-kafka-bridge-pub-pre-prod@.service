@@ -2,7 +2,7 @@
 Description=Concepts Kafka Bridge Publishing Cluster Pre Prod
 After=vulcan.service
 Requires=docker.service
-Wants=concepts-kafka-bridge-pub-pre-prod@%i.service
+Wants=concepts-kafka-bridge-pub-pre-prod-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

@@ -4,19 +4,19 @@ BindsTo=content-public-read@%i.service
 After=content-public-read@%i.service
 
 [Service]
-ExecStart=/bin/sh -c "\
+ExecStart=/bin/sh -c '\
   export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
   etcdctl set 	/ft/services/$SERVICE/healthcheck 		true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set 	/ft/healthcheck/$SERVICE-%i/path 		/__health; \
   etcdctl set 	/ft/healthcheck/$SERVICE-%i/categories 	read; \
-  etcdctl set 	/vulcand/frontends/public-services-content/frontend  '{\"Type\": \"http\", \"BackendId\": \"vcb-content-public-read\", \"Route\": \"PathRegexp(`/content/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)\"}'; \
+  etcdctl set 	/vulcand/frontends/public-services-content/frontend  \'{"Type": "http", "BackendId": "vcb-content-public-read", "Route": "PathRegexp(`/content/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}.*`) && Host(`public-services`)"}\'; \
   while [ -z $PORT ]; do \
-      PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
-      echo 'Port not set, retrying'; \
+      PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d":" -f2)`; \
+      echo "Port not set, retrying"; \
       sleep 5; \
     done; \
-  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;'
 ExecStop=/usr/bin/etcdctl rm /ft/services/content-public-read/servers/%i
 
 [X-Fleet]

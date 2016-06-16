@@ -4,6 +4,7 @@ BindsTo=content-public-read@%i.service
 After=content-public-read@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c '\
   export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
   etcdctl set 	/ft/services/$SERVICE/healthcheck 		true; \

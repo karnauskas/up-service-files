@@ -20,4 +20,4 @@ ExecStart=/bin/sh -c "\
 ExecStop=/usr/bin/etcdctl rm /ft/services/content-public-read/servers/%i
 
 [X-Fleet]
-MachineOf=content-public-read@%i.servicex`
+MachineOf=content-public-read@%i.service

@@ -131,12 +131,12 @@ services:
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
-  version: v1.0.0
+  version: v1.1.3
   count: 1
 - name: genres-rw-neo4j-red-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-red@.service
-  version: v1.0.0
+  version: v1.1.3
   count: 1
 - name: genres-transformer-sidekick@.service
   count: 2
@@ -172,12 +172,12 @@ services:
 - name: locations-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: locations-rw-neo4j-blue@.service
-  version: v1.0.0
+  version: v1.1.1
   count: 2
 - name: locations-rw-neo4j-red-sidekick@.service
   count: 2
 - name: locations-rw-neo4j-red@.service
-  version: v1.0.0
+  version: v1.1.1
   count: 2
 - name: locations-transformer-sidekick@.service
   count: 2
@@ -298,7 +298,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.0.10
+  version: v0.0.12
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
@@ -356,12 +356,12 @@ services:
 - name: sections-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: sections-rw-neo4j-blue@.service
-  version: v1.0.1
+  version: v1.1.1
   count: 2
 - name: sections-rw-neo4j-red-sidekick@.service
   count: 2
 - name: sections-rw-neo4j-red@.service
-  version: v1.0.1
+  version: v1.1.1
   count: 2
 - name: sections-transformer-sidekick@.service
   count: 2
@@ -371,12 +371,12 @@ services:
 - name: special-reports-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: special-reports-rw-neo4j-blue@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: special-reports-rw-neo4j-red-sidekick@.service
   count: 2
 - name: special-reports-rw-neo4j-red@.service
-  version: v1.0.0
+  version: v1.1.0
   count: 2
 - name: special-reports-transformer-sidekick@.service
   count: 2
@@ -387,12 +387,12 @@ services:
 - name: subjects-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: subjects-rw-neo4j-blue@.service
-  version: v1.0.3
+  version: v1.1.0
   count: 2
 - name: subjects-rw-neo4j-red-sidekick@.service
   count: 2
 - name: subjects-rw-neo4j-red@.service
-  version: v1.0.3
+  version: v1.1.0
   count: 2
 - name: subjects-transformer-sidekick@.service
   count: 2
@@ -425,7 +425,7 @@ services:
 - name: topics-transformer-sidekick@.service
   count: 2
 - name: topics-transformer@.service
-  version: v1.0.7
+  version: v1.0.10
   count: 2
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata-sidekick@.service

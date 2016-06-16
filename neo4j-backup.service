@@ -33,6 +33,8 @@ ExecStart=/bin/sh -c "\
         -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" \
         coco/coco-neo4j-backup:${DOCKER_APP_VERSION};"
 
+Nice=10
+
 [Install]
 # this sets user-level
 WantedBy=multi-user.target

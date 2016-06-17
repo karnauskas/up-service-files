@@ -57,12 +57,12 @@ services:
   version: v33
   count: 1
 - name: concept-ingester-blue@.service
-  version: v0.0.15
+  version: v0.0.18
   count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1 
 - name: concept-ingester-red@.service
-  version: v0.0.15
+  version: v0.0.18
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1

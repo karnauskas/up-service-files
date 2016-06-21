@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: ack-support
+  version: v1.1.0
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service

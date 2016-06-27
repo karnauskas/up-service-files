@@ -364,6 +364,16 @@ services:
 - name: sections-transformer@.service
   version: v1.0.2
   count: 2
+- name: series-rw-neo4j-blue-sidekick@.service
+  count: 2
+- name: series-rw-neo4j-blue@.service
+  version: v0.0.1
+  count: 2
+- name: series-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: series-rw-neo4j-red@.service
+  version: v0.0.1
+  count: 2
 - name: special-reports-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: special-reports-rw-neo4j-blue@.service

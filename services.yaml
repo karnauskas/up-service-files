@@ -333,7 +333,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.4
+  version: notifications-push
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

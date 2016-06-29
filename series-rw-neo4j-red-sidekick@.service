@@ -1,0 +1,24 @@
+[Unit]
+Description=Series rw neo4j red Sidekick
+BindsTo=series-rw-neo4j-red@%i.service
+After=series-rw-neo4j-red@%i.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+ExecStop=/usr/bin/etcdctl rm /ft/services/series-rw-neo4j-red/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=series-rw-neo4j-red@%i.service

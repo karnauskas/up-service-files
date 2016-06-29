@@ -1,7 +1,7 @@
 [Unit]
-Description=Series rw neo4j red Sidekick
-BindsTo=series-rw-neo4j-red@%i.service
-After=series-rw-neo4j-red@%i.service
+Description=Alphaville Series RW Neo4j blue Sidekick
+BindsTo=alphaville-series-rw-neo4j-blue@%i.service
+After=alphaville-series-rw-neo4j-blue@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -16,9 +16,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/series-rw-neo4j-red/servers/%i
+ExecStop=/usr/bin/etcdctl rm /ft/services/alphaville-series-rw-neo4j-blue/servers/%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=series-rw-neo4j-red@%i.service
+MachineOf=alphaville-series-rw-neo4j-blue@%i.service

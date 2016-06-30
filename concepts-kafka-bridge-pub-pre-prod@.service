@@ -18,7 +18,7 @@ ExecStart=/bin/sh -c '\
   export QUEUE_PROXY_ADDRS="https://pub-pre-prod-up.ft.com/__kafka-rest-proxy"; \
   export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-concepts-kafka-bridge-pub-pre-prod"; \
   export AUTHORIZATION_KEY="Basic $(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge-pub-pre-prod/authorization_key | tr --delete \"\n\" | base64)"; \
-  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" --env "GROUP_ID=$GROUP_ID" --env "CONSUMER_AUTOCOMMIT_ENABLE=false" --env "AUTHORIZATION_KEY=$AUTHORIZATION_KEY" --env "TOPIC=Concept" --env "PRODUCER_HOST=http://%H:8080" --env "PRODUCER_HOST_HEADER=kafka" --env "PRODUCER_TYPE=proxy" coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
+  /usr/bin/docker run --rm --name %p-%i -p $APP_PORT -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" --env "GROUP_ID=$GROUP_ID" --env "CONSUMER_AUTOCOMMIT_ENABLE=true" --env "AUTHORIZATION_KEY=$AUTHORIZATION_KEY" --env "TOPIC=Concept" --env "PRODUCER_HOST=http://%H:8080" --env "PRODUCER_HOST_HEADER=kafka" --env "PRODUCER_TYPE=proxy" coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
 ExecStop=/usr/bin/docker stop -t 3 %p-%i
 Restart=on-failure
 RestartSec=60

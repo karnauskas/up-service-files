@@ -266,7 +266,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v35
+  version: v44
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2

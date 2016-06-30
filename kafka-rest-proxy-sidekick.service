@@ -4,7 +4,7 @@ BindsTo=kafka-rest-proxy.service
 After=kafka-rest-proxy.service
 [Service]
 ExecStartPre=/bin/sh -c "\
-  etcdctl set /vulcand/backends/kafka-rest-proxy/backend '{\"Type\": \"http\"}' ; \
+  etcdctl set /vulcand/backends/kafka-rest-proxy/backend '{\"Type\": \"http\", \"Settings\": {\"KeepAlive\": {\"MaxIdleConnsPerHost\": 256, \"Period\": \"35s\"}}}' ; \
   etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';"
 
 ExecStart=/bin/sh -c "\

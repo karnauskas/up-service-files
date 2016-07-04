@@ -5,6 +5,16 @@ services:
   version: v1.1.0
   count: 2
   sequentialDeployment: true
+- name: alphaville-series-rw-neo4j-blue-sidekick@.service
+  count: 2
+- name: alphaville-series-rw-neo4j-blue@.service
+  version: v0.0.4
+  count: 2
+- name: alphaville-series-rw-neo4j-red-sidekick@.service
+  count: 2
+- name: alphaville-series-rw-neo4j-red@.service
+  version: v0.0.4
+  count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
@@ -113,9 +123,11 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v57
+  version: v59
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v3.0.0
 - name: elb-presence@.service
@@ -198,7 +210,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v61
+  version: v63
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -283,12 +295,12 @@ services:
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: people-rw-neo4j-blue@.service
-  version: v0.0.60
+  version: v0.0.62
   count: 2
 - name: people-rw-neo4j-red-sidekick@.service
   count: 2
 - name: people-rw-neo4j-red@.service
-  version: v0.0.60
+  version: v0.0.62
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -334,6 +346,11 @@ services:
   count: 1
 - name: publish-availability-monitor@.service
   version: v0.18.5   
+  count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  version: v0.0.3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

@@ -14,6 +14,9 @@ services:
   count: 2
 - name: alphaville-series-rw-neo4j-red@.service
   version: v0.0.4
+- name: alphaville-series-transformer@.service
+  count: 2
+- name: alphaville-series-transformer-sidekick@.service
   count: 2
 - name: api-policy-component-sidekick@.service
   count: 2

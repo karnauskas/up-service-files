@@ -63,10 +63,10 @@ services:
   version: v11.0.6
   count: 2
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
-  count: 2
+  count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
   version: v11.0.7
-  count: 2
+  count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
@@ -128,7 +128,7 @@ services:
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
-  version: 1.0.1
+  version: 1.0.3
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service

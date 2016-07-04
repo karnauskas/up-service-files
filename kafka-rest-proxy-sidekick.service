@@ -2,19 +2,22 @@
 Description=Kafka Rest Proxy Sidekick
 BindsTo=kafka-rest-proxy.service
 After=kafka-rest-proxy.service
+
 [Service]
+RemainAfterExit=yes
 ExecStartPre=/bin/sh -c "\
   etcdctl set /vulcand/backends/kafka-rest-proxy/backend '{\"Type\": \"http\"}' ; \
   etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';"
 
 ExecStart=/bin/sh -c "\
-  while true; do \
-    KAFKA_PROXY_PORT=`[ $KAFKA_PROXY_PORT ] && echo $KAFKA_PROXY_PORT || echo $(/usr/bin/docker port kafka-rest-proxy 8082 | cut -d':' -f2)`; \
-    etcdctl set /ft/config/kafka-rest-proxy/1/host '%H' --ttl 600; \
-    etcdctl set /ft/config/kafka-rest-proxy/1/app_port $KAFKA_PROXY_PORT --ttl 600; \
-    etcdctl set /vulcand/backends/kafka-rest-proxy/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$KAFKA_PROXY_PORT\\\"}\" --ttl 600; \
-    sleep 120; \
-  done"
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  while [ -z $PORT ]; do \
+     sleep 5; \
+     PORT=`echo $(/usr/bin/docker port $SERVICE 8082 | cut -d':' -f2)`; \
+   done; \
+   etcdctl set /ft/config/$SERVICE/1/host '%H'; \
+   etcdctl set /ft/config/$SERVICE/1/app_port $PORT; \
+   etcdctl set /vulcand/backends/$SERVICE/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\"" \
 
 ExecStop=/usr/bin/etcdctl rm --recursive /services/kafka-rest-proxy/1
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/kafka-rest-proxy/servers/srv1

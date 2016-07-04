@@ -16,16 +16,7 @@ ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/content-public-re
 
 # Setting the proper API_HOST parameter according to the current environment
 ExecStart=/bin/sh -c '\
-ENV_TAG=$(etcdctl get /ft/config/environment_tag) ; \
-if [ $ENV_TAG = "prod-uk" ] || [ $ENV_TAG = "prod-us" ]; \
-then \
-    ENV_API_HOST=api.ft.com ; \
-elif [ $ENV_TAG = "pre-prod" ] ; \
-then \
-    ENV_API_HOST=test.api.ft.com ; \
-else \
-    ENV_API_HOST=$ENV_TAG-up-read.ft.com ; \
-fi ; \
+ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
 /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \
                     --env "CONTENT_PATH=content/" \

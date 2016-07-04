@@ -5,6 +5,10 @@ services:
   version: v1.1.0
   count: 2
   sequentialDeployment: true
+- name: alphaville-series-transformer@.service
+  count: 2
+- name: alphaville-series-transformer-sidekick@.service
+  count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service

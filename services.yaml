@@ -95,7 +95,11 @@ services:
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
+<<<<<<< HEAD
   version: v12
+=======
+  version: v11.0.7
+>>>>>>> pam-push
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
@@ -370,7 +374,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.5
+  version: notifications-push
   count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1

@@ -282,7 +282,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v35
+  version: v44
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -483,7 +483,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.12
+  version: v0.0.13
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
@@ -514,7 +514,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.0.23
+  version: v1.2.0
   count: 2
 - name: vulcan-config-builder.service
   version: v1.2.2

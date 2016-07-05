@@ -8,7 +8,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v40
+  version: v41
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -295,7 +295,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v44
+  version: v45
   count: 2
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2

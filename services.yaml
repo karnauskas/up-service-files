@@ -41,6 +41,7 @@ services:
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service
   version: v12.0.1
+  count: 2
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-ucs-test-sidekick@.service

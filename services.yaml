@@ -35,7 +35,7 @@ services:
 - name: cms-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-pre-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 2
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
@@ -47,7 +47,7 @@ services:
 - name: cms-kafka-bridge-ucs-test-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-ucs-test@.service
-  version: v11.0.6
+  version: v12.0.1
   count: 2
 - name: cms-kafka-bridge@.service
   version: v11.0.6
@@ -55,7 +55,7 @@ services:
 - name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-pre-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
   count: 2
@@ -67,7 +67,7 @@ services:
 - name: cms-metadata-kafka-bridge-ucs-test-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-ucs-test@.service
-  version: v11.0.6
+  version: v12.0.1
   count: 2
 - name: cms-metadata-kafka-bridge@.service
   version: v11.0.6
@@ -92,7 +92,7 @@ services:
 - name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge-ucs-test@.service
-  version: v11.0.6
+  version: v12.0.1
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
   version: v11.0.6
@@ -100,7 +100,7 @@ services:
 - name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-pre-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1

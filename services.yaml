@@ -287,10 +287,10 @@ services:
 - name: notifications-ingester@.service
   version: v46
   count: 2
-- name: notifications-push-sidekick@.service
+- name: sh-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.4.0
+  version: v2.4.2
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

@@ -296,8 +296,9 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v45
+  version: v46
   count: 2
+  sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-blue@.service

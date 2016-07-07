@@ -127,7 +127,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v59
+  version: v76
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service
@@ -333,7 +333,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.0.66
+  version: v0.0.67
   count: 2
 - name: public-six-degrees-sidekick@.service
   count: 2
@@ -453,12 +453,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v1-annotations-rw-blue@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v1-annotations-rw-red-sidekick@.service
   count: 2
 - name: v1-annotations-rw-red@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -488,12 +488,12 @@ services:
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v2-annotations-rw-blue@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
 - name: v2-annotations-rw-red@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1

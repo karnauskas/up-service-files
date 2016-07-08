@@ -1,7 +1,7 @@
 [Unit]
 Description=Concept-Ingester Red Service Sidekick
-BindsTo=concept-ingester-red@.service
-After=concept-ingester-red@.service
+BindsTo=concept-ingester-red@%i.service
+After=concept-ingester-red@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -14,11 +14,11 @@ ExecStart=/bin/sh -c "\
     sleep 5; \
     PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
   done; \
-  etcdctl set /ft/services/$SERVICE/servers http://%H:$PORT;"
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/concept-ingester-red/servers/
+ExecStop=/usr/bin/etcdctl rm /ft/services/concept-ingester-red/servers/%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=concept-ingester-red@.service
+MachineOf=concept-ingester-red@%i.service

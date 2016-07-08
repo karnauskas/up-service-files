@@ -381,7 +381,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: notifications-push
+  version: v0.19.0
   count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1

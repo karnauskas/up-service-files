@@ -22,5 +22,3 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=cms-kafka-bridge-ucs-test@%i.service
-
-

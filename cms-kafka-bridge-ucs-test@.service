@@ -1,8 +1,8 @@
 [Unit]
-Description=CMS Kafka Bridge
+Description=CMS Kafka Bridge Prod
 After=vulcan.service
 Requires=docker.service
-Wants=cms-kafka-bridge-sidekick@%i.service
+Wants=cms-kafka-bridge-ucs-test-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -15,8 +15,8 @@ ExecStartPre=/bin/bash -c 'docker pull coco/coco-kafka-bridge:$DOCKER_APP_VERSIO
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
-  export QUEUE_PROXY_ADDRS=$(/usr/bin/etcdctl get /ft/config/kafka-bridge/ucs_queue_proxy_addrs); \
-  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-kafka-bridge"; \
+  export QUEUE_PROXY_ADDRS=https://kafka-proxy-pr-uk-t-2.glb.ft.com,https://kafka-proxy-pr-uk-t-2.glb.ft.com; \
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-kafka-bridge-prod"; \
   export AUTHORIZATION_KEY=$(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge/authorization_key); \
   export VULCAN_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/vulcand/authorization_header); \
   /usr/bin/docker run --rm --name %p-%i -p $APP_PORT -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" --env "GROUP_ID=$GROUP_ID" --env "CONSUMER_AUTOCOMMIT_ENABLE=false" --env "AUTHORIZATION_KEY=$AUTHORIZATION_KEY" --env "TOPIC=NativeCmsPublicationEvents" --env "PRODUCER_HOST=http://%H:8080" --env "PRODUCER_HOST_HEADER=cms-notifier" --env "PRODUCER_VULCAN_AUTH=$VULCAN_AUTH" --env "PRODUCER_TYPE=plainHTTP" coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
@@ -25,4 +25,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=cms-kafka-bridge@*.service
+Conflicts=cms-kafka-bridge-ucs-test@*.service

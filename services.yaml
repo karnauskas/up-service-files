@@ -32,25 +32,45 @@ services:
   version: v0.0.12
   count: 1
   sequentialDeployment: true
+- name: cms-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-pre-prod@.service
+  version: v12.0.1
+  count: 2
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 2
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
+- name: cms-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-ucs-test@.service
+  version: v12.0.1
+  count: 2
 - name: cms-kafka-bridge@.service
-  version: v11.0.6
+  version: v12.0.1
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod@.service
+  version: v12.0.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
+- name: cms-metadata-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-ucs-test@.service
+  version: v12.0.1
+  count: 2
 - name: cms-metadata-kafka-bridge@.service
-  version: v11.0.6
+  version: v12.0.1
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -69,13 +89,23 @@ services:
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
-- name: concept-suggestions-kafka-bridge@.service
-  version: v11.0.6
+- name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service
   count: 2
+- name: concept-suggestions-kafka-bridge-ucs-test@.service
+  version: v12.0.1
+  count: 2
+- name: concept-suggestions-kafka-bridge@.service
+  version: v12.0.1
+  count: 2
+- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 1
+- name: concepts-kafka-bridge-pub-pre-prod@.service
+  version: v12.0.1
+  count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
@@ -126,6 +156,8 @@ services:
   version: v76
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v3.0.0
 - name: elb-presence@.service
@@ -154,8 +186,6 @@ services:
 - name: genres-transformer@.service
   version: v0.0.3
   count: 2
-- name: image-cleaner.service
-  version: 1.0.0
 - name: industry-classifications-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-blue@.service
@@ -208,7 +238,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v61
+  version: v63
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -247,9 +277,12 @@ services:
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v41
+  version: v42
   count: 2
   sequentialDeployment: true
+- name: neo4j-backup.service
+  desiredState: loaded
+  version: 0.8.1
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
@@ -307,6 +340,12 @@ services:
   version: v0.0.15
   count: 2
   sequentialDeployment: true
+- name: public-brands-api-sidekick@.service
+  count: 2
+- name: public-brands-api@.service
+  version: v0.0.7
+  count: 2
+  sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
@@ -345,6 +384,15 @@ services:
   count: 1
 - name: publish-availability-monitor@.service
   version: v0.18.5   
+  count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  version: v0.0.3
+  count: 1
+- name: restorage-mongo-native-sidekick@.service
+  count: 1
+- name: restorage-mongo-native@.service
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v40
+  version: v43
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -210,7 +210,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v63
+  version: v73
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -278,8 +278,9 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v44
+  version: v46
   count: 2
+  sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-blue@.service

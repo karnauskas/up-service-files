@@ -318,7 +318,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.0.66
+  version: v0.0.67
   count: 2
 - name: public-six-degrees-sidekick@.service
   count: 2

@@ -131,13 +131,13 @@ services:
   count: 2
 - name: content-public-read-preview@.service
   sequentialDeployment: true
-  version: v45
+  version: v46
   count: 2
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
   sequentialDeployment: true
-  version: v45
+  version: v46
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -381,7 +381,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.19.0
+  version: v0.18.5
   count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1

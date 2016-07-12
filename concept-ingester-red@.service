@@ -1,0 +1,45 @@
+[Unit]
+Description=Service which ingests concepts from the queue
+After=vulcan.service
+Requires=docker.service
+Wants=concept-ingester-red-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/concept-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/concept-ingester:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export PORT=8080; \
+  export VULCAN_ADDR=http://%H:8080; \
+  export GROUP_ID=RedConcepts; \
+  export TOPIC=Concept; \
+  export SERVICES=people-rw-neo4j-red,organisations-rw-neo4j-red,memberships-rw-neo4j-red,brands-rw-neo4j-red,roles-rw-neo4j-red; \
+  export HOST_HEADER=kafka; \
+  export OFFSET=largest; \
+  export COMMIT_ENABLE=true; \
+  export STREAM_COUNT=1; \
+  export TIMEOUT=60; \
+  /usr/bin/docker run --rm --name %p-%i \
+  -p $PORT \
+  -e "PORT=$PORT" \
+  -e "VULCAN_ADDR=$VULCAN_ADDR" \
+  -e "GROUP_ID=$GROUP_ID" \
+  -e "TOPIC=$TOPIC" \
+  -e "SERVICES=$SERVICES" \
+  -e "HOST_HEADER=$HOST_HEADER" \
+  -e "OFFSET=$OFFSET" \
+  -e "COMMIT_ENABLE=$COMMIT_ENABLE" \
+  -e "STREAM_COUNT=$STREAM_COUNT" \
+  -e "TIMEOUT=$TIMEOUT" \
+  coco/concept-ingester:$DOCKER_APP_VERSION;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

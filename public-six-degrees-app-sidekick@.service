@@ -7,10 +7,7 @@ After=public-six-degrees-app@%i.service
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
-  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
   etcdctl set /vulcand/frontends/public-services-six-degrees-app/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-public-six-degrees-app\", \"Route\": \"PathRegexp(`/sixdegrees-app/.*$`) && Host(`public-services`)\"}'; \
   while [ -z $PORT ]; do \
     PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \

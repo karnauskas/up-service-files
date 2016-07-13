@@ -300,7 +300,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.4.14
+  version: v2.4.15
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -381,7 +381,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.5
+  version: v0.19.0
   count: 1
 - name: restorage-mongo-native-sidekick@.service
   count: 1

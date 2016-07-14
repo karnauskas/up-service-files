@@ -280,6 +280,9 @@ services:
   version: v42
   count: 2
   sequentialDeployment: true
+- name: neo4j-backup.service
+  desiredState: loaded
+  version: 0.8.1
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
@@ -306,7 +309,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v46
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service

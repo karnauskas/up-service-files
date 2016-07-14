@@ -85,6 +85,11 @@ services:
 - name: concepts-kafka-bridge-pub-prod@.service
   version: v12.0.1
   count: 1
+- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 1
+- name: concepts-kafka-bridge-pub-pre-prod@.service
+  version: v12.0.1
+  count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service

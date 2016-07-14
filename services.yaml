@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v40
+  version: v43
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -45,38 +45,48 @@ services:
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 2
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
-  version: v11.0.6
+  version: v12.0.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod@.service
-  version: v11.0.7
+  version: v12.0.1
   count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge@.service
-  version: v11.0.6
+  version: v12.0.1
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
   version: v33
   count: 1
+- name: concept-ingester-blue@.service
+  version: v1.0.1
+  count: 1
+- name: concept-ingester-blue-sidekick@.service
+  count: 1
+- name: concept-ingester-red@.service
+  version: v1.0.1
+  count: 1
+- name: concept-ingester-red-sidekick@.service
+  count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
-  version: v11.0.6
+  version: v12.0.1
   count: 2
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
-  count: 2
+  count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
-  version: v11.0.7
-  count: 2
+  version: v12.0.1
+  count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
@@ -123,7 +133,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v57
+  version: v76
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -138,7 +148,7 @@ services:
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
-  version: 1.0.1
+  version: 1.0.3
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
@@ -250,6 +260,9 @@ services:
   version: v41
   count: 2
   sequentialDeployment: true
+- name: neo4j-backup.service
+  desiredState: loaded
+  version: 0.8.1
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
@@ -270,14 +283,15 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.2.0
+  version: v2.4.15
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v35
+  version: v46
   count: 2
+  sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j-blue@.service
@@ -293,12 +307,12 @@ services:
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: people-rw-neo4j-blue@.service
-  version: v0.0.60
+  version: v0.0.62
   count: 2
 - name: people-rw-neo4j-red-sidekick@.service
   count: 2
 - name: people-rw-neo4j-red@.service
-  version: v0.0.60
+  version: v0.0.62
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -327,7 +341,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.0.66
+  version: v0.0.67
   count: 2
 - name: public-six-degrees-sidekick@.service
   count: 2
@@ -343,7 +357,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.4
+  version: v0.19.0
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -442,12 +456,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v1-annotations-rw-blue@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v1-annotations-rw-red-sidekick@.service
   count: 2
 - name: v1-annotations-rw-red@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -477,12 +491,12 @@ services:
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v2-annotations-rw-blue@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
 - name: v2-annotations-rw-red@.service
-  version: v0.0.25
+  version: v0.0.26
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
@@ -503,7 +517,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.0.23
+  version: v1.2.0
   count: 2
 - name: vulcan-config-builder.service
   version: v1.2.2

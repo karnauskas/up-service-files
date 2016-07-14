@@ -67,6 +67,16 @@ services:
 - name: cms-notifier@.service
   version: v33
   count: 1
+- name: concept-ingester-blue@.service
+  version: v1.0.1
+  count: 1
+- name: concept-ingester-blue-sidekick@.service
+  count: 1
+- name: concept-ingester-red@.service
+  version: v1.0.1
+  count: 1
+- name: concept-ingester-red-sidekick@.service
+  count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
@@ -275,7 +285,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.4.14
+  version: v2.4.15
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -349,7 +359,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.18.5
+  version: v0.19.0
   count: 1
 - name: restorage-elasticsearch-concepts-sidekick@.service
   count: 1
@@ -523,7 +533,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v86
+  version: v89
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

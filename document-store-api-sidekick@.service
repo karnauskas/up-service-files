@@ -20,6 +20,8 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 ExecStop=/usr/bin/etcdctl rm /ft/services/document-store-api/servers/%i
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=document-store-api@%i.service

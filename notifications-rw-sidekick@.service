@@ -23,4 +23,3 @@ ExecStop=/usr/bin/etcdctl rm /ft/services/notifications-rw/servers/%i
 
 [X-Fleet]
 MachineOf=notifications-rw@%i.service
-

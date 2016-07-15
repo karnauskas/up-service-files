@@ -68,10 +68,12 @@ services:
   version: v33
   count: 1
 - name: concept-ingester-blue@.service
+  version: v1.1.1
   count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
+  version: v1.1.1
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
@@ -139,6 +141,8 @@ services:
   version: v76
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v3.0.0
 - name: elb-presence@.service
@@ -221,7 +225,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v61
+  version: v74
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -362,6 +366,11 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.19.0
   count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  version: v0.0.3
+  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
@@ -489,7 +498,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.12
+  version: v0.0.13
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
@@ -529,7 +538,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v86
+  version: v89
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

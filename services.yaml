@@ -68,8 +68,10 @@ services:
   version: v33
   count: 1
 - name: concept-ingester-blue@.service
+  version: v1.1.2
   count: 1
 - name: concept-ingester-blue-sidekick@.service
+  version: v1.1.2
   count: 1
 - name: concept-ingester-red@.service
   count: 1

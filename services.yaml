@@ -310,6 +310,12 @@ services:
   version: v0.0.15
   count: 2
   sequentialDeployment: true
+- name: public-brands-api-sidekick@.service
+  count: 2
+- name: public-brands-api@.service
+  version: v0.0.8
+  count: 2
+  sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service

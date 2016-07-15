@@ -1,0 +1,38 @@
+[Unit]
+Description=Public Brands API Service
+After=vulcan.service
+Requires=docker.service
+Wants=public-brands-api-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/public-brands-api:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/public-brands-api:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export PORT=8080; \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data; \
+  export GRAPHITE_ADDRESS=graphite.ft.com:2003; \
+  export GRAPHITE_PREFIX=coco.services.$ENV.public-brands-api.%i; \
+  export LOG_METRICS=false; \
+  export CACHE_DURATION=24h; \
+  /usr/bin/docker run --rm --name %p-%i \
+  -p $PORT \
+  -e "PORT=$PORT" \
+  -e "NEO_URL=$NEO_URL" \
+  -e "GRAPHITE_ADDRESS=$GRAPHITE_ADDRESS" \
+  -e "GRAPHITE_PREFIX=$GRAPHITE_PREFIX" \
+  -e "LOG_METRICS=$LOG_METRICS" \
+  -e "CACHE_DURATION=$CACHE_DURATION" \
+  coco/public-brands-api:$DOCKER_APP_VERSION;'
+ExecStop=/usr/bin/docker stop -t 3 %p-%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=public-brands-api@*.service

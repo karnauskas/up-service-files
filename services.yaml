@@ -131,13 +131,13 @@ services:
   count: 2
 - name: content-public-read-preview@.service
   sequentialDeployment: true
-  version: v45
+  version: v46
   count: 2
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
   sequentialDeployment: true
-  version: v45
+  version: v46
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -343,7 +343,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v0.0.7
+  version: v0.0.8
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service

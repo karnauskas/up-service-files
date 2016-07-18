@@ -180,10 +180,10 @@ services:
   version: v1.1.3
   count: 1
 - name: genres-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: genres-transformer@.service
   version: v0.0.3
-  count: 2
+  count: 1
 - name: image-cleaner.service
   version: 1.0.0
 - name: industry-classifications-rw-neo4j-blue-sidekick@.service
@@ -221,10 +221,10 @@ services:
   version: v1.1.1
   count: 2
 - name: locations-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: locations-transformer@.service
   version: v1.0.1
-  count: 2
+  count: 1
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j-blue@.service
@@ -415,10 +415,10 @@ services:
   version: v1.1.1
   count: 2
 - name: sections-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: sections-transformer@.service
   version: v1.0.2
-  count: 2
+  count: 1
 - name: special-reports-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: special-reports-rw-neo4j-blue@.service
@@ -430,10 +430,10 @@ services:
   version: v1.1.0
   count: 2
 - name: special-reports-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: special-reports-transformer@.service
   version: v1.0.3
-  count: 2
+  count: 1
 - name: splunk-forwarder.service
 - name: subjects-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -446,10 +446,10 @@ services:
   version: v1.1.0
   count: 2
 - name: subjects-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: subjects-transformer@.service
   version: v1.0.3
-  count: 2
+  count: 1
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-aws@.service
@@ -473,10 +473,10 @@ services:
   version: v1.1.1
   count: 2
 - name: topics-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: topics-transformer@.service
   version: v1.0.10
-  count: 2
+  count: 1
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1

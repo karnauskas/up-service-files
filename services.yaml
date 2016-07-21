@@ -170,7 +170,7 @@ services:
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
-  version: 1.0.3
+  version: 1.0.5
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service

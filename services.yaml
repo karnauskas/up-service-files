@@ -286,12 +286,12 @@ services:
   count: 1
 - name: organisations-rw-neo4j-blue@.service
   version: v0.2.1
-  count: 2
+  count: 1
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-red@.service
   version: v0.2.1
-  count: 2
+  count: 1
 - name: os-upgrade.service
   desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service

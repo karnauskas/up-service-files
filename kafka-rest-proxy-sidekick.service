@@ -15,12 +15,16 @@ ExecStart=/bin/sh -c "\
      sleep 5; \
      PORT=`echo $(/usr/bin/docker port $SERVICE 8082 | cut -d':' -f2)`; \
    done; \
-   etcdctl set /ft/config/$SERVICE/1/host '%H'; \
-   etcdctl set /ft/config/$SERVICE/1/app_port $PORT; \
-   etcdctl set /vulcand/backends/$SERVICE/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\"" \
+   etcdctl set   /ft/services/$SERVICE/healthcheck false; \
+   etcdctl mkdir /ft/services/$SERVICE/servers; \
+   etcdctl set   /ft/services/$SERVICE/servers/1 "http://%H:$PORT --ttl 600"; \
+   etcdctl set   /ft/config/$SERVICE/1/host '%H'; \
+   etcdctl set   /ft/config/$SERVICE/1/app_port $PORT; \
+   etcdctl set   /vulcand/backends/$SERVICE/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\"" \
 
-ExecStop=/usr/bin/etcdctl rm --recursive /services/kafka-rest-proxy/1
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/kafka-rest-proxy/servers/srv1
+ExecStop=/usr/bin/etcdctl rm /ft/services/kafka-rest-proxy/servers/1
+
 Restart=on-failure
 RestartSec=60
 

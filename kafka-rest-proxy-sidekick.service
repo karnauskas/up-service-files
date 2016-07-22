@@ -22,7 +22,6 @@ ExecStart=/bin/sh -c "\
    etcdctl set   /ft/config/$SERVICE/1/app_port $PORT; \
    etcdctl set   /vulcand/backends/$SERVICE/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\"" \
 
-ExecStop=/usr/bin/etcdctl rm --recursive /services/kafka-rest-proxy/1
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/kafka-rest-proxy/servers/srv1
 ExecStop=/usr/bin/etcdctl rm /ft/services/kafka-rest-proxy/servers/1
 

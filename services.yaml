@@ -507,7 +507,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v70
+  version: dev-test
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: v1.1.0
+  version: v1.1.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -536,7 +536,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v70
+  version: dev-test
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

@@ -4,23 +4,22 @@ BindsTo=aggregate-healthcheck@%i.service
 After=aggregate-healthcheck@%i.service
 
 [Service]
-RemainAfterExit=yes
-ExecStart=/bin/sh -c "\
-  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/services/$SERVICE/path-regex/public '/__health' ; \
-  etcdctl set /ft/services/$SERVICE/path-regex/public-gtg '/__gtg' ; \
+ExecStartPre=/bin/sh -c "\
+  etcdctl set /vulcand/backends/aggregate-healthcheck/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck/frontend '{\"Type\": \"http\", \"BackendId\": \"aggregate-healthcheck\", \"Route\": \"Host(`aggregate-healthcheck`)\"}'; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend '{\"Type\":\"http\", \"BackendId\":\"aggregate-healthcheck\", \"Route\":\"Path(`/__health`)\"}'; \
+  etcdctl set /vulcand/frontends/aggregate-healthcheck-public-gtg/frontend '{\"Type\":\"http\", \"BackendId\":\"aggregate-healthcheck\", \"Route\":\"Path(`/__gtg`)\"}'; \
   etcdctl set /ft/healthcheck-categories/read/period_seconds 4; \
   etcdctl set /ft/healthcheck-categories/read/is_resilient true; \
   etcdctl set /ft/healthcheck-categories/system/period_seconds 60; \
-  etcdctl set /ft/healthcheck-categories/system/is_resilient false; \
-  while [ -z $PORT ]; do \
-    sleep 5; \
-    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
-  done; \
-  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
-
-ExecStop=/usr/bin/etcdctl rm /ft/services/aggregate-healthcheck/servers/%i
+  etcdctl set /ft/healthcheck-categories/system/is_resilient false"
+ExecStart=/bin/sh -c "\
+  while true; do \
+    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port aggregate-healthcheck-%i 8080 | cut -d':' -f2)`; \
+    etcdctl set /vulcand/backends/aggregate-healthcheck/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
+    sleep 120; \
+  done"
+ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/aggregate-healthcheck/servers/srv%i
 Restart=on-failure
 RestartSec=60
 

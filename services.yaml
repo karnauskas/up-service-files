@@ -375,7 +375,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.19.1
+  version: v0.20.1
   count: 1
 - name: restorage-elasticsearch-concepts-sidekick@.service
   count: 1

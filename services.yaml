@@ -37,6 +37,11 @@ services:
 - name: cms-kafka-bridge-pub-pre-prod@.service
   version: v12.0.1
   count: 2
+- name: cms-kafka-bridge-pub-xp-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-xp@.service
+  version: v12.0.1
+  count: 2
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service

@@ -498,6 +498,16 @@ services:
 - name: v1-content-annotator-binding-service-red@.service
   version: v24
   count: 1
+- name: v1-content-annotator-brightcove-blue-sidekick@.service
+  count: 1
+- name: v1-content-annotator-brightcove-blue@.service
+  version: v24
+  count: 1
+- name: v1-content-annotator-brightcove-red-sidekick@.service
+  count: 1
+- name: v1-content-annotator-brightcove-red@.service
+  version: v24
+  count: 1
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service

@@ -88,12 +88,12 @@ services:
   version: v33
   count: 1
 - name: concept-ingester-blue@.service
-  version: v1.1.3
+  version: v1.1.5
   count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
-  version: v1.1.3
+  version: v1.1.5
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
@@ -393,7 +393,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.19.1
+  version: v0.20.1
   count: 1
 - name: restorage-elasticsearch-concepts-sidekick@.service
   count: 1

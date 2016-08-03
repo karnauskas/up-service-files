@@ -6,24 +6,19 @@ After=kafka-rest-proxy.service
 [Service]
 RemainAfterExit=yes
 ExecStartPre=/bin/sh -c "\
-  etcdctl set /vulcand/backends/kafka-rest-proxy/backend '{\"Type\": \"http\", \"Settings\": {\"KeepAlive\": {\"MaxIdleConnsPerHost\": 256, \"Period\": \"35s\"}}}' ; \
-  etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';"
+  etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';"
 
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck false; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
   while [ -z $PORT ]; do \
-     sleep 5; \
-     PORT=`echo $(/usr/bin/docker port $SERVICE 8082 | cut -d':' -f2)`; \
-   done; \
-   etcdctl set   /ft/services/$SERVICE/healthcheck false; \
-   etcdctl mkdir /ft/services/$SERVICE/servers; \
-   etcdctl set   /ft/services/$SERVICE/servers/1 \"http://%H:$PORT\"; \
-   etcdctl set   /ft/config/$SERVICE/1/host '%H'; \
-   etcdctl set   /ft/config/$SERVICE/1/app_port \"$PORT\"; \
-   etcdctl set   /vulcand/backends/$SERVICE/servers/srv1 \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\";"
+    sleep 5; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE 8082 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/kafka-rest-proxy/servers/srv1
-ExecStop=/usr/bin/etcdctl rm /ft/services/kafka-rest-proxy/servers/1
+ExecStop=/usr/bin/etcdctl rm /ft/services/kafka-rest-proxy/servers/%i
 
 Restart=on-failure
 RestartSec=60

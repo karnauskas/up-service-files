@@ -16,7 +16,13 @@ ExecStartPre=/bin/bash -c 'docker history coco/genress-rw-neo4j:$DOCKER_APP_VERS
 ExecStart=/bin/sh -c '\
   export PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-blue/db/data" --env "BATCH_SIZE=50" --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.genres-rw-neo4j-blue.%i" coco/genres-rw-neo4j:$DOCKER_APP_VERSION;'
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
+  --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-blue/db/data" \
+  --env "BATCH_SIZE=50" \
+  --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.genres-rw-neo4j-blue.%i" \
+  coco/genres-rw-neo4j:$DOCKER_APP_VERSION;'
+
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60

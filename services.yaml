@@ -136,6 +136,16 @@ services:
   version: v62
   count: 2
   sequentialDeployment: true
+- name: financial-instruments-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: financial-instruments-rw-neo4j-blue@.service
+  version: v0.0.0
+  count: 1
+- name: financial-instruments-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: financial-instruments-rw-neo4j-red@.service
+  version: v0.0.0
+  count: 1
 - name: fleet-unit-healthcheck-sidekick.service
 - name: fleet-unit-healthcheck.service
   version: 1.0.3

@@ -21,7 +21,7 @@ ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \
                     --env "CONTENT_PATH=content/" \
                     --env "HOST_HEADER=document-store-api" \
-                    --env "USE_CACHE_CONTROL_FILTER=true" \
+                    --env "CACHE_CONTROL_POLICY=\"max-age=30\"" \
                     --env "CONTENT_HEALTHCHECK_PATH=/__health" \
                     --env "API_HOST=$ENV_API_HOST" \
                     up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION ; '

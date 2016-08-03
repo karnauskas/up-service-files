@@ -18,7 +18,14 @@ ExecStart=/bin/sh -c '\
   export USER=$(/usr/bin/etcdctl get /ft/_credentials/tme/username); \
   export PASS=$(/usr/bin/etcdctl get /ft/_credentials/tme/password); \
   export TOKEN=$(/usr/bin/etcdctl get /ft/_credentials/tme/token); \
-  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT --env "BASE_URL=http://%H:8080/transformers/subjects/" --env "TME_BASE_URL=https://tme.ft.com" --env "TME_USERNAME=$USER" --env "TME_PASSWORD=$PASS" --env "TOKEN=$TOKEN" coco/subjects-transformer:$DOCKER_APP_VERSION;'
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
+  --env "BASE_URL=http://%H:8080/transformers/subjects/" \
+  --env "TME_BASE_URL=https://tme.ft.com" \
+  --env "TME_USERNAME=$USER" \
+  --env "TME_PASSWORD=$PASS" \
+  --env "TOKEN=$TOKEN" \
+  coco/subjects-transformer:$DOCKER_APP_VERSION;'
+
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60

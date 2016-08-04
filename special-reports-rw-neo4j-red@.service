@@ -2,7 +2,7 @@
 Description=Special Reports neo4j rw red service
 After=vulcan.service
 Requires=docker.service
-Wants=neo4j-red@1.service special-reports-rw-neo4j-red-sidekick@%i.service
+Wants=special-reports-rw-neo4j-red-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

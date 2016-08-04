@@ -1,3 +1,4 @@
+#The sidekick makes sure the service is correctly registered in ETCD.
 [Unit]
 Description=CMS Notifier Sidekick
 BindsTo=cms-notifier@%i.service
@@ -23,7 +24,6 @@ ExecStart=/bin/sh -c "\
 ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/cms-notifier/servers/%i'
 Restart=on-failure
 RestartSec=60
-
 
 [X-Fleet]
 MachineOf=cms-notifier@%i.service

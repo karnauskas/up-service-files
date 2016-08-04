@@ -1,9 +1,10 @@
-#NOTE: you can remove comments, before deploying your service file.
+#NOTE: please remove comments, before deploying your service file.
 [Unit]
+#Add the name of your service. We use CMS Notifier as an example to illustrate.
 Description=CMS Notifier
 After=vulcan.service
 Requires=docker.service
-#The service's sidekick and other dependent services can be added here. Separate by space.
+#The service's sidekick and optionally other dependent services can be added here. Separate by space.
 #Systemd will try to start these services, when the unit is activated, but it continues to work, even if they fail.
 Wants=cms-notifier-sidekick@%i.service
 
@@ -20,7 +21,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-
 #Pull the image, if it is not yet downloaded. Check in history.
 ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
 
-#Define the variables, and commands below. Please put each command on separate line.
+#Define the variables, and commands below. Please put each command on a separate line.
 #Notice that the name of the container will be completed with a "_$(uuidgen)" - to ensure their uniqueness.
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
@@ -34,7 +35,7 @@ ExecStart=/bin/sh -c '\
   --env "KAFKA_TOPIC=$KAFKA_TOPIC" \
   up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
 
-#Filter out and stop the container. Waits 3 sec for stop, before sending a sigterm to terminate.
+#Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60

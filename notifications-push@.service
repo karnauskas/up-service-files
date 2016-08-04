@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c '\
 		--env "GROUP_ID=$GROUP_ID" \
 		--env "TOPIC=CmsPublicationEvents" \
 		--env "QUEUE_HOST=kafka" \
-		--env "API_BASE_URL=api.ft.com" \
+		--env "API_BASE_URL=http://api.ft.com" \
 		coco/notifications-push:$DOCKER_APP_VERSION;'
 
 ExecStop=/usr/bin/docker stop -t 3 %p-%i

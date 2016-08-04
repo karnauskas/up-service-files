@@ -37,14 +37,14 @@ services:
 - name: cms-kafka-bridge-pub-pre-prod@.service
   version: v12.0.1
   count: 2
-- name: cms-kafka-bridge-pub-xp-sidekick@.service
-  count: 2
-- name: cms-kafka-bridge-pub-xp@.service
-  version: v12.0.1
-  count: 2
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service
+  version: v12.0.1
+  count: 2
+- name: cms-kafka-bridge-pub-xp-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-xp@.service
   version: v12.0.1
   count: 2
 - name: cms-kafka-bridge-sidekick@.service
@@ -87,15 +87,15 @@ services:
 - name: cms-notifier@.service
   version: v33
   count: 1
+- name: concept-ingester-blue-sidekick@.service
+  count: 1
 - name: concept-ingester-blue@.service
   version: v1.1.5
   count: 1
-- name: concept-ingester-blue-sidekick@.service
+- name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
   version: v1.1.5
-  count: 1
-- name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
@@ -135,15 +135,15 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  sequentialDeployment: true
   version: v46
   count: 2
+  sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  sequentialDeployment: true
   version: v46
   count: 2
+  sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: content-rw-neo4j-blue@.service
@@ -296,8 +296,8 @@ services:
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service
-  desiredState: inactive
   version: 0.8.1
+  desiredState: inactive
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
@@ -518,6 +518,11 @@ services:
 - name: v1-content-annotator-binding-service-red@.service
   version: v24
   count: 1
+- name: v1-content-annotator-blue-sidekick@.service
+  count: 1
+- name: v1-content-annotator-blue@.service
+  version: v24
+  count: 1
 - name: v1-content-annotator-brightcove-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-blue@.service
@@ -526,11 +531,6 @@ services:
 - name: v1-content-annotator-brightcove-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-red@.service
-  version: v24
-  count: 1
-- name: v1-content-annotator-blue-sidekick@.service
-  count: 1
-- name: v1-content-annotator-blue@.service
   version: v24
   count: 1
 - name: v1-content-annotator-red-sidekick@.service

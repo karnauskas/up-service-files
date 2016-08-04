@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: v1.1.0
+  version: v1.1.1
   count: 2
   sequentialDeployment: true
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
@@ -34,12 +34,12 @@ services:
 - name: brands-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-blue@.service
-  version: v0.0.12
+  version: v0.1.1
   count: 1
 - name: brands-rw-neo4j-red-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-red@.service
-  version: v0.0.12
+  version: v0.1.1
   count: 1
   sequentialDeployment: true
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
@@ -68,12 +68,12 @@ services:
   version: v33
   count: 1
 - name: concept-ingester-blue@.service
-  version: v1.1.2
+  version: v1.1.5
   count: 1
 - name: concept-ingester-blue-sidekick@.service
-  version: v1.1.2
   count: 1
 - name: concept-ingester-red@.service
+  version: v1.1.5
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
@@ -116,13 +116,13 @@ services:
   count: 2
 - name: content-public-read-preview@.service
   sequentialDeployment: true
-  version: v45
+  version: v46
   count: 2
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
   sequentialDeployment: true
-  version: v45
+  version: v46
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -148,7 +148,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v61
+  version: v62
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick.service
@@ -165,21 +165,21 @@ services:
   version: v1.1.3
   count: 1
 - name: genres-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: genres-transformer@.service
   version: v0.0.3
-  count: 2
+  count: 1
 - name: image-cleaner.service
   version: 1.0.0
 - name: industry-classifications-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-blue@.service
-  version: v0.0.3
+  version: v0.0.4
   count: 1
 - name: industry-classifications-rw-neo4j-red-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-red@.service
-  version: v0.0.3
+  version: v0.0.4
   count: 1
 - name: instance-data-ingester-blue-sidekick@.service
   count: 1
@@ -206,29 +206,29 @@ services:
   version: v1.1.1
   count: 2
 - name: locations-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: locations-transformer@.service
   version: v1.0.1
-  count: 2
+  count: 1
 - name: memberships-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: memberships-rw-neo4j-blue@.service
-  version: v0.0.34
-  count: 2
+  version: v0.1.2
+  count: 1
 - name: memberships-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: memberships-rw-neo4j-red@.service
-  version: v0.0.34
-  count: 2
+  version: v0.1.2
+  count: 1
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v61
+  version: v76
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v49
+  version: v55
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -266,7 +266,7 @@ services:
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service
-  desiredState: loaded
+  desiredState: inactive
   version: 0.8.1
 - name: neo4j-blue-sidekick@.service
   count: 1
@@ -294,35 +294,41 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v46
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: organisations-rw-neo4j-blue@.service
-  version: v0.0.37
-  count: 2
+  version: v0.2.1
+  count: 1
 - name: organisations-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: organisations-rw-neo4j-red@.service
-  version: v0.0.37
-  count: 2
+  version: v0.2.0
+  count: 1
 - name: os-upgrade.service
   desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: people-rw-neo4j-blue@.service
-  version: v0.0.62
-  count: 2
+  version: v0.1.1
+  count: 1
 - name: people-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: people-rw-neo4j-red@.service
-  version: v0.0.62
-  count: 2
+  version: v0.1.1
+  count: 1
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
   version: v0.0.15
+  count: 2
+  sequentialDeployment: true
+- name: public-brands-api-sidekick@.service
+  count: 2
+- name: public-brands-api@.service
+  version: v0.0.8
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
@@ -346,7 +352,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.0.67
+  version: v0.1.3
   count: 2
 - name: public-six-degrees-sidekick@.service
   count: 2
@@ -362,7 +368,7 @@ services:
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
-  version: v0.19.0
+  version: v0.20.1
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -371,12 +377,12 @@ services:
 - name: roles-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: roles-rw-neo4j-blue@.service
-  version: v0.0.22
+  version: v0.1.2
   count: 2
 - name: roles-rw-neo4j-red-sidekick@.service
   count: 2
 - name: roles-rw-neo4j-red@.service
-  version: v0.0.22
+  version: v0.1.2
   count: 2
 - name: sections-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -389,10 +395,10 @@ services:
   version: v1.1.1
   count: 2
 - name: sections-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: sections-transformer@.service
   version: v1.0.2
-  count: 2
+  count: 1
 - name: special-reports-rw-neo4j-blue-sidekick@.service
   count: 2
 - name: special-reports-rw-neo4j-blue@.service
@@ -404,10 +410,10 @@ services:
   version: v1.1.0
   count: 2
 - name: special-reports-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: special-reports-transformer@.service
   version: v1.0.3
-  count: 2
+  count: 1
 - name: splunk-forwarder.service
 - name: subjects-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -420,10 +426,10 @@ services:
   version: v1.1.0
   count: 2
 - name: subjects-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: subjects-transformer@.service
   version: v1.0.3
-  count: 2
+  count: 1
 - name: synthetic-image-publication-monitor-aws-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-aws@.service
@@ -448,10 +454,10 @@ services:
   version: v1.1.1
   count: 2
 - name: topics-transformer-sidekick@.service
-  count: 2
+  count: 1
 - name: topics-transformer@.service
   version: v1.0.10
-  count: 2
+  count: 1
 - name: tunnel-registrator.service
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
@@ -516,7 +522,7 @@ services:
 - name: varnish-sidekick@.service
   count: 2
 - name: varnish@.service
-  version: v70
+  version: v71
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service
@@ -531,7 +537,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v86
+  version: v89
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

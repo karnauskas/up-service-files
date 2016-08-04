@@ -1,6 +1,6 @@
 [Unit]
 Description=Content Public Read
-After=docker.service
+After=vulcan.service
 Requires=docker.service
 Wants=content-public-read-sidekick@%i.service
 
@@ -10,22 +10,23 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION'
 
 # Setting the proper API_HOST parameter according to the current environment
 ExecStart=/bin/sh -c '\
-ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
-/usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+  export ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \
                     --env "CONTENT_PATH=content/" \
                     --env "HOST_HEADER=document-store-api" \
                     --env "CONTENT_HEALTHCHECK_PATH=/__health" \
                     --env "API_HOST=$ENV_API_HOST" \
-                    up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION ; '
+                    up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;'
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

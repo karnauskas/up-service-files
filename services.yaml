@@ -362,7 +362,7 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v0.0.9
+  version: v0.0.10
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service

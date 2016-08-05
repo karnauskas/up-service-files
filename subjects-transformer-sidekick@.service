@@ -10,11 +10,12 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/subjects-transformer/servers/%i
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/subjects-transformer/servers/%i'
 Restart=on-failure
 RestartSec=60
 

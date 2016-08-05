@@ -2,7 +2,7 @@
 Description=Runs the mongo backup job
 
 [Timer]
-OnCalendar=14:30
+OnCalendar=14:40
 
 [Install]
 WantedBy=timers.target

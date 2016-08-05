@@ -242,6 +242,7 @@ services:
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service
+  version: v13
   desiredState: loaded
 - name: mongo-backup.timer
 - name: mongodb-configurator.service

@@ -29,7 +29,7 @@ ExecStart=/bin/sh -c "\
     DATA_FOLDER=/data/db; \
     S3_DOMAIN=s3-eu-west-1.amazonaws.com; \
     ENV_TAG=$(usr/bin/etcdctl get /ft/config/environment_tag); \
-     /usr/bin/docker run --rm --name %p \
+     /usr/bin/docker run --rm --name %p-%i \
         -e MONGODB_PORT=$MONGODB_PORT \
         -e MONGODB_HOST=$MONGODB_HOST \
         -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY \

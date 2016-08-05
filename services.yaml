@@ -132,6 +132,7 @@ services:
 - name: content-preview@.service
   version: v0.0.4
   count: 2
+  sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
@@ -390,6 +391,7 @@ services:
 - name: public-six-degrees@.service
   version: 0.0.6
   count: 2
+  sequentialDeployment: true
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service

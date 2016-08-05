@@ -6,15 +6,15 @@ services:
   count: 2
   sequentialDeployment: true
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: alphaville-series-rw-neo4j-blue@.service
   version: v0.0.5
-  count: 2
+  count: 1
 - name: alphaville-series-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: alphaville-series-rw-neo4j-red@.service
   version: v0.0.5
-  count: 2
+  count: 1
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
@@ -107,11 +107,6 @@ services:
 - name: concept-suggestions-kafka-bridge@.service
   version: v12.0.1
   count: 2
-- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
-  count: 1
-- name: concepts-kafka-bridge-pub-pre-prod@.service
-  version: v12.0.1
-  count: 1
 - name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-pre-prod@.service
@@ -272,6 +267,7 @@ services:
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service
+  version: v13
   desiredState: loaded
 - name: mongo-backup.timer
 - name: mongodb-configurator.service

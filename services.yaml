@@ -491,7 +491,7 @@ services:
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
-- name: v2-annotations-rw-red@.service 
+- name: v2-annotations-rw-red@.service
   version: v0.0.29
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service

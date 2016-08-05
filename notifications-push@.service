@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c '\
 	export PORT=8080; \
 	export NOTIFICATIONS_PUSH_PORT=8548; \
 	export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-notifications-push-%i"; \
-	export API_BASE_URL=$(/usr/bin/etcdctl get /ft/config/api_host); \
+	export API_BASE_URL="http://"$(/usr/bin/etcdctl get /ft/config/api_host); \
 	/usr/bin/docker run --rm --name %p-%i -p $NOTIFICATIONS_PUSH_PORT:8080 \
 		--env "QUEUE_PROXY_ADDRS=http://%H:8080" \
 		--env "GROUP_ID=$GROUP_ID" \

@@ -242,9 +242,11 @@ services:
   count: 2
 - name: methodeapi-endpoint.service
 - name: mongo-backup.service
-  version: v13
+  version: v15
   desiredState: loaded
+  count: 3
 - name: mongo-backup.timer
+  count: 3
 - name: mongodb-configurator.service
 - name: mongodb-sidekick@.service
   count: 3

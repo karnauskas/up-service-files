@@ -8,9 +8,4 @@ ExecStart=/bin/sh -c "\
     etcdctl set /vulcand/backends/methodeapi/servers/srv '{\"url\": \"http://methodeapi.ft.com\"}'; \
     etcdctl set /vulcand/frontends/methodeapi/frontend '{\"Type\": \"http\", \"BackendId\": \"methodeapi\", \"Route\": \"PathRegexp(`/.*`) && Host(`methodeapi.ft.com`)\"}';"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /vulcand/backends/methodeapi/backend'
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /vulcand/backends/methodeapi/servers/srv'
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rmdir /vulcand/backends/methodeapi/servers'
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rmdir /vulcand/backends/methodeapi'
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /vulcand/frontends/methodeapi/frontend'
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rmdir /vulcand/frontends/methodeapi'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm --recursive /vulcand/backends/methodeapi'

@@ -1,18 +1,16 @@
 [Unit]
-Description=methodeapi backend
+Description=Methodeapi backend
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  while true; do \
     etcdctl set /vulcand/backends/methodeapi/backend '{\"Type\": \"http\"}'; \
     etcdctl set /vulcand/backends/methodeapi/servers/srv '{\"url\": \"http://methodeapi.ft.com\"}'; \
-    etcdctl set /vulcand/frontends/methodeapi/frontend '{\"Type\": \"http\", \"BackendId\": \"methodeapi\", \"Route\": \"PathRegexp(`/.*`) && Host(`methodeapi.ft.com`)\"}'; \
-    sleep 45; \
-  done" 
-  
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methodeapi/backend
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/methodeapi/servers/srv
-ExecStop=/usr/bin/etcdctl rmdir /vulcand/backends/methodeapi/servers
-ExecStop=/usr/bin/etcdctl rmdir /vulcand/backends/methodeapi
-ExecStop=/usr/bin/etcdctl rm /vulcand/frontends/methodeapi/frontend
-ExecStop=/usr/bin/etcdctl rmdir /vulcand/frontends/methodeapi
+    etcdctl set /vulcand/frontends/methodeapi/frontend '{\"Type\": \"http\", \"BackendId\": \"methodeapi\", \"Route\": \"PathRegexp(`/.*`) && Host(`methodeapi.ft.com`)\"}';"
+
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /vulcand/backends/methodeapi/backend'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /vulcand/backends/methodeapi/servers/srv'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rmdir /vulcand/backends/methodeapi/servers'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rmdir /vulcand/backends/methodeapi'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /vulcand/frontends/methodeapi/frontend'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rmdir /vulcand/frontends/methodeapi'

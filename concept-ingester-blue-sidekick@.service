@@ -1,7 +1,7 @@
 [Unit]
-Description=Document store api sidekick
-BindsTo=methode-image-model-transformer@%i.service
-After=methode-image-model-transformer@%i.service
+Description=Concept-Ingester Blue Service Sidekick
+BindsTo=concept-ingester-blue@%i.service
+After=concept-ingester-blue@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -16,9 +16,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /services/methode-image-model-transformer/%i
+ExecStop=/usr/bin/etcdctl rm /ft/services/concept-ingester-blue/servers/%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=methode-image-model-transformer@%i.service
+MachineOf=concept-ingester-blue@%i.service

@@ -48,5 +48,4 @@ Nice=10
 WantedBy=multi-user.target
 
 [X-Fleet]
-# we only want this to run on mongo machines
-MachineMetadata=host_type=persistent
+MachineOf=mongodb@%i.service

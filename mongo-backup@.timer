@@ -2,11 +2,10 @@
 Description=Runs the mongo backup job
 
 [Timer]
-OnCalendar=11:00
+OnCalendar=14:30
 
 [Install]
 WantedBy=timers.target
 
 [X-Fleet]
-MachineOf=mongo-backup.service
-
+MachineOf=mongo-backup@%i.service

@@ -452,20 +452,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 2
 - name: v1-annotations-rw-blue@.service
-<<<<<<< HEAD
   version: v0.0.29
-=======
-  version: v0.0.26
->>>>>>> master
   count: 2
 - name: v1-annotations-rw-red-sidekick@.service
   count: 2
 - name: v1-annotations-rw-red@.service
-<<<<<<< HEAD
   version: v0.0.29
-=======
-  version: v0.0.26
->>>>>>> master
   count: 2
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -499,7 +491,7 @@ services:
   count: 2
 - name: v2-annotations-rw-red-sidekick@.service
   count: 2
-- name: v2-annotations-rw-red@.service
+- name: v2-annotations-rw-red@.service 
   version: v0.0.29
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service

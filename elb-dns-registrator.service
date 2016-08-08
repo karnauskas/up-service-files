@@ -8,9 +8,13 @@ Environment="DOCKER_APP_VERSION=latest"
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStart=/bin/sh -c '\
+ExecStart=/bin/bash -c '\
   ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  docker run --rm --name %p -e="ETCD_PEERS=http://%H:2379" -e="DOMAINS=$ENV-up,$ENV-up-read" -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" coco/coco-elb-dns-registrator:$DOCKER_APP_VERSION'
+  docker run --rm --name %p_$(uuidgen) \
+  -e="ETCD_PEERS=http://%H:2379" \
+  -e="DOMAINS=$ENV-up,$ENV-up-read" \
+  -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" \
+  coco/coco-elb-dns-registrator:$DOCKER_APP_VERSION'
 
 [Install]
 WantedBy=multi-user.target

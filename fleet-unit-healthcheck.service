@@ -2,7 +2,7 @@
 Description=Fleet unit healthcheck monitoring service
 Requires=docker.socket
 After=docker.socket
-Wants=fleet-unit-healthcheck-sidekick@.service
+Wants=fleet-unit-healthcheck-sidekick.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

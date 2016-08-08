@@ -57,6 +57,11 @@ services:
 - name: cms-metadata-kafka-bridge-pub-prod@.service
   version: v12.0.1
   count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod@.service
+  version: v12.0.1
+  count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge@.service
@@ -82,6 +87,11 @@ services:
 - name: concept-suggestions-kafka-bridge@.service
   version: v12.0.1
   count: 2
+- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 1
+- name: concepts-kafka-bridge-pub-pre-prod@.service
+  version: v12.0.1
+  count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
@@ -111,13 +121,13 @@ services:
   count: 2
 - name: content-public-read-preview@.service
   sequentialDeployment: true
-  version: v46
+  version: v47
   count: 2
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
   sequentialDeployment: true
-  version: v46
+  version: v47
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 2
@@ -136,6 +146,8 @@ services:
   version: v76
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v3.0.0
 - name: elb-presence@.service
@@ -241,10 +253,12 @@ services:
   version: v27
   count: 2
 - name: methodeapi-endpoint.service
-- name: mongo-backup.service
-  version: v13
+- name: mongo-backup@.service
+  version: v15
   desiredState: loaded
-- name: mongo-backup.timer
+  count: 3
+- name: mongo-backup@.timer
+  count: 3
 - name: mongodb-configurator.service
 - name: mongodb-sidekick@.service
   count: 3
@@ -365,6 +379,11 @@ services:
   count: 1
 - name: publish-availability-monitor@.service
   version: v0.20.1
+  count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  version: v0.0.3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -493,7 +512,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.12
+  version: v0.0.14
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2
@@ -538,6 +557,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v27
+  version: v31
   count: 2
 - name: zookeeper.service

@@ -512,7 +512,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.13
+  version: fixAlphavilleSeriesTaxonomyName
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 2

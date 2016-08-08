@@ -5,19 +5,23 @@ After=synthetic-image-publication-monitor-aws@%i.service
 
 [Service]
 ExecStart=/bin/sh -c "\
-  etcdctl set /vulcand/backends/synthetic-image-publication-monitor-aws/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/backends/synthetic-image-publication-monitor-aws-%i/backend '{\"Type\": \"http\"}'; \
-  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-aws/frontend '{\"Type\": \"http\", \"BackendId\": \"synthetic-image-publication-monitor-aws\", \"Route\": \"PathRegexp(`/.*`) && Host(`syn-pub-aws`)\"}'; \
-  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-aws-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"synthetic-image-publication-monitor-aws-%i\", \"Route\":\"PathRegexp(`/health/synthetic-image-publication-monitor-aws-%i/.*`)\"}'; \
-  etcdctl set /vulcand/frontends/synthetic-image-publication-monitor-aws-health-%i/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/synthetic-image-publication-monitor-aws-%i(.*)\", \"Replacement\":\"$1\"}}'; \
-  etcdctl set /ft/healthcheck/synthetic-image-publication-monitor-aws-%i/path /__health; \
-  while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port synthetic-image-publication-monitor-aws-%i 8080 | cut -d':' -f2)`; \
-    etcdctl set /vulcand/backends/synthetic-image-publication-monitor-aws/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
-    etcdctl set /vulcand/backends/synthetic-image-publication-monitor-aws-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
-    sleep 120; \
-  done"
-ExecStop=/usr/bin/etcdctl rm --recursive /vulcand/backends/synthetic-image-publication-monitor-aws/servers/srv%i
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set /vulcand/backends/$SERVICE/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/backends/$SERVICE-%i/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/$SERVICE/frontend '{\"Type\": \"http\", \"BackendId\": \"synthetic-image-publication-monitor-aws\", \"Route\": \"PathRegexp(`/.*`) && Host(`syn-pub-aws`)\"}'; \
+  etcdctl set /vulcand/frontends/$SERVICE-health-%i/frontend '{\"Type\":\"http\", \"BackendId\":\"synthetic-image-publication-monitor-aws-%i\", \"Route\":\"PathRegexp(`/health/synthetic-image-publication-monitor-aws-%i/.*`)\"}'; \
+  etcdctl set /vulcand/frontends/$SERVICE-health-%i/middlewares/rewrite '{\"Id\":\"rewrite\", \"Type\":\"rewrite\", \"Priority\":1, \"Middleware\": {\"Regexp\":\"/health/synthetic-image-publication-monitor-aws-%i(.*)\", \"Replacement\":\"$1\"}}'; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+     sleep 5; \
+     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+     PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /vulcand/backends/$SERVICE/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600; \
+  etcdctl set /vulcand/backends/$SERVICE-%i/servers/srv%i \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\" --ttl 600;"
+
+ExecStop=-/bin/bash -c 'etcdctl rm --recursive /vulcand/backends/synthetic-image-publication-monitor-aws/servers/srv%i'
+ExecStop=-/bin/bash -c 'etcdctl rm --recursive /vulcand/backends/synthetic-image-publication-monitor-aws-%i/servers/srv%i'
 
 [X-Fleet]
 MachineOf=synthetic-image-publication-monitor-aws@%i.service

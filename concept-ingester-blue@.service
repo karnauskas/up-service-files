@@ -9,8 +9,8 @@ Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/concept-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/concept-ingester:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
@@ -24,7 +24,7 @@ ExecStart=/bin/sh -c '\
   export COMMIT_ENABLE=true; \
   export STREAM_COUNT=1; \
   export TIMEOUT=60; \
-  /usr/bin/docker run --rm --name %p-%i \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
   -p $PORT \
   -e "PORT=$PORT" \
   -e "VULCAN_ADDR=$VULCAN_ADDR" \
@@ -37,7 +37,7 @@ ExecStart=/bin/sh -c '\
   -e "STREAM_COUNT=$STREAM_COUNT" \
   -e "TIMEOUT=$TIMEOUT" \
   coco/concept-ingester:$DOCKER_APP_VERSION;'
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

@@ -15,10 +15,10 @@ TimeoutStartSec=0
 KillMode=none
 
 # stop already running instance
-ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker kill %p-%i
 
 # remove existing instance
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/usr/bin/docker rm %p-%i
 
 ExecStart=/bin/sh -c "\
     MONGODB_PORT=$(docker ps | grep mongodb | awk '{ print $1 }' | xargs -i docker port '{}' 27017 | cut -d':' -f2); \

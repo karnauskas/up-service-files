@@ -4,20 +4,22 @@ BindsTo=system-healthcheck.service
 After=system-healthcheck.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl set   /ft/services/$SERVICE-%H/healthcheck     true; \
-  etcdctl mkdir /ft/services/$SERVICE-%H/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%H/path /__health; \
+  etcdctl set /vulcand/backends/system-healthcheck-%H/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/system-healthcheck-%H/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"system-healthcheck-%H\\\", \\\"Route\\\":\\\"Path(\`/health/system-healthcheck-%H/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/system-healthcheck-%H/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/system-healthcheck-%H(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /ft/healthcheck/system-healthcheck-%H/path /__health; \
   etcdctl set /ft/healthcheck/system-healthcheck-%H/categories system; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"_); \
     PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
-  etcdctl set /ft/services/$SERVICE-%H/servers/srv http://%H:$PORT;"
+  etcdctl set /vulcand/backends/system-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\";"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/system-healthcheck-%H/servers/srv'
+ExecStop=/usr/bin/etcdctl rm /vulcand/backends/system-healthcheck-%H/servers/srv%H
 
 [X-Fleet]
 Global=true

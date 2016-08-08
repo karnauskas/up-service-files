@@ -4,6 +4,7 @@ BindsTo=synthetic-image-publication-monitor-aws@%i.service
 After=synthetic-image-publication-monitor-aws@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set /vulcand/backends/$SERVICE/backend '{\"Type\": \"http\"}'; \

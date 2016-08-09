@@ -121,15 +121,15 @@ services:
   version: v46
   count: 2
 - name: content-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: content-rw-neo4j-blue@.service
   version: v0.0.32
-  count: 2
+  count: 1
 - name: content-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: content-rw-neo4j-red@.service
   version: v0.0.32
-  count: 2
+  count: 1
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2
@@ -192,15 +192,15 @@ services:
   version: v1.0.0
 - name: kafka.service
 - name: locations-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: locations-rw-neo4j-blue@.service
   version: v1.1.1
-  count: 2
+  count: 1
 - name: locations-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: locations-rw-neo4j-red@.service
   version: v1.1.1
-  count: 2
+  count: 1
 - name: locations-transformer-sidekick@.service
   count: 1
 - name: locations-transformer@.service
@@ -374,40 +374,40 @@ services:
 - name: restorage-mongo@.service
   count: 1
 - name: roles-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: roles-rw-neo4j-blue@.service
   version: v0.1.2
-  count: 2
+  count: 1
 - name: roles-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: roles-rw-neo4j-red@.service
   version: v0.1.2
-  count: 2
+  count: 1
 - name: sections-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: sections-rw-neo4j-blue@.service
   version: v1.1.1
-  count: 2
+  count: 1
 - name: sections-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: sections-rw-neo4j-red@.service
   version: v1.1.1
-  count: 2
+  count: 1
 - name: sections-transformer-sidekick@.service
   count: 1
 - name: sections-transformer@.service
   version: v1.0.2
   count: 1
 - name: special-reports-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: special-reports-rw-neo4j-blue@.service
   version: v1.1.0
-  count: 2
+  count: 1
 - name: special-reports-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: special-reports-rw-neo4j-red@.service
   version: v1.1.0
-  count: 2
+  count: 1
 - name: special-reports-transformer-sidekick@.service
   count: 1
 - name: special-reports-transformer@.service
@@ -415,15 +415,15 @@ services:
   count: 1
 - name: splunk-forwarder.service
 - name: subjects-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: subjects-rw-neo4j-blue@.service
   version: v1.1.0
-  count: 2
+  count: 1
 - name: subjects-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: subjects-rw-neo4j-red@.service
   version: v1.1.0
-  count: 2
+  count: 1
 - name: subjects-transformer-sidekick@.service
   count: 1
 - name: subjects-transformer@.service
@@ -443,15 +443,15 @@ services:
 - name: system-healthcheck.service
   version: 1.0.1
 - name: topics-rw-neo4j-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: topics-rw-neo4j-blue@.service
   version: v1.1.1
-  count: 2
+  count: 1
 - name: topics-rw-neo4j-red-sidekick@.service
-  count: 2
+  count: 1
 - name: topics-rw-neo4j-red@.service
   version: v1.1.1
-  count: 2
+  count: 1
 - name: topics-transformer-sidekick@.service
   count: 1
 - name: topics-transformer@.service
@@ -464,15 +464,15 @@ services:
   version: v0.0.2
   count: 1
 - name: v1-annotations-rw-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: v1-annotations-rw-blue@.service
   version: v0.0.26
-  count: 2
+  count: 1
 - name: v1-annotations-rw-red-sidekick@.service
-  count: 2
+  count: 1
 - name: v1-annotations-rw-red@.service
   version: v0.0.26
-  count: 2
+  count: 1
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-blue@.service
@@ -499,15 +499,15 @@ services:
   version: v0.0.12
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
-  count: 2
+  count: 1
 - name: v2-annotations-rw-blue@.service
   version: v0.0.26
-  count: 2
+  count: 1
 - name: v2-annotations-rw-red-sidekick@.service
-  count: 2
+  count: 1
 - name: v2-annotations-rw-red@.service
   version: v0.0.26
-  count: 2
+  count: 1
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
 - name: v2-content-annotator-blue@.service

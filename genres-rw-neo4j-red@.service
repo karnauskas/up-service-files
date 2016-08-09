@@ -2,7 +2,7 @@
 Description=Genres neo4j rw red service
 After=vulcan.service
 Requires=docker.service
-Wants=neo4j-red@1.service genres-rw-neo4j-red-sidekick@%i.service
+Wants=genres-rw-neo4j-red-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

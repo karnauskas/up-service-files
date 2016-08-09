@@ -192,9 +192,11 @@ services:
 - name: financial-instruments-rw-neo4j-red@.service
   version: 0.0.1.alpha
   count: 1
-- name: fleet-unit-healthcheck-sidekick.service
-- name: fleet-unit-healthcheck.service
+- name: fleet-unit-healthcheck-sidekick@.service
+  count: 1
+- name: fleet-unit-healthcheck@.service
   version: 1.0.5
+  count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service

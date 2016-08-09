@@ -9,14 +9,17 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/sh -c 'docker kill %p >/dev/null 2>&1'
-ExecStartPre=-/bin/sh -c 'docker rm %p >/dev/null 2>&1'
-ExecStartPre=-/bin/sh -c 'docker history coco/ft-vulcan:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/ft-vulcan:$DOCKER_APP_VERSION'
-ExecStart=/bin/sh -c "\
+ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p_)" >/dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p_)" >/dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/ft-vulcan:$DOCKER_APP_VERSION >/dev/null 2>&1 \
+  || docker pull coco/ft-vulcan:$DOCKER_APP_VERSION'
+ExecStart=/bin/bash -c "\
   export ETCD_IP=$(ifconfig docker0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   echo $ETCD_IP; \
-  docker run --rm --name %p -p 8080:8080 -p 8182:8182 coco/ft-vulcan:$DOCKER_APP_VERSION /vulcand -apiInterface=0.0.0.0 -etcd=http://$ETCD_IP:2379 -port=8080 -apiPort=8182"
-ExecStop=/bin/sh -c 'docker kill %p >/dev/null 2>&1'
+  docker run --rm --name %p_$(uuidgen) -p 8080:8080 -p 8182:8182 \
+  coco/ft-vulcan:$DOCKER_APP_VERSION /vulcand -apiInterface=0.0.0.0 -etcd=http://$ETCD_IP:2379 -port=8080 -apiPort=8182"
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 Restart=on-failure
 RestartSec=60
 

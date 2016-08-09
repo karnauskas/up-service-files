@@ -5,6 +5,7 @@ Requires=docker.service
 Wants=neo4j-blue-sidekick@%i.service neo4j-read-blue-sidekick@%i.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.

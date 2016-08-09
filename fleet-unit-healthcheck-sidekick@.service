@@ -1,7 +1,7 @@
 [Unit]
-Description=Publish Availability Monitor sidekick
-BindsTo=publish-availability-monitor@%i.service
-After=publish-availability-monitor@%i.service
+Description=Fleet unit healthcheck sidekick
+BindsTo=fleet-unit-healthcheck@%i.service
+After=fleet-unit-healthcheck@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -17,10 +17,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/publish-availability-monitor/servers/%i'
-Restart=on-failure
-RestartSec=60
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/fleet-unit-healthcheck/servers/%i'
 
 [X-Fleet]
-MachineOf=publish-availability-monitor@%i.service
-
+MachineOf=fleet-unit-healthcheck@%i.service

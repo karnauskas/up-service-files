@@ -1,17 +1,16 @@
 [Unit]
 Description=System(CPU, memory, disk) healthcheck monitoring service
-Requires=vulcan.socket
+Requires=docker.socket
 After=docker.socket
 Wants=system-healthcheck-sidekick.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest" "SYS_HC_HOST_PATH=host_dir"
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c "docker history coco/coco-system-healthcheck:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/coco-system-healthcheck:$DOCKER_APP_VERSION"
-
+ExecStartPre=-/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)"
+ExecStartPre=-/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)"
+ExecStartPre=/bin/sh -c "docker history coco/coco-system-healthcheck:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/coco-system-healthcheck:$DOCKER_APP_VERSION"
 ExecStart=/bin/sh -c "\
-    /usr/bin/docker run --rm --name=%p_$(uuidgen) -P \
+    /usr/bin/docker run --rm --name %p_$(uuidgen) -P \
     -e SYS_HC_HOST_PATH=$SYS_HC_HOST_PATH \
     -v /:/$SYS_HC_HOST_PATH:ro \
     coco/coco-system-healthcheck:$DOCKER_APP_VERSION"

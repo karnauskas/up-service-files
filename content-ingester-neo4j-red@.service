@@ -11,9 +11,11 @@ TimeoutStartSec=0
 # work correctly.
 KillMode=none
 MemoryLimit=1G
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker pull up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+ || /usr/bin/docker pull up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
+
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ADMIN_PORT=8080; \
@@ -24,7 +26,7 @@ ExecStart=/bin/sh -c '\
   export WHITELIST="^http://(methode|wordpress)(-article|-image-model|-image)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model)/[\\w-]+.*$"; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Content RW Neo4j"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Content rw neo4j returns a 200 response"; \
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "DOCKER_FIX=" \
       --env "VULCAN_HOST=%H:8080" \
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
@@ -39,7 +41,8 @@ ExecStart=/bin/sh -c '\
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

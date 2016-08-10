@@ -1,5 +1,5 @@
 [Unit]
-Description=wordpress article transformer sidekick
+Description=Wordpress article transformer sidekick
 BindsTo=wordpress-article-transformer@%i.service
 After=wordpress-article-transformer@%i.service
 
@@ -12,11 +12,12 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/wordpress-article-transformer/servers/%i
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/wordpress-article-transformer/servers/%i'
 Restart=on-failure
 RestartSec=60
 

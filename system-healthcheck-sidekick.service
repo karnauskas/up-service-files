@@ -4,19 +4,21 @@ BindsTo=system-healthcheck.service
 After=system-healthcheck.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  export HOST_IP=$HOSTNAME; \
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set /vulcand/backends/system-healthcheck-%H/backend '{\"Type\": \"http\"}'; \
   etcdctl set /vulcand/frontends/system-healthcheck-%H/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"system-healthcheck-%H\\\", \\\"Route\\\":\\\"Path(\`/health/system-healthcheck-%H/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/system-healthcheck-%H/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/system-healthcheck-%H(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   etcdctl set /ft/healthcheck/system-healthcheck-%H/path /__health; \
   etcdctl set /ft/healthcheck/system-healthcheck-%H/categories system; \
-  \
-  while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port system-healthcheck 8080 | cut -d':' -f2)`; \
-    etcdctl set /vulcand/backends/system-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOST_IP:$PORT\\\"}\" --ttl 600; \
-    sleep 120; \
-  done"
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /vulcand/backends/system-healthcheck-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\";"
+
 ExecStop=/usr/bin/etcdctl rm /vulcand/backends/system-healthcheck-%H/servers/srv%H
 
 [X-Fleet]

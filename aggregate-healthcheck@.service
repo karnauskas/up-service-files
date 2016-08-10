@@ -1,6 +1,6 @@
 [Unit]
 Description=Aggregate Healthcheck
-After=docker.service
+After=vulcan.service
 Requires=docker.service
 Wants=aggregate-healthcheck-sidekick@%i.service
 
@@ -10,12 +10,13 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker pull coco/aggregate-healthcheck:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/aggregate-healthcheck:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/aggregate-healthcheck:$DOCKER_APP_VERSION'
 
-ExecStart=/bin/bash -c 'ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  docker run --rm --name %p-%i -p 8080 \
+ExecStart=/bin/bash -c '\
+  ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--env="ETCD_PEERS=http://$HOSTNAME:2379" \
 	--env="VULCAND_ADDRESS=$HOSTNAME:8080" \
 	--env="GRAPHITE_HOST=graphite.ft.com" \
@@ -23,7 +24,7 @@ ExecStart=/bin/bash -c 'ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); 
 	--env="ENVIRONMENT=$ENV" \
 	coco/aggregate-healthcheck:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

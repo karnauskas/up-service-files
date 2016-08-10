@@ -1,13 +1,15 @@
 [Unit]
-Description=UP Queue sender for V1 metadata
-BindsTo=up-queue-sender-v1-metadata@%i.service
-After=up-queue-sender-v1-metadata@%i.service
+Description=Fleet unit healthcheck sidekick
+BindsTo=fleet-unit-healthcheck@%i.service
+After=fleet-unit-healthcheck@%i.service
 
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -15,10 +17,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/up-queue-sender-v1-metadata/servers/%i'
-Restart=on-failure
-RestartSec=60
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/fleet-unit-healthcheck/servers/%i'
 
 [X-Fleet]
-MachineOf=up-queue-sender-v1-metadata@%i.service
-
+MachineOf=fleet-unit-healthcheck@%i.service

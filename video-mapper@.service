@@ -9,11 +9,12 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c 'docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c 'docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/video-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/video-mapper:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/video-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+	|| docker pull coco/video-mapper:$DOCKER_APP_VERSION'
 ExecStart=/bin/bash -c '\
-	docker run --rm --name %p-%i -p 8080 \
+	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--env "Q_ADDR=http://%H:8080" \
 	--env "Q_GROUP=videoMapper" \
 	--env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
@@ -22,7 +23,7 @@ ExecStart=/bin/bash -c '\
 	--env "Q_WRITE_QUEUE=kafka" \
 	coco/video-mapper:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

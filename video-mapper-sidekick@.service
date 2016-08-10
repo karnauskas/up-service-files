@@ -11,13 +11,15 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
     PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
     echo 'Port not set, retrying'; \
     sleep 5; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
   
-ExecStop=/usr/bin/etcdctl rm /ft/services/video-mapper/servers/%i
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/video-mapper/servers/%i'
 
 [X-Fleet]
 MachineOf=video-mapper@%i.service

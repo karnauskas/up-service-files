@@ -1,0 +1,44 @@
+#NOTE: please remove comments, before deploying your service file.
+[Unit]
+#Add the name of your service. We use CMS Notifier as an example to illustrate.
+Description=CMS Notifier
+After=vulcan.service
+Requires=docker.service
+#The service's sidekick and optionally other dependent services can be added here. Separate by space.
+#Systemd will try to start these services, when the unit is activated, but it continues to work, even if they fail.
+Wants=cms-notifier-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+#The "-" means that the command is optional.
+#Before starting the container, we make sure that no other containers with the same name are running by killing and removing the previous ones.
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+#Pull the image, if it is not yet downloaded. Check in history.
+ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
+
+#Define the variables, and commands below. Please put each command on a separate line.
+#Notice that the name of the container will be completed with a "_$(uuidgen)" - to ensure their uniqueness.
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export ADMIN_PORT=8081; \
+  export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
+  export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
+  export KAFKA_TOPIC=NativeCmsPublicationEvents; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  --env "KAFKA_HOST=$KAFKA_HOST" \
+  --env "KAFKA_PORT=$KAFKA_PORT" \
+  --env "KAFKA_TOPIC=$KAFKA_TOPIC" \
+  up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
+
+#Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

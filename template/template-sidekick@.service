@@ -1,17 +1,18 @@
+#The sidekick makes sure the service is correctly registered in ETCD.
 [Unit]
-Description=Public Six Degrees Service Sidekick
-BindsTo=public-six-degrees@%i.service
-After=public-six-degrees@%i.service
+Description=CMS Notifier Sidekick
+BindsTo=cms-notifier@%i.service
+After=cms-notifier@%i.service
 
 [Service]
 RemainAfterExit=yes
+#Set the service keys in ETCD. Get the application port by filtering for the container name.
+#The pattern you should filter for is the name of the the service (ex: cms-notifier-1) followed by a "_".
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
-  etcdctl set /vulcand/frontends/public-services-six-degrees/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-public-six-degrees\", \"Route\": \"PathRegexp(`/sixdegrees/.*$`) && Host(`public-services`)\"}'; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -19,9 +20,10 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/public-six-degrees/servers/%i'
+#Remove server keys from ETCD on stop
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/cms-notifier/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=public-six-degrees@%i.service
+MachineOf=cms-notifier@%i.service

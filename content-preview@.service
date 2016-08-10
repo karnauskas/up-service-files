@@ -1,6 +1,6 @@
 [Unit]
 Description=Content Preview
-After=docker.service
+After=vulcan.service
 Requires=docker.service
 Wants=content-preview-sidekick@%i.service
 
@@ -10,15 +10,16 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker pull coco/content-preview:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/content-preview:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/content-preview:$DOCKER_APP_VERSION'
 
 
-ExecStart=/bin/sh -c "\
+ExecStart=/bin/sh -c '\
     export MAPI_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/methode-api/authorization_key); \
     export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 \
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
     --env "APP_PORT=8080" \
     --env "SOURCE_APP_AUTH=$MAPI_AUTH" \
     --env "SOURCE_APP_URI=https://methodeapi.glb.ft.com/eom-file/" \
@@ -32,8 +33,8 @@ ExecStart=/bin/sh -c "\
     --env "GRAPHITE_PREFIX=coco.services.$ENV.content-preview.%i" \
     --env "SOURCE_APP_PANIC_GUIDE=https://sites.google.com/a/ft.com/dynamic-publishing-team/home/methode-api" \
     --env "TRANSFORM_APP_PANIC_GUIDE=https://sites.google.com/a/ft.com/dynamic-publishing-team/methode-article-transformer-panic-guide" \
-    coco/content-preview:$DOCKER_APP_VERSION;"
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+    coco/content-preview:$DOCKER_APP_VERSION;'
+ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

@@ -1,0 +1,32 @@
+[Unit]
+Description=Kafka Rest Proxy
+After=docker.service zookeeper.service
+Requires=docker.service zookeeper.service
+Wants=kafka-rest-proxy-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/kafka-proxy:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull coco/kafka-proxy:$DOCKER_APP_VERSION'
+#IP needs to be edited to grep out on the interface of the host vm
+ExecStart=/bin/bash -c "\
+  export ZOOKEEPER_CONTAINER=$(docker ps -q --filter=name=zookeeper_); \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8082 \
+  --link $ZOOKEEPER_CONTAINER:zk \
+  -e RP_FETCH_MESSAGE_MAX_BYTES=16777216 \
+  -e RP_CONSUMER_REQUEST_MAX_BYTES=17825792 \
+  -e RP_ZOOKEEPER_CONNECT=%H:2181 \
+  coco/kafka-proxy:$DOCKER_APP_VERSION"
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=120
+
+[X-Fleet]
+MachineOf=zookeeper.service

@@ -72,6 +72,11 @@ services:
 - name: cms-metadata-kafka-bridge-pub-prod@.service
   version: v12.0.1
   count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod@.service
+  version: v12.0.1
+  count: 2
 - name: cms-metadata-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-ucs-test-sidekick@.service
@@ -273,10 +278,12 @@ services:
   version: v27
   count: 2
 - name: methodeapi-endpoint.service
-- name: mongo-backup.service
-  version: v13
+- name: mongo-backup@.service
+  version: v15
   desiredState: loaded
-- name: mongo-backup.timer
+  count: 3
+- name: mongo-backup@.timer
+  count: 3
 - name: mongodb-configurator.service
 - name: mongodb-sidekick@.service
   count: 3
@@ -538,7 +545,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.13
+  version: v0.0.14
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1

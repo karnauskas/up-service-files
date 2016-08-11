@@ -352,7 +352,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.15
+  version: v0.0.16
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

@@ -1,11 +1,11 @@
 [Unit]
 Description=Kafka Rest Proxy Sidekick
-BindsTo=kafka-rest-proxy.service
-After=kafka-rest-proxy.service
+BindsTo=kafka-rest-proxy@%i.service
+After=kafka-rest-proxy@%i.service
 
 [Service]
 RemainAfterExit=yes
-ExecStartPre=/bin/sh -c "\
+ExecStartPre=-/bin/bash -c "\
   etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';"
 
 ExecStart=/bin/sh -c "\
@@ -14,14 +14,14 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    PORT=`echo $(/usr/bin/docker port $SERVICE 8082 | cut -d':' -f2)`; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8082 | cut -d':' -f2)`; \
   done; \
-  etcdctl set /ft/services/$SERVICE/servers/1 http://%H:$PORT;"
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/kafka-rest-proxy/servers/1
-
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/kafka-rest-proxy/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=kafka-rest-proxy.service
+MachineOf=kafka-rest-proxy@%i.service

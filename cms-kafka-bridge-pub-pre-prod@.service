@@ -1,5 +1,5 @@
 [Unit]
-Description=CMS Kafka Bridge Publishing Cluster Prod
+Description=CMS Kafka Bridge Publishing Cluster Pre-Prod
 After=vulcan.service
 Requires=docker.service
 Wants=cms-kafka-bridge-pub-pre-prod-sidekick@%i.service

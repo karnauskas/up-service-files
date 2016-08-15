@@ -14,6 +14,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-
 ExecStartPre=/bin/bash -c 'docker history coco/concept-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/concept-ingester:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export PORT=8080; \
   export VULCAN_ADDR=http://%H:8080; \
   export GROUP_ID=BlueConcepts; \

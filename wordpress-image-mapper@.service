@@ -1,6 +1,6 @@
 [Unit]
-Description=wordpress image mapper
-After=docker.service
+Description=Wordpress image mapper
+After=vulcan.service
 Requires=docker.service
 Wants=wordpress-image-mapper-sidekick@%i.service
 
@@ -10,14 +10,17 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/sh -c 'docker kill %p-%i >/dev/null 2>&1'
-ExecStartPre=-/bin/sh -c 'docker rm %p-%i >/dev/null 2>&1'
-ExecStartPre=/bin/sh -c 'docker history up-registry.ft.com/coco/wordpress-image-mapper:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull up-registry.ft.com/coco/wordpress-image-mapper:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/sh -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" >/dev/null 2>&1'
+ExecStartPre=-/bin/sh -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" >/dev/null 2>&1'
+ExecStartPre=/bin/sh -c 'docker history up-registry.ft.com/coco/wordpress-image-mapper:$DOCKER_APP_VERSION >/dev/null 2>&1 \
+  || docker pull up-registry.ft.com/coco/wordpress-image-mapper:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  /usr/bin/docker run --rm --name %p-%i -p 8080 -p 8081 -e "KAFKA_PROXY=$HOSTNAME:8080" up-registry.ft.com/coco/wordpress-image-mapper:$DOCKER_APP_VERSION'
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  -e "KAFKA_PROXY=$HOSTNAME:8080" \
+  up-registry.ft.com/coco/wordpress-image-mapper:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

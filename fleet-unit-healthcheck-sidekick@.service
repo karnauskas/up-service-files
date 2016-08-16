@@ -1,7 +1,7 @@
 [Unit]
-Description=Methode list transformer sidekick
-BindsTo=methode-list-transformer@%i.service
-After=methode-list-transformer@%i.service
+Description=Fleet unit healthcheck sidekick
+BindsTo=fleet-unit-healthcheck@%i.service
+After=fleet-unit-healthcheck@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -17,10 +17,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-list-transformer/servers/%i'
-Restart=on-failure
-RestartSec=60
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/fleet-unit-healthcheck/servers/%i'
 
 [X-Fleet]
-MachineOf=methode-list-transformer@%i.service
-
+MachineOf=fleet-unit-healthcheck@%i.service

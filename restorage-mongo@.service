@@ -5,17 +5,22 @@ Requires=docker.service
 Wants=mongodb-sidekick@%i.service restorage-mongo-sidekick@%i.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull coco/up-restorage
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/up-restorage:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/up-restorage:$DOCKER_APP_VERSION'
 
-ExecStart=/bin/bash -c 'export MONGOS=$((for i in $( etcdctl ls /ft/config/mongodb/) ; do echo -n $(etcdctl get $i/host):$(etcdctl get $i/port), ; done;) |  sed s/,$//) \
-    && /usr/bin/docker run --rm --name %p-%i -P coco/up-restorage /bin/bash -c "/up-restorage --id-map=organisations:uuid,content:uuid mongo --dbname=upp-store $MONGOS"'
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStart=/bin/bash -c '\
+    export MONGOS=$((for i in $( etcdctl ls /ft/config/mongodb/) ; do echo -n $(etcdctl get $i/host):$(etcdctl get $i/port), ; done;) |  sed s/,$//) \
+    && /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -P \
+    coco/up-restorage:$DOCKER_APP_VERSION \
+    /bin/bash -c "/up-restorage --id-map=organisations:uuid,content:uuid mongo --dbname=upp-store $MONGOS"'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

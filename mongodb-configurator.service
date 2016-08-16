@@ -11,9 +11,10 @@ TimeoutStartSec=0
 KillMode=none
 Type=oneshot
 RemainAfterExit=yes
-ExecStartPre=-/bin/bash -c "/usr/bin/docker kill %p > /dev/null 2>&1"
-ExecStartPre=-/bin/bash -c "/usr/bin/docker rm %p > /dev/null 2>&1"
-ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-mongodb-configurator:$DOCKER_APP_VERSION"
+ExecStartPre=-/bin/bash -c "/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1"
+ExecStartPre=-/bin/bash -c "/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1"
+ExecStartPre=/bin/bash -c 'docker history coco/coco-mongodb-configurator:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/coco-mongodb-configurator:$DOCKER_APP_VERSION'
+
 ExecStart=/bin/bash -c '\
     EXPECTED_MONGOS=3; \
     echo "INFO Waiting for all mongodb instances to start"; \
@@ -38,6 +39,9 @@ ExecStart=/bin/bash -c '\
       echo "INFO Still waiting for all mongodb instances to start"; \
     done; \
     echo "INFO Got all instances, configuring mongodb cluster"; \
-    docker run --rm --name %p --env="ARGS=$ALL" coco/coco-mongodb-configurator:$DOCKER_APP_VERSION;'
-ExecStop=/usr/bin/docker stop -t 3 %p
+    docker run --rm --name %p_$(uuidgen) \
+        --env="ARGS=$ALL" \
+        coco/coco-mongodb-configurator:$DOCKER_APP_VERSION;'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 

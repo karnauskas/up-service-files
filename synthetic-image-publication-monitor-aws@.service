@@ -1,6 +1,6 @@
 [Unit]
 Description=Synthetic Image Publication Monitor for bridging UCS to CoCo
-After=docker.service
+After=vulcan.service
 Requires=docker.service
 Wants=synthetic-image-publication-monitor-aws-sidekick@%i.service
 
@@ -10,15 +10,15 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
   	export POST_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/cms-notifier/post-credentials); \
 	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-aws/test-uuid); \
 	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
-	docker run --rm --name %p-%i -p 8080 \
+	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--env "POST_ADDRESS=cmsnotifier.ft.com" \
 	--env "BUCKET_ADDRESS=$BUCKET_ADDRESS" \
 	--env "DYN_ROUTING=false" \
@@ -26,7 +26,7 @@ ExecStart=/bin/bash -c '\
 	--env "TEST_UUID=$TEST_UUID" \
 	coco/coco-synthetic-image-publication-monitor:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

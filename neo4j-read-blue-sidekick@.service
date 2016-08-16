@@ -11,12 +11,13 @@ ExecStart=/bin/sh -c '\
    etcdctl set /vulcand/frontends/neo4j-read/middlewares/rewrite \'{"Id":"rewrite", "Type":"rewrite", "Priority":1, "Middleware": {"Regexp":"/__neo4j-read(/.*)", "Replacement":"$1"}}\'; \
    etcdctl set /vulcand/frontends/neo4j-read-db/frontend \'{"Type": "http", "BackendId": "neo4j-read", "Route": "PathRegexp(`^/db/data/.*`) && Header(`User-Agent`, `neoism`)", "Settings": { "TrustForwardHeader": true, "PassHostHeader": true }}\'; \
    while [ -z $PORT ]; do \
-     PORT=`echo $(/usr/bin/docker port neo4j-blue-%i 7474 | cut -d":" -f2)`; \
-     echo "Port not set, retrying"; \
      sleep 5; \
+     CONTAINER_NAME=$(docker ps -q --filter=name=neo4j-blue-%i_); \
+     PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 7474 | cut -d':' -f2)`; \
    done; \
    etcdctl set /vulcand/backends/neo4j-read/servers/2 "{\\"url\\": \\"http://$HOSTNAME:$PORT\\"}"'
-ExecStop=/usr/bin/etcdctl rm /vulcand/backends/neo4j-read/servers/2
+
+ExecStop=-/bin/bash -c 'etcdctl rm /vulcand/backends/neo4j-read/servers/2'
 
 [X-Fleet]
 MachineOf=neo4j-blue@%i.service

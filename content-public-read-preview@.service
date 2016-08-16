@@ -22,6 +22,7 @@ ExecStart=/bin/sh -c '\
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \
                     --env "CONTENT_PATH=content-preview/" \
                     --env "HOST_HEADER=content-preview" \
+                    --env "CACHE_CONTROL_POLICY=no-store" \
                     --env "API_HOST=$ENV_API_HOST" \
                     --env "CONTENT_HEALTHCHECK_PATH=/__ping" \
                     up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;'

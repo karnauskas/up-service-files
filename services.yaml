@@ -47,14 +47,14 @@ services:
 - name: cms-kafka-bridge-pub-prod@.service
   version: v12.0.1
   count: 2
-- name: cms-kafka-bridge-pub-pre-prod-sidekick@.service
-  count: 2
-- name: cms-kafka-bridge-pub-pre-prod@.service
-  version: v12.0.1
-  count: 2
 - name: cms-kafka-bridge-sidekick@.service
   count: 2
 - name: cms-kafka-bridge@.service
+  version: v12.0.1
+  count: 2
+- name: cms-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-ucs-test@.service
   version: v12.0.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service

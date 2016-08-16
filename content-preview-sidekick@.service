@@ -4,17 +4,23 @@ BindsTo=content-preview@%i.service
 After=content-preview@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl set /ft/services/content-preview/healthcheck true; \
-  etcdctl mkdir /ft/services/content-preview/servers; \
-  etcdctl set /ft/healthcheck/content-preview-%i/path /__health; \
-  etcdctl set /ft/healthcheck/content-preview-%i/categories read; \
-  while true; do \
-      PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port content-preview-%i 8080 | cut -d':' -f2)`; \
-      ((`curl -s -o /dev/null -w \"%{http_code}\" \"0.0.0.0:$PORT/__ping\"` == 200)) && etcdctl set /ft/services/content-preview/servers/%i http://%H:$PORT --ttl 32; \
-      sleep 30; \
-    done"
-ExecStop=/usr/bin/etcdctl rm /ft/services/content-preview/servers/%i
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set /ft/services/$SERVICE/healthcheck true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/content-preview/servers/%i'
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=content-preview@%i.service

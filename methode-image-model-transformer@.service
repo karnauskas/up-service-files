@@ -1,6 +1,6 @@
 [Unit]
 Description=methode image model transformer
-After=docker.service
+After=vulcan.service
 Requires=docker.service
 Wants=methode-image-model-transformer-sidekick@%i.service
 
@@ -10,17 +10,21 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker pull up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'
-Restart=on-failure
-RestartSec=60
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
-  /usr/bin/docker run --rm --name %p-%i -P --env "VULCAN_HOST=%H" --env "S3_URL=http://$BUCKET.s3.amazonaws.com/" up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -P \
+  --env "VULCAN_HOST=%H" \
+  --env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \
+  up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 Conflicts=methode-image-model-transformer@*.service

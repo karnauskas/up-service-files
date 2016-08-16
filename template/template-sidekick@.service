@@ -1,0 +1,29 @@
+#The sidekick makes sure the service is correctly registered in ETCD.
+[Unit]
+Description=CMS Notifier Sidekick
+BindsTo=cms-notifier@%i.service
+After=cms-notifier@%i.service
+
+[Service]
+RemainAfterExit=yes
+#Set the service keys in ETCD. Get the application port by filtering for the container name.
+#The pattern you should filter for is the name of the the service (ex: cms-notifier-1) followed by a "_".
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+#Remove server keys from ETCD on stop
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/cms-notifier/servers/%i'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=cms-notifier@%i.service

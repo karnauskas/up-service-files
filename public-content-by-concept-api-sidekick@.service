@@ -5,21 +5,21 @@ After=public-content-by-concept-api@%i.service
 
 [Service]
 RemainAfterExit=yes
-ExecStart=/bin/sh -c '\
-  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set 	/ft/services/$SERVICE/healthcheck  	true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set 	/ft/healthcheck/$SERVICE-%i/path 		/__health; \
   etcdctl set 	/ft/healthcheck/$SERVICE-%i/categories 	read; \
-  etcdctl set 	/vulcand/frontends/public-services-content-by-concept/frontend 	\'{"Type": "http", "BackendId": "vcb-public-content-by-concept-api", "Route": "PathRegexp(`^\/content.*isAnnotatedBy=.*$`) && Host(`public-services`)"}\'; \
+  etcdctl set 	/vulcand/frontends/public-services-content-by-concept/frontend 	'{\"Type\": \"http\", \"BackendId\": \"vcb-public-content-by-concept-api\", \"Route\": \"PathRegexp(`^\/content.*isAnnotatedBy=.*$`) && Host(`public-services`)\"}'; \
   while [ -z $PORT ]; do \
-    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d":" -f2)`; \
-    echo "Port not set, retrying"; \
     sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
-  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;'
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
   
-ExecStop=/usr/bin/etcdctl rm /ft/services/public-content-by-concept-api/servers/%i
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/public-content-by-concept-api/servers/%i'
 
 [X-Fleet]
 MachineOf=public-content-by-concept-api@%i.service

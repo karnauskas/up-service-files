@@ -10,25 +10,25 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker pull coco/publish-availability-monitor:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/publish-availability-monitor:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/publish-availability-monitor:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   	export BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
-	docker run --rm --name %p-%i -p 8080 \
+	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--env "QUEUE_ADDR=http://%H:8080" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
 	--env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \
 	--env "CONTENT_URL=http://%H:8080/__document-store-api/content-read/" \
 	--env "LISTS_URL=http://%H:8080/__document-store-api/lists/" \
 	--env "NOTIFICATIONS_URL=http://%H:8080/__notifications-rw/content/notifications" \
-  --env "NOTIFICATIONS_PUSH_URL=http://%H:8080/__notifications-push/content/notifications" \
+    --env "NOTIFICATIONS_PUSH_URL=http://%H:8080/__notifications-push/content/notifications" \
 	--env "METHODE_ARTICLE_TRANSFORMER_URL=http://%H:8080/__methode-article-transformer/content-transform" \
 	coco/publish-availability-monitor:$DOCKER_APP_VERSION'
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

@@ -5,11 +5,16 @@ After=docker.socket
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
-ExecStartPre=/bin/sh -c "docker history coco/vulcan-config-builder:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/vulcan-config-builder:$DOCKER_APP_VERSION"
-ExecStart=/bin/sh -c "/usr/bin/docker run --rm --name=%p -P -e="VCB_ETCD_PEERS=http://$HOSTNAME:2379" coco/vulcan-config-builder:$DOCKER_APP_VERSION"
-ExecStopPost=-/usr/bin/docker rm -f %p
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c "docker history coco/vulcan-config-builder:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/vulcan-config-builder:$DOCKER_APP_VERSION"
+
+ExecStart=/bin/sh -c "\
+    /usr/bin/docker run --rm --name=%p_$(uuidgen) -P \
+    -e="VCB_ETCD_PEERS=http://$HOSTNAME:2379" \
+    coco/vulcan-config-builder:$DOCKER_APP_VERSION"
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 Restart=on-failure
 RestartSec=60
 

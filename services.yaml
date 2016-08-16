@@ -67,15 +67,15 @@ services:
 - name: cms-notifier@.service
   version: v33
   count: 1
+- name: concept-ingester-blue-sidekick@.service
+  count: 1
 - name: concept-ingester-blue@.service
   version: v1.1.5
   count: 1
-- name: concept-ingester-blue-sidekick@.service
+- name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
   version: v1.1.5
-  count: 1
-- name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
@@ -111,15 +111,15 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  sequentialDeployment: true
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  sequentialDeployment: true
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: content-rw-neo4j-blue@.service
@@ -267,8 +267,8 @@ services:
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service
-  desiredState: inactive
   version: 0.8.1
+  desiredState: inactive
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service

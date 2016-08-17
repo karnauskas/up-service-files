@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c "\
     -v /vol/%p-%i/:/data -p 7474:7474 \
     --env=NEO4J_AUTH=none \
     --env=NEO4J_HEAP_MEMORY=2048 \
-    --env=NEO4J_CACHE_MEMORY=2048 \
+    --env=NEO4J_CACHE_MEMORY=2048m \
     coco/ft-neo4j:$DOCKER_APP_VERSION"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

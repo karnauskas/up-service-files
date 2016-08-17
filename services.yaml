@@ -488,6 +488,11 @@ services:
   version: v1.0.10
   count: 1
 - name: tunnel-registrator.service
+- name: up-coco-admin-sidekick@.service
+  count: 1
+- name: up-coco-admin@.service
+  version: v0.0.1
+  count: 1
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
 - name: up-queue-sender-v1-metadata@.service

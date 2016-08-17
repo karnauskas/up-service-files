@@ -11,6 +11,7 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories lists-read; \
   etcdctl set /vulcand/frontends/public-services-lists/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-document-store-api\", \"Route\": \"PathRegexp(`/lists.*`) && Host(`public-services`)\"}'; \
   while [ -z $PORT ]; do \
     sleep 5; \

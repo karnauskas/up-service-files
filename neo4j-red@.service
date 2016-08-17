@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c "\
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
     -v /vol/%p-%i/:/data -p 7474:7474 \
     --env=NEO4J_AUTH=none \
-    --env=NEO4J_HEAP_MEMORY=4096 \
+    --env=NEO4J_HEAP_MEMORY=2048 \
     --env=NEO4J_CACHE_MEMORY=2048 \
     coco/ft-neo4j:$DOCKER_APP_VERSION"
 

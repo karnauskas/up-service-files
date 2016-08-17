@@ -18,6 +18,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/ft-neo4j:$DOCKER_APP_VERSION > /d
 # Also see https://neo4j.com/developer/docker-2-x/ for configuration options.
 ExecStart=/bin/sh -c "\
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+    --memory="4g" \
     -v /vol/%p-%i/:/data -p 7474:7474 \
     --env=NEO4J_AUTH=none \
     --env=NEO4J_HEAP_MEMORY=2048 \

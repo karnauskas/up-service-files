@@ -8,19 +8,18 @@ RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /vulcand/frontends/aggregate-healthcheck-public/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-aggregate-healthcheck\", \"Route\":\"Path(`/__health`)\"}'; \
-  etcdctl set /vulcand/frontends/aggregate-healthcheck-public-gtg/frontend '{\"Type\":\"http\", \"BackendId\":\"vcb-aggregate-healthcheck\", \"Route\":\"Path(`/__gtg`)\"}'; \
   etcdctl set /ft/healthcheck-categories/read/period_seconds 4; \
   etcdctl set /ft/healthcheck-categories/read/is_resilient true; \
   etcdctl set /ft/healthcheck-categories/system/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/system/is_resilient false; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/aggregate-healthcheck/servers/%i
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/aggregate-healthcheck/servers/%i'
 Restart=on-failure
 RestartSec=60
 

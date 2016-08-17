@@ -1,6 +1,6 @@
 [Unit]
 Description=Video Mapper
-After=docker.service
+After=vulcan.service
 Requires=docker.service
 
 [Service]
@@ -12,7 +12,8 @@ KillMode=none
 ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/video-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-	|| docker pull coco/video-mapper:$DOCKER_APP_VERSION'
+  || docker pull coco/video-mapper:$DOCKER_APP_VERSION'
+
 ExecStart=/bin/bash -c '\
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--env "Q_ADDR=http://%H:8080" \

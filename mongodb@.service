@@ -5,18 +5,25 @@ Requires=docker.service
 Wants=mongodb-sidekick@%i.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull coco/mongodb
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/mongodb:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/mongodb:$DOCKER_APP_VERSION'
+
 ExecStart=/bin/sh -c "\
   MONGO_PORT=27017;\
   MONGO_ADMIN_PORT=$(( $MONGO_PORT + 1000));\
-  /usr/bin/docker run --rm --name %p-%i -v /vol/mongodb:/data/db -p $(( $MONGO_PORT + %i )):$MONGO_PORT -p $(( $MONGO_ADMIN_PORT + %i )):$MONGO_ADMIN_PORT coco/mongodb;"
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+  -v /vol/mongodb:/data/db \
+  -p $(( $MONGO_PORT + %i )):$MONGO_PORT \
+  -p $(( $MONGO_ADMIN_PORT + %i )):$MONGO_ADMIN_PORT \
+  coco/mongodb:$DOCKER_APP_VERSION;"
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

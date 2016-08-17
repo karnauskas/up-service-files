@@ -5,22 +5,24 @@ Requires=docker.service
 Wants=neo4j-red-sidekick@%i.service neo4j-read-red-sidekick@%i.service
 
 [Service]
+Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
-ExecStartPre=/usr/bin/docker pull neo4j:2.3.1
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull neo4j:$DOCKER_APP_VERSION'
 
 # See neo4j-blue@.service for the other neo4j instance.
 # Also see https://neo4j.com/developer/docker-2-x/ for configuration options.
 ExecStart=/bin/sh -c "\
-  /usr/bin/docker run --rm --name %p-%i -v /vol/%p-%i/:/data -p 7474:7474 \
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+    -v /vol/%p-%i/:/data -p 7474:7474 \
     --env=NEO4J_AUTH=none \
-    --env=NEO4J_HEAP_MEMORY=4096 neo4j:2.3.1"
+    --env=NEO4J_HEAP_MEMORY=4096 neo4j:$DOCKER_APP_VERSION"
 
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

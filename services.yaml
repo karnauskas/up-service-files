@@ -296,7 +296,6 @@ services:
 - name: methode-list-transformer@.service
   version: v27
   count: 2
-- name: methodeapi-endpoint.service
 - name: mongo-backup.service
   version: v13
   desiredState: loaded

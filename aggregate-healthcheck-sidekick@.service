@@ -10,8 +10,8 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck-categories/read/period_seconds 4; \
   etcdctl set /ft/healthcheck-categories/read/is_resilient true; \
-  etcdctl set /ft/healthcheck-categories/lists-read/period_seconds 30; \
-  etcdctl set /ft/healthcheck-categories/lists-read/is_resilient true; \
+  etcdctl set /ft/healthcheck-categories/lists-read/period_seconds 60; \
+  etcdctl set /ft/healthcheck-categories/lists-read/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/system/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/system/is_resilient false; \
   while [ -z $PORT ]; do \

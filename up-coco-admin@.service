@@ -13,6 +13,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/up-coco-admin:$DOCKER_APP_VERSION
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
   --env "ETCD_URL=http://$HOSTNAME:2379" \
+  -P \
   coco/up-coco-admin:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

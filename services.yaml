@@ -265,7 +265,7 @@ services:
 - name: methodeapi-endpoint.service
 - name: mongo-backup@.service
   version: v18
-  desiredState: loaded
+  desiredState: inactive
   count: 3
 - name: mongo-backup@.timer
   count: 3

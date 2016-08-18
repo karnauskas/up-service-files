@@ -1,6 +1,6 @@
 [Unit]
 Description=Alphaville Series neo4j rw service red
-After=docker.service
+After=vulcan.service
 Requires=docker.service
 Wants=neo4j-red@1.service alphaville-series-rw-neo4j-red-sidekick@%i.service
 

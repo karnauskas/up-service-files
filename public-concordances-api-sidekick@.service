@@ -11,6 +11,7 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories lists-publish; \
   etcdctl set /vulcand/frontends/$SERVICE/frontend \
   '{\"Type\": \"http\", \"BackendId\": \"vcb-public-concordances-api\", \"Route\": \"Path(`/concordances`) && Host(`public-services`)\"}'; \
   while [ -z $PORT ]; do \

@@ -9,7 +9,7 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck false; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set   /ft/services/$SERVICE/path-regex/route /.*; \
+  etcdctl set   /ft/services/$SERVICE/path-regex/route '/.*'; \
   etcdctl set   /ft/services/$SERVICE/path-host/route kafka; \
   while [ -z $PORT ]; do \
     sleep 5; \

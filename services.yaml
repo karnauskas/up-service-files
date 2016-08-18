@@ -560,8 +560,6 @@ services:
 - name: v2-content-annotator-red@.service
   version: v24
   count: 1
-- name: varnish-sidekick@.service
-  count: 2
 - name: varnish@.service
   version: v71
   count: 2

@@ -12,7 +12,7 @@ ExecStart=/bin/sh -c '\
   etcdctl set /vulcand/frontends/neo4j-read-db/frontend \'{"Type": "http", "BackendId": "neo4j-read", "Route": "PathRegexp(`^/db/data/.*`) && Header(`User-Agent`, `neoism`)", "Settings": { "TrustForwardHeader": true, "PassHostHeader": true }}\'; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    CONTAINER_NAME=$(docker ps -q --filter=name=neo4j-red-%i_); \
+    CONTAINER_NAME=$(docker ps -q --filter=name=^/neo4j-red-%i_); \
     PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 7474 | cut -d":" -f2)`; \
   done; \
   etcdctl set /vulcand/backends/neo4j-read/servers/1 "{\\"url\\": \\"http://$HOSTNAME:$PORT\\"}"'

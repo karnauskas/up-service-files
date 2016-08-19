@@ -25,7 +25,7 @@ ExecStart=/bin/sh -c '\
     AWS_SECRET_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
     ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
     FLEETCTL_ENDPOINT="http://$HOSTNAME:49153"; \
-     /usr/bin/docker run --rm --name %p \
+     /usr/bin/docker run --rm --name_$(uuidgen) %p \
         -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY \
         -e AWS_SECRET_KEY=$AWS_SECRET_KEY \
         -e ENVIRONMENT_TAG=$ENVIRONMENT_TAG \

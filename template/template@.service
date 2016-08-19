@@ -16,8 +16,9 @@ TimeoutStartSec=0
 KillMode=none
 #The "-" means that the command is optional.
 #Before starting the container, we make sure that no other containers with the same name are running by killing and removing the previous ones.
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+#Note: the container name can be filtered to start with the service name (^/).
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 #Pull the image, if it is not yet downloaded. Check in history.
 ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
 
@@ -36,7 +37,7 @@ ExecStart=/bin/sh -c '\
   up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
 
 #Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

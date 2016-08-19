@@ -5,13 +5,12 @@ After=kafka-rest-proxy@%i.service
 
 [Service]
 RemainAfterExit=yes
-ExecStartPre=-/bin/bash -c "\
-  etcdctl set /vulcand/frontends/kafka-rest-proxy/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-kafka-rest-proxy\", \"Route\": \"PathRegexp(`/.*`) && Host(`kafka`)\"}';"
-
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck false; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set   /ft/services/$SERVICE/path-regex/route '/.*'; \
+  etcdctl set   /ft/services/$SERVICE/path-host/route kafka; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \

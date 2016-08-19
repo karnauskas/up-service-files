@@ -9,8 +9,8 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read,lists-publish; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories read,lists-publish; \
   etcdctl set   /ft/services/$SERVICE/path-regex/public-services /things/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$; \
   etcdctl set   /ft/services/$SERVICE/path-host/public-services public-services; \
   while [ -z $PORT ]; do \

@@ -67,15 +67,15 @@ services:
 - name: cms-notifier@.service
   version: v33
   count: 1
+- name: concept-ingester-blue-sidekick@.service
+  count: 1
 - name: concept-ingester-blue@.service
   version: v1.1.5
   count: 1
-- name: concept-ingester-blue-sidekick@.service
+- name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
   version: v1.1.5
-  count: 1
-- name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
@@ -111,24 +111,24 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  sequentialDeployment: true
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  sequentialDeployment: true
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: content-rw-neo4j-blue@.service
-  version: v0.0.32
+  version: v0.0.33
   count: 1
 - name: content-rw-neo4j-red-sidekick@.service
   count: 1
 - name: content-rw-neo4j-red@.service
-  version: v0.0.32
+  version: v0.0.33
   count: 1
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -245,7 +245,6 @@ services:
 - name: methode-list-transformer@.service
   version: v27
   count: 2
-- name: methodeapi-endpoint.service
 - name: mongo-backup.service
   version: v13
   desiredState: loaded
@@ -267,8 +266,8 @@ services:
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service
-  desiredState: inactive
   version: 0.8.1
+  desiredState: inactive
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
@@ -489,6 +488,16 @@ services:
 - name: v1-content-annotator-binding-service-red@.service
   version: v24
   count: 1
+- name: v1-content-annotator-brightcove-blue-sidekick@.service
+  count: 1
+- name: v1-content-annotator-brightcove-blue@.service
+  version: v24
+  count: 1
+- name: v1-content-annotator-brightcove-red-sidekick@.service
+  count: 1
+- name: v1-content-annotator-brightcove-red@.service
+  version: v24
+  count: 1
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service
@@ -524,8 +533,6 @@ services:
 - name: v2-content-annotator-red@.service
   version: v24
   count: 1
-- name: varnish-sidekick@.service
-  count: 2
 - name: varnish@.service
   version: v71
   count: 2
@@ -533,7 +540,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.2.0
+  version: v1.2.3
   count: 2
 - name: vulcan-config-builder.service
   version: v1.3.0

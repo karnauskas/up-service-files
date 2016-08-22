@@ -10,7 +10,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read,lists-publish; \
   etcdctl set /vulcand/frontends/$SERVICE/frontend \
   '{\"Type\": \"http\", \"BackendId\": \"vcb-public-concordances-api\", \"Route\": \"Path(`/concordances`) && Host(`public-services`)\"}'; \
   while [ -z $PORT ]; do \

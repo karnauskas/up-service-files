@@ -3,7 +3,6 @@ Description=Varnish
 After=docker.service
 After=elb-presence@%i.service
 Requires=docker.service
-Wants=varnish-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

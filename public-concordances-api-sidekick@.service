@@ -9,10 +9,10 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read,lists-publish; \
-  etcdctl set /vulcand/frontends/$SERVICE/frontend \
-  '{\"Type\": \"http\", \"BackendId\": \"vcb-public-concordances-api\", \"Route\": \"Path(`/concordances`) && Host(`public-services`)\"}'; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories read,lists-publish; \
+  etcdctl set   /ft/services/$SERVICE/path-regex/public-services /concordances; \
+  etcdctl set   /ft/services/$SERVICE/path-host/public-services public-services; \
   while [ -z $PORT ]; do \
       sleep 5; \
       CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \

@@ -171,7 +171,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v62
+  version: v63
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick@.service

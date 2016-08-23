@@ -161,13 +161,13 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v62
+  version: v63
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.3
+  version: 1.0.6
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -572,7 +572,7 @@ services:
   version: v1.2.3
   count: 2
 - name: vulcan-config-builder.service
-  version: v1.3.1
+  version: v1.3.2
 - name: vulcan.service
   version: v1.2.2
 - name: wordpress-article-transformer-sidekick@.service

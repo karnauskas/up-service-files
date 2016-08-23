@@ -7,11 +7,10 @@ After=public-content-by-concept-api@%i.service
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl set 	/ft/services/$SERVICE/healthcheck  	true; \
+  etcdctl set   /ft/services/$SERVICE/healthcheck  	true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set 	/ft/healthcheck/$SERVICE-%i/path 		/__health; \
-  etcdctl set 	/ft/healthcheck/$SERVICE-%i/categories 	read; \
-  etcdctl set 	/vulcand/frontends/public-services-content-by-concept/frontend 	'{\"Type\": \"http\", \"BackendId\": \"vcb-public-content-by-concept-api\", \"Route\": \"PathRegexp(`^\/content.*isAnnotatedBy=.*$`) && Host(`public-services`)\"}'; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/path 		/__health; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories 	read; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \

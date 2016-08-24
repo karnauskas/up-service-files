@@ -4,18 +4,20 @@ Description=Registers a cluster tunnel in DYN through konstructor API
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-TimeoutStartSec=30
+Environment="DOCKER_APP_VERSION=latest"
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStart=/bin/sh -c '\
-  ENV=$(etcdctl get /ft/config/environment_tag); \
-  KONSTRUCTOR_API_KEY=$(etcdctl get /ft/_credentials/konstructor/api-key); \
-  KONSTRUCTOR_DNS_ENDPOINT=https://dns-api.in.ft.com/v2; \
+ExecStart=/bin/bash -c '\
+  ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  KONSTRUCTOR_API_KEY=$(/usr/bin/etcdctl get /ft/_credentials/konstructor/api-key); \
   PUBLIC_IP=$(curl -s 169.254.169.254/latest/meta-data/public-ipv4); \
-  curl -s -L -d "{\"zone\": \"ft.com\", \"name\": \"$ENV-tunnel-up\"}" -X DELETE -H "Content-Type: application/json" -H "Accept: application/json" -H "x-api-key: $KONSTRUCTOR_API_KEY" "$KONSTRUCTOR_DNS_ENDPOINT"; \
-  ((`curl -s -L -w "%{http_code}" -H "Accept: application/json" -H "x-api-key: $KONSTRUCTOR_API_KEY" "$KONSTRUCTOR_DNS_ENDPOINT/name/ft.com/$ENV-tunnel-up" -o /dev/null` == 400)) && \
-  ((`curl -s -L -w "%{http_code}" -X POST -d "{\"zone\": \"ft.com\", \"name\": \"$ENV-tunnel-up\",\"rdata\": \"$PUBLIC_IP\",\"ttl\": \"600\"}" -H "Content-Type: application/json" -H "Accept: application/json" -H "x-api-key: $KONSTRUCTOR_API_KEY" "$KONSTRUCTOR_DNS_ENDPOINT" -o /dev/null` == 200));'
+  docker run --rm --name %p_$(uuidgen) \
+  -e="DOMAINS=$ENV-tunnel-up" \
+  -e="KONSTRUCTOR_API_KEY=$KONSTRUCTOR_API_KEY" \
+  -e="IP=$PUBLIC_IP" \
+  -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" \
+  coco/coco-tunnel-dns-registrator:$DOCKER_APP_VERSION'
 
 [Install]
 WantedBy=multi-user.target

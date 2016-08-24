@@ -70,12 +70,12 @@ services:
 - name: concept-ingester-blue-sidekick@.service
   count: 1
 - name: concept-ingester-blue@.service
-  version: v1.1.5
+  version: v1.1.7
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
-  version: v1.1.5
+  version: v1.1.7
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2

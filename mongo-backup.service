@@ -2,6 +2,10 @@
 Description=Job to backup mongo DB data files to S3
 
 [Service]
+# process will be short-lived and that systemd should wait for the process to
+# exit before continuing on with other units.
+Type=oneshot
+
 Environment="DOCKER_APP_VERSION=latest"
 
 # should start up instantly, so start timeout can be 0

@@ -100,12 +100,12 @@ services:
 - name: concept-ingester-blue-sidekick@.service
   count: 1
 - name: concept-ingester-blue@.service
-  version: v1.1.5
+  version: v1.1.7
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
-  version: v1.1.5
+  version: v1.1.7
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
@@ -179,7 +179,7 @@ services:
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
-  version: v3.0.0
+  version: v4.0.0
 - name: elb-presence@.service
   count: 2
 - name: enriched-content-read-api-sidekick@.service
@@ -201,7 +201,7 @@ services:
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.3
+  version: 1.0.5
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -517,6 +517,7 @@ services:
   version: v1.0.10
   count: 1
 - name: tunnel-registrator.service
+  version: 1.0.0
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
 - name: up-queue-sender-v1-metadata@.service

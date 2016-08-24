@@ -150,7 +150,7 @@ services:
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.3
+  version: 1.0.7
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1

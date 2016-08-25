@@ -262,7 +262,7 @@ services:
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v41
+  version: v51
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service

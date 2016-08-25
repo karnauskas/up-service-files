@@ -264,7 +264,7 @@ services:
   count: 2
 - name: mongo-backup@.service
   version: v18
-  desiredState: inactive
+  desiredState: loaded
   count: 3
 - name: mongo-backup@.timer
   count: 3

@@ -131,7 +131,7 @@ services:
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
-  version: v0.0.2
+  version: v1.0.3
   count: 2
 - name: nativerw-sidekick@.service
   count: 2

@@ -308,12 +308,12 @@ services:
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
-  version: v0.0.2
+  version: v1.0.3
   count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v42
+  version: v1.0.15
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service
@@ -595,7 +595,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.2.7
+  version: v1.2.8
   count: 2
 - name: vulcan-config-builder.service
   version: v1.3.2

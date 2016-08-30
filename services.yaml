@@ -155,7 +155,7 @@ services:
 - name: elasticsearch-sidekick.service
 - name: elasticsearch.service
 - name: elb-dns-registrator.service
-  version: v3.0.0
+  version: v4.0.0
 - name: elb-presence@.service
   count: 2
 - name: enriched-content-read-api-sidekick@.service
@@ -167,7 +167,7 @@ services:
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.5
+  version: 1.0.7
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -487,6 +487,7 @@ services:
   version: v1.0.10
   count: 1
 - name: tunnel-registrator.service
+  version: 1.0.0
 - name: up-coco-admin-sidekick@.service
   count: 1
 - name: up-coco-admin@.service

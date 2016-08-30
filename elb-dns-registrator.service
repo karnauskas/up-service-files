@@ -10,12 +10,20 @@ Environment="DOCKER_APP_VERSION=latest"
 KillMode=none
 ExecStart=/bin/bash -c '\
   ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  KONSTRUCTOR_API_KEY=$(/usr/bin/etcdctl get /ft/_credentials/konstructor/api-key); \
+  ELB_NAME=$(/usr/bin/etcdctl get /ft/_credentials/elb_name); \
+  AWS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
+  AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
+  AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
   docker run --rm --name %p_$(uuidgen) \
-  -e="ETCD_PEERS=http://%H:2379" \
-  -e="DOMAINS=$ENV-up,$ENV-up-read" \
+  -e="DOMAINS=$ENV-up" \
+  -e="KONSTRUCTOR_API_KEY=$KONSTRUCTOR_API_KEY" \
+  -e="ELB_NAME=$ELB_NAME" \
+  -e="AWS_REGION=$AWS_REGION" \
+  -e="AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+  -e="AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" \
   coco/coco-elb-dns-registrator:$DOCKER_APP_VERSION'
 
 [Install]
 WantedBy=multi-user.target
-

@@ -254,6 +254,7 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+  sequentialDeployment: true
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service

@@ -67,15 +67,15 @@ services:
 - name: cms-notifier@.service
   version: v33
   count: 1
-- name: concept-ingester-blue@.service
-  version: v1.1.5
-  count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1
-- name: concept-ingester-red@.service
-  version: v1.1.5
+- name: concept-ingester-blue@.service
+  version: v1.1.7
   count: 1
 - name: concept-ingester-red-sidekick@.service
+  count: 1
+- name: concept-ingester-red@.service
+  version: v1.1.7
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
@@ -111,24 +111,24 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  sequentialDeployment: true
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  sequentialDeployment: true
   version: v47
   count: 2
+  sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: content-rw-neo4j-blue@.service
-  version: v0.0.32
+  version: v0.0.33
   count: 1
 - name: content-rw-neo4j-red-sidekick@.service
   count: 1
 - name: content-rw-neo4j-red@.service
-  version: v0.0.32
+  version: v0.0.33
   count: 1
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -138,19 +138,19 @@ services:
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
-  version: v3.0.0
+  version: v4.0.0
 - name: elb-presence@.service
   count: 2
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v62
+  version: v63
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.3
+  version: 1.0.5
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -245,7 +245,6 @@ services:
 - name: methode-list-transformer@.service
   version: v27
   count: 2
-- name: methodeapi-endpoint.service
 - name: mongo-backup.service
   version: v13
   desiredState: loaded
@@ -258,21 +257,21 @@ services:
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
-  version: v0.0.2
+  version: v1.0.3
   count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v41
+  version: v1.0.15
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service
-  desiredState: inactive
   version: 0.8.1
+  desiredState: inactive
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
-  version: 2.3.1
+  version: 2.3.1-3
   count: 1
 - name: neo4j-read-blue-sidekick@.service
   count: 1
@@ -281,7 +280,7 @@ services:
 - name: neo4j-red-sidekick@.service
   count: 1
 - name: neo4j-red@.service
-  version: 2.3.1
+  version: 2.3.1-3
   count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -325,7 +324,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.15
+  version: v0.0.16
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -464,6 +463,7 @@ services:
   version: v1.0.10
   count: 1
 - name: tunnel-registrator.service
+  version: 1.0.0
 - name: up-coco-admin-sidekick@.service
   count: 1
 - name: up-coco-admin@.service
@@ -477,12 +477,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v1-annotations-rw-blue@.service
-  version: v0.0.26
+  version: v0.0.30
   count: 1
 - name: v1-annotations-rw-red-sidekick@.service
   count: 1
 - name: v1-annotations-rw-red@.service
-  version: v0.0.26
+  version: v0.0.30
   count: 1
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -492,6 +492,16 @@ services:
 - name: v1-content-annotator-binding-service-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-red@.service
+  version: v24
+  count: 1
+- name: v1-content-annotator-brightcove-blue-sidekick@.service
+  count: 1
+- name: v1-content-annotator-brightcove-blue@.service
+  version: v24
+  count: 1
+- name: v1-content-annotator-brightcove-red-sidekick@.service
+  count: 1
+- name: v1-content-annotator-brightcove-red@.service
   version: v24
   count: 1
 - name: v1-content-annotator-blue-sidekick@.service
@@ -507,17 +517,17 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.12
+  version: v0.0.14
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v2-annotations-rw-blue@.service
-  version: v0.0.26
+  version: v0.0.30
   count: 1
 - name: v2-annotations-rw-red-sidekick@.service
   count: 1
 - name: v2-annotations-rw-red@.service
-  version: v0.0.26
+  version: v0.0.30
   count: 1
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
@@ -529,8 +539,6 @@ services:
 - name: v2-content-annotator-red@.service
   version: v24
   count: 1
-- name: varnish-sidekick@.service
-  count: 2
 - name: varnish@.service
   version: v71
   count: 2
@@ -538,10 +546,10 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.2.0
+  version: v1.2.8
   count: 2
 - name: vulcan-config-builder.service
-  version: v1.3.0
+  version: v1.3.2
 - name: vulcan.service
   version: v1.2.2
 - name: wordpress-article-transformer-sidekick@.service

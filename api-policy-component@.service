@@ -22,6 +22,7 @@ ExecStart=/bin/sh -c '\
   --env "READ_ENDPOINT=$HOSTNAME:8080:8182" \
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
+  --env "JERSEY_TIMEOUT_MS=10000" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.api-policy-component.%i" \
   up-registry.ft.com/coco/api-policy-component:$DOCKER_APP_VERSION'
 ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

@@ -13,7 +13,7 @@ ExecStart=/bin/sh -c "\
   NOTIFICATIONS_PUSH_PORT=8548; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$NOTIFICATIONS_PUSH_PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/notifications-push/servers/%i
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/notifications-push/servers/%i'
 Restart=on-failure
 RestartSec=60
 

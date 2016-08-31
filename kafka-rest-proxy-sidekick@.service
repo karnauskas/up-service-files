@@ -1,0 +1,26 @@
+[Unit]
+Description=Kafka Rest Proxy Sidekick
+BindsTo=kafka-rest-proxy@%i.service
+After=kafka-rest-proxy@%i.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck false; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set   /ft/services/$SERVICE/path-regex/route '/.*'; \
+  etcdctl set   /ft/services/$SERVICE/path-host/route kafka; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8082 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/kafka-rest-proxy/servers/%i'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=kafka-rest-proxy@%i.service

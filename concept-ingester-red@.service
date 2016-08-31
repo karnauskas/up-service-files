@@ -9,35 +9,40 @@ Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill %p-%i > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm %p-%i > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/concept-ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/concept-ingester:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export PORT=8080; \
   export VULCAN_ADDR=http://%H:8080; \
   export GROUP_ID=RedConcepts; \
   export TOPIC=Concept; \
-  export SERVICES=people-rw-neo4j-red,organisations-rw-neo4j-red,memberships-rw-neo4j-red,brands-rw-neo4j-red,roles-rw-neo4j-red; \
-  export HOST_HEADER=kafka; \
+  export SERVICES=people-rw-neo4j-red,organisations-rw-neo4j-red,memberships-rw-neo4j-red,brands-rw-neo4j-red,roles-rw-neo4j-red,alphaville-series-rw-neo4j-red; \
+  export QUEUE_ID=kafka; \
+  export GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003; \
+  export GRAPHITE_PREFIX=coco.services.$ENV.concept-ingester-red.%i; \
   export OFFSET=largest; \
   export COMMIT_ENABLE=true; \
   export STREAM_COUNT=1; \
   export TIMEOUT=60; \
-  /usr/bin/docker run --rm --name %p-%i \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
   -p $PORT \
   -e "PORT=$PORT" \
   -e "VULCAN_ADDR=$VULCAN_ADDR" \
   -e "GROUP_ID=$GROUP_ID" \
   -e "TOPIC=$TOPIC" \
   -e "SERVICES=$SERVICES" \
-  -e "HOST_HEADER=$HOST_HEADER" \
+  -e "QUEUE_ID=$QUEUE_ID" \
+  -e "GRAPHITE_TCP_ADDRESS=$GRAPHITE_TCP_ADDRESS" \
+  -e "GRAPHITE_PREFIX=$GRAPHITE_PREFIX" \
   -e "OFFSET=$OFFSET" \
   -e "COMMIT_ENABLE=$COMMIT_ENABLE" \
   -e "STREAM_COUNT=$STREAM_COUNT" \
   -e "TIMEOUT=$TIMEOUT" \
   coco/concept-ingester:$DOCKER_APP_VERSION;'
-ExecStop=/usr/bin/docker stop -t 3 %p-%i
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

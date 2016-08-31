@@ -4,22 +4,23 @@ BindsTo=public-concordances-api@%i.service
 After=public-concordances-api@%i.service
 
 [Service]
-ExecStart=/bin/sh -c '\
-  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
-  etcdctl set /vulcand/frontends/$SERVICE/frontend \
-  \'{"Type": "http", "BackendId": "vcb-public-concordances-api", "Route": "Path(`/concordances`) && Host(`public-services`)"}\'; \
-  while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d":" -f2)`; \
-    curl -s -H "Accept: application/json" 0.0.0.0:$PORT/__health | jq -e "[.checks[].ok] | all" 2>&1>/dev/null && \
-      etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT --ttl 10; \
-    sleep 5; \
-  done'
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories read,lists-publish; \
+  etcdctl set   /ft/services/$SERVICE/path-regex/public-services /concordances; \
+  etcdctl set   /ft/services/$SERVICE/path-host/public-services public-services; \
+  while [ -z $PORT ]; do \
+      sleep 5; \
+      CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+      PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+    done; \
+    etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=/usr/bin/etcdctl rm /ft/services/public-concordances-api/servers/%i
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/public-concordances-api/servers/%i'
 Restart=on-failure
 RestartSec=60
 

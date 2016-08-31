@@ -4,15 +4,19 @@ BindsTo=neo4j-red@%i.service
 After=neo4j-red@%i.service
 
 [Service]
+RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  etcdctl mkdir /ft/services/neo4j-red/servers; \
-  etcdctl set /vulcand/frontends/neo4j-red-db/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-neo4j-red\", \"Route\": \"HeaderRegexp(`Referer`, `.*__neo4j-red.*`)\", \"Settings\": { \"TrustForwardHeader\": true, \"PassHostHeader\": true }}'; \
-  while true; do \
-    PORT=`[ $PORT ] && echo $PORT || echo $(/usr/bin/docker port neo4j-red-%i 7474 | cut -d':' -f2)`; \
-    etcdctl set /ft/services/neo4j-red/servers/%i "http://$HOSTNAME:$PORT" --ttl 600; \
-    sleep 120; \
-  done"
-ExecStop=/usr/bin/etcdctl rm /ft/services/neo4j-red/servers/%i
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /vulcand/frontends/$SERVICE-db/frontend '{\"Type\": \"http\", \"BackendId\": \"vcb-neo4j-red\", \"Route\": \"HeaderRegexp(`Referer`, `.*__neo4j-red.*`)\", \"Settings\": { \"TrustForwardHeader\": true, \"PassHostHeader\": true }}'; \
+  while [ -z $PORT ]; do \
+     sleep 5; \
+     CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
+     PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 7474 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/neo4j-red/servers/%i'
 
 [X-Fleet]
 MachineOf=neo4j-red@%i.service

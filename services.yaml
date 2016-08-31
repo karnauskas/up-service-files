@@ -246,7 +246,7 @@ services:
   version: v27
   count: 2
 - name: mongo-backup.service
-  version: v13
+  version: v14.0.0
   desiredState: loaded
 - name: mongo-backup.timer
 - name: mongodb-configurator.service

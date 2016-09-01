@@ -171,7 +171,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v63
+  version: v65
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-blue-sidekick@.service

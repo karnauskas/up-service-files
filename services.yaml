@@ -583,7 +583,7 @@ services:
   version: v24
   count: 1
 - name: varnish@.service
-  version: v71
+  version: v73
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

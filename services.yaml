@@ -161,13 +161,13 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v65
+  version: v66
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.5
+  version: 1.0.7
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -264,7 +264,7 @@ services:
   count: 2
 - name: mongo-backup@.service
   version: v18
-  desiredState: inactive
+  desiredState: loaded
   count: 3
 - name: mongo-backup@.timer
   count: 3
@@ -491,7 +491,7 @@ services:
 - name: up-coco-admin-sidekick@.service
   count: 1
 - name: up-coco-admin@.service
-  version: v0.0.2
+  version: v0.0.3
   count: 1
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
@@ -564,7 +564,7 @@ services:
   version: v24
   count: 1
 - name: varnish@.service
-  version: v73
+  version: v74
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

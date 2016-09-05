@@ -1,5 +1,5 @@
 [Unit]
-Description=Sections rw neo4j blue Sidekick
+Description=UP Coco admin tool
 BindsTo=up-coco-admin@%i.service
 After=up-coco-admin@%i.service
 

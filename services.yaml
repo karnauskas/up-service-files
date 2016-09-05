@@ -245,10 +245,12 @@ services:
 - name: methode-list-transformer@.service
   version: v27
   count: 2
-- name: mongo-backup.service
-  version: v13
+- name: mongo-backup@.service
+  version: v18
   desiredState: loaded
-- name: mongo-backup.timer
+  count: 3
+- name: mongo-backup@.timer
+  count: 3
 - name: mongodb-configurator.service
 - name: mongodb-sidekick@.service
   count: 3

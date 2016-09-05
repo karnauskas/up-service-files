@@ -15,10 +15,10 @@ TimeoutStartSec=0
 KillMode=none
 
 # stop already running instance
-ExecStartPre=-/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)"
+ExecStartPre=-/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)"
 
 # remove existing instance
-ExecStartPre=-/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)"
+ExecStartPre=-/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)"
 
 ExecStart=/bin/sh -c "\
     MONGODB_PORT=$(docker ps | grep mongodb | awk '{ print $1 }' | xargs -i docker port '{}' 27017 | cut -d':' -f2); \
@@ -29,7 +29,7 @@ ExecStart=/bin/sh -c "\
     DATA_FOLDER=/data/db; \
     S3_DOMAIN=s3-eu-west-1.amazonaws.com; \
     ENV_TAG=$(usr/bin/etcdctl get /ft/config/environment_tag); \
-     /usr/bin/docker run --rm --name %p_$(uuidgen) \
+     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
         -e MONGODB_PORT=$MONGODB_PORT \
         -e MONGODB_HOST=$MONGODB_HOST \
         -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY \
@@ -48,5 +48,4 @@ Nice=10
 WantedBy=multi-user.target
 
 [X-Fleet]
-# we only want this to run on mongo machines
-MachineMetadata=host_type=persistent
+MachineOf=mongodb@%i.service

@@ -467,7 +467,7 @@ services:
 - name: up-coco-admin-sidekick@.service
   count: 1
 - name: up-coco-admin@.service
-  version: v0.0.2
+  version: v0.0.3
   count: 1
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1

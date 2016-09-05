@@ -276,12 +276,12 @@ services:
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
-  version: v0.0.2
+  version: v1.0.3
   count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v41
+  version: v1.0.15
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service
@@ -290,7 +290,7 @@ services:
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
-  version: 2.3.1
+  version: 2.3.1-3
   count: 1
 - name: neo4j-read-blue-sidekick@.service
   count: 1
@@ -299,7 +299,7 @@ services:
 - name: neo4j-red-sidekick@.service
   count: 1
 - name: neo4j-red@.service
-  version: 2.3.1
+  version: 2.3.1-3
   count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -491,7 +491,7 @@ services:
 - name: up-coco-admin-sidekick@.service
   count: 1
 - name: up-coco-admin@.service
-  version: v0.0.2
+  version: v0.0.3
   count: 1
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
@@ -570,7 +570,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.2.3
+  version: v1.2.8
   count: 2
 - name: vulcan-config-builder.service
   version: v1.3.2

@@ -30,3 +30,4 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=organisations-rw-neo4j-blue@*.service
+MachineOf=neo4j-blue@%i.service

@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v43
+  version: v52
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -152,13 +152,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v47
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v47
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -175,7 +175,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v76
+  version: v78
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -185,7 +185,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v63
+  version: v65
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-blue-sidekick@.service
@@ -274,7 +274,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v76
+  version: v81
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -306,11 +306,6 @@ services:
 - name: mongodb@.service
   count: 3
   sequentialDeployment: true
-- name: native-ingester-metadata-sidekick@.service
-  count: 2
-- name: native-ingester-metadata@.service
-  version: v1.0.3
-  count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service

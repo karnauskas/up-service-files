@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v43
+  version: v52
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -111,13 +111,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v47
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v47
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -134,7 +134,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v76
+  version: v78
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -144,13 +144,13 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v63
+  version: v65
   count: 2
   sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.5
+  version: 1.0.7
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -223,7 +223,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v76
+  version: v81
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -245,10 +245,12 @@ services:
 - name: methode-list-transformer@.service
   version: v27
   count: 2
-- name: mongo-backup.service
+- name: mongo-backup@.service
   version: v14.0.0
   desiredState: loaded
-- name: mongo-backup.timer
+  count: 3
+- name: mongo-backup@.timer
+  count: 3
 - name: mongodb-configurator.service
 - name: mongodb-sidekick@.service
   count: 3
@@ -257,7 +259,7 @@ services:
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
-  version: v0.0.2
+  version: v1.0.3
   count: 2
 - name: nativerw-sidekick@.service
   count: 2
@@ -535,7 +537,7 @@ services:
   version: v24
   count: 1
 - name: varnish@.service
-  version: v71
+  version: v73
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

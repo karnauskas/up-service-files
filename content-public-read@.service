@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c '\
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \
                     --env "CONTENT_PATH=content/" \
                     --env "HOST_HEADER=document-store-api" \
-                    --env "CACHE_CONTROL_POLICY=\"max-age=30\"" \
+                    --env "CACHE_CONTROL_POLICY=\"max-age=$(/usr/bin/etcdctl get /ft/config/cache-max-age)\"" \
                     --env "CONTENT_HEALTHCHECK_PATH=/__health" \
                     --env "API_HOST=$ENV_API_HOST" \
                     up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;'

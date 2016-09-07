@@ -246,7 +246,7 @@ services:
   version: v27
   count: 2
 - name: mongo-backup@.service
-  version: v14.0.0
+  version: v20.0.0
   desiredState: loaded
   count: 3
 - name: mongo-backup@.timer

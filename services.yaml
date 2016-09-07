@@ -155,12 +155,12 @@ services:
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
-  version: v1.1.3
+  version: v1.1.4
   count: 1
 - name: genres-rw-neo4j-red-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-red@.service
-  version: v1.1.3
+  version: v1.1.4
   count: 1
 - name: genres-transformer-sidekick@.service
   count: 1
@@ -198,12 +198,12 @@ services:
 - name: locations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: locations-rw-neo4j-blue@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: locations-rw-neo4j-red-sidekick@.service
   count: 1
 - name: locations-rw-neo4j-red@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: locations-transformer-sidekick@.service
   count: 1
@@ -393,12 +393,12 @@ services:
 - name: sections-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: sections-rw-neo4j-blue@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: sections-rw-neo4j-red-sidekick@.service
   count: 1
 - name: sections-rw-neo4j-red@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: sections-transformer-sidekick@.service
   count: 1

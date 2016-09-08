@@ -138,12 +138,12 @@ services:
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: content-rw-neo4j-blue@.service
-  version: v0.0.33
+  version: v0.0.34
   count: 1
 - name: content-rw-neo4j-red-sidekick@.service
   count: 1
 - name: content-rw-neo4j-red@.service
-  version: v0.0.33
+  version: v0.0.34
   count: 1
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -273,6 +273,7 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+  sequentialDeployment: true
 - name: native-ingester-metadata-sidekick@.service
   count: 2
 - name: native-ingester-metadata@.service
@@ -321,12 +322,12 @@ services:
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-blue@.service
-  version: v0.2.0
+  version: v0.3.0
   count: 1
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-red@.service
-  version: v0.2.0
+  version: v0.3.0
   count: 1
 - name: os-upgrade.service
   desiredState: loaded
@@ -518,6 +519,11 @@ services:
 - name: v1-content-annotator-binding-service-red@.service
   version: v24
   count: 1
+- name: v1-content-annotator-blue-sidekick@.service
+  count: 1
+- name: v1-content-annotator-blue@.service
+  version: v24
+  count: 1
 - name: v1-content-annotator-brightcove-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-blue@.service
@@ -526,11 +532,6 @@ services:
 - name: v1-content-annotator-brightcove-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-red@.service
-  version: v24
-  count: 1
-- name: v1-content-annotator-blue-sidekick@.service
-  count: 1
-- name: v1-content-annotator-blue@.service
   version: v24
   count: 1
 - name: v1-content-annotator-red-sidekick@.service

@@ -8,5 +8,4 @@ OnCalendar=11:00
 WantedBy=timers.target
 
 [X-Fleet]
-MachineOf=mongo-backup.service
-
+MachineOf=mongodb@%i.service

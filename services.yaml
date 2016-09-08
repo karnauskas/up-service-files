@@ -293,6 +293,7 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
+  sequentialDeployment: true
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service

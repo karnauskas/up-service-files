@@ -126,13 +126,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v48
+  version: v49
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v48
+  version: v49
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -571,7 +571,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: v1.2.8
+  version: v1.2.9
   count: 2
 - name: vulcan-config-builder.service
   version: v1.3.2

@@ -8,12 +8,12 @@ services:
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: alphaville-series-rw-neo4j-blue@.service
-  version: v0.0.5
+  version: v0.0.6
   count: 1
 - name: alphaville-series-rw-neo4j-red-sidekick@.service
   count: 1
 - name: alphaville-series-rw-neo4j-red@.service
-  version: v0.0.5
+  version: v0.0.6
   count: 1
 - name: api-policy-component-sidekick@.service
   count: 2
@@ -34,12 +34,12 @@ services:
 - name: brands-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-blue@.service
-  version: v0.1.1
+  version: v0.1.2
   count: 1
 - name: brands-rw-neo4j-red-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-red@.service
-  version: v0.1.1
+  version: v0.1.2
   count: 1
   sequentialDeployment: true
 - name: cms-kafka-bridge-pub-pre-prod-sidekick@.service
@@ -152,24 +152,24 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v48
+  version: v50
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v48
+  version: v50
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: content-rw-neo4j-blue@.service
-  version: v0.0.33
+  version: v0.0.34
   count: 1
 - name: content-rw-neo4j-red-sidekick@.service
   count: 1
 - name: content-rw-neo4j-red@.service
-  version: v0.0.33
+  version: v0.0.34
   count: 1
 - name: diamond.service
 - name: document-store-api-sidekick@.service
@@ -206,12 +206,12 @@ services:
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
-  version: v1.1.3
+  version: v1.1.4
   count: 1
 - name: genres-rw-neo4j-red-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-red@.service
-  version: v1.1.3
+  version: v1.1.4
   count: 1
 - name: genres-transformer-sidekick@.service
   count: 1
@@ -223,12 +223,12 @@ services:
 - name: industry-classifications-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-blue@.service
-  version: v0.0.4
+  version: v0.0.5
   count: 1
 - name: industry-classifications-rw-neo4j-red-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-red@.service
-  version: v0.0.4
+  version: v0.0.5
   count: 1
 - name: instance-data-ingester-blue-sidekick@.service
   count: 1
@@ -249,12 +249,12 @@ services:
 - name: locations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: locations-rw-neo4j-blue@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: locations-rw-neo4j-red-sidekick@.service
   count: 1
 - name: locations-rw-neo4j-red@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: locations-transformer-sidekick@.service
   count: 1
@@ -264,12 +264,12 @@ services:
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: memberships-rw-neo4j-blue@.service
-  version: v0.1.2
+  version: v0.1.3
   count: 1
 - name: memberships-rw-neo4j-red-sidekick@.service
   count: 1
 - name: memberships-rw-neo4j-red@.service
-  version: v0.1.2
+  version: v0.1.3
   count: 1
 - name: methode-article-transformer-sidekick@.service
   count: 2
@@ -294,7 +294,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v27
+  version: v29
   count: 2
 - name: mongo-backup@.service
   version: v18
@@ -351,24 +351,24 @@ services:
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-blue@.service
-  version: v0.2.0
+  version: v0.3.0
   count: 1
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-red@.service
-  version: v0.2.0
+  version: v0.3.0
   count: 1
 - name: os-upgrade.service
   desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: people-rw-neo4j-blue@.service
-  version: v0.1.1
+  version: v0.1.2
   count: 1
 - name: people-rw-neo4j-red-sidekick@.service
   count: 1
 - name: people-rw-neo4j-red@.service
-  version: v0.1.1
+  version: v0.1.2
   count: 1
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -434,22 +434,22 @@ services:
 - name: roles-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: roles-rw-neo4j-blue@.service
-  version: v0.1.2
+  version: v0.1.3
   count: 1
 - name: roles-rw-neo4j-red-sidekick@.service
   count: 1
 - name: roles-rw-neo4j-red@.service
-  version: v0.1.2
+  version: v0.1.3
   count: 1
 - name: sections-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: sections-rw-neo4j-blue@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: sections-rw-neo4j-red-sidekick@.service
   count: 1
 - name: sections-rw-neo4j-red@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: sections-transformer-sidekick@.service
   count: 1
@@ -459,12 +459,12 @@ services:
 - name: special-reports-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: special-reports-rw-neo4j-blue@.service
-  version: v1.1.0
+  version: v1.1.2
   count: 1
 - name: special-reports-rw-neo4j-red-sidekick@.service
   count: 1
 - name: special-reports-rw-neo4j-red@.service
-  version: v1.1.0
+  version: v1.1.2
   count: 1
 - name: special-reports-transformer-sidekick@.service
   count: 1
@@ -475,12 +475,12 @@ services:
 - name: subjects-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: subjects-rw-neo4j-blue@.service
-  version: v1.1.0
+  version: v1.1.1
   count: 1
 - name: subjects-rw-neo4j-red-sidekick@.service
   count: 1
 - name: subjects-rw-neo4j-red@.service
-  version: v1.1.0
+  version: v1.1.1
   count: 1
 - name: subjects-transformer-sidekick@.service
   count: 1
@@ -502,12 +502,12 @@ services:
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: topics-rw-neo4j-blue@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: topics-rw-neo4j-red-sidekick@.service
   count: 1
 - name: topics-rw-neo4j-red@.service
-  version: v1.1.1
+  version: v1.1.2
   count: 1
 - name: topics-transformer-sidekick@.service
   count: 1

@@ -292,7 +292,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.4.15
+  version: v2.4.16
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

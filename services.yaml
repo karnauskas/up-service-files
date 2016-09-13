@@ -297,7 +297,7 @@ services:
   version: v29
   count: 2
 - name: mongo-backup@.service
-  version: v18
+  version: v20.0.0
   desiredState: loaded
   count: 3
 - name: mongo-backup@.timer
@@ -311,7 +311,7 @@ services:
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v1.0.15
+  version: v1.1.0
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service

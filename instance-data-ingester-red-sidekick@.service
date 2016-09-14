@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/instance-data-ingester-red/servers/%i'
 Restart=on-failure
-RestartSec=62
+RestartSec=60
 
 [X-Fleet]
 MachineOf=instance-data-ingester-red@%i.service

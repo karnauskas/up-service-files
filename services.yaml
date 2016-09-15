@@ -255,7 +255,6 @@ services:
 - name: mongodb-online-backup.service
   version: v0.1.0
   desiredState: loaded
-- name: mongodb-online-backup.timer
 - name: mongodb-sidekick@.service
   count: 3
 - name: mongodb@.service

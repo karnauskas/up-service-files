@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: v1.1.1
+  version: v1.1.5
   count: 2
   sequentialDeployment: true
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v52
+  version: v54
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -126,13 +126,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v49
+  version: v50
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v49
+  version: v50
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -263,7 +263,7 @@ services:
   version: v29
   count: 2
 - name: mongo-backup@.service
-  version: v18
+  version: v20.0.0
   desiredState: loaded
   count: 3
 - name: mongo-backup@.timer
@@ -274,15 +274,10 @@ services:
 - name: mongodb@.service
   count: 3
   sequentialDeployment: true
-- name: native-ingester-metadata-sidekick@.service
-  count: 2
-- name: native-ingester-metadata@.service
-  version: v1.0.3
-  count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v1.0.15
+  version: v1.1.0
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service

@@ -45,7 +45,7 @@ services:
 - name: cms-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-pre-prod@.service
-  version: v12.0.1
+  version: v13.0.0
   count: 2
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
@@ -57,7 +57,7 @@ services:
 - name: cms-kafka-bridge-ucs-test-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-ucs-test@.service
-  version: v12.0.1
+  version: v13.0.0
   count: 2
 - name: cms-kafka-bridge@.service
   version: v13.0.0
@@ -65,7 +65,7 @@ services:
 - name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-pre-prod@.service
-  version: v12.0.1
+  version: v13.0.0
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
   count: 2
@@ -77,7 +77,7 @@ services:
 - name: cms-metadata-kafka-bridge-ucs-test-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-ucs-test@.service
-  version: v12.0.1
+  version: v13.0.0
   count: 2
 - name: cms-metadata-kafka-bridge@.service
   version: v13.0.0
@@ -102,14 +102,14 @@ services:
 - name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge-ucs-test@.service
-  version: v12.0.1
+  version: v13.0.0
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
   version: v13.0.0
   count: 2
 - name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-prod@.service
+- name: concepts-kafka-bridge-pub-pre-prod@.service
   version: v13.0.0
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service

@@ -1,0 +1,25 @@
+[Unit]
+Description=System CoreOS version monitoring sidekick
+BindsTo=coreos-version-checker.service
+After=coreos-version-checker.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set /vulcand/backends/coreos-version-checker-%H/backend '{\"Type\": \"http\"}'; \
+  etcdctl set /vulcand/frontends/coreos-version-checker-%H/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"coreos-version-checker-%H\\\", \\\"Route\\\":\\\"Path(\`/health/coreos-version-checker-%H/__health\`)\\\"}\"; \
+  etcdctl set /vulcand/frontends/coreos-version-checker-%H/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/coreos-version-checker-%H(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
+  etcdctl set /ft/healthcheck/coreos-version-checker-%H/path /__health; \
+  etcdctl set /ft/healthcheck/coreos-version-checker-%H/categories system; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /vulcand/backends/coreos-version-checker-%H/servers/srv%H \"{\\\"url\\\": \\\"http://$HOSTNAME:$PORT\\\"}\";"
+
+ExecStop=-/bin/bash -c 'etcdctl rm /vulcand/backends/coreos-version-checker-%H/servers/srv%H'
+
+[X-Fleet]
+Global=true

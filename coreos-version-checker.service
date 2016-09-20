@@ -1,0 +1,26 @@
+[Unit]
+Description=System CoreOS version monitoring service
+Requires=docker.socket
+After=docker.socket
+Wants=coreos-version-checker-sidekick.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest" "SYS_HC_HOST_PATH=host_dir"
+ExecStartPre=-/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)"
+ExecStartPre=-/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)"
+ExecStartPre=/bin/sh -c "docker history coco/coreos-version-checker:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/coreos-version-checker:$DOCKER_APP_VERSION"
+ExecStart=/bin/sh -c "/usr/bin/docker run --rm --name %p_$(uuidgen) \
+    -P \
+    -e SYS_HC_HOST_PATH=$SYS_HC_HOST_PATH \
+    -v /:/$SYS_HC_HOST_PATH:ro \
+    coco/coreos-version-checker:$DOCKER_APP_VERSION"
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true

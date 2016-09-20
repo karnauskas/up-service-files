@@ -304,11 +304,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-<<<<<<< HEAD
-  version: v50
-=======
   version: v52
->>>>>>> master
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service

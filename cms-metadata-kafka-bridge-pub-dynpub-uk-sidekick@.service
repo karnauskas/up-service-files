@@ -1,7 +1,7 @@
 [Unit]
-Description=CMS Kafka Bridge Publishing Cluster Prode Sidekick
-BindsTo=cms-kafka-bridge-pub-prod@%i.service
-After=cms-kafka-bridge-pub-prod@%i.service
+Description=CMS Metadata Kafka Bridge Pub Dynpub Uk Delivery Cluster Sidekick
+BindsTo=cms-metadata-kafka-bridge-pub-dynpub-uk@%i.service
+After=cms-metadata-kafka-bridge-pub-dynpub-uk@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -12,16 +12,13 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
-    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+    PORT=`echo $(/usr/bin/docker port $SERVICE-%i 8080 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/cms-kafka-bridge-pub-prod/servers/%i'
+ExecStop=/usr/bin/etcdctl rm /ft/services/cms-metadata-kafka-bridge-pub-dynpub-uk/servers/%i
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=cms-kafka-bridge-pub-prod@%i.service
-
-
+MachineOf=cms-metadata-kafka-bridge-pub-dynpub-uk@%i.service

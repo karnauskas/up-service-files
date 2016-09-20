@@ -42,24 +42,14 @@ services:
   version: v0.1.2
   count: 1
   sequentialDeployment: true
-- name: cms-kafka-bridge-pub-prod-sidekick@.service
+- name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
-- name: cms-kafka-bridge-pub-prod@.service
+- name: cms-kafka-bridge-pub-dynpub-uk@.service
   version: v12.0.1
   count: 2
-- name: cms-kafka-bridge-sidekick@.service
+- name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
-- name: cms-kafka-bridge@.service
-  version: v12.0.1
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod@.service
-  version: v12.0.1
-  count: 2
-- name: cms-metadata-kafka-bridge-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge@.service
+- name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
   version: v12.0.1
   count: 2
 - name: cms-notifier-sidekick@.service
@@ -82,9 +72,9 @@ services:
 - name: concept-suggestions-kafka-bridge@.service
   version: v12.0.1
   count: 2
-- name: concepts-kafka-bridge-pub-prod-sidekick@.service
+- name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-prod@.service
+- name: concepts-kafka-bridge-pub-dynpub-uk@.service
   version: v12.0.1
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service

@@ -2,7 +2,7 @@
 Description=Splunk forwarder
 
 [Service]
-Environment="DOCKER_SPLUNK_HTTP_FWD_VERSION=latest"
+Environment="DOCKER_SPLUNK_HTTP_FWD_VERSION=jussi"
 Environment="DOCKER_LOGFILTER_VERSION=v1.0.4"
 TimeoutStartSec=1200
 # Change killmode from "control-group" to "none" to let Docker remove

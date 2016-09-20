@@ -119,20 +119,14 @@ services:
   count: 2
 - name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 1
-<<<<<<< HEAD
 - name: concepts-kafka-bridge-pub-pre-prod@.service
-  version: v12.0.1
-=======
-- name: concepts-kafka-bridge-pub-prod@.service
   version: v13.0.0
->>>>>>> extend-api-comp-policy-metrics
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
   version: v12.0.1
   count: 1
-
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service

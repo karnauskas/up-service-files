@@ -150,7 +150,7 @@ services:
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.7
+  version: 1.0.8
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -260,15 +260,10 @@ services:
 - name: mongodb@.service
   count: 3
   sequentialDeployment: true
-- name: native-ingester-metadata-sidekick@.service
-  count: 2
-- name: native-ingester-metadata@.service
-  version: v1.0.3
-  count: 2
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
-  version: v1.0.15
+  version: v1.1.0
   count: 2
   sequentialDeployment: true
 - name: neo4j-backup.service

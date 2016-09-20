@@ -226,7 +226,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v30
+  version: v31
   count: 2
 - name: mongo-backup@.service
   version: v20.0.0

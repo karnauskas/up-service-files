@@ -20,6 +20,7 @@ ExecStart=/bin/sh -c '\
   export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-kafka-bridge-pub-prod"; \
   export AUTHORIZATION_KEY="Basic $(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge-pub-prod/authorization_key | tr --delete \"\n\" | base64)"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
+  --memory="32m" \
   -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" \
   --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" \
   --env "GROUP_ID=$GROUP_ID" \

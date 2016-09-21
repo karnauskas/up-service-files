@@ -18,7 +18,7 @@ ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
-  --memory="32m" \
+  --memory="64m" \
   --env "PLATFORM_VERSION=v2" \
   --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-red/db/data" \
   --env "APP_PORT=$APP_PORT" \

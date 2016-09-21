@@ -15,6 +15,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-
 ExecStartPre=/bin/bash -c "/usr/bin/docker pull coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
 ExecStart=/bin/bash -c "\
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+    --memory=\"32m\" \
     --env=\"FLEET_ENDPOINT=http://$HOSTNAME:49153\" \
     coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
 

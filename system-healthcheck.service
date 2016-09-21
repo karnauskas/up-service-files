@@ -11,6 +11,7 @@ ExecStartPre=-/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)"
 ExecStartPre=/bin/sh -c "docker history coco/coco-system-healthcheck:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/coco-system-healthcheck:$DOCKER_APP_VERSION"
 ExecStart=/bin/sh -c "\
     /usr/bin/docker run --rm --name %p_$(uuidgen) -P \
+	--memory=\"32m\" \
     -e SYS_HC_HOST_PATH=$SYS_HC_HOST_PATH \
     -v /:/$SYS_HC_HOST_PATH:ro \
     coco/coco-system-healthcheck:$DOCKER_APP_VERSION"

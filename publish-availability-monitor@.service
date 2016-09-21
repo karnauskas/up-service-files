@@ -18,6 +18,7 @@ ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   	export BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+	--memory="32m" \
 	--env "QUEUE_ADDR=http://%H:8080" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
 	--env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \

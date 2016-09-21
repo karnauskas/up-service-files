@@ -19,6 +19,7 @@ ExecStart=/bin/sh -c '\
 	export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-notifications-push-%i"; \
 	export API_BASE_URL="http://"$(/usr/bin/etcdctl get /ft/config/api_host); \
 	/usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $NOTIFICATIONS_PUSH_PORT:8080 \
+	    --memory="32m" \
 		--env "QUEUE_PROXY_ADDRS=http://%H:8080" \
 		--env "GROUP_ID=$GROUP_ID" \
 		--env "TOPIC=CmsPublicationEvents" \

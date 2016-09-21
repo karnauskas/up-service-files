@@ -17,6 +17,7 @@ ExecStart=/bin/bash -c "\
   export ETCD_IP=$(ifconfig docker0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2); \
   echo $ETCD_IP; \
   docker run --rm --name %p_$(uuidgen) -p 8080:8080 -p 8182:8182 \
+  --memory=\"2g\" \
   coco/ft-vulcan:$DOCKER_APP_VERSION /vulcand -apiInterface=0.0.0.0 -etcd=http://$ETCD_IP:2379 -port=8080 -apiPort=8182"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'

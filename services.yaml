@@ -203,7 +203,7 @@ services:
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.7
+  version: 1.0.8
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -276,7 +276,7 @@ services:
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service
-  version: v30
+  version: v31
   count: 2
 - name: mongo-backup@.service
   version: v20.0.0
@@ -285,6 +285,9 @@ services:
 - name: mongo-backup@.timer
   count: 3
 - name: mongodb-configurator.service
+- name: mongodb-online-backup.service
+  version: v0.1.0
+  desiredState: loaded
 - name: mongodb-sidekick@.service
   count: 3
 - name: mongodb@.service

@@ -18,6 +18,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/v1-suggestor:$DOCKER_APP_VERSION 
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+	--memory="64m" \
 	--env "SRC_ADDR=http://%H:8080" \
 	--env "SRC_GROUP=v1Suggestor" \
 	--env "SRC_TOPIC=NativeCmsMetadataPublicationEvents" \

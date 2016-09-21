@@ -10,7 +10,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set 	/ft/services/$SERVICE/healthcheck 		true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set 	/ft/healthcheck/$SERVICE-%i/path 		/__health; \
-  etcdctl set 	/ft/healthcheck/$SERVICE-%i/categories 	read,content-read; \
+  etcdctl set 	/ft/healthcheck/$SERVICE-%i/categories 	read; \
   etcdctl set   /ft/services/$SERVICE/path-regex/public-services /content-preview/.*; \
   etcdctl set   /ft/services/$SERVICE/path-host/public-services public-services; \
   while [ -z $PORT ]; do \

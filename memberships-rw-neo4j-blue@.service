@@ -17,6 +17,7 @@ ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
+  --memory="64m" \
   --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-blue/db/data" \
   --env "APP_PORT=$APP_PORT" \
   --env "BATCH_SIZE=50" \

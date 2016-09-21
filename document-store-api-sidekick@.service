@@ -10,7 +10,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories read,lists-read,lists-publish; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories read,lists-read,lists-publish,enrichedcontent-read,content-read; \
   etcdctl set   /ft/services/$SERVICE/path-regex/public-services-lists /lists.*; \
   etcdctl set   /ft/services/$SERVICE/path-host/public-services-lists public-services; \
   while [ -z $PORT ]; do \
@@ -26,4 +26,3 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=document-store-api@%i.service
-

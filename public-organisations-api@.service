@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c '\
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export NEO_HOST_PORT=$(/usr/bin/etcdctl get /ft/services/neo4j/servers/1); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
-  --memory="32m" \
+  --memory="64m" \
   -p $APP_PORT \
   -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" \
   -e "APP_PORT=$APP_PORT" \

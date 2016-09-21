@@ -19,7 +19,7 @@ ExecStart=/bin/bash -c '\
 	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-aws/test-uuid); \
 	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
-	--memory="32m" \
+	--memory="64m" \
 	--env "POST_ADDRESS=cmsnotifier.ft.com" \
 	--env "BUCKET_ADDRESS=$BUCKET_ADDRESS" \
 	--env "DYN_ROUTING=false" \

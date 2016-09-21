@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/up-queue-sender:$DOCKER_APP_VERSI
 ExecStart=/bin/bash -c '\
   	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
-	--memory="32m" \
+	--memory="64m" \
 	--env "ADDR=http://%H:8080" \
 	--env "TOPIC=NativeCmsMetadataPublicationEvents" \
 	--env "QUEUE=kafka" \

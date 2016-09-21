@@ -23,6 +23,7 @@ ExecStart=/bin/sh -c '\
   export LOG_METRICS=false; \
   export CACHE_DURATION=24h; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+  --memory="64m" \
   -p $PORT \
   -e "PORT=$PORT" \
   -e "NEO_URL=$NEO_URL" \

@@ -18,7 +18,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/conte
 # Setting the proper API_HOST parameter according to the current environment
 ExecStart=/bin/sh -c '\
   export ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
-  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server" \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server" ; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
                     --env "JAVA_OPTS=$JAVA_OPTS" \
                     --env "VULCAN_HOST=$HOSTNAME:8080:8081" \

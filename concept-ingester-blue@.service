@@ -28,6 +28,7 @@ ExecStart=/bin/sh -c '\
   export STREAM_COUNT=1; \
   export TIMEOUT=60; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+  --memory="32m" \
   -p $PORT \
   -e "PORT=$PORT" \
   -e "VULCAN_ADDR=$VULCAN_ADDR" \

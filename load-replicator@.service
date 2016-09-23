@@ -1,0 +1,31 @@
+[Unit]
+Description=Load Replicator
+After=vulcan.service
+Requires=docker.service
+Wants=load-replicator-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/load-replicator:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/load-replicator:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  ENDPOINT_RATE_PAIRS=$(/usr/bin/etcdctl get /ft/config/load-replicator/endpoint-rate-pairs) || ENDPOINT_RATE_PAIRS=enrichedcontent:10; \
+  AUTHORIZATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/authorization); \
+  DURATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/duration) || DURATION=24; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+  --env "ENDPOINT_RATE_PAIRS=$ENDPOINT_RATE_PAIRS" \
+  --env "AUTHORIZATION=$AUTHORIZATION" \
+  --env "DURATION=$DURATION" \
+  coco/load-replicator:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

@@ -14,12 +14,14 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%
 ExecStartPre=/bin/bash -c 'docker history coco/load-replicator:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/load-replicator:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  ENDPOINT_RATE_PAIRS=$(/usr/bin/etcdctl get /ft/config/load-replicator/endpoint-rate-pairs) || ENDPOINT_RATE_PAIRS=enrichedcontent:10; \
+  ENDPOINT_RATE_PAIRS=$(/usr/bin/etcdctl get /ft/config/load-replicator/endpoint-rate-pairs) || ENDPOINT_RATE_PAIRS=endpointRates=things:1;enrichedcontent:3; \
   AUTHORIZATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/authorization); \
-  DURATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/duration) || DURATION=24; \
+  ENVIRONMENT=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  DURATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/duration) || DURATION=0; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
   --env "ENDPOINT_RATE_PAIRS=$ENDPOINT_RATE_PAIRS" \
   --env "AUTHORIZATION=$AUTHORIZATION" \
+  --env "ENVIRONMENT=$ENVIRONMENT" \
   --env "DURATION=$DURATION" \
   coco/load-replicator:$DOCKER_APP_VERSION'
 

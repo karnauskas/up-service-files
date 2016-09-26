@@ -47,19 +47,9 @@ services:
 - name: cms-kafka-bridge-pub-prod@.service
   version: v13.0.0
   count: 2
-- name: cms-kafka-bridge-sidekick@.service
-  count: 2
-- name: cms-kafka-bridge@.service
-  version: v13.0.0
-  count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod@.service
-  version: v13.0.0
-  count: 2
-- name: cms-metadata-kafka-bridge-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge@.service
   version: v13.0.0
   count: 2
 - name: cms-notifier-sidekick@.service

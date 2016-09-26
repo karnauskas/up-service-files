@@ -15,7 +15,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/enric
   || docker pull up-registry.ft.com/coco/enriched-content-read-api:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server" ; \
+  export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server" ; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "VULCAN_HOST=%H:8080" \

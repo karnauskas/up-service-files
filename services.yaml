@@ -301,7 +301,7 @@ services:
 - name: neo4j-red-sidekick@.service
   count: 1
 - name: neo4j-red@.service
-  version: 2.3.7-1
+  version: 2.3.7-2
   count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2

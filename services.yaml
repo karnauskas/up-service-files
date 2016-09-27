@@ -230,7 +230,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: v1.0.2
+  version: v1.0.3
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

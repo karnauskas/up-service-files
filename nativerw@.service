@@ -17,7 +17,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/nativerw:$DOCKER_APP_VERSION > /d
 ExecStart=/bin/sh -c '\
   export MONGOS=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
-  --memory="64m" \
+  --memory="256m" \
   --env "MONGOS=$MONGOS" \
   coco/nativerw:$DOCKER_APP_VERSION;'
 

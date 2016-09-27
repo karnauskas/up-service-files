@@ -230,7 +230,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: v0.0.11
+  version: v1.0.1
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -315,7 +315,7 @@ services:
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
-  version: 2.3.7-1
+  version: 2.3.7-2
   count: 1
 - name: neo4j-read-blue-sidekick@.service
   count: 1
@@ -324,7 +324,7 @@ services:
 - name: neo4j-red-sidekick@.service
   count: 1
 - name: neo4j-red@.service
-  version: 2.3.7-1
+  version: 2.3.7-2
   count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -334,13 +334,13 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.4.15
+  version: v2.4.16
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v52
+  version: v53
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service

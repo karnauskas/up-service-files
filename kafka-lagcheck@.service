@@ -24,7 +24,8 @@ ExecStart=/bin/sh -c '\
     --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
     --env "KAFKA_HOST=$KAFKA_HOST" \
     --env "KAFKA_PORT=$KAFKA_PORT" \
-    --env "CONSUMER_GROUPS=videoMapper,xp-v1-annotator-blue,content-neo4j-red,xp-notifications-push-1,xp-v1-annotator-binding-service-blue,v1Suggestor,xp-v2-annotator-red,xp-v1-annotator-red,MethodeContentImporter,BlueConcepts,RedConcepts,xp-v1-annotator-brightcove-blue,WordPressImageMapper,content,BinaryIngester,content-neo4j-blue,xp-v2-annotator-blue,xp-notifications-push-2,xp-v1-annotator-brightcove-red,xp-v1-annotator-binding-service-red,notifications,PubMonitor" \
+    --env "WHITELISTED_TOPICS=Concept" \
+    --env "LAG_TOLERANCE=30" \
     coco/kafka-lagcheck:$DOCKER_APP_VERSION;'
     
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

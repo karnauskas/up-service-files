@@ -24,7 +24,8 @@ ExecStart=/bin/sh -c '\
     --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
     --env "KAFKA_HOST=$KAFKA_HOST" \
     --env "KAFKA_PORT=$KAFKA_PORT" \
-    --env "CONSUMER_GROUPS=contentIngester" \
+    --env "WHITELISTED_TOPICS=Concept" \
+    --env "LAG_TOLERANCE=30" \
     coco/kafka-lagcheck:$DOCKER_APP_VERSION;'
     
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

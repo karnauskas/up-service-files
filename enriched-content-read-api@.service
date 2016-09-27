@@ -17,6 +17,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/enric
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "VULCAN_HOST=%H:8080" \
+  --env "CACHE_TTL=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \
   up-registry.ft.com/coco/enriched-content-read-api:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

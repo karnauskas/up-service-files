@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/video-mapper:$DOCKER_APP_VERSION 
 
 ExecStart=/bin/bash -c '\
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
-	--memory="64m" \
+	--memory="256m" \
 	--env "Q_ADDR=http://%H:8080" \
 	--env "Q_GROUP=videoMapper" \
 	--env "Q_READ_TOPIC=NativeCmsPublicationEvents" \

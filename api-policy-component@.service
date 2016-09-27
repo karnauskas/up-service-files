@@ -18,7 +18,9 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/api-p
 # Through the port 8182 vulcan's api status endpoint can be accessed.
 ExecStart=/bin/sh -c '\
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "READ_ENDPOINT=$HOSTNAME:8080:8182" \
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \

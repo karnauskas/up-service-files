@@ -466,7 +466,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.2
+  version: 1.0.3
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: topics-rw-neo4j-blue@.service

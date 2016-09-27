@@ -393,11 +393,6 @@ services:
 - name: subjects-rw-neo4j-red@.service
   version: v1.1.2
   count: 1
-- name: synthetic-image-publication-monitor-aws-sidekick@.service
-  count: 1
-- name: synthetic-image-publication-monitor-aws@.service
-  version: v36
-  count: 1
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service

@@ -11,7 +11,7 @@ ExecStartPre=/bin/bash -c "docker history coco/vulcan-config-builder:$DOCKER_APP
 
 ExecStart=/bin/sh -c "\
     /usr/bin/docker run --rm --name=%p_$(uuidgen) -P \
-	--memory=\"64m\" \
+	--memory=\"256m\" \
     -e="VCB_ETCD_PEERS=http://$HOSTNAME:2379" \
     coco/vulcan-config-builder:$DOCKER_APP_VERSION"
 

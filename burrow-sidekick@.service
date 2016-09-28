@@ -1,0 +1,24 @@
+[Unit]
+Description=Burrow Sidekick
+BindsTo=burrow@%i.service
+After=burrow@%i.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set /ft/services/$SERVICE/healthcheck false; \
+  etcdctl mkdir /ft/services/burrow/servers; \
+  while [ -z $BURROW_PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    BURROW_PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/burrow/servers/%i http://%H:$BURROW_PORT;"
+
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/burrow/servers/%i
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=burrow@%i.service

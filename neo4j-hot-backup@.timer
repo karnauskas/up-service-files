@@ -1,8 +1,8 @@
 [Unit]
-Description=Runs the neo4j hot backup job
+Description=Runs the Neo4j hot backup job
 
 [Timer]
-OnCalendar=09:00
+OnCalendar=14:00
 
 [Install]
 WantedBy=timers.target

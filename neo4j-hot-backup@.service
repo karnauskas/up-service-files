@@ -1,7 +1,7 @@
 [Unit]
 Description=Neo4j hot backup
-After=neo4j-blue.service
-Requires=neo4j-blue.service
+After=neo4j-blue@%i.service
+Requires=neo4j-blue@%i.service
 
 [Service]
 Type=oneshot

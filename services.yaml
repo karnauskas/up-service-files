@@ -42,6 +42,11 @@ services:
   version: v0.1.3
   count: 1
   sequentialDeployment: true
+- name: burrow-sidekick@.service
+  count: 1
+- name: burrow@.service
+  version: v1.0.1
+  count: 1
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service

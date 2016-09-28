@@ -400,7 +400,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.3
+  version: 1.0.4
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: topics-rw-neo4j-blue@.service

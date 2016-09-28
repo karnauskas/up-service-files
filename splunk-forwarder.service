@@ -13,8 +13,8 @@ ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-filter_
 ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-http_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-filter_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-http_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/coco-splunk-http-forwarder:$DOCKER_APP_VERSION >/dev/null 2>&1 \
-  || docker pull coco/coco-splunk-http-forwarder:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history coco/coco-splunk-http-forwarder:$DOCKER_FORWARDER_VERSION >/dev/null 2>&1 \
+  || docker pull coco/coco-splunk-http-forwarder:$DOCKER_FORWARDER_VERSION'
 ExecStartPre=/bin/bash -c 'docker history coco/coco-logfilter:$DOCKER_LOGFILTER_VERSION >/dev/null 2>&1 \
   || docker pull coco/coco-logfilter:$DOCKER_LOGFILTER_VERSION'
 ExecStart=/bin/sh -c '\
@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c '\
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   journalctl -a -f --since=now --output=json \
   | docker run -i --log-driver=none -e=ENV=$ENV --rm --name %p-filter_$(uuidgen) coco/coco-logfilter:$DOCKER_LOGFILTER_VERSION \
-  | docker run -i --log-driver=none --rm --name %p-http_$(uuidgen) -e="FORWARD_URL=$FORWARD_URL" coco/coco-splunk-http-forwarder:$DOCKER_APP_VERSION'
+  | docker run -i --log-driver=none --rm --name %p-http_$(uuidgen) -e="FORWARD_URL=$FORWARD_URL" coco/coco-splunk-http-forwarder:$DOCKER_FORWARDER_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-filter_)" && docker stop -t 3 "$(docker ps -q --filter=name=%p-http_)"'
 Restart=on-failure

@@ -4,7 +4,6 @@ After=neo4j-blue@%i.service
 Requires=neo4j-blue@%i.service
 
 [Service]
-Type=oneshot
 Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 KillMode=none

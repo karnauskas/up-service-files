@@ -16,6 +16,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/kafka-lagcheck:$DOCKER_A
   
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+    --memory="256m" \
     --env "HOST_MACHINE=%H" \
     --env "WHITELISTED_TOPICS=Concept" \
     --env "LAG_TOLERANCE=30" \

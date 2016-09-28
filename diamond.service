@@ -8,7 +8,7 @@ Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
-ExecStartPre=/bin/sh -c 'docker history angelx/diamond:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull angelx/diamond:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/sh -c 'docker history coco/coco-diamond:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/coco-diamond:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
   ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
@@ -20,7 +20,7 @@ ExecStart=/bin/bash -c '\
   -e INTERVAL=60 \
   -v /proc:/host_proc:ro \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  angelx/diamond:$DOCKER_APP_VERSION'
+  coco/coco-diamond:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 Restart=on-failure

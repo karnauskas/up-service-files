@@ -16,13 +16,6 @@ ExecStart=/bin/sh -c "\
     KAFKA_LAGCHECK_PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$KAFKA_LAGCHECK_PORT; \
-  etcdctl mkdir /ft/services/burrow/servers; \
-  while [ -z $BURROW_PORT ]; do \
-    sleep 5; \
-    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
-    BURROW_PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8081 | cut -d':' -f2)`; \
-  done; \
-  etcdctl set /ft/services/burrow/servers/%i http://%H:$BURROW_PORT;"
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/kafka-lagcheck/servers/%i \
   /usr/bin/etcdctl rm /ft/services/burrow/servers/%i'

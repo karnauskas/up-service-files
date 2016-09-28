@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
     --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" \
     --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
     --env "KAFKA_HOST=$KAFKA_HOST" \

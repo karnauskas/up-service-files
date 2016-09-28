@@ -145,7 +145,7 @@ services:
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.8
+  version: 1.0.9
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -400,11 +400,6 @@ services:
 - name: subjects-rw-neo4j-red@.service
   version: v1.1.2
   count: 1
-- name: synthetic-image-publication-monitor-aws-sidekick@.service
-  count: 1
-- name: synthetic-image-publication-monitor-aws@.service
-  version: v36
-  count: 1
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
@@ -412,7 +407,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.3
+  version: 1.0.4
 - name: topics-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: topics-rw-neo4j-blue@.service

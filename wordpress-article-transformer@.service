@@ -16,7 +16,9 @@ ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/wordpress-arti
   || docker pull up-registry.ft.com/coco/wordpress-article-transformer:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
+  export JAVA_OPTS="-Xms384m -Xmx384m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "READ_ENDPOINT=$HOSTNAME:8080" \
   up-registry.ft.com/coco/wordpress-article-transformer:$DOCKER_APP_VERSION'
 

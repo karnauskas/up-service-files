@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/publish-availability-monitor/servers/%i'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 MachineOf=publish-availability-monitor@%i.service

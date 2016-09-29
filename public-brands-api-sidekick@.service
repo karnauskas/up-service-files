@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/public-brands-api/servers/%i'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 MachineOf=public-brands-api@%i.service

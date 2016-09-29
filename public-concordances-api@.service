@@ -29,7 +29,7 @@ ExecStart=/bin/sh -c '\
   coco/public-concordances-api:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 Conflicts=public-concordances-api@*.service

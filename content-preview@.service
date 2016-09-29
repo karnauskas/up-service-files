@@ -36,7 +36,7 @@ ExecStart=/bin/sh -c '\
     coco/content-preview:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 Conflicts=content-preview@*.service

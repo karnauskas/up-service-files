@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-red/db/data" --env "APP_PORT=$APP_PORT" --env "BATCH_SIZE=50" --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" --env "GRAPHITE_PREFIX=coco.services.$ENV.content-rw-neo4j-red.%i" coco/content-rw-neo4j:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 Conflicts=content-rw-neo4j-red@*.service

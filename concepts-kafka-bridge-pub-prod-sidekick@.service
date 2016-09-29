@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concepts-kafka-bridge-pub-prod/servers/%i'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 MachineOf=concepts-kafka-bridge-pub-prod@%i.service

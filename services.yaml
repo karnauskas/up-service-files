@@ -248,6 +248,12 @@ services:
 - name: neo4j-blue@.service
   version: 2.3.7-2
   count: 1
+- name: neo4j-hot-backup@.service
+  version: 1.1-go
+  count: 1
+  desiredState: loaded
+- name: neo4j-hot-backup@.timer
+  count: 1
 - name: neo4j-read-blue-sidekick@.service
   count: 1
 - name: neo4j-read-red-sidekick@.service

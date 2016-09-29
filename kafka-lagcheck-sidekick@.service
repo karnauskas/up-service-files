@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/kafka-lagcheck/servers/%i
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/kafka-lagcheck/servers/%i'
 Restart=on-failure
 RestartSec=60
 

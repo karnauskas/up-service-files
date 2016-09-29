@@ -10,15 +10,14 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/$SERVICE/healthcheck true; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  while [ -z $KAFKA_LAGCHECK_PORT ]; do \
+  while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
-    KAFKA_LAGCHECK_PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
-  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$KAFKA_LAGCHECK_PORT;"
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/kafka-lagcheck/servers/%i \
-  /usr/bin/etcdctl rm /ft/services/burrow/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/kafka-lagcheck/servers/%i
 Restart=on-failure
 RestartSec=60
 

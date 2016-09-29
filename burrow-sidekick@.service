@@ -16,7 +16,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/burrow/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/burrow/servers/%i
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/burrow/servers/%i'
 Restart=on-failure
 RestartSec=60
 

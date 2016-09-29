@@ -19,6 +19,6 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/v1-content-annotator-brightcove-red/servers/%i'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 [X-Fleet]
 MachineOf=v1-content-annotator-brightcove-red@%i.service

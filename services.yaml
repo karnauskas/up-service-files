@@ -4,7 +4,6 @@ services:
 - name: aggregate-healthcheck@.service
   version: v1.1.7
   count: 2
-  sequentialDeployment: true
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: alphaville-series-rw-neo4j-blue@.service
@@ -20,7 +19,6 @@ services:
 - name: api-policy-component@.service
   version: v56
   count: 2
-  sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
@@ -41,7 +39,6 @@ services:
 - name: brands-rw-neo4j-red@.service
   version: v0.1.3
   count: 1
-  sequentialDeployment: true
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service
@@ -97,19 +94,16 @@ services:
 - name: content-preview@.service
   version: v0.0.4
   count: 2
-  sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
   version: v51
   count: 2
-  sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
   version: v51
   count: 2
-  sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: content-rw-neo4j-blue@.service
@@ -129,7 +123,6 @@ services:
 - name: document-store-api@.service
   version: v81
   count: 2
-  sequentialDeployment: true
 - name: elb-dns-registrator.service
   version: v4.0.0
 - name: elb-presence@.service
@@ -139,7 +132,6 @@ services:
 - name: enriched-content-read-api@.service
   version: v67
   count: 2
-  sequentialDeployment: true
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
@@ -233,13 +225,11 @@ services:
   count: 3
 - name: mongodb@.service
   count: 3
-  sequentialDeployment: true
 - name: nativerw-sidekick@.service
   count: 2
 - name: nativerw@.service
   version: v1.1.0
   count: 2
-  sequentialDeployment: true
 - name: neo4j-backup.service
   version: 0.8.1
   desiredState: inactive
@@ -267,13 +257,11 @@ services:
 - name: notifications-push@.service
   version: v2.4.17
   count: 2
-  sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
   version: v53
   count: 2
-  sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-blue@.service
@@ -301,49 +289,41 @@ services:
 - name: public-annotations-api@.service
   version: v0.0.16
   count: 2
-  sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
   version: v0.0.8
   count: 2
-  sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
   version: v0.1.5
   count: 2
-  sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
   version: v0.0.10
   count: 2
-  sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
   version: v0.1.0
   count: 2
-  sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
   version: v0.1.3
   count: 2
-  sequentialDeployment: true
 - name: public-six-degrees-sidekick@.service
   count: 2
 - name: public-six-degrees@.service
   version: 0.0.6
   count: 2
-  sequentialDeployment: true
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
   version: 0.0.16
   count: 2
-  sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
   count: 1
 - name: publish-availability-monitor@.service
@@ -487,7 +467,6 @@ services:
 - name: varnish@.service
   version: v75
   count: 2
-  sequentialDeployment: true
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service

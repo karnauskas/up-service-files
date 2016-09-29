@@ -29,7 +29,7 @@ ExecStart=/bin/sh -c '\
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 Conflicts=v2-annotations-rw-red@*.service

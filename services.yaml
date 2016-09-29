@@ -225,6 +225,7 @@ services:
 - name: mongo-backup@.timer
   count: 3
 - name: mongodb-configurator.service
+  version: v0.1.0
 - name: mongodb-online-backup.service
   version: v0.1.0
   desiredState: loaded

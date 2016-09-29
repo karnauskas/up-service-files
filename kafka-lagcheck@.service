@@ -15,11 +15,12 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/kafka-lagcheck:$DOCKER_A
   || /usr/bin/docker pull coco/kafka-lagcheck:$DOCKER_APP_VERSION'
   
 ExecStart=/bin/sh -c '\
+  LAG_TOLERANCE=$(etcdctl get /ft/config/kafka-lagcheck/lag-tolerance) || LAG_TOLERANCE=30; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
     --memory="256m" \
     --env "HOST_MACHINE=%H" \
     --env "WHITELISTED_TOPICS=Concept" \
-    --env "LAG_TOLERANCE=30" \
+    --env "LAG_TOLERANCE=$LAG_TOLERANCE" \
     coco/kafka-lagcheck:$DOCKER_APP_VERSION;'
     
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

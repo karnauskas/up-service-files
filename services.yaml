@@ -127,7 +127,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v81
+  version: v82
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

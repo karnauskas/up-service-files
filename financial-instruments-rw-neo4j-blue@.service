@@ -2,7 +2,7 @@
 Description=Financial Instruments Reader-Writer for Blue Neo4j Service
 After=vulcan.service
 Requires=docker.service
-Wants=financial-instruments-rw-neo4j-blue-sidekick@i.service
+Wants=financial-instruments-rw-neo4j-blue-sidekick%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

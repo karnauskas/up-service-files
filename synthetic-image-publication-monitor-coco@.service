@@ -18,6 +18,7 @@ ExecStart=/bin/bash -c '\
 	export TEST_UUID=$(/usr/bin/etcdctl get /ft/config/synthetic-image-publication-monitor-coco/test-uuid); \
 	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+	--memory="256m" \
 	--env "POST_ADDRESS=%H:8080" \
 	--env "BUCKET_ADDRESS=$BUCKET_ADDRESS" \
 	--env "DYN_ROUTING=true" \

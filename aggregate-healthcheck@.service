@@ -17,6 +17,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/aggregate-healthcheck:$DOCKER_APP
 ExecStart=/bin/bash -c '\
   ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+    --memory="256m" \
 	--env="ETCD_PEERS=http://$HOSTNAME:2379" \
 	--env="VULCAND_ADDRESS=$HOSTNAME:8080" \
 	--env="GRAPHITE_HOST=graphite.ft.com" \

@@ -17,6 +17,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/up-restorage:$DOCKER_APP_VERSION 
 ExecStart=/bin/bash -c '\
     export MONGOS=$((for i in $( etcdctl ls /ft/config/mongodb/) ; do echo -n $(etcdctl get $i/host):$(etcdctl get $i/port), ; done;) |  sed s/,$//) \
     && /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -P \
+	--memory="256m" \
     coco/up-restorage:$DOCKER_APP_VERSION \
     /bin/bash -c "/up-restorage --id-map=organisations:uuid,content:uuid mongo --dbname=upp-store $MONGOS"'
 

@@ -1,8 +1,8 @@
 [Unit]
-Description=CMS Kafka Bridge Publishing Cluster Pub Dynpub Uk 
+Description=Concepts Kafka Bridge Publishing Cluster Prod
 After=vulcan.service
 Requires=docker.service
-Wants=cms-kafka-bridge-pub-dynpub-uk-sidekick@%i.service
+Wants=concepts-kafka-bridge-pub-prod-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -11,25 +11,24 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/coco-kafka-bridge:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || docker pull coco/coco-kafka-bridge:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history coco/coco-kafka-bridge:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/coco-kafka-bridge:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
-  export QUEUE_PROXY_ADDRS="https://pub-dynpub-uk-up.ft.com/__kafka-rest-proxy"; \
-  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-kafka-bridge-pub-dynpub-uk"; \
-  export AUTHORIZATION_KEY="Basic $(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge-pub-dynpub-uk/authorization_key | tr --delete \"\n\" | base64)"; \
+  export QUEUE_PROXY_ADDRS="https://publishing-prod-up.ft.com/__kafka-rest-proxy"; \
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-concepts-kafka-bridge-pub-prod"; \
+  export AUTHORIZATION_KEY="Basic $(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge-pub-prod/authorization_key | tr --delete \"\n\" | base64)"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
   -v "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt" \
   --env "QUEUE_PROXY_ADDRS=$QUEUE_PROXY_ADDRS" \
   --env "GROUP_ID=$GROUP_ID" \
-  --env "CONSUMER_AUTOCOMMIT_ENABLE=false" \
+  --env "CONSUMER_AUTOCOMMIT_ENABLE=true" \
   --env "AUTHORIZATION_KEY=$AUTHORIZATION_KEY" \
-  --env "TOPIC=NativeCmsPublicationEvents" \
+  --env "TOPIC=Concept" \
   --env "PRODUCER_HOST=http://%H:8080" \
-  --env "PRODUCER_HOST_HEADER=cms-notifier" \
-  --env "PRODUCER_TYPE=plainHTTP" \
+  --env "PRODUCER_HOST_HEADER=kafka" \
+  --env "PRODUCER_TYPE=proxy" \
   coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
@@ -37,4 +36,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=cms-kafka-bridge-pub-dynpub-uk@*.service
+Conflicts=concepts-kafka-bridge-pub-prod@*.service

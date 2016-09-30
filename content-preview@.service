@@ -20,6 +20,7 @@ ExecStart=/bin/sh -c '\
     export MAPI_AUTH=$(/usr/bin/etcdctl get /ft/_credentials/methode-api/authorization_key); \
     export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+	--memory="256m" \
     --env "APP_PORT=8080" \
     --env "SOURCE_APP_AUTH=$MAPI_AUTH" \
     --env "SOURCE_APP_URI=https://methodeapi.glb.ft.com/eom-file/" \

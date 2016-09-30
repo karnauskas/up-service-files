@@ -18,6 +18,7 @@ ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
+  --memory="256m" \
   -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" \
   -e "APP_PORT=$APP_PORT" \
   -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \

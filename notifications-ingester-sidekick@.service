@@ -19,7 +19,7 @@ export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/notifications-ingester/servers/%i'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 MachineOf=notifications-ingester@%i.service

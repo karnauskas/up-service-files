@@ -1,0 +1,39 @@
+[Unit]
+Description=Job to backup mongo DB data files to S3
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+
+# should start up instantly, so start timeout can be 0
+TimeoutStartSec=0
+
+# let Docker remove work correctly.
+KillMode=none
+
+# stop already running instance
+ExecStartPre=-/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)" 2>/dev/null
+
+# remove existing instance
+ExecStartPre=-/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)" 2>/dev/null
+
+ExecStart=/bin/sh -c "\
+    MONGODB=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//); \
+    S3_DOMAIN=s3-eu-west-1.amazonaws.com; \
+    S3_BUCKET=com.ft.coco-mongo-backup.prod; \
+    S3_DIR=$(usr/bin/etcdctl get /ft/config/environment_tag); \
+    AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id);\
+    AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
+    /usr/bin/docker run --rm --name %p_$(uuidgen) \
+        -e MONGODB=$MONGODB \
+        -e S3_DOMAIN=$S3_DOMAIN \
+        -e S3_BUCKET=$S3_BUCKET \
+        -e S3_DIR=$S3_DIR \
+        -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+        -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+        --memory="1g" \
+        coco/up-mongolizer:$DOCKER_APP_VERSION /up-mongolizer backup upp-store/content,upp-store/lists,upp-store/notifications; "
+
+[Install]
+# this sets user-level
+WantedBy=multi-user.target
+

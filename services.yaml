@@ -47,7 +47,7 @@ services:
 - name: burrow@.service
   version: v1.0.1
   count: 1
-- name: cms-kafka-bridge-pub-prod-sidekick@.service
+- name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
   version: v12.0.1

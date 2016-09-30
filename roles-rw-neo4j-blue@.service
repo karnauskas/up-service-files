@@ -26,7 +26,7 @@ ExecStart=/bin/sh -c '\
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 Conflicts=roles-rw-neo4j-blue@*.service

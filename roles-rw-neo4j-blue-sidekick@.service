@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/roles-rw-neo4j-blue/servers/%i'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 MachineOf=roles-rw-neo4j-blue@%i.service

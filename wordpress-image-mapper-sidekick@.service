@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/wordpress-image-mapper/servers/%i'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [X-Fleet]
 MachineOf=wordpress-image-mapper@%i.service

@@ -42,6 +42,11 @@ services:
   version: v0.1.3
   count: 1
   sequentialDeployment: true
+- name: burrow-sidekick@.service
+  count: 1
+- name: burrow@.service
+  version: v1.0.1
+  count: 1
 - name: cms-kafka-bridge-pub-prod-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod@.service
@@ -166,6 +171,11 @@ services:
   count: 1
 - name: industry-classifications-rw-neo4j-red@.service
   version: v0.0.6
+  count: 1
+- name: kafka-lagcheck-sidekick@.service
+  count: 1
+- name: kafka-lagcheck@.service
+  version: v1.0.6
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

@@ -12,20 +12,22 @@ KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/notifications-push:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || docker pull coco/notifications-push:$DOCKER_APP_VERSION'
+   || docker pull coco/notifications-push:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-	export NOTIFICATIONS_PUSH_PORT=8548; \
-	export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-notifications-push-%i"; \
-	export API_BASE_URL="http://"$(/usr/bin/etcdctl get /ft/config/api_host); \
-	/usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $NOTIFICATIONS_PUSH_PORT:8080 \
-	    --memory="256m" \
-		--env "QUEUE_PROXY_ADDRS=http://%H:8080" \
-		--env "GROUP_ID=$GROUP_ID" \
-		--env "TOPIC=CmsPublicationEvents" \
-		--env "QUEUE_HOST=kafka" \
-		--env "API_BASE_URL=$API_BASE_URL" \
-		coco/notifications-push:$DOCKER_APP_VERSION;'
+   export NOTIFICATIONS_PUSH_PORT=8548; \
+   export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-notifications-push-%i"; \
+   export API_BASE_URL="http://"$(/usr/bin/etcdctl get /ft/config/api_host); \
+   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $NOTIFICATIONS_PUSH_PORT:8080 \
+   --memory="256m" \
+      --env "QUEUE_PROXY_ADDRS=http://%H:8080" \
+      --env "GROUP_ID=$GROUP_ID" \
+      --env "TOPIC=CmsPublicationEvents" \
+      --env "NOTIFICATIONS_DELAY=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \
+      --env "QUEUE_HOST=kafka" \
+      --env "API_BASE_URL=$API_BASE_URL" \
+      --env "CONSUMER_BACKOFF=2" \
+      coco/notifications-push:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

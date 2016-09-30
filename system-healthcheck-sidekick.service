@@ -11,7 +11,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /vulcand/frontends/system-healthcheck-%H/frontend \"{\\\"Type\\\":\\\"http\\\", \\\"BackendId\\\":\\\"system-healthcheck-%H\\\", \\\"Route\\\":\\\"Path(\`/health/system-healthcheck-%H/__health\`)\\\"}\"; \
   etcdctl set /vulcand/frontends/system-healthcheck-%H/middlewares/rewrite \"{\\\"Id\\\":\\\"rewrite\\\", \\\"Type\\\":\\\"rewrite\\\", \\\"Priority\\\":1, \\\"Middleware\\\": {\\\"Regexp\\\":\\\"/health/system-healthcheck-%H(.*)\\\", \\\"Replacement\\\":\\\"\$1\\\"}}\"; \
   etcdctl set /ft/healthcheck/system-healthcheck-%H/path /__health; \
-  etcdctl set /ft/healthcheck/system-healthcheck-%H/categories system,lists-read,lists-publish; \
+  etcdctl set /ft/healthcheck/system-healthcheck-%H/categories system,lists-read,lists-publish,concordances-read,enrichedcontent-read,content-read,image-publish; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"_); \

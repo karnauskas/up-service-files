@@ -199,11 +199,6 @@ services:
 - name: industry-classifications-rw-neo4j-red@.service
   version: v0.0.6
   count: 1
-- name: kafka-lagcheck-sidekick@.service
-  count: 1
-- name: kafka-lagcheck@.service
-  version: v1.0.6
-  count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
 - name: kafka-rest-proxy@.service

@@ -25,7 +25,7 @@ ExecStart=/bin/sh -c '\
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-filter_)" && docker stop -t 3 "$(docker ps -q --filter=name=%p-http_)"'
 Restart=on-failure
-RestartSec=60
+RestartSec=61
 
 [Install]
 WantedBy=multi-user.target

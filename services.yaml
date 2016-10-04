@@ -132,7 +132,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v82
+  version: v83
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -145,6 +145,16 @@ services:
   version: v67
   count: 2
   sequentialDeployment: true
+- name: financial-instruments-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: financial-instruments-rw-neo4j-blue@.service
+  version: v0.0.2
+  count: 1
+- name: financial-instruments-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: financial-instruments-rw-neo4j-red@.service
+  version: v0.0.2
+  count: 1
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
@@ -171,11 +181,6 @@ services:
   count: 1
 - name: industry-classifications-rw-neo4j-red@.service
   version: v0.0.6
-  count: 1
-- name: kafka-lagcheck-sidekick@.service
-  count: 1
-- name: kafka-lagcheck@.service
-  version: v1.0.6
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

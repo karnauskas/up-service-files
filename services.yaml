@@ -147,6 +147,16 @@ services:
   version: v67
   count: 2
   sequentialDeployment: true
+- name: financial-instruments-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: financial-instruments-rw-neo4j-blue@.service
+  version: v0.0.2
+  count: 1
+- name: financial-instruments-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: financial-instruments-rw-neo4j-red@.service
+  version: v0.0.2
+  count: 1
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
@@ -513,7 +523,7 @@ services:
   version: v24
   count: 1
 - name: varnish@.service
-  version: v75
+  version: v0.0.4
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

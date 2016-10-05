@@ -33,7 +33,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/aggregate-healthcheck/servers/%i'
 Restart=on-failure
-RestartSec=61
+RestartSec=62
 
 [X-Fleet]
 MachineOf=aggregate-healthcheck@%i.service

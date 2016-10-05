@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/binary-ingester/servers/%i'
 Restart=on-failure
-RestartSec=61
+RestartSec=62
 
 [X-Fleet]
 MachineOf=binary-ingester@%i.service

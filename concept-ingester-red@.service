@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c '\
   export VULCAN_ADDR=http://%H:8080; \
   export GROUP_ID=RedConcepts; \
   export TOPIC=Concept; \
-  export SERVICES=people-rw-neo4j-red,organisations-rw-neo4j-red,memberships-rw-neo4j-red,brands-rw-neo4j-red,roles-rw-neo4j-red,alphaville-series-rw-neo4j-red; \
+  export SERVICES=people-rw-neo4j-red,organisations-rw-neo4j-red,memberships-rw-neo4j-red,brands-rw-neo4j-red,roles-rw-neo4j-red,alphaville-series-rw-neo4j-red,financial-instruments-rw-neo4j-red; \
   export QUEUE_ID=kafka; \
   export GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003; \
   export GRAPHITE_PREFIX=coco.services.$ENV.concept-ingester-red.%i; \
@@ -28,6 +28,7 @@ ExecStart=/bin/sh -c '\
   export STREAM_COUNT=1; \
   export TIMEOUT=60; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+  --memory="256m" \
   -p $PORT \
   -e "PORT=$PORT" \
   -e "VULCAN_ADDR=$VULCAN_ADDR" \

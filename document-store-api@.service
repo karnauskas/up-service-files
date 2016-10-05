@@ -13,15 +13,18 @@ KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c "/usr/bin/docker history up-registry.ft.com/coco/document-store-api:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || /usr/bin/docker pull up-registry.ft.com/coco/document-store-api:$DOCKER_APP_VERSION"
+      || /usr/bin/docker pull up-registry.ft.com/coco/document-store-api:$DOCKER_APP_VERSION"
 
-ExecStart=/bin/sh -c "\
-  export MONGO_ADDRESSES=$(for x in $(etcdctl ls /ft/config/mongodb); do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)\",\"; done);\
-  API_HOST=$(etcdctl get /ft/config/api_host) ;\
+ExecStart=/bin/sh -c '\
+  export MONGO_ADDRESSES=$(for x in $(etcdctl ls /ft/config/mongodb); do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done);\
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server" ; \
+  export API_HOST=$(etcdctl get /ft/config/api_host) ;\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
-  --env \"MONGO_ADDRESSES=$(echo $MONGO_ADDRESSES | sed s/.$//)\" \
-  --env \"API_HOST=$API_HOST\" \
-  up-registry.ft.com/coco/document-store-api:$DOCKER_APP_VERSION;"
+  --env "JAVA_OPTS=$JAVA_OPTS" \
+  --env "MONGO_ADDRESSES=$(echo $MONGO_ADDRESSES | sed s/.$//)" \
+  --env "CACHE_TTL=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \
+  --env "API_HOST=$API_HOST" \
+  up-registry.ft.com/coco/document-store-api:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

@@ -1,7 +1,7 @@
 [Unit]
-Description=CMS Metadata Kafka Bridge Sidekick
-BindsTo=cms-metadata-kafka-bridge@%i.service
-After=cms-metadata-kafka-bridge@%i.service
+Description=Financial Instruments Reader-Writer for Red Neo4j Service Sidekick
+BindsTo=financial-instruments-rw-neo4j-red@%i.service
+After=financial-instruments-rw-neo4j-red@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -17,10 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/cms-metadata-kafka-bridge/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/financial-instruments-rw-neo4j-red/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=cms-metadata-kafka-bridge@%i.service
-
+MachineOf=financial-instruments-rw-neo4j-red@%i.service

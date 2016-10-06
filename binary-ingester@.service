@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c '\
   export KAFKA_PROXY=http://$HOSTNAME:8080; \
   export QUEUE=kafka; \
   export BACKOFF_PERIOD=8000; \
-  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
+  export JAVA_OPTS="-Xms296m -Xmx296m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "WRITER_ENDPOINT=$HOSTNAME:8080:8080" \

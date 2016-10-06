@@ -17,8 +17,10 @@ ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/methode-list-t
 
 ExecStart=/bin/sh -c '\
   export WORDPRESS_CONTENT_API_KEY=$(/usr/bin/etcdctl get /ft/_credentials/wordpress/content_api_key); \
+  export JAVA_OPTS="Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "WORDPRESS_CONTENT_API_KEY=$WORDPRESS_CONTENT_API_KEY" \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "VULCAN_HOST=%H:8080" \
   up-registry.ft.com/coco/methode-list-transformer:$DOCKER_APP_VERSION'
 

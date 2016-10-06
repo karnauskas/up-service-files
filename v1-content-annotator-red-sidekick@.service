@@ -19,7 +19,7 @@ ExecStart=/bin/sh -c "\
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/v1-content-annotator-red/servers/%i'
 Restart=on-failure
-RestartSec=61
+RestartSec=62
 
 [X-Fleet]
 MachineOf=v1-content-annotator-red@%i.service

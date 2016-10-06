@@ -23,6 +23,7 @@ ExecStart=/bin/sh -c "\
     --env=NEO4J_AUTH=none \
     --env=NEO4J_HEAP_MEMORY=3584 \
     --env=NEO4J_CACHE_MEMORY=1024m \
+    --env=DBMS_QUERYLOG_THRESHOLD=0s \
     coco/ft-neo4j:$DOCKER_APP_VERSION"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

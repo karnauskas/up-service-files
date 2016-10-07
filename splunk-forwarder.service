@@ -3,7 +3,7 @@ Description=Splunk forwarder
 
 [Service]
 
-Environment="DOCKER_FORWARDER_VERSION=v0.0.6"
+Environment="DOCKER_FORWARDER_VERSION=v0.0.7"
 Environment="DOCKER_LOGFILTER_VERSION=v1.0.4"
 TimeoutStartSec=1200
 # Change killmode from "control-group" to "none" to let Docker remove
@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c '\
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   journalctl -a -f --since=now --output=json \
   | docker run -i --log-driver=none -e=ENV=$ENV --rm --name %p-filter_$(uuidgen) --memory="256m" coco/coco-logfilter:$DOCKER_LOGFILTER_VERSION \
-  | docker run -i --log-driver=none --rm --name %p-http_$(uuidgen) --memory="256m" -e="FORWARD_URL=$FORWARD_URL" -e="ENV=$ENV" coco/coco-splunk-http-forwarder:$DOCKER_FORWARDER_VERSION'
+  | docker run -i --log-driver=none --rm --name %p-http_$(uuidgen) --memory="256m" -e="FORWARD_URL=$FORWARD_URL" -e="ENV=$ENV" -e="HOSTNAME=$(hostname)" coco/coco-splunk-http-forwarder:$DOCKER_FORWARDER_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-filter_)" && docker stop -t 3 "$(docker ps -q --filter=name=%p-http_)"'
 Restart=on-failure

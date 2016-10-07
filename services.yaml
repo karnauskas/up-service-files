@@ -218,7 +218,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v82
+  version: v83
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -357,7 +357,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.1.3
+  version: v0.1.6
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-sidekick@.service

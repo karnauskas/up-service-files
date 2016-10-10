@@ -23,7 +23,9 @@ ExecStart=/bin/sh -c '\
   export S3_ACCESSKEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
   export S3_SECRETKEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
   export BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
+  export JAVA_OPTS="-Xms296m -Xmx296m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "KAFKA_HOST=$KAFKA_HOST" \
   --env "KAFKA_PORT=$KAFKA_PORT" \
   --env "BUCKET_PATH=$BUCKET" \

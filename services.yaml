@@ -80,6 +80,7 @@ services:
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
+  count: 1
   version: v14.0.0
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1

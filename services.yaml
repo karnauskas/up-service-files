@@ -332,8 +332,6 @@ services:
 - name: organisations-rw-neo4j-red@.service
   version: v0.3.2
   count: 1
-- name: os-upgrade.service
-  desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: people-rw-neo4j-blue@.service

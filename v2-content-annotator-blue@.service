@@ -21,6 +21,7 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
+  export JAVA_OPTS="-Xms512m -Xmx512m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "TOPIC=ConceptSuggestions" \
   --env "GROUP_ID=$GROUP_ID" \
@@ -29,6 +30,7 @@ ExecStart=/bin/sh -c '\
   --env "WRITER_ENDPOINT=$HOSTNAME:8080:8080" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
   --env "WRITER_HOST_HEADER=v2-annotations-rw-blue" \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
   up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

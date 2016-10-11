@@ -17,7 +17,9 @@ ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/methode-image-
 
 ExecStart=/bin/sh -c '\
   BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -P \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "VULCAN_HOST=%H" \
   --env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \
   up-registry.ft.com/coco/methode-image-model-transformer:$DOCKER_APP_VERSION'

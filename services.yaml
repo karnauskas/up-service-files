@@ -306,8 +306,6 @@ services:
 - name: organisations-rw-neo4j-red@.service
   version: v0.3.1
   count: 1
-- name: os-upgrade.service
-  desiredState: loaded
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: people-rw-neo4j-blue@.service
@@ -507,7 +505,7 @@ services:
   version: v24
   count: 1
 - name: varnish@.service
-  version: v75
+  version: v0.0.4
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

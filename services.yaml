@@ -567,7 +567,7 @@ services:
   version: v1.2.9
   count: 2
 - name: vulcan-config-builder.service
-  version: v1.3.2
+  version: v1.3.3
 - name: vulcan.service
   version: v1.2.2
 - name: wordpress-article-transformer-sidekick@.service

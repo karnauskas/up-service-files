@@ -240,6 +240,7 @@ services:
 - name: methode-article-transformer@.service
   version: v83
   count: 2
+  sequentialDeployment: true
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service

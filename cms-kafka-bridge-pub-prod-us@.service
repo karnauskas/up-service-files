@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/coco-kafka-bridge:$DOCKER_APP_VER
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
-  export QUEUE_PROXY_ADDRS="https://publishing-prod-us-up.ft.com/__kafka-rest-proxy"; \
+  export QUEUE_PROXY_ADDRS="https://pub-prod-us-up.ft.com/__kafka-rest-proxy"; \
   export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-kafka-bridge-pub-prod-us"; \
   export AUTHORIZATION_KEY="Basic $(/usr/bin/etcdctl get /ft/_credentials/kafka-bridge-pub-prod/authorization_key | tr --delete \"\n\" | base64)"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \

@@ -411,10 +411,6 @@ services:
 - name: restorage-elasticsearch-concepts@.service
   version: v0.0.3
   count: 1
-- name: restorage-mongo-native-sidekick@.service
-  count: 1
-- name: restorage-mongo-native@.service
-  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

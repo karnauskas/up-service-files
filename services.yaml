@@ -398,7 +398,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 0.0.16
+  version: 0.0.17
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service

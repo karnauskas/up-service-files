@@ -1,7 +1,7 @@
 [Unit]
-Description=CMS Kafka Bridge Publishing Cluster Prode Sidekick
-BindsTo=cms-kafka-bridge-pub-prod@%i.service
-After=cms-kafka-bridge-pub-prod@%i.service
+Description=CMS Kafka Bridge Publishing Cluster Prod UK Sidekick
+BindsTo=cms-kafka-bridge-pub-prod-uk@%i.service
+After=cms-kafka-bridge-pub-prod-uk@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/cms-kafka-bridge-pub-prod/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/cms-kafka-bridge-pub-prod-uk/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=cms-kafka-bridge-pub-prod@%i.service
+MachineOf=cms-kafka-bridge-pub-prod-uk@%i.service

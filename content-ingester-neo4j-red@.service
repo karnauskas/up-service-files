@@ -26,7 +26,9 @@ ExecStart=/bin/sh -c '\
   export WHITELIST="^http://(methode|wordpress)(-article|-image-model|-image)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model)/[\\w-]+.*$"; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Content RW Neo4j"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Content rw neo4j returns a 200 response"; \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+      --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "DOCKER_FIX=" \
       --env "VULCAN_HOST=%H:8080" \
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \

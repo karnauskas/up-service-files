@@ -47,14 +47,24 @@ services:
 - name: burrow@.service
   version: v1.0.1
   count: 1
-- name: cms-kafka-bridge-pub-prod-sidekick@.service
+- name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
-- name: cms-kafka-bridge-pub-prod@.service
+- name: cms-kafka-bridge-pub-prod-uk@.service
   version: v14.0.0
   count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
+- name: cms-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
-- name: cms-metadata-kafka-bridge-pub-prod@.service
+- name: cms-kafka-bridge-pub-prod-us@.service
+  version: v14.0.0
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-uk@.service
+  version: v14.0.0
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-us@.service
   version: v14.0.0
   count: 2
 - name: cms-notifier-sidekick@.service

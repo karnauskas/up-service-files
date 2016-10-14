@@ -9,7 +9,7 @@ ExecStart=/bin/sh -c '\
     echo $LINKS; \
     DESTINATION=$(etcdctl get /ft/config/coreos-version-feed/hook); \
     echo $DESTINATION; \
-    curl -X POST -H 'Content-type: application/json'  --data '{"username": "coreos-bot","icon_emoji": ":coreos-1:","text":"'"CoreOS versions: $LINKS"'"}' $DESTINATION;
+    curl -X POST -H \'Content-type: application/json\'  --data \'{"username": "coreos-bot","icon_emoji": ":coreos-1:","text":"\'"CoreOS versions: $LINKS"\'"}\' $DESTINATION;
     exit 0'
 
 [Install]

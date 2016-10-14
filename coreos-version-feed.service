@@ -1,0 +1,16 @@
+[Unit]
+Description=Sends the current coreos versions to a url
+
+[Service]
+TimeoutStartSec=0
+
+ExecStart=/bin/sh -c '\
+    LINKS=$(for i in $(curl -s https://coreos.com/releases/  | grep "co-p-releases-channels-channel-version text-right" | cut -d">" -f2 | cut -d"<" -f1); do echo "<https://coreos.com/releases/#$i|$i>"; done | xargs) \
+    echo $LINKS; \
+    DESTINATION=$(etcdctl get /ft/config/coreos-version-feed/hook); \
+    echo $DESTINATION; \
+    curl -X POST -H 'Content-type: application/json'  --data '{"username": "coreos-bot","icon_emoji": ":coreos-1:","text":"'"CoreOS versions: $LINKS"'"}' $DESTINATION;
+    exit 0'
+
+[Install]
+WantedBy=multi-user.target

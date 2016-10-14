@@ -163,7 +163,7 @@ services:
 - name: elasticsearch-sidekick.service
 - name: elasticsearch.service
 - name: elb-dns-registrator.service
-  version: v4.0.1
+  version: v4.0.2
 - name: elb-presence@.service
   count: 2
 - name: enriched-content-read-api-sidekick@.service
@@ -475,7 +475,7 @@ services:
   version: v1.1.3
   count: 1
 - name: tunnel-registrator.service
-  version: v1.0.1
+  version: v1.0.2
 - name: up-coco-admin-sidekick@.service
   count: 1
 - name: up-coco-admin@.service

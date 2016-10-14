@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/conce
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
-  export CES_ENDPOINT="http://ftapp06179-lvpr-uk-t:8080/worker/extract"
+  export CES_ENDPOINT="http://ftapp06179-lvpr-uk-t:8080/worker/extract" \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "CES_ENDPOINT=$CES_ENDPOINT" \

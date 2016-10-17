@@ -25,6 +25,7 @@ ExecStart=/bin/bash -c '\
   -e "HOST_HEADER=api-policy-component" \
   -e "ETCD_HOST=$ETCD_HOST" \
   -e "ETCD_CONFIG_KEY=$ETCD_CONFIG_KEY" \
+  -e "S3O_PUBLIC_KEY=$(/usr/bin/etcdctl get /ft/_credentials/s3o/public_key)" \
   coco/delivery-varnish:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

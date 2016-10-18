@@ -17,12 +17,16 @@ ExecStartPre=/bin/bash -c 'docker history coco/ft-neo4j:$DOCKER_APP_VERSION > /d
 # See neo4j-blue@.service for the other neo4j instance.
 # Also see https://neo4j.com/developer/docker-2-x/ for configuration options.
 ExecStart=/bin/sh -c "\
+    export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
-    --memory="10g" \
+    --memory "10g" \
     -v /vol/%p-%i/:/data -p 7474:7474 \
-    --env=NEO4J_AUTH=none \
-    --env=NEO4J_HEAP_MEMORY=3584 \
-    --env=NEO4J_CACHE_MEMORY=1024m \
+    --env "NEO4J_AUTH=none" \
+    --env "NEO4J_HEAP_MEMORY=3584" \
+    --env "NEO4J_CACHE_MEMORY=1024m" \
+    --env "GRAPHITE_ENABLED=true" \
+    --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+    --env "GRAPHITE_PREFIX=coco.services.$ENV.neo4j-red.%i" \
     coco/ft-neo4j:$DOCKER_APP_VERSION"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

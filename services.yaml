@@ -24,7 +24,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v92
+  version: v97
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2

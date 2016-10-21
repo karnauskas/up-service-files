@@ -19,10 +19,12 @@ ExecStart=/bin/sh -c '\
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
   export KAFKA_TOPIC=NativeCmsPublicationEvents; \
+  export RESPECT_EXISTING_TIMESTAMP=true; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "KAFKA_HOST=$KAFKA_HOST" \
   --env "KAFKA_PORT=$KAFKA_PORT" \
   --env "KAFKA_TOPIC=$KAFKA_TOPIC" \
+  --env "RESPECT_EXISTING_TIMESTAMP=$RESPECT_EXISTING_TIMESTAMP" \
   up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

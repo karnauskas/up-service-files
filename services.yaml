@@ -311,11 +311,7 @@ services:
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
-<<<<<<< HEAD
   version: query-log
-=======
-  version: v2.3.7-4
->>>>>>> Memory-Limit-for-fi-apps
   count: 1
 - name: neo4j-hot-backup@.service
   version: 1.1-go

@@ -107,15 +107,10 @@ services:
 - name: concept-suggestions-kafka-bridge@.service
   version: v14.0.0
   count: 2
-- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
+- name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
-<<<<<<< HEAD
-- name: concepts-kafka-bridge-pub-pre-prod@.service
-  version: v13.0.0
-=======
 - name: concepts-kafka-bridge-pub-prod@.service
   version: v14.0.0
->>>>>>> Memory-Limit-for-fi-apps
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1

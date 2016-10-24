@@ -383,6 +383,11 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.20.1
   count: 1
+- name: rec-reads-content-annotator@.service
+  version: v35
+  count: 1
+- name: rec-reads-content-annotator-sidekick@.service
+  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

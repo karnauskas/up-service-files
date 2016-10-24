@@ -1,0 +1,39 @@
+[Unit]
+Description=Recommended Reads Content Annotator Service
+After=vulcan.service
+Requires=docker.service
+Wants=rec-reads-content-annotator-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
+  export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
+  export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
+  export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
+  --env "TOPIC=ConceptSuggestions" \
+  --env "GROUP_ID=rec-reads-content-annotator" \
+  --env "ZOOKEEPER_ENDPOINTS=$ZOOKEEPER_HOST:$ZOOKEEPER_PORT" \
+  --env "KAFKA_ENDPOINTS=$KAFKA_HOST:$KAFKA_PORT" \
+  --env "WRITER_ENDPOINT=rec-reads-suggestions-indexer.ft.com:8080" \
+  --env "ANNOTATING_SYSTEM=concept-suggestor" \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
+  up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=rec-reads-content-annotator@*.service

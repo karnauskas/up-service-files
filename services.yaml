@@ -47,6 +47,11 @@ services:
 - name: burrow@.service
   version: v1.0.1
   count: 1
+- name: cms-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-pre-prod@.service
+  version: v13.0.0
+  count: 2
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-uk@.service
@@ -56,6 +61,11 @@ services:
   count: 2
 - name: cms-kafka-bridge-pub-prod-us@.service
   version: v14.0.0
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod@.service
+  version: v13.0.0
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
@@ -84,12 +94,17 @@ services:
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
+- name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service
+  count: 2
+- name: concept-suggestions-kafka-bridge-ucs-test@.service
+  version: v13.0.0
+  count: 2
 - name: concept-suggestions-kafka-bridge@.service
   version: v14.0.0
   count: 2
-- name: concepts-kafka-bridge-pub-prod-sidekick@.service
+- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-prod@.service
+- name: concepts-kafka-bridge-pub-pre-prod@.service
   version: v14.0.0
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
@@ -145,6 +160,8 @@ services:
   version: v86
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-sidekick.service
+- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v4.0.2
 - name: elb-presence@.service
@@ -203,6 +220,11 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
+- name: load-replicator@.service
+  version: v1.0.0
+  count: 1
+- name: load-replicator-sidekick@.service
+  count: 1
 - name: locations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: locations-rw-neo4j-blue@.service
@@ -228,6 +250,7 @@ services:
 - name: methode-article-transformer@.service
   version: v83
   count: 2
+  sequentialDeployment: true
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
@@ -333,7 +356,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.16
+  version: v0.0.17
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -382,6 +405,16 @@ services:
   count: 1
 - name: publish-availability-monitor@.service
   version: v0.20.1
+  count: 1
+- name: rec-reads-content-ingester@.service
+  version: v50
+  count: 1
+- name: rec-reads-content-ingester-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts-sidekick@.service
+  count: 1
+- name: restorage-elasticsearch-concepts@.service
+  version: v0.0.3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -448,6 +481,11 @@ services:
   count: 1
 - name: tunnel-registrator.service
   version: v1.0.2
+- name: up-coco-admin-sidekick@.service
+  count: 1
+- name: up-coco-admin@.service
+  version: v0.0.2
+  count: 1
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
 - name: up-queue-sender-v1-metadata@.service

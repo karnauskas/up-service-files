@@ -16,10 +16,12 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/conce
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
-  export CES_ENDPOINT="http://ftapp06179-lvpr-uk-t:8080/worker/extract" \
+  export CES_ENDPOINT="http://ces-test.ft.com:8080/worker/extract" \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
-  --env "CES_ENDPOINT=$CES_ENDPOINT" \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
+  --env "CES_ENDPOINT=$CES_ENDPOINT" \ 
+  --env "KAFKA_ADDRESS=http://%H:8080" \ 
   up-registry.ft.com/coco/concept-suggestion-api:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

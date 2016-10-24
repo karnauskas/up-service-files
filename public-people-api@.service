@@ -24,7 +24,7 @@ ExecStart=/bin/sh -c '\
   -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
   -e "GRAPHITE_PREFIX=coco.services.$ENV.public-people-api.%i" \
   -e "LOG_METRICS=false" \
-  -e "CACHE_DURATION=24h" \
+  -e "CACHE_DURATION=10m" \
   coco/public-people-api:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

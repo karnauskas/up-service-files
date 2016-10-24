@@ -393,6 +393,11 @@ services:
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
+- name: rec-reads-content-annotator@.service
+  version: v44
+  count: 1
+- name: rec-reads-content-annotator-sidekick@.service
+  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
@@ -544,7 +549,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v91
+  version: v90
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

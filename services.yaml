@@ -84,7 +84,7 @@ services:
   count: 1
 - name: concept-suggestion-api@.service
   count: 1
-  version: v3
+  version: coco-test
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestions-kafka-bridge-sidekick@.service

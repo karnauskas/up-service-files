@@ -11,16 +11,16 @@ KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1'
 ExecStartPre=/usr/bin/docker pull wurstmeister/kafka:0.8.2.0
-ExecStart=/bin/bash -c "\
+ExecStart=/bin/bash -c '\
   export ZOOKEEPER_CONTAINER=$(docker ps -q --filter=name=zookeeper_); \
   /usr/bin/docker run --rm --name %p_$(uuidgen) -p 9092:9092 \
   --link $ZOOKEEPER_CONTAINER:zk \
-  --env \"KAFKA_ADVERTISED_HOST_NAME=$$HOSTNAME\" \
-  --env=\"KAFKA_MESSAGE_MAX_BYTES=16777216\" \
-  --env=\"KAFKA_REPLICA_FETCH_MAX_BYTES=16777216\" \
+  --env "KAFKA_ADVERTISED_HOST_NAME=$$HOSTNAME" \
+  --env="KAFKA_MESSAGE_MAX_BYTES=16777216" \
+  --env="KAFKA_REPLICA_FETCH_MAX_BYTES=16777216" \
+  --env="DOCKER_HOST=$HOSTNAME:2375" \
   -v /vol/kafka:/kafka \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  wurstmeister/kafka:0.8.2.0"
+  wurstmeister/kafka:0.8.2.0'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 ExecStartPost=/bin/sh -c "\

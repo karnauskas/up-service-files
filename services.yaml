@@ -342,7 +342,7 @@ services:
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: v0.1.2-rc.2
+  version: v0.1.2-rc.3
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service

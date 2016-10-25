@@ -22,7 +22,7 @@ ExecStart=/bin/bash -c '\
 	--env "QUEUE_ADDR=http://%H:8080" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
 	--env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \
-	--env "CONTENT_URL=http://%H:8080/__document-store-api/content-read/" \
+	--env "CONTENT_URL=http://%H:8080/__document-store-api/content/" \
 	--env "LISTS_URL=http://%H:8080/__document-store-api/lists/" \
 	--env "NOTIFICATIONS_URL=http://%H:8080/__notifications-rw/content/notifications" \
     --env "NOTIFICATIONS_PUSH_URL=http://%H:8080/__notifications-push/content/notifications" \
@@ -32,4 +32,3 @@ ExecStart=/bin/bash -c '\
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
-

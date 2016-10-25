@@ -24,7 +24,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v92
+  version: v97
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -47,20 +47,30 @@ services:
 - name: burrow@.service
   version: v1.0.1
   count: 1
-- name: cms-kafka-bridge-pub-prod-sidekick@.service
+- name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
-- name: cms-kafka-bridge-pub-prod@.service
-  version: v13.0.0
+- name: cms-kafka-bridge-pub-prod-uk@.service
+  version: v14.0.0
   count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-sidekick@.service
+- name: cms-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
-- name: cms-metadata-kafka-bridge-pub-prod@.service
-  version: v13.0.0
+- name: cms-kafka-bridge-pub-prod-us@.service
+  version: v14.0.0
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-uk@.service
+  version: v14.0.0
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-us@.service
+  version: v14.0.0
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v33
+  version: v38
   count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1
@@ -75,12 +85,12 @@ services:
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge@.service
-  version: v13.0.0
+  version: v14.0.0
   count: 2
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
-  version: v13.0.0
+  version: v14.0.0
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
@@ -132,11 +142,11 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v83
+  version: v86
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
-  version: v4.0.1
+  version: v4.0.2
 - name: elb-presence@.service
   count: 2
 - name: enriched-content-read-api-sidekick@.service
@@ -182,6 +192,11 @@ services:
 - name: industry-classifications-rw-neo4j-red@.service
   version: v0.0.6
   count: 1
+- name: kafka-lagcheck-sidekick@.service
+  count: 1
+- name: kafka-lagcheck@.service
+  version: v1.0.14
+  count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
 - name: kafka-rest-proxy@.service
@@ -211,7 +226,7 @@ services:
 - name: methode-article-transformer-sidekick@.service
   count: 2
 - name: methode-article-transformer@.service
-  version: v82
+  version: v83
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -242,7 +257,7 @@ services:
 - name: mongodb-configurator.service
   version: v0.1.0
 - name: mongodb-online-backup.service
-  version: v0.1.0
+  version: v0.2.0
   desiredState: loaded
 - name: mongodb-sidekick@.service
   count: 3
@@ -261,7 +276,7 @@ services:
 - name: neo4j-blue-sidekick@.service
   count: 1
 - name: neo4j-blue@.service
-  version: 2.3.7-2
+  version: v2.3.7-4
   count: 1
 - name: neo4j-hot-backup@.service
   version: 1.1-go
@@ -276,7 +291,7 @@ services:
 - name: neo4j-red-sidekick@.service
   count: 1
 - name: neo4j-red@.service
-  version: 2.3.7-2
+  version: v2.3.7-4
   count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -360,7 +375,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 0.0.16
+  version: 0.0.17
   count: 2
   sequentialDeployment: true
 - name: publish-availability-monitor-sidekick@.service
@@ -432,7 +447,7 @@ services:
   version: v1.1.3
   count: 1
 - name: tunnel-registrator.service
-  version: v1.0.1
+  version: v1.0.2
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
 - name: up-queue-sender-v1-metadata@.service
@@ -513,7 +528,7 @@ services:
   version: v1.2.9
   count: 2
 - name: vulcan-config-builder.service
-  version: v1.3.2
+  version: v1.3.5
 - name: vulcan.service
   version: v1.2.2
 - name: wordpress-article-transformer-sidekick@.service

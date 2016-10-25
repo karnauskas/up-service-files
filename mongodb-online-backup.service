@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c "\
     MONGODB=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//); \
     S3_DOMAIN=s3-eu-west-1.amazonaws.com; \
     S3_BUCKET=com.ft.coco-mongo-backup.prod; \
-    S3_DIR=$(usr/bin/etcdctl get /ft/config/environment_tag); \
+    S3_DIR=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
     AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id);\
     AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
     /usr/bin/docker run --rm --name %p_$(uuidgen) \
@@ -36,4 +36,3 @@ ExecStart=/bin/sh -c "\
 [Install]
 # this sets user-level
 WantedBy=multi-user.target
-

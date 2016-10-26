@@ -18,12 +18,14 @@ ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/methode-conten
 ExecStart=/bin/sh -c '\
   export BROKER_LIST=$(/usr/bin/etcdctl get /ft/config/kafka/ip):$(/usr/bin/etcdctl get /ft/config/kafka/port); \
   export CONSUMER_LIST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip):$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
-   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
+   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -P \
    --env "CONSUMER_LIST=$CONSUMER_LIST" \
    --env "BROKER_LIST=$BROKER_LIST" \
    --env "QUEUEPROXY_HOST=$HOSTNAME:8080" \
    --env "NATIVERW_HOST=$HOSTNAME:8080" \
    --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
+   --env "JAVA_OPTS=$JAVA_OPTS" \
    up-registry.ft.com/coco/methode-content-importer:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

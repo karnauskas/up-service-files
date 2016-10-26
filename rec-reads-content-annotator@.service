@@ -29,6 +29,7 @@ ExecStart=/bin/sh -c '\
   --env "WRITER_ENDPOINT=rec-reads-suggestions-indexer.ft.com:8080" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
+  --env "FILTER_NOVELTIES=false" \
   up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

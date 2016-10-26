@@ -42,6 +42,7 @@ ExecStart=/bin/sh -c '\
       --env "WRITER_NAME=ContentRWNeo4j" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
+      --env "MESSAGE_FORWARDING_ENABLED=false" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

@@ -21,7 +21,7 @@ ExecStart=/bin/sh -c '\
   export GRAPHITE_ADDRESS=graphite.ft.com:2003; \
   export GRAPHITE_PREFIX=coco.services.$ENV.public-brands-api.%i; \
   export LOG_METRICS=false; \
-  export CACHE_DURATION=24h; \
+  export CACHE_DURATION=10m; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
   --memory="256m" \
   -p $PORT \

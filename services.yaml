@@ -466,32 +466,32 @@ services:
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-blue@.service
-  version: v25
+  version: v35
   count: 1
 - name: v1-content-annotator-binding-service-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-red@.service
-  version: v25
+  version: v35
   count: 1
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service
-  version: v25
+  version: v35
   count: 1
 - name: v1-content-annotator-brightcove-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-blue@.service
-  version: v25
+  version: v35
   count: 1
 - name: v1-content-annotator-brightcove-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-red@.service
-  version: v25
+  version: v35
   count: 1
 - name: v1-content-annotator-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-red@.service
-  version: v25
+  version: v35
   count: 1
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -511,12 +511,12 @@ services:
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
 - name: v2-content-annotator-blue@.service
-  version: v24
+  version: v35
   count: 1
 - name: v2-content-annotator-red-sidekick@.service
   count: 1
 - name: v2-content-annotator-red@.service
-  version: v24
+  version: v35
   count: 1
 - name: varnish@.service
   version: v0.0.4

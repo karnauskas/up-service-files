@@ -349,7 +349,7 @@ services:
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: v0.1.4
+  version: v0.1.5
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
@@ -536,7 +536,7 @@ services:
 - name: wordpress-article-transformer-sidekick@.service
   count: 2
 - name: wordpress-article-transformer@.service
-  version: v90
+  version: v91
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

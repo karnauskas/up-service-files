@@ -116,13 +116,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v51
+  version: v52
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v51
+  version: v52
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service

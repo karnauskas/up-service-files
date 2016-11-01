@@ -26,6 +26,7 @@ ExecStart=/bin/sh -c '\
   --env "GROUP_ID=rec-reads-content-annotator" \
   --env "ZOOKEEPER_ENDPOINTS=$ZOOKEEPER_HOST:$ZOOKEEPER_PORT" \
   --env "KAFKA_ENDPOINTS=$KAFKA_HOST:$KAFKA_PORT" \
+  --env "WRITER_PATH=rr-content/" \
   --env "WRITER_ENDPOINT=rec-reads-suggestions-indexer.ft.com:8080" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
   --env "JAVA_OPTS=$JAVA_OPTS" \

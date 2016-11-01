@@ -29,6 +29,7 @@ ExecStart=/bin/sh -c '\
     --env "ANNOTATING_SYSTEM=http://cmdb.ft.com/systems/brightcove" \
     --env "WRITER_HOST_HEADER=v1-annotations-rw-blue" \
     --env "JAVA_OPTS=$JAVA_OPTS" \
+    --env "FILTER_NOVELTIES=true" \
     up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

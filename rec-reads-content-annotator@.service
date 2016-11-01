@@ -21,13 +21,15 @@ ExecStart=/bin/sh -c '\
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
+  export WRITER_HOST=$(/usr/bin/etcdctl get /ft/config/upp-gateway/host); \
+  export WRITER_PORT=$(/usr/bin/etcdctl get /ft/config/upp-gateway/port); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "TOPIC=ConceptSuggestions" \
   --env "GROUP_ID=rec-reads-content-annotator" \
   --env "ZOOKEEPER_ENDPOINTS=$ZOOKEEPER_HOST:$ZOOKEEPER_PORT" \
   --env "KAFKA_ENDPOINTS=$KAFKA_HOST:$KAFKA_PORT" \
   --env "WRITER_PATH=rr-content/" \
-  --env "WRITER_ENDPOINT=rec-reads-suggestions-indexer.ft.com:8080" \
+  --env "WRITER_ENDPOINT=$WRITER_HOST:$WRITER_PORT" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "FILTER_NOVELTIES=false" \

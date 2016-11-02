@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: v1.1.7
+  version: v1.1.9
   count: 2
   sequentialDeployment: true
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service

@@ -85,17 +85,17 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v51
+  version: v52
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v51
+  version: v52
   count: 1
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v51
+  version: v52
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -288,7 +288,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v51
+  version: v52
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2

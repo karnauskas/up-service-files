@@ -92,6 +92,11 @@ services:
 - name: concept-ingester-red@.service
   version: v1.1.8
   count: 1
+- name: concept-suggestion-api-sidekick@.service
+  count: 1
+- name: concept-suggestion-api@.service
+  count: 1
+  version: v5
 - name: concept-suggestions-kafka-bridge-sidekick@.service
   count: 2
 - name: concept-suggestions-kafka-bridge-ucs-test-sidekick@.service

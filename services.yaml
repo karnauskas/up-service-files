@@ -238,6 +238,11 @@ services:
 - name: methode-image-binary-transformer@.service
   version: v24
   count: 2
+- name: methode-image-model-mapper-sidekick@.service
+  count: 2
+- name: methode-image-model-mapper@.service
+  version: v2
+  count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
 - name: methode-image-model-transformer@.service

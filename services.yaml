@@ -384,7 +384,7 @@ services:
   version: v0.20.1
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: v37
+  version: v40
   count: 1
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1

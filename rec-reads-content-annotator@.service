@@ -24,6 +24,7 @@ ExecStart=/bin/sh -c '\
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   export WRITER_HOST=$(/usr/bin/etcdctl get /ft/config/upp-gateway/host); \
   export WRITER_PORT=$(/usr/bin/etcdctl get /ft/config/upp-gateway/port); \
+  export WRITER_CREDENTIALS=$(usr/bin/etcdctl get /ft/config/upp-gateway/credentials); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "TOPIC=ConceptSuggestions" \
   --env "GROUP_ID=$GROUP_ID" \
@@ -31,7 +32,7 @@ ExecStart=/bin/sh -c '\
   --env "KAFKA_ENDPOINTS=$KAFKA_HOST:$KAFKA_PORT" \
   --env "WRITER_PATH=rr-content/" \
   --env "WRITER_ENDPOINT=$WRITER_HOST:$WRITER_PORT" \
-  --env "WRITER_HOST_HEADER=upp-gateway" \
+  --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "FILTER_NOVELTIES=false" \

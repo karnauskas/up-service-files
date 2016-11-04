@@ -407,7 +407,7 @@ services:
   version: v0.20.1
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: v50
+  version: v55
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1

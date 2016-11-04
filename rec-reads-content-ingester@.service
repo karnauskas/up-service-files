@@ -21,7 +21,9 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/inges
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ADMIN_PORT=8080; \
-  export WRITER_HOST=up-writer-host.ft.com; \
+  export WRITER_HOST=$(/usr/bin/etcdctl get /ft/config/upp-gateway/host); \
+  export WRITER_PORT=$(/usr/bin/etcdctl get /ft/config/upp-gateway/port); \
+  export WRITER_CREDENTIALS=$(usr/bin/etcdctl get /ft/config/upp-gateway/credentials); \
   export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
@@ -33,10 +35,15 @@ ExecStart=/bin/sh -c '\
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
-      --env "VULCAN_HOST=$WRITER_HOST" \
-      --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
-      --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
-      --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
+      --env "UPP_GATEWAY_PATH=/rr-content"
+      --env "VULCAN_HOST=$WRITER_HOST:$WRITER_PORT:$WRITER_PORT" \
+      --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
+      --env "APP_PORT=$APP_PORT" \
+      --env "ADMIN_PORT=$ADMIN_PORT" \
+      --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" \
+      --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
+      --env "KAFKA_HOST=$KAFKA_HOST" \
+      --env "KAFKA_PORT=$KAFKA_PORT" \
       --env "KAFKA_GROUPNAME=$KAFKA_GROUPNAME" \
       --env "KAFKA_SYSTEM_ID=ContentIngester" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \

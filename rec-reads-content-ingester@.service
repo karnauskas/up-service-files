@@ -32,7 +32,7 @@ ExecStart=/bin/sh -c '\
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
-      --env "VULCAN_HOST=$WRITER_HOST:$WRITER_PORT:$WRITER_PORT" \
+      --env "VULCAN_HOST=$WRITER_HOST:$WRITER_PORT" \
       --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
       --env "APP_PORT=$APP_PORT" \
       --env "ADMIN_PORT=$ADMIN_PORT" \

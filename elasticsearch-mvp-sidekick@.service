@@ -9,7 +9,7 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set   /ft/healthcheck/$SERVICE-%i/path-regex/detailedhealth /__health-details; \
+  etcdctl set   /ft/services/$SERVICE-%i/path-regex/detailed-health /health/$SERVICE-%i/__health-details; \
   etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set   /ft/healthcheck/$SERVICE-%i/categories read; \
   while [ -z $PORT ]; do \

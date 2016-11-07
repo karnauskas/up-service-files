@@ -23,10 +23,12 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
+  export KAFKA_GROUPNAME=rec-reads-content-ingester; \
   export WHITELIST="^http://(methode|wordpress|brightcove)(-article|-image-model|-list|-image|-video-model)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model|lists|video/model)/[\\w-]+.*$"; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Document Store"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Document Store returns a 200 response"; \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
+  env; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "VULCAN_HOST=%H:8080" \
@@ -36,12 +38,11 @@ ExecStart=/bin/sh -c '\
       --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
       --env "KAFKA_HOST=$KAFKA_HOST" \
       --env "KAFKA_PORT=$KAFKA_PORT" \
-      --env "KAFKA_GROUPNAME=rec-reads-content" \
+      --env "KAFKA_GROUPNAME=$KAFKA_GROUPNAME" \
       --env "KAFKA_SYSTEM_ID=RecReadsContentIngester" \
       --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "WHITELIST=$WHITELIST" \
-      --env "WRITER_HEADER=document-store-api" \
-      --env "WRITER_NAME=DocumentStore" \
+      --env "WRITER_NAME=RecReadContentIndexer" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
       --env "MESSAGE_FORWARDING_ENABLED=false" \

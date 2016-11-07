@@ -47,8 +47,6 @@ ExecStart=/bin/sh -c '\
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
       --env "WRITER_NAME=RecReadContentIndexer" \
-      --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
-      --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
       --env "MESSAGE_FORWARDING_ENABLED=false" \
       --env "KAFKA_PROXY=%H:8080" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'

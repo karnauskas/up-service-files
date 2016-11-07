@@ -26,7 +26,6 @@ ExecStart=/bin/sh -c '\
   export WHITELIST="^http://(methode|wordpress|brightcove)(-article|-image-model|-list|-image|-video-model)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model|lists|video/model)/[\\w-]+.*$"; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Document Store"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Document Store returns a 200 response"; \
-  export KAFKA_GROUPNAME=rec-reads-content-ingester; \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
@@ -34,10 +33,12 @@ ExecStart=/bin/sh -c '\
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
       --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
-      --env "KAFKA_GROUPNAME=$KAFKA_GROUPNAME" \
+      --env "KAFKA_GROUPNAME=rec-reads-content-ingester" \
+      --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "KAFKA_SYSTEM_ID=RecReadsContentIngester" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
+      --env "MESSAGE_FORWARDING_ENABLED=false" \
       --env "WRITER_HEADER=document-store-api" \
       --env "WRITER_NAME=RecReadContentIndexer" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \

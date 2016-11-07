@@ -11,6 +11,8 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+# Sets key in etcd with default value for neo4j BATCH_SIZE parameter if one does not already exist.
+ExecStartPre=-/bin/bash -c 'etcd_batchsize_param="/ft/services/%p-%i/param/batchsize" ; /usr/bin/etcdctl get $etcd_batchsize_param > /dev/null 2>&1 ; if [ $? != 0 ] ; then /usr/bin/etcdctl set $etcd_batchsize_param 600 > /dev/null 2>&1; fi'
 ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/roles-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/roles-rw-neo4j:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
@@ -20,7 +22,7 @@ ExecStart=/bin/sh -c '\
   --memory="256m" \
   --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-blue/db/data" \
   --env "APP_PORT=$APP_PORT" \
-  --env "BATCH_SIZE=600" \
+  --env "BATCH_SIZE=$BATCH_SIZE" \
   --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.roles-rw-neo4j-blue.%i" \
   coco/roles-rw-neo4j:$DOCKER_APP_VERSION;'

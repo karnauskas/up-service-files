@@ -36,12 +36,14 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
       --env "KAFKA_GROUPNAME=content-neo4j-blue" \
       --env "KAFKA_SYSTEM_ID=ContentIngesterNeo4j" \
+      --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_HEADER=content-rw-neo4j-blue" \
       --env "WRITER_NAME=ContentRWNeo4j" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
+      --env "MESSAGE_FORWARDING_ENABLED=false" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

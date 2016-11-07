@@ -32,7 +32,7 @@ ExecStart=/bin/sh -c '\
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
-      --env "VULCAN_HOST=%H:8080" \
+      --env "VULCAN_HOST=$WRITER_HOST:$WRITER_PORT" \
       --env "APP_PORT=$APP_PORT" \
       --env "ADMIN_PORT=$ADMIN_PORT" \
       --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" \
@@ -43,6 +43,7 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_SYSTEM_ID=RecReadsContentIngester" \
       --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "WHITELIST=$WHITELIST" \
+      --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
       --env "WRITER_HEADER=document-store-api" \
       --env "WRITER_NAME=DocumentStore" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \

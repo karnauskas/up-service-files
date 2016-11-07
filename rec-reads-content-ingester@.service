@@ -1,0 +1,59 @@
+[Unit]
+Description=Recommended Reads Content Ingester
+After=vulcan.service
+Requires=docker.service
+Wants=rec-reads-content-ingester-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+Environment='JAVA_OPTS=-Xms128m -Xmx128m -XX:+UseG1GC -server'
+Environment='WRITER_NAME=RecReadContentIndexer'
+Environment='WRITER_HEALTHCHECK_NAME="Can connect to the Notifications Reader/Writer"'
+Environment='WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"'
+Environment='WHITELIST="^http://(methode|wordpress|brightcove)(-article|-video-model)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|video/model)/[\\w-]+.*$"'
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+MemoryLimit=1G
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export WRITER_HOST=$(/usr/bin/etcdctl get /ft/config/upp-gateway/host); \
+  export WRITER_PORT=$(/usr/bin/etcdctl get /ft/config/upp-gateway/port); \
+  export WRITER_CREDENTIALS=$(usr/bin/etcdctl get /ft/config/upp-gateway/credentials); \
+  export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
+  export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
+  export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
+  export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+      --env "JAVA_OPTS=$JAVA_OPTS" \
+      --env "UPP_GATEWAY_PATH=/rr-content" \
+      --env "VULCAN_HOST=$WRITER_HOST:$WRITER_PORT:$WRITER_PORT" \
+      --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
+      --env "APP_PORT=8080" \
+      --env "ADMIN_PORT=8080" \
+      --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" \
+      --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
+      --env "KAFKA_HOST=$KAFKA_HOST" \
+      --env "KAFKA_PORT=$KAFKA_PORT" \
+      --env "KAFKA_GROUPNAME=rec-reads-content-ingester" \
+      --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
+      --env "KAFKA_SYSTEM_ID=ContentIngester" \
+      --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
+      --env "WHITELIST=$WHITELIST" \
+      --env "MESSAGE_FORWARDING_ENABLED=false" \
+      --env "WRITER_NAME=$WRITER_NAME" \
+      --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
+      --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
+      up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

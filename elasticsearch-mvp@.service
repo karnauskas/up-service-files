@@ -15,8 +15,8 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/elasticsearch-mvp:$DOCKE
   || /usr/bin/docker pull coco/elasticsearch-mvp:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_elastic_access_key_id); \
-  export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_elastic_secret_access_key); \
+  export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_elastic_access_key_id); \
+  export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_elastic_secret_access_key); \
   export APP_PORT=8080; \
   export ELASTICSEARCH_ENDPOINT="search-concept-search-mvp-k2vkgwhfgjv63nu6jvortpggha.eu-west-1.es.amazonaws.com"; \
   export ELASTICSEARCH_REGION="eu-west-1"; \

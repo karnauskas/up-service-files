@@ -44,7 +44,7 @@ ExecStart=/bin/sh -c '\
       --env "WHITELIST=Whitelist" \
       --env "MESSAGE_FORWARDING_ENABLED=false" \
       --env "WRITER_NAME=RecReadContentIndexer" \
-      --env "WRITER_HEALTHCHECK_NAME=Can" \
+      --env "WRITER_HEALTHCHECK_NAME=Can\ so\ fiF\ adsfka\ s\ ekdnfdkl\ fllashdfjha\ skdfkjdsfhjklah\ sdjfha\ kshdfak\ sdjfhaks\ dfhlkajshd\ fkajhsdfkatsdlfhadskfha\ skdfha\ skdfhalk\ sdhfkajsdhflkasd\ fhakjshdflak\ sdfhlkasjhdf\ akjshdflkjashdfklja\ sdkjfhalskjdfh\ aklshdflkajshdf\ lakjhsd\ flkash" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=Tests" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 

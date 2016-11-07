@@ -141,13 +141,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v51
+  version: v52
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v51
+  version: v52
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -170,6 +170,11 @@ services:
   version: v86
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-mvp-sidekick.service
+  count: 2
+- name: elasticsearch-mvp.service
+  version: v0.0.1
+  count: 2
 - name: elb-dns-registrator.service
   version: v4.0.2
 - name: elb-presence@.service
@@ -491,12 +496,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v1-annotations-rw-blue@.service
-  version: v0.1.0
+  version: v0.1.6
   count: 1
 - name: v1-annotations-rw-red-sidekick@.service
   count: 1
 - name: v1-annotations-rw-red@.service
-  version: v0.1.0
+  version: v0.1.6
   count: 1
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -531,17 +536,17 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.14
+  version: v0.0.15
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v2-annotations-rw-blue@.service
-  version: v0.1.0
+  version: v0.1.6
   count: 1
 - name: v2-annotations-rw-red-sidekick@.service
   count: 1
 - name: v2-annotations-rw-red@.service
-  version: v0.1.0
+  version: v0.1.6
   count: 1
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1

@@ -1,0 +1,38 @@
+[Unit]
+Description=Elasticsearch MVP Service
+After=vulcan.service
+Requires=docker.service
+Wants=elasticsearch-mvp-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/elasticsearch-mvp:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull coco/elasticsearch-mvp:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_elastic_access_key_id); \
+  export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_elastic_secret_access_key); \
+  export APP_PORT=8080; \
+  export ELASTICSEARCH_ENDPOINT="search-concept-search-mvp-k2vkgwhfgjv63nu6jvortpggha.eu-west-1.es.amazonaws.com"; \
+  export ELASTICSEARCH_REGION="eu-west-1"; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+  --memory="256m" \
+  -p $APP_PORT \
+  -e "APP_PORT=$APP_PORT" \
+  -e "ELASTICSEARCH_ENDPOINT=$ELASTICSEARCH_ENDPOINT" \
+  -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
+  -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+  -e "ELASTICSEARCH_REGION=$ELASTICSEARCH_REGION" \
+  coco/elasticsearch-mvp:$DOCKER_APP_VERSION;'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=elasticsearch-mvp@*.service

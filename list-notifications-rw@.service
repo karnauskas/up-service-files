@@ -13,7 +13,7 @@ KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/list-notifications-rw:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-   || docker pull coco/notifications-push:$DOCKER_APP_VERSION'
+   || docker pull coco/list-notifications-rw:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   MONGO_ADDRESSES=$(for x in $(etcdctl ls /ft/config/mongodb); do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)","; done);\

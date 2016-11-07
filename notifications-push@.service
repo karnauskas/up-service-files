@@ -27,7 +27,7 @@ ExecStart=/bin/sh -c '\
       --env "QUEUE_HOST=kafka" \
       --env "API_BASE_URL=$API_BASE_URL" \
       --env "CONSUMER_BACKOFF=2" \
-      coco/list-notifications-rw:$DOCKER_APP_VERSION;'
+      coco/notifications-push:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

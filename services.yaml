@@ -145,6 +145,11 @@ services:
   version: v86
   count: 2
   sequentialDeployment: true
+- name: elasticsearch-mvp-sidekick.service
+  count: 2
+- name: elasticsearch-mvp.service
+  version: v0.0.1
+  count: 2
 - name: elb-dns-registrator.service
   version: v4.0.2
 - name: elb-presence@.service

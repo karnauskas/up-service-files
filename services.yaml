@@ -148,7 +148,7 @@ services:
 - name: elasticsearch-mvp-sidekick@.service
   count: 2
 - name: elasticsearch-mvp@.service
-  version: v0.0.2
+  version: v0.0.3
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

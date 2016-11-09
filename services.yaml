@@ -243,6 +243,11 @@ services:
 - name: methode-image-model-transformer@.service
   version: v46
   count: 2
+- name: methode-list-mapper-sidekick@.service
+  count: 2
+- name: methode-list-mapper@.service
+  version: v3
+  count: 2
 - name: methode-list-transformer-sidekick@.service
   count: 2
 - name: methode-list-transformer@.service

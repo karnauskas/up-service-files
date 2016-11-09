@@ -206,7 +206,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: v55
+  version: v52
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2

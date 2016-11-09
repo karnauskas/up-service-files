@@ -203,6 +203,10 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
+- name: list-notifications-ingester-sidekick@.service
+  count: 2
+- name: list-notifications-ingester@.service
+  version: v55
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service

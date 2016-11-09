@@ -211,7 +211,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.0.3
+  version: v0.0.4
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-blue-sidekick@.service

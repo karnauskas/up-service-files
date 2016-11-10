@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v56
+  version: v59
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -116,13 +116,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v52
+  version: v53
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v52
+  version: v53
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service

@@ -1,0 +1,21 @@
+[Unit]
+Description=List notifications-push Sidekick
+BindsTo=list-notifications-push@%i.service
+After=list-notifications-push@%i.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set /ft/services/$SERVICE/healthcheck true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  LIST_NOTIFICATIONS_PUSH_PORT=8548; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$LIST_NOTIFICATIONS_PUSH_PORT;"
+
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/list-notifications-push/servers/%i'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=list-notifications-push@%i.service

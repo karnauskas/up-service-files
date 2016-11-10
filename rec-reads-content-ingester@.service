@@ -6,6 +6,11 @@ Wants=rec-reads-content-ingester-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment='JAVA_OPTS=-Xms128m -Xmx128m -XX:+UseG1GC -server'
+Environment='WRITER_NAME=RecReadContentIndexer'
+Environment='WRITER_HEALTHCHECK_NAME="Can connect to the Notifications Reader/Writer"'
+Environment='WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"'
+Environment='WHITELIST="^http://(methode|wordpress|brightcove)(-article|-video-model)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|video/model)/[\\w-]+.*$"'
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -24,8 +29,6 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
-  env; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "UPP_GATEWAY_PATH=/rr-content" \
@@ -41,11 +44,11 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "KAFKA_SYSTEM_ID=ContentIngester" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
-      --env "WHITELIST=Whitelist" \
+      --env "WHITELIST=$WHITELIST" \
       --env "MESSAGE_FORWARDING_ENABLED=false" \
-      --env "WRITER_NAME=RecReadContentIndexer" \
-      --env "WRITER_HEALTHCHECK_NAME=Can\ so\ fiF\ adsfka\ s\ ekdnfdkl\ fllashdfjha\ skdfkjdsfhjklah\ sdjfha\ kshdfak\ sdjfhaks\ dfhlkajshd\ fkajhsdfkatsdlfhadskfha\ skdfha\ skdfhalk\ sdhfkajsdhflkasd\ fhakjshdflak\ sdfhlkasjhdf\ akjshdflkjashdfklja\ sdkjfhalskjdfh\ aklshdflkajshdf\ lakjhsd\ flkash" \
-      --env "WRITER_HEALTHCHECK_TECH_SUMMARY=Tests" \
+      --env "WRITER_NAME=$WRITER_NAME" \
+      --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
+      --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

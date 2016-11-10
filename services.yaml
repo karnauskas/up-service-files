@@ -195,22 +195,19 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
-<<<<<<< HEAD
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
   version: v52
   count: 2
-- name: list-notifications-rw-sidekick@.service
-  count: 2
-- name: list-notifications-rw@.service
-  version: v0.0.5
-=======
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
   version: v3.0.0
->>>>>>> feature/notification-push-for-lists
+- name: list-notifications-rw-sidekick@.service
+  count: 2
+- name: list-notifications-rw@.service
+  version: v0.0.5
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-blue-sidekick@.service

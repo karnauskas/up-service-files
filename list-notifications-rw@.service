@@ -19,6 +19,7 @@ ExecStart=/bin/sh -c '\
   MONGO_ADDRESSES=$(for x in $(etcdctl ls /ft/config/mongodb); do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)","; done);\
   ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+    --memory="128m" \
     --env "MONGO_ADDRESSES=$(echo $MONGO_ADDRESSES | sed s/.$//)" \
     --env "API_HOST=$ENV_API_HOST" \
     --env "CACHE_TTL=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \

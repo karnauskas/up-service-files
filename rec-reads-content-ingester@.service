@@ -10,7 +10,7 @@ Environment='JAVA_OPTS=-Xms128m -Xmx128m -XX:+UseG1GC -server'
 Environment='WRITER_NAME=RecReadContentIndexer'
 Environment='WRITER_HEALTHCHECK_NAME="Can connect to the Notifications Reader/Writer"'
 Environment='WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"'
-Environment='WHITELIST=^http://(methode|fastft|wordpress)(-article|-image-model|-image)?(-transformer|-mapper)(-pr|-iw)?(-uk-t)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model)/[\\w-]+.*$'
+Environment='WHITELIST=^http://(methode|fastft|wordpress)(-article|-image-model|-image)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model)/[\\w-]+.*$'
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.

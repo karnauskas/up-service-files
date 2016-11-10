@@ -26,7 +26,7 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_PORT=2003" \
   --env "JERSEY_TIMEOUT_DURATION=10000ms" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.api-policy-component.%i" \
-  up-registry.ft.com/coco/api-policy-component:$DOCKER_APP_VERSION'
+  coco/api-policy-component:$DOCKER_APP_VERSION'
 ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60

@@ -1,7 +1,7 @@
 [Unit]
-Description=Methode list transformer sidekick
-BindsTo=methode-list-transformer@%i.service
-After=methode-list-transformer@%i.service
+Description=Methode list mapper sidekick
+BindsTo=methode-list-mapper@%i.service
+After=methode-list-mapper@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-list-transformer/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-list-mapper/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=methode-list-transformer@%i.service
+MachineOf=methode-list-mapper@%i.service

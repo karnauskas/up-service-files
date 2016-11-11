@@ -2,7 +2,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: v1.1.9
+  version: v1.1.7
   count: 2
   sequentialDeployment: true
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v56
+  version: v62
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -259,7 +259,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v56
+  version: v57
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -271,10 +271,10 @@ services:
 - name: methode-image-model-transformer@.service
   version: v46
   count: 2
-- name: methode-list-transformer-sidekick@.service
+- name: methode-list-mapper-sidekick@.service
   count: 2
-- name: methode-list-transformer@.service
-  version: v31
+- name: methode-list-mapper@.service
+  version: v3
   count: 2
 - name: mongo-backup@.service
   version: v20.0.0

@@ -248,11 +248,6 @@ services:
 - name: methode-list-mapper@.service
   version: v3
   count: 2
-- name: methode-list-transformer-sidekick@.service
-  count: 2
-- name: methode-list-transformer@.service
-  version: v31
-  count: 2
 - name: mongo-backup@.service
   version: v20.0.0
   count: 3

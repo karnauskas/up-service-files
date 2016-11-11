@@ -22,6 +22,7 @@ ExecStart=/bin/sh -c '\
     --memory="128m" \
     --env "MONGO_ADDRESSES=$(echo $MONGO_ADDRESSES | sed s/.$//)" \
     --env "API_HOST=$ENV_API_HOST" \
+    --env "DUMP_REQUESTS=true" \
     --env "CACHE_TTL=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \
       coco/list-notifications-rw:$DOCKER_APP_VERSION;'
 

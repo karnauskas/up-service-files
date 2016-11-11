@@ -15,7 +15,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/notifications-push:$DOCKER_APP_VE
    || docker pull coco/notifications-push:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-   export LIST_NOTIFICATIONS_PUSH_PORT=8548; \
+   export LIST_NOTIFICATIONS_PUSH_PORT=8549; \
    export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-list-notifications-push-%i"; \
    export API_BASE_URL="http://"$(/usr/bin/etcdctl get /ft/config/api_host); \
    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $LIST_NOTIFICATIONS_PUSH_PORT:8080 \

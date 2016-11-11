@@ -10,7 +10,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  LIST_NOTIFICATIONS_PUSH_PORT=8548; \
+  LIST_NOTIFICATIONS_PUSH_PORT=8549; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$LIST_NOTIFICATIONS_PUSH_PORT;"
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/list-notifications-push/servers/%i'

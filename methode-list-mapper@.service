@@ -6,7 +6,7 @@ Wants=methode-list-mapper-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"
+Environment="JAVA_OPTS=-Xms128m -Xmx128m -XX:+UseG1GC -server"
 
 TimeoutStartSec=0
 

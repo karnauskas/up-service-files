@@ -1,7 +1,7 @@
 [Unit]
 Description=Recommended Reads Content Annotator Service Sidekick
-BindsTo=rec-reads-content-annotator-sidekick@%i.service
-After=rec-reads-content-annotator-sidekick@%i.service
+BindsTo=rec-reads-content-annotator@%i.service
+After=rec-reads-content-annotator@%i.service
 
 [Service]
 RemainAfterExit=yes

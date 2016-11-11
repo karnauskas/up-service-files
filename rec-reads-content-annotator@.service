@@ -24,7 +24,7 @@ ExecStart=/bin/sh -c '\
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   export WRITER_HOST=$(/usr/bin/etcdctl get /ft/config/upp-gateway/host); \
   export WRITER_PORT=$(/usr/bin/etcdctl get /ft/config/upp-gateway/port); \
-  export WRITER_CREDENTIALS=$(usr/bin/etcdctl get /ft/config/upp-gateway/credentials); \
+  export WRITER_CREDENTIALS=$(usr/bin/etcdctl get /ft/_credentials/upp-gateway/authorization_key); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "TOPIC=ConceptSuggestions" \
   --env "GROUP_ID=$GROUP_ID" \

@@ -231,7 +231,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v56
+  version: del-img
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -241,12 +241,17 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v5
+  version: v12
   count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
 - name: methode-image-model-transformer@.service
   version: v46
+  count: 2
+- name: methode-image-set-mapper-sidekick@.service
+  count: 2
+- name: methode-image-set-mapper@.service
+  version: v7
   count: 2
 - name: methode-list-transformer-sidekick@.service
   count: 2

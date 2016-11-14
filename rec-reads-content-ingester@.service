@@ -34,6 +34,7 @@ ExecStart=/bin/sh -c '\
       --env "UPP_GATEWAY_PATH=/rr-content" \
       --env "VULCAN_HOST=$WRITER_HOST:$WRITER_PORT:$WRITER_PORT" \
       --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
+      --env "WRITER_HEADER=upp-gateway" \
       --env "APP_PORT=8080" \
       --env "ADMIN_PORT=8080" \
       --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" \

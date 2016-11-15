@@ -411,6 +411,11 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.20.1
   count: 1
+- name: rec-reads-content-annotator@.service
+  version: v44
+  count: 1
+- name: rec-reads-content-annotator-sidekick@.service
+  count: 1
 - name: rec-reads-content-ingester@.service
   version: v57
   count: 1

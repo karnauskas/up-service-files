@@ -384,7 +384,7 @@ services:
   version: v0.20.1
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: scott_logging
+  version: v44
   count: 1
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1

@@ -16,9 +16,12 @@ ExecStartPre=/bin/sh -c 'docker history up-registry.ft.com/coco/methode-image-mo
 
 ExecStart=/bin/sh -c '\
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
+  BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "KAFKA_PROXY=$HOSTNAME:8080" \
+  --env "VULCAN_HOST=%H"
+  --env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \
   up-registry.ft.com/coco/methode-image-model-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

@@ -20,7 +20,7 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "KAFKA_PROXY=$HOSTNAME:8080" \
-  --env "VULCAN_HOST=%H"
+  --env "VULCAN_HOST=%H" \
   --env "S3_URL=http://$BUCKET.s3.amazonaws.com/" \
   up-registry.ft.com/coco/methode-image-model-mapper:$DOCKER_APP_VERSION'
 

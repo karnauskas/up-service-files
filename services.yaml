@@ -135,7 +135,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: v0.0.10
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service

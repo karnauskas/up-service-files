@@ -277,7 +277,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v12
+  version: v15
   count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
@@ -287,7 +287,7 @@ services:
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v7
+  version: v8
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2

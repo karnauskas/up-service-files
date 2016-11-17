@@ -8,7 +8,6 @@ Wants=genres-rw-neo4j-red-sidekick@%i.service
 Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
-KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/genress-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/genres-rw-neo4j:$DOCKER_APP_VERSION'

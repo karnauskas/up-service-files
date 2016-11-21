@@ -1,7 +1,7 @@
 [Unit]
-Description=Methode article transformer sidekick
-BindsTo=methode-article-transformer@%i.service
-After=methode-article-transformer@%i.service
+Description=Methode article mapper sidekick
+BindsTo=methode-article-mapper@%i.service
+After=methode-article-mapper@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-article-transformer/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-article-mapper/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=methode-article-transformer@%i.service
+MachineOf=methode-article-mapper@%i.service

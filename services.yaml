@@ -409,7 +409,6 @@ services:
   version: v44
   count: 1
 - name: rec-reads-content-annotator-sidekick@.service
->>>>>>> aggregate-hc-version-bump
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

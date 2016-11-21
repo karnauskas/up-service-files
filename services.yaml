@@ -259,10 +259,10 @@ services:
 - name: memberships-rw-neo4j-red@.service
   version: v0.1.4
   count: 1
-- name: methode-article-mapper-sidekick@.service
+- name: methode-article-transformer-sidekick@.service
   count: 2
-- name: methode-article-mapper@.service
-  version: v1.0.2
+- name: methode-article-transformer@.service
+  version: v86
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2

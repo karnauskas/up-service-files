@@ -400,6 +400,7 @@ services:
   count: 1
 - name: restorage-elasticsearch-concepts@.service
   version: v0.0.3
+  count: 1
 - name: rec-reads-content-ingester@.service
   version: v57
   count: 1

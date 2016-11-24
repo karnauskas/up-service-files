@@ -76,7 +76,7 @@ services:
   count: 1
 - name: concept-suggestion-api@.service
   count: 1
-  version: v5
+  version: v10
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
@@ -203,7 +203,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.2
+  version: v3.0.3
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -239,7 +239,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v57
+  version: v61
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -254,7 +254,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v3
+  version: v6
   count: 2
 - name: mongo-backup@.service
   version: v20.0.0

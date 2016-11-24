@@ -106,7 +106,7 @@ services:
   count: 1
 - name: concept-suggestion-api@.service
   count: 1
-  version: v5
+  version: v10
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
@@ -547,7 +547,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.15
+  version: addPeopleMajorMentions
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1

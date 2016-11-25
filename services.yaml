@@ -229,6 +229,7 @@ services:
   count: 2
 - name: list-notifications-rw@.service
   version: v0.1.1
+  count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service

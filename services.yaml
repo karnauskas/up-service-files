@@ -220,6 +220,17 @@ services:
   count: 1
 - name: load-replicator-sidekick@.service
   count: 1
+- name: list-notifications-ingester-sidekick@.service
+  count: 2
+- name: list-notifications-ingester@.service
+  version: v52
+  count: 2
+- name: list-notifications-rw-sidekick@.service
+  count: 2
+- name: list-notifications-rw@.service
+  version: v0.1.1
+  count: 2
+  sequentialDeployment: true
 - name: locations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: locations-rw-neo4j-blue@.service

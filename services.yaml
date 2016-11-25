@@ -229,6 +229,10 @@ services:
   count: 2
 - name: list-notifications-rw@.service
   version: v0.1.1
+- name: list-notifications-push-sidekick@.service
+  count: 2
+- name: list-notifications-push@.service
+  version: v3.0.3
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-blue-sidekick@.service
@@ -573,7 +577,7 @@ services:
   version: v35
   count: 1
 - name: varnish@.service
-  version: v0.0.4
+  version: v0.1.0
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

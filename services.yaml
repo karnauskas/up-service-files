@@ -368,11 +368,6 @@ services:
   version: 0.0.17
   count: 2
   sequentialDeployment: true
-- name: publish-availability-monitor-sidekick@.service
-  count: 1
-- name: publish-availability-monitor@.service
-  version: v0.20.1
-  count: 1
 - name: rec-reads-content-ingester@.service
   version: v57
   count: 1
@@ -496,7 +491,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.15
+  version: addAboutRelationship
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1

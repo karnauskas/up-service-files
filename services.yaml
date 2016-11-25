@@ -406,11 +406,6 @@ services:
   version: 0.0.17
   count: 2
   sequentialDeployment: true
-- name: publish-availability-monitor-sidekick@.service
-  count: 1
-- name: publish-availability-monitor@.service
-  version: v0.20.1
-  count: 1
 - name: rec-reads-content-annotator@.service
   version: v44
   count: 1

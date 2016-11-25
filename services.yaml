@@ -47,24 +47,14 @@ services:
 - name: burrow@.service
   version: v1.0.1
   count: 1
-- name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
+- name: cms-kafka-bridge-pub-semantic-sidekick@.service
   count: 2
-- name: cms-kafka-bridge-pub-prod-uk@.service
+- name: cms-kafka-bridge-pub-semantic@.service
   version: v14.0.0
   count: 2
-- name: cms-kafka-bridge-pub-prod-us-sidekick@.service
+- name: cms-metadata-kafka-bridge-pub-semantic-sidekick@.service
   count: 2
-- name: cms-kafka-bridge-pub-prod-us@.service
-  version: v14.0.0
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: v14.0.0
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-us@.service
+- name: cms-metadata-kafka-bridge-pub-semantic@.service
   version: v14.0.0
   count: 2
 - name: cms-notifier-sidekick@.service
@@ -87,9 +77,9 @@ services:
 - name: concept-suggestion-api@.service
   count: 1
   version: v10
-- name: concepts-kafka-bridge-pub-prod-sidekick@.service
+- name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-prod@.service
+- name: concepts-kafka-bridge-pub-semantic@.service
   version: v14.0.0
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service

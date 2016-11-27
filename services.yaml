@@ -82,11 +82,17 @@ services:
 - name: concept-ingester-red@.service
   version: v1.1.8
   count: 1
+- name: concept-rw-elasticsearch-sidekick@.service
+  count: 2
+- name: concept-rw-elasticsearch@.service
+  version: v0.0.1
+  count: 2
+  sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  count: 1
   version: v10
+  count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
@@ -143,12 +149,6 @@ services:
   count: 2
 - name: document-store-api@.service
   version: v86
-  count: 2
-  sequentialDeployment: true
-- name: concept-rw-elasticsearch-sidekick@.service
-  count: 2
-- name: concept-rw-elasticsearch@.service
-  version: v0.0.1
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -389,15 +389,15 @@ services:
 - name: publish-availability-monitor@.service
   version: v0.20.1
   count: 1
-- name: rec-reads-content-ingester@.service
-  version: v57
-  count: 1
-- name: rec-reads-content-ingester-sidekick@.service
+- name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
   version: v44
   count: 1
-- name: rec-reads-content-annotator-sidekick@.service
+- name: rec-reads-content-ingester-sidekick@.service
+  count: 1
+- name: rec-reads-content-ingester@.service
+  version: v57
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

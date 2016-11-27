@@ -1,7 +1,7 @@
 [Unit]
-Description=Elasticsearch MVP Service Sidekick
-BindsTo=elasticsearch-mvp@%i.service
-After=elasticsearch-mvp@%i.service
+Description=Concept RW Elasticsearch Service Sidekick
+BindsTo=concept-rw-elasticsearch@%i.service
+After=concept-rw-elasticsearch@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/elasticsearch-mvp/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/concept-rw-elasticsearch/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=elasticsearch-mvp@%i.service
+MachineOf=concept-rw-elasticsearch@%i.service

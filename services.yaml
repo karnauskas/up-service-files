@@ -145,10 +145,10 @@ services:
   version: v86
   count: 2
   sequentialDeployment: true
-- name: elasticsearch-mvp-sidekick@.service
+- name: concept-rw-elasticsearch-sidekick@.service
   count: 2
-- name: elasticsearch-mvp@.service
-  version: v0.0.3
+- name: concept-rw-elasticsearch@.service
+  version: v0.0.1
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

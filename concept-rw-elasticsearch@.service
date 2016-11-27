@@ -1,8 +1,8 @@
 [Unit]
-Description=Elasticsearch MVP Service
+Description=Concept RW Elasticsearch Service
 After=vulcan.service
 Requires=docker.service
-Wants=elasticsearch-mvp-sidekick@%i.service
+Wants=concept-rw-elasticsearch-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -11,8 +11,8 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/elasticsearch-mvp:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || /usr/bin/docker pull coco/elasticsearch-mvp:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/concept-rw-elasticsearch:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull coco/concept-rw-elasticsearch:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_elastic_access_key_id); \
@@ -28,11 +28,11 @@ ExecStart=/bin/sh -c '\
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
   -e "ELASTICSEARCH_REGION=$ELASTICSEARCH_REGION" \
-  coco/elasticsearch-mvp:$DOCKER_APP_VERSION;'
+  coco/concept-rw-elasticsearch:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=elasticsearch-mvp@*.service
+Conflicts=concept-rw-elasticsearch@*.service

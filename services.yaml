@@ -24,7 +24,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v97
+  version: process-binaries
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -263,6 +263,11 @@ services:
 - name: methode-content-importer@.service
   version: no-wordpress
   count: 2
+- name: methode-image-binary-mapper-sidekick@.service
+  count: 2
+- name: methode-image-binary-mapper@.service
+  version: first-test
+  count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service
@@ -418,20 +423,15 @@ services:
   version: 0.0.17
   count: 2
   sequentialDeployment: true
-- name: publish-availability-monitor-sidekick@.service
+- name: rec-reads-content-ingester@.service
+  version: v57
   count: 1
-- name: publish-availability-monitor@.service
-  version: v0.20.1
-  count: 1
-- name: rec-reads-content-annotator-sidekick@.service
+- name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
   version: v44
   count: 1
-- name: rec-reads-content-ingester-sidekick@.service
-  count: 1
-- name: rec-reads-content-ingester@.service
-  version: v57
+- name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

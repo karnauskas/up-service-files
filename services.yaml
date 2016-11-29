@@ -75,7 +75,7 @@ services:
 - name: concept-ingester-blue-sidekick@.service
   count: 1
 - name: concept-ingester-blue@.service
-  version: v1.1.8
+  version: ingest-into-elastic
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1

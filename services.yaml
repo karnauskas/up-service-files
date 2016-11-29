@@ -472,7 +472,7 @@ services:
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-blue@.service
-  version: croman-3
+  version: croman-2
   count: 1
 - name: v1-content-annotator-binding-service-red-sidekick@.service
   count: 1

@@ -9,10 +9,6 @@ services:
   count: 1
 - name: all-roads@.service
   count: 1
-- name: ml-comments-sidekick@.service
-  count: 1
-- name: ml-comments@.service
-  count: 1
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: alphaville-series-rw-neo4j-blue@.service

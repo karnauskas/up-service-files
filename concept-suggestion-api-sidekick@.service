@@ -1,7 +1,7 @@
 [Unit]
-Description=Publish Availability Monitor sidekick
-BindsTo=publish-availability-monitor@%i.service
-After=publish-availability-monitor@%i.service
+Description=Concept Suggestion Api Service Sidekick
+BindsTo=concept-suggestion-api@%i.service
+After=concept-suggestion-api@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -10,7 +10,6 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories lists-publish,image-publish; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -18,10 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/publish-availability-monitor/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/concept-suggestion-api/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=publish-availability-monitor@%i.service
-
+MachineOf=concept-suggestion-api@%i.service

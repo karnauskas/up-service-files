@@ -1,5 +1,5 @@
 [Unit]
-Description=CMS Metadata Kafka Bridge Publishing Cluster Pre Prod
+Description=CMS Metadata Kafka Bridge Publishing Cluster Pre Prod UK
 After=vulcan.service
 Requires=docker.service
 Wants=cms-metadata-kafka-bridge-pub-pre-prod-uk-sidekick@%i.service

@@ -107,9 +107,13 @@ services:
 - name: concept-suggestion-api@.service
   count: 1
   version: v17
-- name: concepts-kafka-bridge-pub-pre-prod-sidekick@.service
+- name: concepts-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-pre-prod@.service
+- name: concepts-kafka-bridge-pub-pre-prod-uk@.service
+  version: v14.0.0
+- name: concepts-kafka-bridge-pub-pre-prod-us-sidekick@.service
+  count: 1
+- name: concepts-kafka-bridge-pub-pre-prod-us@.service
   version: v14.0.0
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service

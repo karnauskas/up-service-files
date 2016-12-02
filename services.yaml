@@ -387,7 +387,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.17
+  version: v0.0.19
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -525,12 +525,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v1-annotations-rw-blue@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v1-annotations-rw-red-sidekick@.service
   count: 1
 - name: v1-annotations-rw-red@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -565,17 +565,17 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.16
+  version: v0.0.17
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v2-annotations-rw-blue@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v2-annotations-rw-red-sidekick@.service
   count: 1
 - name: v2-annotations-rw-red@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1

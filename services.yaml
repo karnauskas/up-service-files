@@ -113,6 +113,7 @@ services:
 - name: concept-suggestion-api@.service
   count: 1
   version: v17
+- name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
   version: v14.0.0

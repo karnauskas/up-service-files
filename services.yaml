@@ -112,8 +112,7 @@ services:
   count: 1
 - name: concept-suggestion-api@.service
   count: 1
-  version: v11
-- name: concepts-kafka-bridge-pub-xp-sidekick@.service
+  version: v17
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
   version: v14.0.0
@@ -270,10 +269,15 @@ services:
 - name: methode-article-transformer@.service
   version: v86
   count: 2
+- name: methode-article-mapper-sidekick@.service
+  count: 2
+- name: methode-article-mapper@.service
+  version: v1.0.4
+  count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v62
+  version: v63
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -390,7 +394,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.17
+  version: v0.0.19
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -518,67 +522,67 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v1-annotations-rw-blue@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v1-annotations-rw-red-sidekick@.service
   count: 1
 - name: v1-annotations-rw-red@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-blue@.service
-  version: v35
+  version: v53
   count: 1
 - name: v1-content-annotator-binding-service-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-red@.service
-  version: v35
+  version: v53
   count: 1
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service
-  version: v35
+  version: v53
   count: 1
 - name: v1-content-annotator-brightcove-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-blue@.service
-  version: v35
+  version: v53
   count: 1
 - name: v1-content-annotator-brightcove-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-red@.service
-  version: v35
+  version: v53
   count: 1
 - name: v1-content-annotator-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-red@.service
-  version: v35
+  version: v53
   count: 1
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: addPeopleMajorMentions
+  version: v0.0.17
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v2-annotations-rw-blue@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v2-annotations-rw-red-sidekick@.service
   count: 1
 - name: v2-annotations-rw-red@.service
-  version: v0.1.6
+  version: v0.1.7
   count: 1
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
 - name: v2-content-annotator-blue@.service
-  version: v35
+  version: v53
   count: 1
 - name: v2-content-annotator-red-sidekick@.service
   count: 1
 - name: v2-content-annotator-red@.service
-  version: v35
+  version: v53
   count: 1
 - name: varnish@.service
   version: v0.0.4

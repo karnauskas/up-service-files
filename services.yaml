@@ -275,11 +275,6 @@ services:
 - name: methode-content-importer@.service
   version: v62
   count: 2
-- name: methode-image-binary-mapper-sidekick@.service
-  count: 2
-- name: methode-image-binary-mapper@.service
-  version: first-test
-  count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service

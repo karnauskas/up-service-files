@@ -277,7 +277,7 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v64
+  version: v65
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

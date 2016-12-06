@@ -29,7 +29,7 @@ services:
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: v48
+  version: logs
   count: 2
 - name: brands-rw-neo4j-blue-sidekick@.service
   count: 1

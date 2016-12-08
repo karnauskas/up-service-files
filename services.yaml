@@ -193,6 +193,22 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
+- name: list-notifications-push-sidekick@.service
+  count: 2
+- name: list-notifications-push@.service
+  version: v3.0.3
+  count: 2
+- name: list-notifications-ingester-sidekick@.service
+  count: 2
+- name: list-notifications-ingester@.service
+  version: v52
+  count: 2
+- name: list-notifications-rw-sidekick@.service
+  count: 2
+- name: list-notifications-rw@.service
+  version: v0.1.1
+  count: 2
+  sequentialDeployment: true
 - name: locations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: locations-rw-neo4j-blue@.service
@@ -221,17 +237,27 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v57
+  version: v59
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service
   version: v24
   count: 2
+- name: methode-image-model-mapper-sidekick@.service
+  count: 2
+- name: methode-image-model-mapper@.service
+  version: v16.0.0
+  count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
 - name: methode-image-model-transformer@.service
   version: v46
+  count: 2
+- name: methode-image-set-mapper-sidekick@.service
+  count: 2
+- name: methode-image-set-mapper@.service
+  version: v9.0.0
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -341,13 +367,13 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v0.0.10
+  version: v0.1.0
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: v0.1.5
+  version: v0.1.6
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
@@ -491,7 +517,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.17
+  version: v0.0.18
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
@@ -514,7 +540,7 @@ services:
   version: v53
   count: 1
 - name: varnish@.service
-  version: v0.0.4
+  version: v0.1.0
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

@@ -308,7 +308,7 @@ services:
   version: v6
   count: 2
 - name: mongo-backup@.service
-  version: v20.0.0
+  version: v20.0.1
   count: 3
   desiredState: loaded
 - name: mongo-backup@.timer

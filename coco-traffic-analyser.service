@@ -1,0 +1,27 @@
+[Unit]
+Description=COCO Traffic Analyser
+After=vulcan.service
+Requires=docker.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p_)" >/dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p_)" >/dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/coco-traffic-analyser:$DOCKER_APP_VERSION >/dev/null 2>&1 \
+  || docker pull coco/coco-traffic-analyser:$DOCKER_APP_VERSION'
+ExecStart=/bin/bash -c "\
+/usr/bin/docker run --rm --name %p_$(uuidgen) -p $PORT \
+--memory="256m" \
+--env "INTERFACE=docker0" \
+coco/coco-traffic-analyser:$DOCKER_APP_VERSION;'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Global=true

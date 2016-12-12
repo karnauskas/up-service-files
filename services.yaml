@@ -127,6 +127,7 @@ services:
 - name: content-rw-neo4j-red@.service
   version: v0.0.36
   count: 1
+- name: coco-traffic-analyser.service
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
   version: v1.0.0
@@ -269,7 +270,7 @@ services:
   version: v6
   count: 2
 - name: mongo-backup@.service
-  version: v20.0.0
+  version: v20.0.1
   count: 3
   desiredState: loaded
 - name: mongo-backup@.timer
@@ -371,7 +372,7 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v0.0.10
+  version: v0.1.0
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
@@ -531,7 +532,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.17
+  version: v0.0.18
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1

@@ -135,6 +135,7 @@ services:
 - name: content-rw-neo4j-red@.service
   version: v0.0.36
   count: 1
+- name: coco-traffic-analyser.service
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
   version: v1.0.0

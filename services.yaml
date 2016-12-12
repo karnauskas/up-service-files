@@ -288,6 +288,7 @@ services:
 - name: mongodb-sidekick@.service
   count: 3
 - name: mongodb@.service
+  version: v3.0.2
   count: 3
   sequentialDeployment: true
 - name: nativerw-sidekick@.service

@@ -16,7 +16,6 @@ ExecStartPre=/bin/bash -c 'docker history coco/coco-traffic-analyser:$DOCKER_APP
 ExecStart=/bin/bash -c "\
 /usr/bin/docker run --rm --name %p_$(uuidgen) -p $PORT \
 --memory="256m" \
---env "INTERFACE=docker0" \
 coco/coco-traffic-analyser:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'

@@ -17,8 +17,8 @@ ExecStart=/bin/sh -c '\
   export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
   export ELASTICSEARCH_ENDPOINT=$(/usr/bin/etcdctl get /ft/config/aws_es_endpoint); \
   export ELASTICSEARCH_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
-  export ELASTICSEARCH_INDEX=concept \
-  export RESULT_LIMIT=50 \
+  export ELASTICSEARCH_INDEX=concept; \
+  export RESULT_LIMIT=50; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
   --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \

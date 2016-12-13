@@ -550,7 +550,7 @@ services:
   version: v53
   count: 1
 - name: varnish@.service
-  version: v0.1.0
+  version: concept-search-api-routing
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

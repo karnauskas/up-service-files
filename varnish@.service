@@ -21,7 +21,8 @@ ExecStart=/bin/bash -c '\
   docker run --rm --name %p-%i_$(uuidgen) -p 80:80 \
   -e "VARNISH_BACKEND_HOST=%H" \
   -e "VARNISH_BACKEND_PORT=8080" \
-  -e "NOTIFICATIONS_PUSH_PORT=8548" \
+  -e "CONTENT_NOTIFICATIONS_PUSH_PORT=8548" \
+  -e "LIST_NOTIFICATIONS_PUSH_PORT=8549" \
   -e "HOST_HEADER=api-policy-component" \
   -e "ETCD_HOST=$ETCD_HOST" \
   -e "ETCD_CONFIG_KEY=$ETCD_CONFIG_KEY" \

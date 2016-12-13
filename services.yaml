@@ -234,15 +234,15 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
-- name: list-notifications-push-sidekick@.service
-  count: 2
-- name: list-notifications-push@.service
-  version: v3.0.3
-  count: 2
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
   version: v52
+  count: 2
+- name: list-notifications-push-sidekick@.service
+  count: 2
+- name: list-notifications-push@.service
+  version: v3.0.3
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2

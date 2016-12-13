@@ -265,7 +265,7 @@ services:
   version: v6
   count: 2
 - name: mongo-backup@.service
-  version: v20.0.0
+  version: v20.0.1
   count: 3
   desiredState: loaded
 - name: mongo-backup@.timer
@@ -317,7 +317,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v2.4.17
+  version: v3.0.3
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -355,7 +355,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v0.0.8
+  version: v0.0.9
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service

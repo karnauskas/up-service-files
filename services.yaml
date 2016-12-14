@@ -111,6 +111,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
+  count: 1
   version: v17
 - name: concepts-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 1

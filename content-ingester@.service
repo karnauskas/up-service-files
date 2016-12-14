@@ -26,6 +26,7 @@ ExecStart=/bin/sh -c '\
   export WHITELIST="^http://(methode|wordpress|brightcove)(-article|-image-model|-list|-image|-video-model)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|image/model|image-set/model|lists|video/model)/[\\w-]+.*$"; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Document Store"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Document Store returns a 200 response"; \
+  export UPP_GATEWAY_PATH=""; \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
@@ -35,7 +36,7 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
       --env "KAFKA_GROUPNAME=content" \
       --env "KAFKA_SYSTEM_ID=ContentIngester" \
-      --env "UPP_GATEWAY_PATH=" \
+      --env "UPP_GATEWAY_PATH=$UPP_GATEWAY_PATH" \
       --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \

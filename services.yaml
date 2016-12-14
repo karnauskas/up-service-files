@@ -136,7 +136,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v58
+  version: v52
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -412,7 +412,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v0.0.9
+  version: v0.0.8
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service

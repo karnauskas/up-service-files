@@ -105,7 +105,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v52
+  version: v58
   count: 2
 - name: content-preview-sidekick@.service
   count: 2

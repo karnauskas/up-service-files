@@ -285,12 +285,16 @@ services:
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
+<<<<<<< HEAD
   version: v59
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
   version: v1.0.0
+=======
+  version: v62
+>>>>>>> wordpress-article-mapper
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -616,10 +620,10 @@ services:
   version: v1.3.5
 - name: vulcan.service
   version: v1.2.3
-- name: wordpress-article-transformer-sidekick@.service
+- name: wordpress-article-mapper-sidekick@.service
   count: 2
-- name: wordpress-article-transformer@.service
-  version: v91
+- name: wordpress-article-mapper@.service
+  version: v1.0.3
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

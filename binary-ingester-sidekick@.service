@@ -24,4 +24,3 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=binary-ingester@%i.service
-

@@ -619,4 +619,4 @@ services:
 - name: wordpress-image-mapper@.service
   version: v32
   count: 2
-- name: zookeeper.servicecsapi-routing
+- name: zookeeper.service

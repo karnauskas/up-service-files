@@ -79,8 +79,8 @@ services:
   version: v17
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-semantic@.service
-  version: v14.0.0
+- name: concepts-kafka-bridge-semantic@.service
+  version: v14.0.1
   count: 1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1

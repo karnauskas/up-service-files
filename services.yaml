@@ -54,12 +54,12 @@ services:
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
-  version: v14.0.0
+  version: v14.0.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
-  version: v14.0.0
+  version: v14.0.1
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -83,7 +83,7 @@ services:
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
   count: 1
-  version: v14.0.0
+  version: v14.0.1
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
@@ -206,7 +206,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.3
+  version: v3.0.4
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -322,7 +322,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.3
+  version: v3.0.4
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -360,7 +360,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v0.0.8
+  version: v0.0.9
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
@@ -378,7 +378,7 @@ services:
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: v0.1.6-rc1
+  version: v0.1.6
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service

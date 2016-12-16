@@ -1,8 +1,8 @@
 [Unit]
-Description=Public Six Degrees Service
+Description=Public Six Degrees Api Service
 After=vulcan.service
 Requires=docker.service
-Wants=public-six-degrees-sidekick@%i.service
+Wants=public-six-degrees-api-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c '\
   -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" \
   -e "APP_PORT=$APP_PORT" \
   -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-  -e "GRAPHITE_PREFIX=coco.services.$ENV.public-six-degrees.%i" \
+  -e "GRAPHITE_PREFIX=coco.services.$ENV.public-six-degrees-api.%i" \
   -e "LOG_METRICS=false" \
   -e "CACHE_DURATION=24h" \
   coco/public-six-degrees:$DOCKER_APP_VERSION;'
@@ -32,4 +32,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=public-six-degrees@*.service
+Conflicts=public-six-degrees-api@*.service

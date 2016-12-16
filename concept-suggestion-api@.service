@@ -6,6 +6,7 @@ Wants=concept-suggestion-api-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment="APP_PORT=8080"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
@@ -15,13 +16,20 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/conce
   || /usr/bin/docker pull up-registry.ft.com/coco/concept-suggestion-api:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  export APP_PORT=8080; \
-  export CES_ENDPOINT="$(/usr/bin/etcdctl get /ft/_credentials/ces/endpoint)"; \
+  export CES_HOST="$(/usr/bin/etcdctl get /ft/config/ces/host)"; \
+  export CES_CREDENTIALS="$(/usr/bin/etcdctl get /ft/_credentials/ces/auth)"; \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "JAVA_OPTS=$JAVA_OPTS" \
-  --env "CES_ENDPOINT=$CES_ENDPOINT" \
+  --env "CES_HOST=$CES_HOST" \
+  --env "CES_CREDENTIALS=$CES_CREDENTIALS" \
+  --env "CES_ENDPOINT=/worker/extract" \
+  --env "CES_PING=/worker/admin/ping" \
   --env "KAFKA_ADDRESS=%H:8080" \
+  --env "GRAPHITE_HOST=graphite.ft.com" \
+  --env "GRAPHITE_PORT=2003" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.concept-suggestion-api.%i" \
   up-registry.ft.com/coco/concept-suggestion-api:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

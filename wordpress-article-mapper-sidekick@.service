@@ -1,7 +1,7 @@
 [Unit]
-Description=Public Six Degrees Service Sidekick
-BindsTo=public-six-degrees@%i.service
-After=public-six-degrees@%i.service
+Description=Wordpress article mapper sidekick
+BindsTo=wordpress-article-mapper@%i.service
+After=wordpress-article-mapper@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -10,9 +10,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories read; \
-  etcdctl set   /ft/services/$SERVICE/path-regex/public-services /sixdegrees/.*$; \
-  etcdctl set   /ft/services/$SERVICE/path-host/public-services public-services; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories content-publish; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -20,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/public-six-degrees/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/wordpress-article-mapper/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=public-six-degrees@%i.service
+MachineOf=wordpress-article-mapper@%i.service

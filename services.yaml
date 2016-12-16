@@ -81,8 +81,6 @@ services:
 - name: concept-suggestion-api@.service
   count: 1
   version: v20
-- name: concepts-kafka-bridge-pub-prod-sidekick@.service
-  count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
   count: 1
   version: v14.0.1

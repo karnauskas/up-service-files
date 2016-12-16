@@ -1,7 +1,7 @@
 [Unit]
-Description=Public Six Degrees Service Sidekick
-BindsTo=public-six-degrees@%i.service
-After=public-six-degrees@%i.service
+Description=Public Six Degrees Api Service Sidekick
+BindsTo=public-six-degrees-api@%i.service
+After=public-six-degrees-api@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -20,9 +20,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/public-six-degrees/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/public-six-degrees-api/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=public-six-degrees@%i.service
+MachineOf=public-six-degrees-api@%i.service

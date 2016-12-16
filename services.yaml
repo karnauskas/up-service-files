@@ -244,10 +244,15 @@ services:
 - name: methode-article-transformer@.service
   version: v86
   count: 2
+- name: methode-article-mapper-sidekick@.service
+  count: 2
+- name: methode-article-mapper@.service
+  version: v1.0.7
+  count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v62
+  version: v65
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2

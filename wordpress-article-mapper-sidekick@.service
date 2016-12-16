@@ -1,7 +1,7 @@
 [Unit]
-Description=Wordpress article transformer sidekick
-BindsTo=wordpress-article-transformer@%i.service
-After=wordpress-article-transformer@%i.service
+Description=Wordpress article mapper sidekick
+BindsTo=wordpress-article-mapper@%i.service
+After=wordpress-article-mapper@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/wordpress-article-transformer/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/wordpress-article-mapper/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=wordpress-article-transformer@%i.service
+MachineOf=wordpress-article-mapper@%i.service

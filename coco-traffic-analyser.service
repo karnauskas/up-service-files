@@ -13,7 +13,7 @@ ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p_)" >/de
 ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p_)" >/dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/coco-traffic-analyser:$DOCKER_APP_VERSION >/dev/null 2>&1 \
   || docker pull coco/coco-traffic-analyser:$DOCKER_APP_VERSION'
-ExecStart=/bin/bash -c "\
+ExecStart=/bin/bash -c '\
 export PORT=8080; \
 /usr/bin/docker run --rm --name %p_$(uuidgen) -p $PORT \
 --memory="256m" \

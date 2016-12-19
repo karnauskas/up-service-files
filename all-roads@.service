@@ -20,7 +20,6 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "SUGGESTOR_HOST=$HOSTNAME" \
-  --env "MOCK_SUGGESTOR_API=false" \
   --env "CONTENT_API_AUTH_KEY=$(etcdctl get /ft/_credentials/hackathon/all/roads/api_key)" \
   coco/hackathon-all-roads-service:$DOCKER_APP_VERSION'
 

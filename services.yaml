@@ -5,10 +5,6 @@ services:
   version: v1.1.10
   count: 2
   sequentialDeployment: true
-- name: all-roads-sidekick@.service
-  count: 1
-- name: all-roads@.service
-  count: 1
 - name: alphaville-series-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: alphaville-series-rw-neo4j-blue@.service

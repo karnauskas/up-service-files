@@ -245,6 +245,11 @@ services:
 - name: methode-content-importer@.service
   version: v65
   count: 2
+- name: methode-content-placeholder-mapper-sidekick@.service
+  count: 2
+- name: methode-content-placeholder-mapper@.service
+  version: v0.0.1-alpha
+  count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
 - name: methode-image-binary-transformer@.service

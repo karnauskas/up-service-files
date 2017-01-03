@@ -21,7 +21,6 @@ ExecStart=/bin/sh -c '\
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   export WHITELIST="^http://(methode-article)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$"; \
-
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "CES_HOST=$CES_HOST" \

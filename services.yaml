@@ -112,8 +112,13 @@ services:
   count: 1
 - name: concept-suggestion-api@.service
   count: 1
+<<<<<<< HEAD
   version: skip-binaries
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
+=======
+  version: v23
+- name: concepts-kafka-bridge-pub-prod-sidekick@.service
+>>>>>>> methode-image-binary-mapper
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
   version: v14.0.1

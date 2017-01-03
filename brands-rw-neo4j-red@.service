@@ -16,11 +16,12 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/brands-rw-neo4j:$DOCKER_
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/brands-rw-neo4j/batchsize); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
   --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-red/db/data" \
   --env "APP_PORT=$APP_PORT" \
-  --env "BATCH_SIZE=60" \
+  --env "BATCH_SIZE=$BATCH_SIZE" \
   --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.brands-rw-neo4j-red.%i" \
   coco/brands-rw-neo4j:$DOCKER_APP_VERSION;'

@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.0.0
+  version: v63.1.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -298,7 +298,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.0
+  version: v16.0.1-rc1
   count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2

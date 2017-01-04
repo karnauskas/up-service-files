@@ -12,7 +12,7 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/mongodb:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/mongodb:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history coco/coco-mongodb:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/coco-mongodb:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c "\
   MONGO_PORT=27017;\
@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c "\
   -v /vol/mongodb:/data/db \
   -p $(( $MONGO_PORT + %i )):$MONGO_PORT \
   -p $(( $MONGO_ADMIN_PORT + %i )):$MONGO_ADMIN_PORT \
-  coco/mongodb:$DOCKER_APP_VERSION;"
+  coco/coco-mongodb:$DOCKER_APP_VERSION;"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

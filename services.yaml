@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.0.0
+  version: v63.1.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -234,10 +234,15 @@ services:
 - name: methode-article-transformer@.service
   version: v86
   count: 2
+- name: methode-article-mapper-sidekick@.service
+  count: 2
+- name: methode-article-mapper@.service
+  version: v1.0.7
+  count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
-  version: v62
+  version: v65
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -278,6 +283,7 @@ services:
 - name: mongodb-sidekick@.service
   count: 3
 - name: mongodb@.service
+  version: v3.0.2
   count: 3
   sequentialDeployment: true
 - name: nativerw-sidekick@.service
@@ -323,7 +329,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v54
+  version: v55
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
@@ -551,7 +557,7 @@ services:
 - name: vulcan-config-builder.service
   version: v1.3.5
 - name: vulcan.service
-  version: v1.2.2
+  version: v1.2.3
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service

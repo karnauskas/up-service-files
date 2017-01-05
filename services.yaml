@@ -246,15 +246,15 @@ services:
   count: 1
 - name: load-replicator-sidekick@.service
   count: 1
-- name: list-notifications-push-sidekick@.service
-  count: 2
-- name: list-notifications-push@.service
-  version: v3.0.4
-  count: 2
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
   version: v52
+  count: 2
+- name: list-notifications-push-sidekick@.service
+  count: 2
+- name: list-notifications-push@.service
+  version: v3.0.4
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -301,7 +301,7 @@ services:
   count: 2
 - name: methode-content-placeholder-mapper@.service
   version: v0.0.2
-  count: 2 
+  count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service

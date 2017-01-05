@@ -10,8 +10,8 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps --filter=name=%p-%i_ --format "{{ .Names }}" | grep ^%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps --filter=name=%p-%i_ --format "{{ .Names }}" | grep ^%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c "docker history up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION > /dev/null 2>&1 \
   || docker pull up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION"
 
@@ -27,7 +27,7 @@ ExecStart=/bin/sh -c '\
     --env "CACHE_TTL=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \
     up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION;'
 
-ExecStop=-/bin/bash -c 'docker stop -t $(( $(/usr/bin/etcdctl get /ft/config/cache-max-age) + 1 )) "$(docker ps --filter=name=%p-%i_ --format "{{ .Names }}" | grep ^%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t $(( $(/usr/bin/etcdctl get /ft/config/cache-max-age) + 1 )) "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

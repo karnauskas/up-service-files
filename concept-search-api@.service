@@ -1,0 +1,36 @@
+[Unit]
+Description=Concept Search API
+After=vulcan.service
+Requires=docker.service
+Wants=concept-search-api-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/concept-search-api:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/concept-search-api:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
+  export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
+  export ELASTICSEARCH_ENDPOINT=$(/usr/bin/etcdctl get /ft/config/aws_es_endpoint); \
+  export ELASTICSEARCH_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
+  export ELASTICSEARCH_INDEX=concept; \
+  export RESULT_LIMIT=50; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+  --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+  --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
+  --env "ELASTICSEARCH_ENDPOINT=$ELASTICSEARCH_ENDPOINT" \
+  --env "ELASTICSEARCH_REGION=$ELASTICSEARCH_REGION" \
+  --env "ELASTICSEARCH_INDEX=$ELASTICSEARCH_INDEX" \
+  --env "RESULT_LIMIT=$RESULT_LIMIT" \
+  coco/concept-search-api:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

@@ -11,8 +11,8 @@ TimeoutStartSec=0
 # work correctly.
 KillMode=none
 MemoryLimit=1G
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps --filter=name=%p-%i_ --format "{{ .Names }}" | grep ^%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps --filter=name=%p-%i_ --format "{{ .Names }}" | grep ^%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 \
   || /usr/bin/docker pull up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
@@ -44,7 +44,7 @@ ExecStart=/bin/sh -c '\
       --env "MESSAGE_FORWARDING_ENABLED=false" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps --filter=name=%p-%i_ --format "{{ .Names }}" | grep ^%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

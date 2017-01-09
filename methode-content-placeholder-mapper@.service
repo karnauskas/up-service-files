@@ -1,0 +1,34 @@
+[Unit]
+Description=Methode Content Placeholder Mapper
+After=vulcan.service
+Requires=docker.service
+Wants=methode-content-placeholder-mappercms-notifier-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/methode-content-placeholder-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/methode-content-placeholder-mapper:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/bash -c '\
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-methode-content-placeholder-mapper"; \
+	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+	--memory="256m" \
+	--env "Q_READ_ADDR=http://%H:8080" \
+  --env "Q_WRITE_ADDR=http://%H:8080" \
+	--env "Q_GROUP=$GROUP_ID" \
+	--env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
+	--env "Q_WRITE_TOPIC=CmsPublicationEvents" \
+	coco/methode-content-placeholder-mapper:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

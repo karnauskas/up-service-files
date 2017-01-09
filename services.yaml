@@ -24,7 +24,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: test-content
+  version: v59
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -288,7 +288,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: v1.0.1-rc1
+  version: v1.0.1
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2

@@ -557,7 +557,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.18
+  version: v0.1.1
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
@@ -595,11 +595,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.4
+  version: v1.0.5
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v32
+  version: v34
   count: 2
 - name: zookeeper.service

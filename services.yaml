@@ -86,8 +86,8 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
+  version: v27
   count: 1
-  version: v20
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-semantic@.service

@@ -142,13 +142,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v53
+  version: v54
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v53
+  version: v54
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -284,6 +284,11 @@ services:
   count: 2
 - name: methode-content-importer@.service
   version: v65
+  count: 2
+- name: methode-content-placeholder-mapper-sidekick@.service
+  count: 2
+- name: methode-content-placeholder-mapper@.service
+  version: v0.0.3
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -569,7 +574,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.18
+  version: v0.1.1
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1

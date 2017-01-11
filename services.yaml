@@ -85,7 +85,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: v0.0.9
+  version: v0.0.10
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service

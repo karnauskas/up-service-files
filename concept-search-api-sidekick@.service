@@ -1,13 +1,13 @@
 [Unit]
-Description=List Notifications Ingester Sidekick
-BindsTo=list-notifications-ingester@%i.service
-After=list-notifications-ingester@%i.service
+Description=Concept Search API Sidekick
+BindsTo=concept-search-api@%i.service
+After=concept-search-api@%i.service
 
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl set ft/services/$SERVICE/healthcheck true; \
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
@@ -17,9 +17,9 @@ export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/list-notifications-ingester/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concept-search-api/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=list-notifications-ingester@%i.service
+MachineOf=concept-search-api@%i.service

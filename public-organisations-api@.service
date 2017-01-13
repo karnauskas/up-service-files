@@ -21,7 +21,7 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
   --memory="256m" \
   -p $APP_PORT \
-  -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" \
+  -e "NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_url)" \
   -e "APP_PORT=$APP_PORT" \
   -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
   -e "GRAPHITE_PREFIX=coco.services.$ENV.public-organisations-api.%i" \

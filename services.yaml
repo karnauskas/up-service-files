@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.0.0
+  version: v63.1.3
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -34,12 +34,12 @@ services:
 - name: brands-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-blue@.service
-  version: v0.1.3
+  version: v0.1.5
   count: 1
 - name: brands-rw-neo4j-red-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-red@.service
-  version: v0.1.3
+  version: v0.1.5
   count: 1
   sequentialDeployment: true
 - name: burrow-sidekick@.service
@@ -75,18 +75,29 @@ services:
 - name: concept-ingester-blue-sidekick@.service
   count: 1
 - name: concept-ingester-blue@.service
-  version: v1.1.8
+  version: v2.0.0
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
-  version: v1.1.8
+  version: v2.0.0
   count: 1
+- name: concept-rw-elasticsearch-sidekick@.service
+  count: 2
+- name: concept-rw-elasticsearch@.service
+  version: v0.0.10
+  count: 2
+  sequentialDeployment: true
+- name: concept-search-api-sidekick@.service
+  count: 2
+- name: concept-search-api@.service
+  version: v1.0.5
+  count: 2
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  count: 1
   version: v25
+  count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
@@ -116,13 +127,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v53
+  version: v54
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v53
+  version: v54
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -203,15 +214,15 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
-- name: list-notifications-push-sidekick@.service
-  count: 2
-- name: list-notifications-push@.service
-  version: v3.0.4
-  count: 2
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
   version: v52
+  count: 2
+- name: list-notifications-push-sidekick@.service
+  count: 2
+- name: list-notifications-push@.service
+  version: v3.0.4
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -254,6 +265,10 @@ services:
 - name: methode-content-importer@.service
   version: v65
   count: 2
+- name: methode-content-placeholder-mapper-sidekick@.service
+  count: 2
+- name: methode-content-placeholder-mapper@.service
+  version: v0.0.3
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
@@ -415,15 +430,15 @@ services:
   version: 0.0.17
   count: 2
   sequentialDeployment: true
-- name: rec-reads-content-ingester@.service
-  version: v57
-  count: 1
-- name: rec-reads-content-ingester-sidekick@.service
+- name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
   version: v44
   count: 1
-- name: rec-reads-content-annotator-sidekick@.service
+- name: rec-reads-content-ingester-sidekick@.service
+  count: 1
+- name: rec-reads-content-ingester@.service
+  version: v57
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -538,7 +553,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.18
+  version: v0.1.1
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
@@ -561,7 +576,7 @@ services:
   version: v53
   count: 1
 - name: varnish@.service
-  version: v0.1.0
+  version: v0.1.3
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service
@@ -576,7 +591,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.3
+  version: v1.0.4
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

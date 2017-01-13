@@ -24,7 +24,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v58
+  version: v59
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -116,8 +116,8 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
+  version: v25
   count: 1
-  version: v20
 - name: concepts-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-pre-prod-uk@.service
@@ -305,7 +305,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2

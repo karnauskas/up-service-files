@@ -18,7 +18,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/methode-article-mapper:$DOCKER_AP
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "VULCAN_HOST=%H:8080" \
-  --env "CONSUMER_GROUP_NAME=MethodeArticleInternalContentComponentsMapper" \
+  --env "CONSUMER_GROUP_NAME=MethodeArticleInternalComponentsMapper" \
   --env "INTERNAL_CONTENT_COMPONTENT_MAPPER=true" \
   --env "CONTENT_URI_PREFIX=http://methode-article-internal-components-mapper.svc.ft.com/internalcomponents" \
   coco/methode-article-mapper:$DOCKER_APP_VERSION'

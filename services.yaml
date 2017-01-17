@@ -283,7 +283,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.0
+  version: v16.0.1
   count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2

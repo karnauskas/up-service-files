@@ -153,7 +153,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: rj-rc1
+  version: rj-rc2
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

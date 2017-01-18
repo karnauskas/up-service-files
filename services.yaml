@@ -152,13 +152,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v54
+  version: v55
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v54
+  version: v55
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -290,7 +290,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.7
+  version: v1.0.8
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -619,7 +619,7 @@ services:
   version: v53
   count: 1
 - name: varnish@.service
-  version: v0.1.5
+  version: v0.1.6
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

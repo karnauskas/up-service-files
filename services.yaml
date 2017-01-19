@@ -50,12 +50,12 @@ services:
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
-  version: v14.1.0
+  version: v14.1.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
-  version: v14.1.0
+  version: v14.1.1
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -91,8 +91,8 @@ services:
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
+  version: v14.1.1
   count: 1
-  version: v14.1.0
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service

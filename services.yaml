@@ -139,7 +139,7 @@ services:
 - name: coco-traffic-analyser.service
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: v1.0.1
+  version: v1.0.2
 - name: diamond.service
 - name: document-store-api-sidekick@.service
   count: 2

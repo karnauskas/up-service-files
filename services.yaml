@@ -100,7 +100,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v38
+  version: v39
   count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1

@@ -36,6 +36,7 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_GROUPNAME=notifications" \
       --env "KAFKA_SYSTEM_ID=NotificationsIngester" \
       --env "KAFKA_TOPIC_NAME=PostPublicationEvents" \
+      --env "UPP_GATEWAY_PATH=" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_HEADER=notifications-rw" \

@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c '\
       --memory="256m" \
       --env="QUEUE_PROXY_ADDRS=http://%H:8080" \
       --env="GROUP_ID=$GROUP_ID" \
-      --env="TOPIC=CmsPublicationEvents" \
+      --env="TOPIC=PostPublicationEvents" \
       --env="NOTIFICATIONS_DELAY=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \
       --env="QUEUE_HOST=kafka" \
       --env="API_BASE_URL=$API_BASE_URL" \

@@ -75,12 +75,12 @@ services:
 - name: concept-ingester-blue-sidekick@.service
   count: 1
 - name: concept-ingester-blue@.service
-  version: v2.0.0
+  version: AddedHelpfulLogging
   count: 1
 - name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
-  version: v2.0.0
+  version: AddedHelpfulLogging
   count: 1
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2

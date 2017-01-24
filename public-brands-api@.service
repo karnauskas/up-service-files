@@ -17,7 +17,6 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/public-brands-api:$DOCKE
 ExecStart=/bin/sh -c '\
   export PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  export NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data; \
   export GRAPHITE_ADDRESS=graphite.ft.com:2003; \
   export GRAPHITE_PREFIX=coco.services.$ENV.public-brands-api.%i; \
   export LOG_METRICS=false; \
@@ -26,7 +25,7 @@ ExecStart=/bin/sh -c '\
   --memory="256m" \
   -p $PORT \
   -e "PORT=$PORT" \
-  -e "NEO_URL=$NEO_URL" \
+  -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" \
   -e "GRAPHITE_ADDRESS=$GRAPHITE_ADDRESS" \
   -e "GRAPHITE_PREFIX=$GRAPHITE_PREFIX" \
   -e "LOG_METRICS=$LOG_METRICS" \

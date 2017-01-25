@@ -261,7 +261,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.8
+  version: v1.0.9
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -389,7 +389,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.19
+  version: v0.0.21
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

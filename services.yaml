@@ -116,7 +116,7 @@ services:
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: components-v2
+  version: v65
   count: 2
 - name: content-preview-sidekick@.service
   count: 2

@@ -1,0 +1,33 @@
+[Unit]
+Description=Generic RW for S3
+After=vulcan.service
+Requires=docker.service
+Wants=generic-rw-s3-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+Environment="APP_PORT=8080"
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/generic-rw-s3:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull coco/generic-rw-s3:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+    export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    /usr/bin/docker run --rm -P --name %p-%i_$(uuidgen) \
+        --memory="512m" \
+        -e "APP_PORT=$APP_PORT" \
+        -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+        -e "GRAPHITE_PREFIX=coco.services.$ENV.generic-rw-s3.%i" \
+        -e "LOG_METRICS=false" \
+        coco/generic-rw-s3:$DOCKER_APP_VERSION;'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=generic-rw-s3@*.service
+

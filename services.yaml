@@ -289,7 +289,6 @@ services:
   count: 2
 - name: methode-image-model-mapper@.service
   version: v16.0.1
-  count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
@@ -586,7 +585,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.5
+  version: v1.0.6-rc1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

@@ -289,6 +289,7 @@ services:
   count: 2
 - name: methode-image-model-mapper@.service
   version: v16.0.1
+  count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service

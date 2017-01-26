@@ -18,7 +18,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/internal-content-api:$DO
 
 ExecStart=/bin/sh -c '\
     ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    ENV_API_HOST=$(etcdctl get /ft/config/api_host) ;
+    ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
     --memory="256m" \
     --env "APP_PORT=8080" \
@@ -26,7 +26,7 @@ ExecStart=/bin/sh -c '\
     --env "DOCUMENT_STORE_API_URI=http://$HOSTNAME:8080/__document-store-api/internalcomponents/" \
     --env "ENRICHED_CONTENT_APP_HEALTH_URI=http://$HOSTNAME:8080/__enriched-content-read-api/__health" \
     --env "DOCUMENT_STORE_APP_HEALTH_URI=http://$HOSTNAME:8080/__document-store-api/__health" \
-    --env "ENV_API_HOST=$ENV_API_HOST"
+    --env "ENV_API_HOST=$ENV_API_HOST" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
     --env "GRAPHITE_PREFIX=coco.services.$ENV.internal-content-api.%i" \
     coco/internal-content-api:$DOCKER_APP_VERSION;'

@@ -11,8 +11,8 @@ TimeoutStartSec=0
 # work correctly.
 KillMode=none
 MemoryLimit=1G
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION > /dev/null 2>&1 \
   || /usr/bin/docker pull up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
@@ -23,10 +23,10 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export WHITELIST="^http://(methode|wordpress|brightcove)(-article|-video-model)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|video/model)/[\\w-]+.*$"; \
+  export WHITELIST="^http://(methode|wordpress|brightcove)(-article|-video-model|-content-placeholder)?(-transformer|-mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content|video/model)/[\\w-]+.*$"; \
   export WRITER_HEALTHCHECK_NAME="Can connect to the Notifications Reader/Writer"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"; \
-  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
+  export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "VULCAN_HOST=%H:8080" \
@@ -36,6 +36,7 @@ ExecStart=/bin/sh -c '\
       --env "KAFKA_GROUPNAME=notifications" \
       --env "KAFKA_SYSTEM_ID=NotificationsIngester" \
       --env "KAFKA_TOPIC_NAME=PostPublicationEvents" \
+      --env "UPP_GATEWAY_PATH=" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_HEADER=notifications-rw" \
@@ -45,7 +46,7 @@ ExecStart=/bin/sh -c '\
       --env "MESSAGE_FORWARDING_ENABLED=false" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

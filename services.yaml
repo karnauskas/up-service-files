@@ -24,7 +24,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v97
+  version: v63
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -34,14 +34,24 @@ services:
 - name: brands-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-blue@.service
-  version: v0.1.3
+  version: v0.1.5
   count: 1
 - name: brands-rw-neo4j-red-sidekick@.service
   count: 1
 - name: brands-rw-neo4j-red@.service
-  version: v0.1.3
+  version: v0.1.5
   count: 1
   sequentialDeployment: true
+- name: brightcove-annotations-rw-blue-sidekick@.service
+  count: 1
+- name: brightcove-annotations-rw-blue@.service
+  version: v0.1.8
+  count: 1
+- name: brightcove-annotations-rw-red-sidekick@.service
+  count: 1
+- name: brightcove-annotations-rw-red@.service
+  version: v0.1.8
+  count: 1
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
@@ -70,7 +80,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v38
+  version: v39
   count: 1
 - name: concept-ingester-blue-sidekick@.service
   count: 1
@@ -85,7 +95,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: v0.0.9
+  version: v0.0.10
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -96,7 +106,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: v20
+  version: v29
   count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
@@ -106,17 +116,17 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v52
+  version: v63
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v52
+  version: v63
   count: 1
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v52
+  version: v63
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -127,13 +137,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v53
+  version: v55
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v53
+  version: v55
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -181,27 +191,32 @@ services:
 - name: fleet-unit-healthcheck@.service
   version: 1.0.9
   count: 1
+- name: generic-rw-s3-sidekick@.service
+  count: 1
+- name: generic-rw-s3@.service
+  version: v0.1.0
+  count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
-  version: v1.1.5
+  version: v1.1.6
   count: 1
 - name: genres-rw-neo4j-red-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-red@.service
-  version: v1.1.5
+  version: v1.1.6
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
 - name: industry-classifications-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-blue@.service
-  version: v0.0.6
+  version: v0.0.8
   count: 1
 - name: industry-classifications-rw-neo4j-red-sidekick@.service
   count: 1
 - name: industry-classifications-rw-neo4j-red@.service
-  version: v0.0.6
+  version: v0.0.8
   count: 1
 - name: kafka-lagcheck-sidekick@.service
   count: 1
@@ -217,12 +232,12 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: v52
+  version: v63
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.4
+  version: v3.0.6
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -258,12 +273,22 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.7
+  version: v1.0.8
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
 - name: methode-content-importer@.service
   version: v65
+  count: 2
+- name: methode-content-placeholder-mapper-sidekick@.service
+  count: 2
+- name: methode-content-placeholder-mapper@.service
+  version: v0.0.5
+  count: 2
+- name: methode-image-binary-mapper-sidekick@.service
+  count: 2
+- name: methode-image-binary-mapper@.service
+  version: v1.0.1
   count: 2
 - name: methode-image-binary-transformer-sidekick@.service
   count: 2
@@ -273,7 +298,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.0
+  version: v16.0.1
   count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
@@ -339,29 +364,29 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v52
+  version: v63
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.4
+  version: v3.0.6
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v55
+  version: v58
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-blue@.service
-  version: v0.4.1
+  version: v0.4.4
   count: 1
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-red@.service
-  version: v0.4.1
+  version: v0.4.4
   count: 1
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -376,7 +401,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.19
+  version: v0.0.21
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -388,7 +413,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.1.5
+  version: v0.1.6
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
@@ -429,7 +454,7 @@ services:
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: v57
+  version: v63
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
@@ -504,12 +529,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v1-annotations-rw-blue@.service
-  version: v0.1.7
+  version: v0.1.8
   count: 1
 - name: v1-annotations-rw-red-sidekick@.service
   count: 1
 - name: v1-annotations-rw-red@.service
-  version: v0.1.7
+  version: v0.1.8
   count: 1
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -544,17 +569,17 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.0.18
+  version: v0.1.1
   count: 2
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v2-annotations-rw-blue@.service
-  version: v0.1.7
+  version: v0.1.8
   count: 1
 - name: v2-annotations-rw-red-sidekick@.service
   count: 1
 - name: v2-annotations-rw-red@.service
-  version: v0.1.7
+  version: v0.1.8
   count: 1
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
@@ -567,7 +592,7 @@ services:
   version: v53
   count: 1
 - name: varnish@.service
-  version: v0.1.3
+  version: v0.1.6
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service
@@ -582,11 +607,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.4
+  version: v1.0.5
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v32
+  version: v34
   count: 2
 - name: zookeeper.service

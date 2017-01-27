@@ -191,6 +191,11 @@ services:
 - name: fleet-unit-healthcheck@.service
   version: 1.0.9
   count: 1
+- name: generic-rw-s3-sidekick@.service
+  count: 1
+- name: generic-rw-s3@.service
+  version: v0.1.0
+  count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: genres-rw-neo4j-blue@.service
@@ -232,7 +237,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.5
+  version: v3.0.6
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -293,7 +298,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.0
+  version: v16.0.1
   count: 2
 - name: methode-image-model-transformer-sidekick@.service
   count: 2
@@ -364,7 +369,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.5
+  version: v3.0.6
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

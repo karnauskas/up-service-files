@@ -313,7 +313,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v6
+  version: v7
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

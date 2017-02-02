@@ -10,18 +10,15 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/methode-article-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || docker pull coco/methode-article-mapper:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=/^%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=/^%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/methode-article-internal-components-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/methode-article-internal-components-mapper:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "VULCAN_HOST=%H:8080" \
-  --env "CONSUMER_GROUP_NAME=MethodeArticleInternalComponentsMapper" \
-  --env "INTERNAL_CONTENT_COMPONTENT_MAPPER=true" \
-  --env "CONTENT_URI_PREFIX=http://methode-article-internal-components-mapper.svc.ft.com/internalcomponents" \
-  coco/methode-article-mapper:$DOCKER_APP_VERSION'
+  coco/methode-article-internal-components-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

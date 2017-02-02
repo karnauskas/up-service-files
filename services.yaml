@@ -289,7 +289,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.1.0-rj0.0.4
+  version: v1.0.10
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2

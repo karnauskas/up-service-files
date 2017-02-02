@@ -315,6 +315,11 @@ services:
 - name: methode-list-mapper@.service
   version: v7
   count: 2
+- name: methode-story-package-mapper-sidekick@.service
+  count: 2
+- name: methode-story-package-mapper@.service
+  version: latest
+  count: 2
 - name: mongo-backup@.service
   version: v20.0.1
   count: 3

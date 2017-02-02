@@ -45,12 +45,12 @@ services:
 - name: brightcove-annotations-rw-blue-sidekick@.service
   count: 1
 - name: brightcove-annotations-rw-blue@.service
-  version: v0.1.8
+  version: v1.0.0-rc1
   count: 1
 - name: brightcove-annotations-rw-red-sidekick@.service
   count: 1
 - name: brightcove-annotations-rw-red@.service
-  version: v0.1.8
+  version: v1.0.0-rc1
   count: 1
 - name: burrow-sidekick@.service
   count: 1
@@ -529,12 +529,12 @@ services:
 - name: v1-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v1-annotations-rw-blue@.service
-  version: v0.1.8
+  version: v1.0.0-rc1
   count: 1
 - name: v1-annotations-rw-red-sidekick@.service
   count: 1
 - name: v1-annotations-rw-red@.service
-  version: v0.1.8
+  version: v1.0.0-rc1
   count: 1
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
@@ -574,12 +574,12 @@ services:
 - name: v2-annotations-rw-blue-sidekick@.service
   count: 1
 - name: v2-annotations-rw-blue@.service
-  version: v0.1.8
+  version: v1.0.0-rc1
   count: 1
 - name: v2-annotations-rw-red-sidekick@.service
   count: 1
 - name: v2-annotations-rw-red@.service
-  version: v0.1.8
+  version: v1.0.0-rc1
   count: 1
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1

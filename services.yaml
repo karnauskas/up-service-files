@@ -234,6 +234,12 @@ services:
   version: v0.0.0-rc3
   count: 2
   sequentialDeployment: true
+- name: internal-content-preview-api-sidekick@.service
+  count: 2
+- name: internal-content-preview-api@.service
+  version: v0.0.0-rc3
+  count: 2
+  sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service

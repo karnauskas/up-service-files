@@ -433,17 +433,17 @@ services:
 - name: organisations-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-blue@.service
-  version: v0.4.4
+  version: 0.5.0-logging
   count: 1
 - name: organisations-rw-neo4j-red-sidekick@.service
   count: 1
 - name: organisations-rw-neo4j-red@.service
-  version: v0.4.4
+  version: 0.5.0-logging
   count: 1
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: v0.4.4
+  version: 0.5.0-logging
   count: 2
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 1

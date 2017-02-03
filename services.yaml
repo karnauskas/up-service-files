@@ -441,10 +441,10 @@ services:
   version: v0.4.4
   count: 1
 - name: organisations-rw-neo4j-sidekick@.service
-  count: 2
+  count: 1
 - name: organisations-rw-neo4j@.service
   version: v0.4.4
-  count: 2
+  count: 1
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: people-rw-neo4j-blue@.service

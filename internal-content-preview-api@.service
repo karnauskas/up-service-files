@@ -22,6 +22,7 @@ ExecStart=/bin/sh -c '\
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
     --memory="256m" \
     --env "APP_PORT=8080" \
+    --env "HANDLER_PATH=internalcontent-preview" \
     --env "ENRICHED_CONTENT_API_URI=http://$HOSTNAME:8080/__content-preview/content-preview/" \
     --env "DOCUMENT_STORE_API_URI=http://$HOSTNAME:8080/__internal-components-preview/content-preview/" \
     --env "ENRICHED_CONTENT_APP_HEALTH_URI=http://$HOSTNAME:8080/__content-preview/__health" \

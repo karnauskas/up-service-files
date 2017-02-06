@@ -362,7 +362,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.7-DP-carousel-rc1
+  version: v3.0.7-DP-carousel-rc2
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

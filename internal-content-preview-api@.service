@@ -1,0 +1,38 @@
+[Unit]
+Description=Internal Content Preview API
+After=vulcan.service
+Requires=docker.service
+Wants=internal-content-preview-api-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/internal-content-api:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/internal-content-api:$DOCKER_APP_VERSION'
+
+
+ExecStart=/bin/sh -c '\
+    ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+    --memory="256m" \
+    --env "APP_PORT=8080" \
+    --env "ENRICHED_CONTENT_API_URI=http://$HOSTNAME:8080/__content-preview/content-preview/" \
+    --env "DOCUMENT_STORE_API_URI=http://$HOSTNAME:8080/__internal-components-preview/content-preview/" \
+    --env "ENRICHED_CONTENT_APP_HEALTH_URI=http://$HOSTNAME:8080/__content-preview/__health" \
+    --env "DOCUMENT_STORE_APP_HEALTH_URI=http://$HOSTNAME:8080/__internal-components-preview/__health" \
+    --env "ENV_API_HOST=$ENV_API_HOST" \
+    --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
+    --env "GRAPHITE_PREFIX=coco.services.$ENV.internal-content-preview-api.%i" \
+    coco/internal-content-api:$DOCKER_APP_VERSION;'
+ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=internal-content-preview-api@*.service

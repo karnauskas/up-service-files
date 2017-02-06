@@ -22,10 +22,12 @@ ExecStart=/bin/sh -c '\
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
     --memory="256m" \
     --env "APP_PORT=8080" \
-    --env "ENRICHED_CONTENT_API_URI=http://$HOSTNAME:8080/__enriched-content-read-api/enrichedcontent/" \
-    --env "DOCUMENT_STORE_API_URI=http://$HOSTNAME:8080/__document-store-api/internalcomponents/" \
-    --env "ENRICHED_CONTENT_APP_HEALTH_URI=http://$HOSTNAME:8080/__enriched-content-read-api/__health" \
-    --env "DOCUMENT_STORE_APP_HEALTH_URI=http://$HOSTNAME:8080/__document-store-api/__health" \
+    --env "CONTENT_SOURCE_URI=http://$HOSTNAME:8080/__enriched-content-read-api/enrichedcontent/" \
+    --env "INTERNAL_COMPONENTS_SOURCE_URI=http://$HOSTNAME:8080/__document-store-api/internalcomponents/" \
+    --env "CONTENT_SOURCE_APP_NAME=Enriched Content Read API" \
+    --env "INTERNAL_COMPONENTS_SOURCE_APP_NAME=Document Store API" \
+    --env "CONTENT_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__enriched-content-read-api/__health" \
+    --env "INTERNAL_COMPONENTS_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__document-store-api/__health" \
     --env "ENV_API_HOST=$ENV_API_HOST" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
     --env "GRAPHITE_PREFIX=coco.services.$ENV.internal-content-api.%i" \

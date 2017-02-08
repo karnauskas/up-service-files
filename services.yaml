@@ -266,7 +266,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.12
+  version: v1.0.13
   count: 2
 - name: methode-content-importer-sidekick@.service
   count: 2
@@ -276,7 +276,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.5
+  version: v0.0.6
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

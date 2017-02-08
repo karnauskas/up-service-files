@@ -173,7 +173,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: rj-rc3
+  version: rj-rc4
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

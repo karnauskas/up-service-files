@@ -30,6 +30,7 @@ ExecStart=/bin/sh -c '\
     --env "CONTENT_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__content-preview/__health" \
     --env "INTERNAL_COMPONENTS_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__internal-components-preview/__health" \
     --env "ENV_API_HOST=$ENV_API_HOST" \
+    --env "CACHE_CONTROL_POLICY=no-store" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
     --env "GRAPHITE_PREFIX=coco.services.$ENV.internal-content-preview-api.%i" \
     coco/internal-content-api:$DOCKER_APP_VERSION;'

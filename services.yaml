@@ -283,7 +283,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.5
+  version: v0.0.6
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

@@ -9,6 +9,7 @@ Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
+TimeoutStopSec=infinity
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
@@ -29,7 +30,7 @@ ExecStart=/bin/sh -c "\
     --env "GRAPHITE_PREFIX=coco.services.$ENV.neo4j-red.%i" \
     coco/ft-neo4j:$DOCKER_APP_VERSION"
 
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 90 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

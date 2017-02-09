@@ -18,7 +18,7 @@ services:
 - name: alphaville-series-rw-neo4j-sidekick@.service
   count: 2
 - name: alphaville-series-rw-neo4j@.service
-  version: v0.0.8
+  version: v0.0.9
   count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
@@ -50,7 +50,7 @@ services:
 - name: brands-rw-neo4j-sidekick@.service
   count: 2
 - name: brands-rw-neo4j@.service
-  version: v0.1.5
+  version: v0.1.6
   count: 2
 - name: brightcove-annotations-rw-blue-sidekick@.service
   count: 1
@@ -184,7 +184,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v0.0.36
+  version: v0.0.37
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -219,7 +219,7 @@ services:
 - name: financial-instruments-rw-neo4j-sidekick@.service
   count: 2
 - name: financial-instruments-rw-neo4j@.service
-  version: v0.0.2
+  version: v0.0.4
   count: 2
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
@@ -244,7 +244,7 @@ services:
 - name: genres-rw-neo4j-sidekick@.service
   count: 2
 - name: genres-rw-neo4j@.service
-  version: v1.1.6
+  version: v1.1.7
   count: 2
 - name: image-cleaner.service
   version: 1.0.0
@@ -261,7 +261,7 @@ services:
 - name: industry-classifications-rw-neo4j-sidekick@.service
   count: 2
 - name: industry-classifications-rw-neo4j@.service
-  version: v0.0.8
+  version: v0.0.9
   count: 2
 - name: kafka-lagcheck-sidekick@.service
   count: 1
@@ -303,7 +303,7 @@ services:
 - name: locations-rw-neo4j-sidekick@.service
   count: 2
 - name: locations-rw-neo4j@.service
-  version: v1.1.3
+  version: v1.1.4
   count: 2
 - name: memberships-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -318,7 +318,7 @@ services:
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
-  version: v0.1.4
+  version: v1.1.5
   count: 2
 - name: methode-article-transformer-sidekick@.service
   count: 2
@@ -443,7 +443,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.0-logging
+  version: v0.5.1
   count: 2
 - name: people-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -458,7 +458,7 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: v0.1.7
+  version: v0.1.8
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -535,7 +535,7 @@ services:
 - name: roles-rw-neo4j-sidekick@.service
   count: 1
 - name: roles-rw-neo4j@.service
-  version: v0.1.4
+  version: v0.1.5
   count: 2
 - name: sections-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -550,7 +550,7 @@ services:
 - name: sections-rw-neo4j-sidekick@.service
   count: 1
 - name: sections-rw-neo4j@.service
-  version: v1.1.3
+  version: v1.1.4
   count: 2
 - name: special-reports-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -565,7 +565,7 @@ services:
 - name: special-reports-rw-neo4j-sidekick@.service
   count: 1
 - name: special-reports-rw-neo4j@.service
-  version: v1.1.3
+  version: v1.1.4
   count: 2
 - name: splunk-forwarder.service
 - name: subjects-rw-neo4j-blue-sidekick@.service
@@ -581,7 +581,7 @@ services:
 - name: subjects-rw-neo4j-sidekick@.service
   count: 1
 - name: subjects-rw-neo4j@.service
-  version: v1.1.2
+  version: v1.1.3
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
@@ -604,7 +604,7 @@ services:
 - name: topics-rw-neo4j-sidekick@.service
   count: 1
 - name: topics-rw-neo4j@.service
-  version: v1.1.3
+  version: v1.1.5
   count: 2
 - name: tunnel-registrator.service
   version: v1.0.3
@@ -626,7 +626,7 @@ services:
 - name: v1-annotations-rw-sidekick@.service
   count: 2
 - name: v1-annotations-rw@.service
-  version: v0.1.8
+  version: v0.1.9
   count: 2
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1

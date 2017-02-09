@@ -6,6 +6,8 @@ Wants=methode-article-internal-components-mapper-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment="JAVA_OPTS=-Xms128m -Xmx128m -XX:+UseG1GC -server"
+
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -18,6 +20,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/methode-article-internal-componen
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "VULCAN_HOST=%H:8080" \
+  --env "JAVA_OPTS=$JAVA_OPTS" \
   coco/methode-article-internal-components-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

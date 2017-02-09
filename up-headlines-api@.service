@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/up-headlines-api:$DOCKER_APP_VERS
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export MONGO_URL=$(for x in $(etcdctl ls /ft/config/mongodb); do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done);\
-  export LOG_LEVEL=INFO; \
+  export LOG_LEVEL=debug; \
   export LISTS_URL=http://localhost:8080/__document-store-api/lists/; \
   export CONCEPT_URL=http://localhost:8080/__public-content-by-concept-api/content?isAnnotatedBy=; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \

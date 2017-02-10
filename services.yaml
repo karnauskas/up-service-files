@@ -265,6 +265,11 @@ services:
 - name: memberships-rw-neo4j-red@.service
   version: v0.1.4
   count: 1
+- name: methode-article-internal-components-mapper-sidekick@.service
+  count: 2
+- name: methode-article-internal-components-mapper@.service
+  version: v0.0.6
+  count: 2
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service

@@ -90,7 +90,7 @@ services:
 - name: concept-ingester-red-sidekick@.service
   count: 1
 - name: concept-ingester-red@.service
-  version: v2.0.0
+  version: carlosr-3
   count: 1
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2

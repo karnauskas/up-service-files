@@ -1,16 +1,18 @@
 [Unit]
-Description=Methode Image Binary Transformer
-BindsTo=methode-image-binary-transformer@%i.service
-After=methode-image-binary-transformer@%i.service
+Description=Internal Content API sidekick
+BindsTo=internal-content-api@%i.service
+After=internal-content-api@%i.service
 
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl set /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories image-publish; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
+  etcdctl set /ft/services/$SERVICE/path-regex/public-services /internalcontent/.*; \
+  etcdctl set /ft/services/$SERVICE/path-host/public-services public-services; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -18,9 +20,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-image-binary-transformer/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/internal-content-api/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=methode-image-binary-transformer@%i.service
+MachineOf=internal-content-api@%i.service

@@ -38,6 +38,9 @@ ExecStart=/bin/sh -c '\
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "FILTER_NOVELTIES=false" \
+  --env "GRAPHITE_HOST=graphite.ft.com" \
+  --env "GRAPHITE_PORT=2003" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.rec-reads-content-annotator.%i" \
   up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

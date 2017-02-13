@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.1.4-rc.6
+  version: v63.1.4-xp-rc.8
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -178,7 +178,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v67
+  version: v68-xp-rc1
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-blue-sidekick@.service

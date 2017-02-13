@@ -243,7 +243,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.6
+  version: v3.0.8
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -354,7 +354,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.7
+  version: v3.0.8
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

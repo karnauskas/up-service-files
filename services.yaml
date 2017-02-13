@@ -275,7 +275,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.6
+  version: v3.0.7
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2

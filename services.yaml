@@ -305,7 +305,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v0.0.6
+  version: v0.0.7
   count: 2
 - name: methode-article-mapper-sidekick@.service
   count: 2

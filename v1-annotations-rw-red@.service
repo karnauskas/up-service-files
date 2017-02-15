@@ -20,6 +20,7 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
   --env "PLATFORM_VERSION=v1" \
+  --env "ANNOTATION_LIFECYCLE=v1-annotations" \
   --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-red/db/data" \
   --env "APP_PORT=$APP_PORT" \
   --env "BATCH_SIZE=50" \

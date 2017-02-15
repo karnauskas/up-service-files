@@ -1,8 +1,8 @@
 [Unit]
-Description=Methode story package mapper
+Description=Methode content collection mapper
 After=vulcan.service
 Requires=docker.service
-Wants=methode-story-package-mapper-sidekick@%i.service
+Wants=methode-content-collection-mapper-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -14,8 +14,8 @@ TimeoutStartSec=0
 # work correctly.
 KillMode=none
 
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=/bin/bash -c 'docker history coco/methode-story-package-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
 || docker pull coco/methode-story-package-mapper:$DOCKER_APP_VERSION'
 
@@ -25,7 +25,7 @@ ExecStart=/bin/sh -c '\
   --env "VULCAN_HOST=%H:8080" \
   coco/methode-story-package-mapper:$DOCKER_APP_VERSION'
   
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

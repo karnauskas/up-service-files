@@ -267,7 +267,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v0.0.6
+  version: v0.0.7
   count: 2
 - name: methode-article-mapper-sidekick@.service
   count: 2
@@ -353,7 +353,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v60
+  version: v0.61-dp-rc1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service

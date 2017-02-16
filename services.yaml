@@ -309,7 +309,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v8-rc1
+  version: v11-zoli-rc2
   count: 2
 - name: methode-story-package-mapper-sidekick@.service
   count: 2

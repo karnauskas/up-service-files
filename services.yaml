@@ -245,6 +245,11 @@ services:
 - name: industry-classifications-rw-neo4j-red@.service
   version: v0.0.8
   count: 1
+- name: internal-components-preview-sidekick@.service
+  count: 2
+- name: internal-components-preview@.service
+  version: v1.0.1
+  count: 2
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service

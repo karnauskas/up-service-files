@@ -2,7 +2,7 @@
 Description=Brigthcove Annotations Reader-Writer for Neo4j Service
 After=vulcan.service
 Requires=docker.service
-Wants=brightcove-annotations-rw-sidekick@%i.service
+Wants=brightcove-annotations-rw-neo4j-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -34,4 +34,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=brightcove-annotations-rw@*.service
+Conflicts=brightcove-annotations-rw-neo4j@*.service

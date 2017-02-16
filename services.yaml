@@ -62,9 +62,9 @@ services:
 - name: brightcove-annotations-rw-red@.service
   version: v0.1.8
   count: 1
-- name: brightcove-annotations-rw-sidekick@.service
+- name: brightcove-annotations-rw-neo4j-sidekick@.service
   count: 2
-- name: brightcove-annotations-rw@.service
+- name: brightcove-annotations-rw-neo4j@.service
   version: v0.1.8
   count: 2
 - name: burrow-sidekick@.service
@@ -623,9 +623,9 @@ services:
 - name: v1-annotations-rw-red@.service
   version: v0.1.8
   count: 1
-- name: v1-annotations-rw-sidekick@.service
+- name: v1-annotations-rw-neo4j-sidekick@.service
   count: 2
-- name: v1-annotations-rw@.service
+- name: v1-annotations-rw-neo4j@.service
   version: v0.1.9
   count: 2
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
@@ -688,9 +688,9 @@ services:
 - name: v2-annotations-rw-red@.service
   version: v0.1.8
   count: 1
-- name: v2-annotations-rw-sidekick@.service
+- name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
-- name: v2-annotations-rw@.service
+- name: v2-annotations-rw-neo4j@.service
   version: v0.1.8
   count: 2
 - name: v2-content-annotator-blue-sidekick@.service

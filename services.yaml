@@ -231,7 +231,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: 422-rc1
+  version: 422-rc2
   count: 2
 - name: internal-content-api-sidekick@.service
   count: 2

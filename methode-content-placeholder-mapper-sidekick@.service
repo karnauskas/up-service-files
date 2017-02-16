@@ -19,6 +19,8 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
 ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-content-placeholder-mapper/servers/%i'
+Restart=on-failure
+RestartSec=60
 
 [X-Fleet]
 MachineOf=methode-content-placeholder-mapper@%i.service

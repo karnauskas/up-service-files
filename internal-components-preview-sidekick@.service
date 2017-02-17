@@ -1,16 +1,16 @@
 [Unit]
-Description=Content Ingester Sidekick
-BindsTo=content-ingester@%i.service
-After=content-ingester@%i.service
+Description=Content Preview sidekick
+BindsTo=internal-components-preview@%i.service
+After=internal-components-preview@%i.service
 
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl set /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories lists-publish,image-publish,content-publish; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/content-ingester/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/internal-components-preview/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=content-ingester@%i.service
+MachineOf=internal-components-preview@%i.service

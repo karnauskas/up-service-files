@@ -18,7 +18,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.1.4-xp-rc.8
+  version: v63.1.4
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -148,7 +148,7 @@ services:
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v56-rc1
+  version: v63
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -178,7 +178,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v68-xp-rc1
+  version: v70
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-blue-sidekick@.service
@@ -284,7 +284,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.13-rc2
+  version: v1.0.16
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
@@ -597,7 +597,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.8-rc1
+  version: v1.0.9
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

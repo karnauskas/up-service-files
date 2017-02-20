@@ -529,7 +529,7 @@ services:
   version: v0.1.4
   count: 1
 - name: roles-rw-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: roles-rw-neo4j@.service
   version: v0.1.6
   count: 2
@@ -544,7 +544,7 @@ services:
   version: v1.1.3
   count: 1
 - name: sections-rw-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: sections-rw-neo4j@.service
   version: v1.1.4
   count: 2
@@ -559,7 +559,7 @@ services:
   version: v1.1.3
   count: 1
 - name: special-reports-rw-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: special-reports-rw-neo4j@.service
   version: v1.1.4
   count: 2
@@ -575,7 +575,7 @@ services:
   version: v1.1.2
   count: 1
 - name: subjects-rw-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: subjects-rw-neo4j@.service
   version: v1.1.3
   count: 2
@@ -598,7 +598,7 @@ services:
   version: v1.1.3
   count: 1
 - name: topics-rw-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: topics-rw-neo4j@.service
   version: v1.1.5
   count: 2

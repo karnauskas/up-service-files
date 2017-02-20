@@ -138,6 +138,16 @@ services:
 - name: content-collection-ingester-neo4j-red@.service
   version: v65
   count: 1
+- name: content-collection-rw-neo4j-blue-sidekick@.service
+  count: 1
+- name: content-collection-rw-neo4j-blue@.service
+  version: latest
+  count: 1
+- name: content-collection-rw-neo4j-red-sidekick@.service
+  count: 1
+- name: content-collection-rw-neo4j-red@.service
+  version: latest
+  count: 1
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service

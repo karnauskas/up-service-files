@@ -333,7 +333,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v0.0.7
+  version: v0.0.8
   count: 2
 - name: methode-article-mapper-sidekick@.service
   count: 2
@@ -416,7 +416,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v65
+  version: v68_carousel-notifications-rc4
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
@@ -723,7 +723,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.7
+  version: v1.0.8
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

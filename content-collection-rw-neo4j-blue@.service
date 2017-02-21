@@ -28,7 +28,7 @@ ExecStart=/bin/sh -c '\
   -e "LOG_METRICS=false" \
   -e "CACHE_DURATION=30s" \
   coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION;'
-  
+
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60

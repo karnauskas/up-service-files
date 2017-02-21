@@ -423,7 +423,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v65
+  version: v68_carousel-notifications-rc4
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service

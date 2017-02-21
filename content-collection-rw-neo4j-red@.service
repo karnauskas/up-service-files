@@ -21,10 +21,10 @@ ExecStart=/bin/sh -c '\
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
-  -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-read/db/data" \
+  -e "NEO_URL=http://$HOSTNAME:8080/__neo4j-red/db/data" \
   -e "APP_PORT=$APP_PORT" \
   -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-  -e "GRAPHITE_PREFIX=coco.services.$ENV.content-collection-rw-neo4j.%i" \
+  -e "GRAPHITE_PREFIX=coco.services.$ENV.content-collection-rw-neo4j-red.%i" \
   -e "LOG_METRICS=false" \
   -e "CACHE_DURATION=30s" \
   coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION;'
@@ -35,4 +35,3 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=content-collection-rw-neo4j-red@*.service
-MachineOf=neo4j-red@%i.service

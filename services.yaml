@@ -289,7 +289,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.1
+  version: v0.1.2
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-blue-sidekick@.service
@@ -320,7 +320,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.17
+  version: v1.0.18-RJ.rc1
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2

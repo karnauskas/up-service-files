@@ -319,7 +319,7 @@ services:
   count: 1
 - name: kafka.service
 - name: load-replicator@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 1
 - name: load-replicator-sidekick@.service
   count: 1

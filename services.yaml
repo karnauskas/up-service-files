@@ -168,7 +168,7 @@ services:
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v61
+  version: v66
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service

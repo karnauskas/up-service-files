@@ -221,6 +221,11 @@ services:
 - name: financial-instruments-rw-neo4j@.service
   version: v0.0.5
   count: 2
+- name: fleet-neo4j-unit-healthcheck-sidekick@.service
+  count: 1
+- name: fleet-neo4j-unit-healthcheck@.service
+  version: 1.0.9
+  count: 1
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service

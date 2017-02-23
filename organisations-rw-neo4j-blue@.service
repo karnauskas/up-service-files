@@ -24,6 +24,7 @@ ExecStart=/bin/sh -c '\
   --env "BATCH_SIZE=$BATCH_SIZE" \
   --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.organisations-rw-neo4j-blue.%i" \
+  --env "LOG_LEVEL=debug" \
   coco/organisations-rw-neo4j:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

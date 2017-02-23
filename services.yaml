@@ -352,6 +352,7 @@ services:
 - name: methode-article-mapper@.service
   version: v1.0.18
   count: 2
+  sequentialDeployment: true
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service

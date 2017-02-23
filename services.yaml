@@ -23,7 +23,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.1.3
+  version: v63.1.4
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -152,13 +152,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v61
+  version: v63
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: etag-lm
+  version: v64
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -184,7 +184,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v87
+  version: v94
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service
@@ -196,7 +196,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v67
+  version: v70
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-blue-sidekick@.service
@@ -214,6 +214,11 @@ services:
 - name: financial-instruments-rw-neo4j@.service
   version: v0.0.5
   count: 2
+- name: fleet-neo4j-unit-healthcheck-sidekick@.service
+  count: 1
+- name: fleet-neo4j-unit-healthcheck@.service
+  version: 1.0.9
+  count: 1
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
@@ -338,7 +343,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.15
+  version: v1.0.18
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
@@ -410,7 +415,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.7
+  version: v3.0.8_notification-date-monitoring_dp_rc1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -723,7 +728,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.8
+  version: v1.0.9
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

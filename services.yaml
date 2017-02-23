@@ -168,7 +168,7 @@ services:
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v63
+  version: v64
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -193,7 +193,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v87
+  version: v94
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -350,7 +350,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.16
+  version: v1.0.17
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2

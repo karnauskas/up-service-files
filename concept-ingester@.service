@@ -20,6 +20,7 @@ ExecStart=/bin/sh -c '\
   export GROUP_ID=ConceptIngester; \
   export TOPIC=Concept; \
   export SERVICES=people-rw-neo4j,organisations-rw-neo4j,memberships-rw-neo4j,brands-rw-neo4j,roles-rw-neo4j,alphaville-series-rw-neo4j,financial-instruments-rw-neo4j,special-reports-rw-neo4j,locations-rw-neo4j,genres-rw-neo4j,topics-rw-neo4j,sections-rw-neo4j,subjects-rw-neo4j,industry-classifications-rw-neo4j; \
+  export ELASTICSEARCH_WRITER=concept-rw-elasticsearch; \
   export QUEUE_ID=kafka; \
   export GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003; \
   export GRAPHITE_PREFIX=coco.services.$ENV.concept-ingester.%i; \

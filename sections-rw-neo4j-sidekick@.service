@@ -1,7 +1,7 @@
 [Unit]
-Description=Instance data ingester Red sidekick
-BindsTo=instance-data-ingester-red@%i.service
-After=instance-data-ingester-red@%i.service
+Description=Sections rw neo4j Sidekick
+BindsTo=sections-rw-neo4j@%i.service
+After=sections-rw-neo4j@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -17,10 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/instance-data-ingester-red/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/sections-rw-neo4j/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=instance-data-ingester-red@%i.service
-
+MachineOf=sections-rw-neo4j@%i.service

@@ -575,6 +575,11 @@ services:
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
+- name: relations-api-sidekick@.service
+  count: 1
+- name: relations-api@.service
+  version: impl
+  count: 1
 - name: restorage-elasticsearch-concepts-sidekick@.service
   count: 1
 - name: restorage-elasticsearch-concepts@.service

@@ -188,11 +188,6 @@ services:
 - name: content-collection-rw-neo4j@.service
   version: latest
   count: 1
-- name: content-collection-rw-neo4j-red-sidekick@.service
-  count: 1
-- name: content-collection-rw-neo4j-red@.service
-  version: latest
-  count: 1
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service

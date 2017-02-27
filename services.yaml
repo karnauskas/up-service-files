@@ -519,6 +519,11 @@ services:
 - name: rec-reads-content-ingester@.service
   version: v65
   count: 1
+- name: relations-api-sidekick@.service
+  count: 2
+- name: relations-api@.service
+  version: v1.0.0-rj-rc1
+  count: 2
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

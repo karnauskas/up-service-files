@@ -186,7 +186,7 @@ services:
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 1
 - name: content-collection-rw-neo4j@.service
-  version: latest
+  version: 1.0.0-fd-sp-rc1
   count: 1
 - name: content-preview-sidekick@.service
   count: 2

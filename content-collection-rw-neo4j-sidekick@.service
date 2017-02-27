@@ -1,7 +1,7 @@
 [Unit]
-Description=Content-Collection Ingester Neo4j Red Sidekick
-BindsTo=content-collection-ingester-neo4j-red@%i.service
-After=content-collection-ingester-neo4j-red@%i.service
+Description=Content-Collection Reader Writer for Neo4j Service Sidekick
+BindsTo=content-collection-rw-neo4j@%i.service
+After=content-collection-rw-neo4j@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -12,15 +12,14 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
+    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
     PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/content-collection-ingester-neo4j-red/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/content-collection-rw-neo4j/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=content-collection-ingester-neo4j-red@%i.service
-
+MachineOf=content-collection-rw-neo4j@%i.service

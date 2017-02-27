@@ -1,7 +1,7 @@
 [Unit]
-Description=Content-Collection Ingester Neo4j Blue Sidekick
-BindsTo=content-collection-ingester-neo4j-blue@%i.service
-After=content-collection-ingester-neo4j-blue@%i.service
+Description=Content-Collection Ingester Neo4j Sidekick
+BindsTo=content-collection-ingester-neo4j@%i.service
+After=content-collection-ingester-neo4j@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -17,10 +17,10 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
   
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/content-collection-ingester-neo4j-blue/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/content-collection-ingester-neo4j/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=content-collection-ingester-neo4j-blue@%i.service
+MachineOf=content-collection-ingester-neo4j@%i.service
 

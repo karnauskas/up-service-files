@@ -110,7 +110,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: v2.0.1
+  version: v2.0.2-rc1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2

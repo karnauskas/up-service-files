@@ -304,7 +304,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.7
+  version: v3.0.8_notification-date-monitoring_dp_rc2
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2

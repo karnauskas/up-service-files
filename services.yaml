@@ -29,7 +29,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v65
+  version: v70
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -146,27 +146,27 @@ services:
 - name: content-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-blue@.service
-  version: v65
+  version: v70
   count: 1
 - name: content-ingester-neo4j-red-sidekick@.service
   count: 1
 - name: content-ingester-neo4j-red@.service
-  version: v65
+  version: v70
   count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: v63
+  version: v70
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v65
+  version: v70
   count: 2
 - name: content-collection-ingester-neo4j-blue-sidekick@.service
   count: 1
 - name: content-collection-ingester-neo4j-blue@.service
-  version: v65
+  version: v70
   count: 1
 - name: content-collection-ingester-neo4j-red-sidekick@.service
   count: 1
@@ -329,7 +329,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: v65
+  version: v70
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
@@ -452,7 +452,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v65
+  version: v70
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -546,8 +546,8 @@ services:
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
-- name: rec-reads-content-annotator@.service
-  version: v62
+- name: rec-reads-content-ingester@.service
+  version: v70
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1

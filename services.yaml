@@ -422,7 +422,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.8_notification-date-monitoring_dp_rc1
+  version: v3.0.8_notification-date-monitoring_dp_rc2
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

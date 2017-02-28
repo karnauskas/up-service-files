@@ -261,7 +261,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: v0.1.0
+  version: v1.2.4
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1

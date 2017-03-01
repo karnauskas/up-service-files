@@ -35,6 +35,7 @@ ExecStart=/bin/sh -c '\
   --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
   --env "WRITER_HOST_HEADER=upp-gateway" \
   --env "WRITER_HEALTHCHECK_PATH=/build-info" \
+  --env "MESSAGE_FORWARDING_ENABLED=false" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "FILTER_NOVELTIES=false" \

@@ -1,8 +1,8 @@
 [Unit]
-Description=V1 Content Annotator Binding Service Red Service
+Description=V1 Content Annotator Service
 After=vulcan.service
 Requires=docker.service
-Wants=v1-content-annotator-binding-service-red-sidekick@%i.service
+Wants=v1-content-annotator-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/conte
   || /usr/bin/docker pull up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-v1-annotator-binding-service-red"; \
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-v1-annotator"; \
   export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
@@ -29,8 +29,8 @@ ExecStart=/bin/sh -c '\
   --env "ZOOKEEPER_ENDPOINTS=$ZOOKEEPER_HOST:$ZOOKEEPER_PORT" \
   --env "KAFKA_ENDPOINTS=$KAFKA_HOST:$KAFKA_PORT" \
   --env "WRITER_ENDPOINT=$HOSTNAME:8080:8080" \
-  --env "ANNOTATING_SYSTEM=http://cmdb.ft.com/systems/binding-service" \
-  --env "WRITER_HOST_HEADER=v1-annotations-rw-red" \
+  --env "ANNOTATING_SYSTEM=http://cmdb.ft.com/systems/methode-web-pub" \
+  --env "WRITER_HOST_HEADER=v1-annotations-rw-neo4j" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "FILTER_NOVELTIES=true" \
   --env "MESSAGE_FORWARDING_ENABLED=true" \
@@ -39,7 +39,7 @@ ExecStart=/bin/sh -c '\
   --env "KAFKA_PROXY_HOST_HEADER=kafka" \
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
-  --env "GRAPHITE_PREFIX=coco.services.$ENV.v1-content-annotator-binding-service-red.%i" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.v1-content-annotator.%i" \
   up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
@@ -47,4 +47,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=v1-content-annotator-binding-service-red@*.service
+Conflicts=v1-content-annotator@*.service

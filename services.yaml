@@ -23,7 +23,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.2.0
+  version: v63.2.1-FD-rc.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -167,7 +167,7 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v63
+  version: v66
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service

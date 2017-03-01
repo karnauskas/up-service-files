@@ -23,7 +23,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.1.4
+  version: v63.2.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -130,7 +130,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: v2.0.1
+  version: v2.0.2
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -219,7 +219,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v0.0.37
+  version: v0.0.37-FD-sp-rc1
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -421,7 +421,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v12
+  version: v14
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -474,7 +474,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v73
+  version: v74
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
@@ -556,7 +556,7 @@ services:
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator@.service
-  version: v54
+  version: v62
   count: 1
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
@@ -693,47 +693,47 @@ services:
 - name: v1-content-annotator-binding-service-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-blue@.service
-  version: v54
+  version: v62
   count: 1
 - name: v1-content-annotator-binding-service-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-binding-service-red@.service
-  version: v54
+  version: v62
   count: 1
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
 - name: v1-content-annotator-binding-service@.service
-  version: v53
+  version: v62
   count: 2
 - name: v1-content-annotator-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-blue@.service
-  version: v54
+  version: v62
   count: 1
 - name: v1-content-annotator-brightcove-blue-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-blue@.service
-  version: v54
+  version: v62
   count: 1
 - name: v1-content-annotator-brightcove-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-brightcove-red@.service
-  version: v54
+  version: v62
   count: 1
 - name: v1-content-annotator-red-sidekick@.service
   count: 1
 - name: v1-content-annotator-red@.service
-  version: v54
+  version: v62
   count: 1
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v53
+  version: v62
   count: 2
 - name: v1-content-annotator-brightcove-sidekick@.service
   count: 2
 - name: v1-content-annotator-brightcove@.service
-  version: v53
+  version: v62
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -758,17 +758,17 @@ services:
 - name: v2-content-annotator-blue-sidekick@.service
   count: 1
 - name: v2-content-annotator-blue@.service
-  version: v54
+  version: v62
   count: 1
 - name: v2-content-annotator-red-sidekick@.service
   count: 1
 - name: v2-content-annotator-red@.service
-  version: v54
+  version: v62
   count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v53
+  version: v62
   count: 2
 - name: varnish@.service
   version: v0.1.7

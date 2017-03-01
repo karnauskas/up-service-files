@@ -546,13 +546,13 @@ services:
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
-- name: rec-reads-content-ingester@.service
-  version: v70
+- name: rec-reads-content-annotator@.service
+  version: v62
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: v65
+  version: v70
   count: 1
 - name: relations-api-sidekick@.service
   count: 2

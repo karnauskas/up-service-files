@@ -115,7 +115,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: v2.0.2
+  version: v2.0.1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -304,7 +304,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.9
+  version: v3.0.8
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -357,11 +357,6 @@ services:
 - name: methode-article-mapper@.service
   version: v1.0.21-FD-rc.2
   count: 2
-- name: methode-content-collection-mapper-sidekick@.service
-  count: 2
-- name: methode-content-collection-mapper@.service
-  version: v1.0.2
-  count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
@@ -385,7 +380,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v14
+  version: v12
   count: 2
 - name: methode-story-package-mapper-sidekick@.service
   count: 2
@@ -437,7 +432,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.9
+  version: v3.0.8
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -725,7 +720,7 @@ services:
   version: v62
   count: 2
 - name: varnish@.service
-  version: v0.1.8-rc1
+  version: v0.1.7
   count: 2
   sequentialDeployment: true
 - name: video-mapper-sidekick@.service

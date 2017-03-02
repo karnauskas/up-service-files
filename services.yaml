@@ -234,7 +234,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: v0.1.0
+  version: v1.3.0
   count: 1
 - name: genres-rw-neo4j-blue-sidekick@.service
   count: 1
@@ -365,17 +365,17 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: v1.0.1
+  version: v1.0.2
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.3
+  version: v16.0.4
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v9.0.1
+  version: v9.0.2
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -730,11 +730,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.10-rc.1
+  version: v1.0.11-FD-rc.1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v35
+  version: v41
   count: 2
 - name: zookeeper.service

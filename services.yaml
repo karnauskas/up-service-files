@@ -365,7 +365,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: v1.0.1
+  version: v1.0.2
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
@@ -375,7 +375,7 @@ services:
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v9.0.1
+  version: v9.0.2
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2

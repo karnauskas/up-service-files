@@ -387,6 +387,11 @@ services:
 - name: methode-content-collection-mapper@.service
   version: v1.0.2-rj-rc1
   count: 2
+- name: methode-content-collection-mapper-sidekick@.service
+  count: 2
+- name: methode-content-collection-mapper@.service
+  version: v1.0.2
+  count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service

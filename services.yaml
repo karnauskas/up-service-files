@@ -568,7 +568,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 1
 - name: relations-api@.service
-  version: impl
+  version: v1.0.0-FD-rc1
   count: 1
 - name: restorage-elasticsearch-concepts-sidekick@.service
   count: 1

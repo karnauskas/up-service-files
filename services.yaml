@@ -738,3 +738,13 @@ services:
   version: v35
   count: 2
 - name: zookeeper.service
+- name: cms-kafka-bridge-pub-semantic-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-semantic-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 2

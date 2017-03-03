@@ -1,8 +1,8 @@
 [Unit]
-Description=Methode story package mapper
+Description=Methode content collection mapper
 After=vulcan.service
 Requires=docker.service
-Wants=methode-story-package-mapper-sidekick@%i.service
+Wants=methode-content-collection-mapper-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -24,8 +24,8 @@ ExecStart=/bin/sh -c '\
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "VULCAN_HOST=%H:8080" \
   coco/methode-content-collection-mapper:$DOCKER_APP_VERSION'
-  
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

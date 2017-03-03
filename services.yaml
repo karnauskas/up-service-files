@@ -184,7 +184,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 0.0.38-rc2
+  version: 0.0.38
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service

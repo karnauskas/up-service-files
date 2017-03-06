@@ -184,7 +184,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v0.0.37
+  version: 0.0.38-rc2
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -738,3 +738,18 @@ services:
   version: v35
   count: 2
 - name: zookeeper.service
+- name: cms-kafka-bridge-pub-semantic-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-semantic-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 2
+- name: concepts-kafka-bridge-pub-semantic-sidekick@.service
+  count: 1
+- name: concepts-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 1

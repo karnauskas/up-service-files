@@ -23,7 +23,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.3.0_dp_notifications-field-filtering_rc1
+  version: v63.3.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service

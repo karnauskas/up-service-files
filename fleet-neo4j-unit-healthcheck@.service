@@ -18,7 +18,7 @@ ExecStart=/bin/bash -c "\
     export FLEET_ENDPOINT=$(/usr/bin/ectdctl get /ft/config/neo4j/fleet_endpoint); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
     --memory=\"256m\" \
-    --env=\"FLEET_ENDPOINT=$FLEET_ENDPOINT" \
+    --env=\"FLEET_ENDPOINT=$FLEET_ENDPOINT\" \
     coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

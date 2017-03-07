@@ -365,7 +365,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.6
+  version: v0.0.7-FD-rc.1
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -479,49 +479,49 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.21
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v0.0.8
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.1.6
+  version: v0.2.0
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v0.1.0
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: v0.1.6
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.1.7
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service
   count: 2
 - name: public-six-degrees-api@.service
-  version: 1.0.0
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 0.0.17
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service

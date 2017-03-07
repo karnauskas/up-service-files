@@ -189,7 +189,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v0.0.37
+  version: 0.0.38
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -375,12 +375,12 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.4
+  version: v16.0.5-FD-rc.1
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v9.0.2
+  version: v9.0.3-FD-rc.2
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2

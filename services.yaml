@@ -350,7 +350,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.16-FD-sp-2
+  version: v1.0.18-FD-rc1
   count: 2
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2

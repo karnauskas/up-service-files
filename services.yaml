@@ -124,7 +124,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v0.0.37
+  version: 0.0.38
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -164,7 +164,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: v0.1.0
+  version: v1.3.0
   count: 1
 - name: genres-rw-neo4j-sidekick@.service
   count: 2
@@ -186,13 +186,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v0.0.8
+  version: v0.0.9
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v0.0.8
+  version: v0.0.9
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -214,7 +214,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.7
+  version: v3.0.9
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -242,6 +242,11 @@ services:
 - name: methode-article-mapper@.service
   version: v1.0.18
   count: 2
+- name: methode-content-collection-mapper-sidekick@.service
+  count: 2
+- name: methode-content-collection-mapper@.service
+  version: v1.0.2
+  count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
@@ -250,22 +255,22 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: v1.0.1
+  version: v1.0.2
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.3
+  version: v16.0.4
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v9.0.1
+  version: v9.0.2
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v12
+  version: v14
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -292,13 +297,13 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.7
+  version: v3.0.9
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v74
+  version: v75
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -465,7 +470,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.9
+  version: v1.0.10
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

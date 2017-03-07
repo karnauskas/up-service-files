@@ -209,17 +209,17 @@ services:
 - name: content-rw-neo4j-blue-sidekick@.service
   count: 1
 - name: content-rw-neo4j-blue@.service
-  version: 0.0.38-FD-sp-rc1
+  version: 0.0.39
   count: 1
 - name: content-rw-neo4j-red-sidekick@.service
   count: 1
 - name: content-rw-neo4j-red@.service
-  version: 0.0.38-FD-sp-rc1
+  version: 0.0.39
   count: 1
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 0.0.38-FD-sp-rc1
+  version: 0.0.39
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service

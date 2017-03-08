@@ -23,7 +23,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.2.0
+  version: v63.3.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -184,7 +184,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v0.0.37
+  version: 0.0.38
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -433,7 +433,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v75
+  version: v77
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
@@ -469,49 +469,49 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v0.0.21
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v0.0.9
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.1.6
+  version: v0.2.0
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v0.1.0
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: v0.1.6
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v0.1.7
+  version: v1.0.0
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service
   count: 2
 - name: public-six-degrees-api@.service
-  version: 1.0.0
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 0.0.17
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service

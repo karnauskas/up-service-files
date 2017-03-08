@@ -6,6 +6,12 @@ Wants=internal-content-api-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment="CONTENT_SOURCE_APP_NAME=Enriched Content Read API"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_NAME=Document Store API"
+Environment="CONTENT_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/enriched-content-read-api.html"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/document-store-api.html"
+Environment="CONTENT_SOURCE_APP_BUSINESS_IMPACT=No articles would be available"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT=Articles won't have the internal components"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -25,14 +31,8 @@ ExecStart=/bin/sh -c '\
     --env "APP_PORT=8080" \
     --env "CONTENT_SOURCE_URI=http://$HOSTNAME:8080/__enriched-content-read-api/enrichedcontent/" \
     --env "INTERNAL_COMPONENTS_SOURCE_URI=http://$HOSTNAME:8080/__document-store-api/internalcomponents/" \
-    --env "CONTENT_SOURCE_APP_NAME=Enriched Content Read API" \
-    --env "INTERNAL_COMPONENTS_SOURCE_APP_NAME=Document Store API" \
     --env "CONTENT_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__enriched-content-read-api/__health" \
     --env "INTERNAL_COMPONENTS_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__document-store-api/__health" \
-    --env "CONTENT_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/enriched-content-read-api.html" \
-    --env "INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/document-store-api.html" \
-    --env "CONTENT_SOURCE_APP_BUSINESS_IMPACT=No articles would be available" \
-    --env "INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT=Articles won't have the internal components" \
     --env "ENV_API_HOST=$ENV_API_HOST" \
     --env "CACHE_CONTROL_POLICY=\"max-age=$(/usr/bin/etcdctl get /ft/config/cache-max-age)\"" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \

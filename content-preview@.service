@@ -6,11 +6,11 @@ Wants=content-preview-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="BUSINESS_IMPACT=Editorial users won't be able to preview articles"
 Environment="SOURCE_APP_NAME=methode-api"
 Environment="TRANSFORM_APP_NAME=methode-article-mapper"
 Environment="SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/up-mapi.html"
 Environment="TRANSFORM_APP_PANIC_GUIDE=https://dewey.ft.com/up-mam.html"
+Environment="BUSINESS_IMPACT=Editorial users won't be able to preview articles"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.

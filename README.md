@@ -1,5 +1,5 @@
 # Universal Publishing service files + service file definition
-Repository that contains the UP stack service files and services definition for pre-prod and prod environments.
+ Repository that contains the UP stack service files and services definition for pre-prod and prod environments.
 
 ##Development
 

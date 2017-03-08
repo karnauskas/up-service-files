@@ -6,8 +6,8 @@ Wants=internal-content-preview-api-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="CONTENT_SOURCE_APP_NAME=Content Public Read Preview"
-Environment="INTERNAL_COMPONENTS_SOURCE_APP_NAME=Internal Components Preview"
+Environment="CONTENT_SOURCE_APP_NAME=content-public-read-preview"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_NAME=internal-components-preview"
 Environment="CONTENT_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/contentreadapi.html"
 Environment="INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/internal-components-preview.html"
 Environment="CONTENT_SOURCE_APP_BUSINESS_IMPACT=No internal content articles would be available to be previewed"

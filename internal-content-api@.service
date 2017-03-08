@@ -6,8 +6,8 @@ Wants=internal-content-api-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="CONTENT_SOURCE_APP_NAME=Enriched Content Read API"
-Environment="INTERNAL_COMPONENTS_SOURCE_APP_NAME=Document Store API"
+Environment="CONTENT_SOURCE_APP_NAME=enriched-content-read-api"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_NAME=document-store-api"
 Environment="CONTENT_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/enriched-content-read-api.html"
 Environment="INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/document-store-api.html"
 Environment="CONTENT_SOURCE_APP_BUSINESS_IMPACT=No articles would be available"

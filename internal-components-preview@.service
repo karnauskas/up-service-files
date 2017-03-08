@@ -6,11 +6,11 @@ Wants=internal-components-preview-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="BUSINESS_IMPACT=Editorial users won't be able to preview internal components on articles"
-Environment="TRANSFORM_APP_PANIC_GUIDE=https://dewey.ft.com/up-maicm.html"
-Environment="SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/up-mapi.html"
 Environment="SOURCE_APP_NAME=methode-api"
 Environment="TRANSFORM_APP_NAME=methode-article-internal-components-mapper"
+Environment="TRANSFORM_APP_PANIC_GUIDE=https://dewey.ft.com/up-maicm.html"
+Environment="SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/up-mapi.html"
+Environment="BUSINESS_IMPACT=Editorial users won't be able to preview internal components on articles"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.

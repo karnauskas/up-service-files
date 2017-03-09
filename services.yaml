@@ -390,7 +390,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v12
+  version: v14-rc1
   count: 2
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2

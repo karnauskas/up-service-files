@@ -23,7 +23,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.3.0
+  version: v63.4.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -162,13 +162,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v63
+  version: v67
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v64
+  version: v67
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -350,7 +350,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.18
+  version: v1.0.21
   count: 2
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
@@ -730,7 +730,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.10
+  version: v1.0.11
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

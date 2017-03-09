@@ -289,26 +289,6 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
-- name: neo4j-blue-sidekick@.service
-  count: 1
-- name: neo4j-blue@.service
-  version: v2.3.7-4
-  count: 1
-- name: neo4j-hot-backup@.service
-  version: 1.1-go
-  count: 1
-  desiredState: loaded
-- name: neo4j-hot-backup@.timer
-  count: 1
-- name: neo4j-read-blue-sidekick@.service
-  count: 1
-- name: neo4j-read-red-sidekick@.service
-  count: 1
-- name: neo4j-red-sidekick@.service
-  count: 1
-- name: neo4j-red@.service
-  version: v2.3.7-4
-  count: 1
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service

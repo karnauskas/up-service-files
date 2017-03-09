@@ -23,7 +23,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.2.1-FD-rc.1
+  version: v63.4.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -167,13 +167,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v66
+  version: v67
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v66
+  version: v67
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-blue-sidekick@.service
@@ -448,7 +448,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v75
+  version: v77
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-blue-sidekick@.service
@@ -607,7 +607,7 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v36
+  version: v37
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
@@ -745,11 +745,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.11-FD-rc.1
+  version: v1.0.11
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v41
+  version: v35
   count: 2
 - name: zookeeper.service

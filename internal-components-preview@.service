@@ -6,11 +6,6 @@ Wants=internal-components-preview-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="SOURCE_APP_NAME=methode-api"
-Environment="TRANSFORM_APP_NAME=methode-article-internal-components-mapper"
-Environment="TRANSFORM_APP_PANIC_GUIDE=https://dewey.ft.com/up-maicm.html"
-Environment="SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/up-mapi.html"
-Environment="BUSINESS_IMPACT=Editorial users won't be able to preview internal components on articles"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -35,11 +30,11 @@ ExecStart=/bin/sh -c '\
     --env "TRANSFORM_APP_HOST_HEADER=methode-article-internal-components-mapper" \
     --env "SOURCE_APP_HEALTH_URI=$METHODE_API/build-info" \
     --env "TRANSFORM_APP_HEALTH_URI=http://$HOSTNAME:8080/__health" \
-    --env "SOURCE_APP_NAME=$SOURCE_APP_NAME" \
-    --env "TRANSFORM_APP_NAME=$TRANSFORM_APP_NAME" \
-    --env "SOURCE_APP_PANIC_GUIDE=$SOURCE_APP_PANIC_GUIDE" \
-    --env "SOURCE_APP_PANIC_GUIDE=$TRANSFORM_APP_PANIC_GUIDE" \
-    --env "BUSINESS_IMPACT=$BUSINESS_IMPACT" \
+    --env "SOURCE_APP_NAME=methode-api" \
+    --env "TRANSFORM_APP_NAME=methode-article-internal-components-mapper" \
+    --env "SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/up-mapi.html" \
+    --env "TRANSFORM_APP_PANIC_GUIDE=https://dewey.ft.com/up-maicm.html" \
+    --env "BUSINESS_IMPACT=Editorial users won't be able to preview internal components on articles" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
     --env "GRAPHITE_PREFIX=coco.services.$ENV.internal-components-preview.%i" \
     coco/content-preview:$DOCKER_APP_VERSION;'

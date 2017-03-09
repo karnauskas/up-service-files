@@ -159,7 +159,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 0.0.38
+  version: 0.0.39
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -282,7 +282,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.21
+  version: v1.0.22
   count: 2
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2

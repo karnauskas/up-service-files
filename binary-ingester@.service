@@ -27,6 +27,7 @@ ExecStart=/bin/sh -c '\
   export WRITER_HEALTHCHECK_NAME="Can connect to the Binary Writer"; \
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Binary Writer returns a 200 response"; \
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
+  export PANIC_GUIDE_URL=https://dewey.ft.com/up-ibi.html \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
     --env "JAVA_OPTS=$JAVA_OPTS" \
     --env "VULCAN_HOST=%H:8080" \
@@ -50,6 +51,7 @@ ExecStart=/bin/sh -c '\
     --env "MESSAGE_FORWARDING_ENABLED=false" \
     --env "FORWARD_TO_TOPIC_NAME=PostPublicationEvents" \
     --env "KAFKA_PROXY=%H:8080" \
+    --env "PANIC_GUIDE_URL=$PANIC_GUIDE_URL"  \
   up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

@@ -223,13 +223,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v0.0.10
+  version: v1.0.11
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v0.0.10
+  version: v1.0.11
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -277,7 +277,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v0.0.8
+  version: v1.0.1
   count: 2
 - name: methode-article-mapper-sidekick@.service
   count: 2

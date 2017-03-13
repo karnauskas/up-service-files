@@ -380,7 +380,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v16-rj.rc2
+  version: v16
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

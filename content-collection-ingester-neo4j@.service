@@ -1,8 +1,8 @@
 [Unit]
-Description=Content-Collection Ingester for Blue Neo4j
+Description=Content-Collection Ingester for Neo4j
 After=vulcan.service
 Requires=docker.service
-Wants=content-collection-ingester-neo4j-blue-sidekick@%i.service
+Wants=content-collection-ingester-neo4j-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -34,13 +34,13 @@ ExecStart=/bin/sh -c '\
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
       --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
       --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
-      --env "KAFKA_GROUPNAME=content-collection-neo4j-blue" \
+      --env "KAFKA_GROUPNAME=content-collection-neo4j" \
       --env "KAFKA_SYSTEM_ID=ContentCollectionIngesterNeo4j" \
       --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "UPP_GATEWAY_PATH=" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
-      --env "WRITER_HEADER=content-collection-rw-neo4j-blue" \
+      --env "WRITER_HEADER=content-collection-rw-neo4j" \
       --env "WRITER_NAME=ContentCollectionRWNeo4j" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
@@ -54,4 +54,3 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=%p@*.service
-

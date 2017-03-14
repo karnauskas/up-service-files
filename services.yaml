@@ -203,7 +203,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v75-sp-cp-rc2
+  version: v75-sp-cp-rc4
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-blue-sidekick@.service

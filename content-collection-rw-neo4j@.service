@@ -1,0 +1,38 @@
+[Unit]
+Description=Content-Collection Reader Writer for Neo4j
+After=vulcan.service
+Requires=docker.service
+Wants=content-collection-rw-neo4j-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+|| /usr/bin/docker pull coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
+  --memory="256m" \
+  -e "NEO_URL=$NEO_URL" \
+  -e "APP_PORT=$APP_PORT" \
+  -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+  -e "GRAPHITE_PREFIX=coco.services.$ENV.content-collection-rw-neo4j.%i" \
+  -e "LOG_METRICS=false" \
+  -e "CACHE_DURATION=30s" \
+  coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION;'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=content-collection-rw-neo4j@*.service

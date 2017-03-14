@@ -97,12 +97,12 @@ services:
   count: 2
 - name: content-collection-ingester-neo4j@.service
   version: v71
-  count: 1
+  count: 2
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
   version: 1.0.1-cp-rc3
-  count: 1
+  count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service

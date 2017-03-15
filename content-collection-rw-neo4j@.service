@@ -1,34 +1,38 @@
 [Unit]
-Description=Brands Reader-Writer for blue Neo4j Service
+Description=Content-Collection Reader Writer for Neo4j
 After=vulcan.service
 Requires=docker.service
-Wants=brands-rw-neo4j-blue-sidekick@%i.service
+Wants=content-collection-rw-neo4j-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
+
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
+
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/brands-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/brands-rw-neo4j:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+|| /usr/bin/docker pull coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/brands-rw-neo4j/batchsize); \
+  export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
-  --env "NEO_URL=http://$HOSTNAME:8080/__neo4j-blue/db/data" \
-  --env "APP_PORT=$APP_PORT" \
-  --env "BATCH_SIZE=$BATCH_SIZE" \
-  --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-  --env "GRAPHITE_PREFIX=coco.services.$ENV.brands-rw-neo4j-blue.%i" \
-  coco/brands-rw-neo4j:$DOCKER_APP_VERSION;'
+  -e "NEO_URL=$NEO_URL" \
+  -e "APP_PORT=$APP_PORT" \
+  -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+  -e "GRAPHITE_PREFIX=coco.services.$ENV.content-collection-rw-neo4j.%i" \
+  -e "LOG_METRICS=false" \
+  -e "CACHE_DURATION=30s" \
+  coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION;'
+
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=brands-rw-neo4j-blue@*.service
-
+Conflicts=content-collection-rw-neo4j@*.service

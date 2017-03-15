@@ -296,7 +296,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v78-dp-types-param-case-insensitive-rc1
+  version: v78
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

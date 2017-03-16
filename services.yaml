@@ -19,11 +19,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-<<<<<<< HEAD
-  version: v70
-=======
   version: v71
->>>>>>> relations-api
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -122,22 +118,6 @@ services:
 - name: concepts-kafka-bridge-pub-pre-prod-us@.service
   version: v14.1.1
   count: 1
-<<<<<<< HEAD
-- name: content-ingester-neo4j-blue-sidekick@.service
-  count: 1
-- name: content-ingester-neo4j-blue@.service
-  version: v70
-  count: 1
-- name: content-ingester-neo4j-red-sidekick@.service
-  count: 1
-- name: content-ingester-neo4j-red@.service
-  version: v70
-  count: 1
-- name: content-ingester-neo4j-sidekick@.service
-  count: 2
-- name: content-ingester-neo4j@.service
-  version: v70
-=======
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-collection-ingester-neo4j@.service
@@ -152,16 +132,11 @@ services:
   count: 2
 - name: content-ingester-neo4j@.service
   version: v71
->>>>>>> relations-api
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-<<<<<<< HEAD
-  version: v70
-=======
   version: v71
->>>>>>> relations-api
   count: 2
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 1
@@ -286,11 +261,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-<<<<<<< HEAD
-  version: v70
-=======
   version: v71
->>>>>>> relations-api
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
@@ -302,20 +273,7 @@ services:
 - name: list-notifications-rw@.service
   version: v0.1.2
   count: 2
-<<<<<<< HEAD
-- name: locations-rw-neo4j-blue-sidekick@.service
-  count: 1
-- name: locations-rw-neo4j-blue@.service
-  version: v1.1.3
-  count: 1
-- name: locations-rw-neo4j-red-sidekick@.service
-  count: 1
-- name: locations-rw-neo4j-red@.service
-  version: v1.1.3
-  count: 1
-=======
   sequentialDeployment: true
->>>>>>> relations-api
 - name: locations-rw-neo4j-sidekick@.service
   count: 2
 - name: locations-rw-neo4j@.service
@@ -391,11 +349,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-<<<<<<< HEAD
-  version: v70
-=======
   version: v71
->>>>>>> relations-api
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -473,13 +427,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-<<<<<<< HEAD
-  version: v70
-  count: 1
-- name: rec-reads-content-ingester-sidekick@.service
-=======
   version: v71
->>>>>>> relations-api
   count: 1
 - name: relations-api-sidekick@.service
   count: 1

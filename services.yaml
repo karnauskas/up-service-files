@@ -485,7 +485,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.11
+  version: v1.0.12-rc.1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

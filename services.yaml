@@ -94,15 +94,15 @@ services:
   version: v14.1.1
   count: 1
 - name: content-collection-ingester-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: content-collection-ingester-neo4j@.service
   version: v71
-  count: 1
+  count: 2
 - name: content-collection-rw-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: content-collection-rw-neo4j@.service
   version: 1.0.0
-  count: 1
+  count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
@@ -153,7 +153,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v75-sp-cp-rc4
+  version: v75
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -387,7 +387,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 1
 - name: relations-api@.service
-  version: v1.0.0-FD-rc1
+  version: v1.0.0
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

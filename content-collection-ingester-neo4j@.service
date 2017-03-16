@@ -54,4 +54,3 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=%p@*.service
-

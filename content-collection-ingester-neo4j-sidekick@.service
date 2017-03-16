@@ -23,4 +23,3 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=content-collection-ingester-neo4j@%i.service
-

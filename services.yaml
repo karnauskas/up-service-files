@@ -122,13 +122,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v67
+  version: v68-rj.rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v67
+  version: v68-rj.rc1
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -250,7 +250,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.24
+  version: v1.0.25-rj.rc1
   count: 2
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2

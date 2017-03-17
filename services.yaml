@@ -196,7 +196,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: v1.0.6
+  version: v1.0.7-rc.1
   count: 2
 - name: internal-content-preview-api-sidekick@.service
   count: 2

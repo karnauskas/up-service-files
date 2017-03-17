@@ -6,6 +6,11 @@ Wants=internal-components-preview-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment="SOURCE_APP_NAME=methode-api"
+Environment="TRANSFORM_APP_NAME=methode-article-internal-components-mapper"
+Environment="SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/up-mapi.html"
+Environment="TRANSFORM_APP_PANIC_GUIDE=https://dewey.ft.com/up-maicm.html"
+Environment="BUSINESS_IMPACT=Editorial users won't be able to preview internal components on articles"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -22,19 +27,21 @@ ExecStart=/bin/sh -c '\
     export METHODE_API=$(/usr/bin/etcdctl get /ft/config/methode-api); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
 	--memory="256m" \
+    --env "APP_NAME=internal-components-preview" \
     --env "APP_PORT=8080" \
     --env "SOURCE_APP_AUTH=$MAPI_AUTH" \
     --env "SOURCE_APP_URI=$METHODE_API/eom-file/" \
-    --env "TRANSFORM_APP_URI=http://$HOSTNAME:8080/content-transform/" \
+    --env "TRANSFORM_APP_URI=http://$HOSTNAME:8080/map" \
     --env "TRANSFORM_APP_HOST_HEADER=methode-article-internal-components-mapper" \
     --env "SOURCE_APP_HEALTH_URI=$METHODE_API/build-info" \
     --env "TRANSFORM_APP_HEALTH_URI=http://$HOSTNAME:8080/__health" \
-    --env "SOURCE_APP_NAME=methode-api" \
-    --env "TRANSFORM_APP_NAME=methode-article-internal-components-mapper" \
+    --env "SOURCE_APP_NAME=$SOURCE_APP_NAME" \
+    --env "TRANSFORM_APP_NAME=$TRANSFORM_APP_NAME" \
+    --env "SOURCE_APP_PANIC_GUIDE=$SOURCE_APP_PANIC_GUIDE" \
+    --env "TRANSFORM_APP_PANIC_GUIDE=$TRANSFORM_APP_PANIC_GUIDE" \
+    --env "BUSINESS_IMPACT=$BUSINESS_IMPACT" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
     --env "GRAPHITE_PREFIX=coco.services.$ENV.internal-components-preview.%i" \
-    --env "SOURCE_APP_PANIC_GUIDE=https://sites.google.com/a/ft.com/dynamic-publishing-team/home/methode-api" \
-    --env "TRANSFORM_APP_PANIC_GUIDE=https://dewey.ft.com/up-mlm.html" \
     coco/content-preview:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure

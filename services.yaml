@@ -145,6 +145,7 @@ services:
 - name: coreos-version-checker.service
   version: v1.0.0
 - name: diamond.service
+  version: v1.1.0
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service

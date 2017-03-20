@@ -387,7 +387,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: v1.0.0-rj-rc2
+  version: v1.0.1-rj-rc1
   count: 2
 - name: restorage-mongo-sidekick@.service
   count: 1

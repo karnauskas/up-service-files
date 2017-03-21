@@ -313,7 +313,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v80-dp-type-param-order-rc1
+  version: v80
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

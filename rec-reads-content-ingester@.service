@@ -29,7 +29,7 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export PANIC_GUIDE_URL=https://dewey.ft.com/rec-reads-content-ingester \
+  export PANIC_GUIDE_URL="https://dewey.ft.com/rec-reads-content-ingester"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "UPP_GATEWAY_PATH=/rr-content" \

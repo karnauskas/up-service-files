@@ -1,11 +1,12 @@
 [Unit]
-Description=Recommended Reads Content Annotator Service
+Description=V1 Content Annotator Binding Service Service
 After=vulcan.service
 Requires=docker.service
-Wants=rec-reads-content-annotator-sidekick@%i.service
+Wants=v1-content-annotator-binding-service-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment="APP_PORT=8080"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
@@ -15,33 +16,30 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/conte
   || /usr/bin/docker pull up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  export APP_PORT=8080; \
-  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-rec-reads-content-annotator"; \
+  export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-v1-annotator-binding-service"; \
   export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
   export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
-  export WRITER_HOST=$(/usr/bin/etcdctl get /ft/config/upp-gateway/host); \
-  export WRITER_PORT=$(/usr/bin/etcdctl get /ft/config/upp-gateway/port); \
-  export WRITER_CREDENTIALS=$(usr/bin/etcdctl get /ft/_credentials/upp-gateway/authorization_key); \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
-  --env "TOPIC=ConceptSuggestions" \
+  --env "TOPIC=V1ConceptAnnotations" \
   --env "GROUP_ID=$GROUP_ID" \
   --env "ZOOKEEPER_ENDPOINTS=$ZOOKEEPER_HOST:$ZOOKEEPER_PORT" \
   --env "KAFKA_ENDPOINTS=$KAFKA_HOST:$KAFKA_PORT" \
-  --env "WRITER_PATH=/rr-suggestions" \
-  --env "WRITER_ENDPOINT=$WRITER_HOST:$WRITER_PORT" \
-  --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
-  --env "WRITER_HOST_HEADER=upp-gateway" \
-  --env "WRITER_HEALTHCHECK_PATH=/build-info" \
-  --env "MESSAGE_FORWARDING_ENABLED=false" \
-  --env "ANNOTATING_SYSTEM=concept-suggestor" \
+  --env "WRITER_ENDPOINT=$HOSTNAME:8080:8080" \
+  --env "ANNOTATING_SYSTEM=http://cmdb.ft.com/systems/binding-service" \
+  --env "WRITER_HOST_HEADER=v1-annotations-rw-neo4j" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
-  --env "FILTER_NOVELTIES=false" \
+  --env "FILTER_NOVELTIES=true" \
+  --env "MESSAGE_FORWARDING_ENABLED=true" \
+  --env "FORWARD_TO_TOPIC_NAME=PostMetadataPublicationEvents" \
+  --env "KAFKA_PROXY=%H:8080" \
+  --env "KAFKA_PROXY_HOST_HEADER=kafka" \
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
-  --env "GRAPHITE_PREFIX=coco.services.$ENV.rec-reads-content-annotator.%i" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.v1-content-annotator-binding-service.%i" \
   up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
@@ -49,4 +47,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=rec-reads-content-annotator@*.service
+Conflicts=v1-content-annotator-binding-service@*.service

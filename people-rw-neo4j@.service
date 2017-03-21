@@ -1,8 +1,8 @@
 [Unit]
-Description=Public Six Degrees Api Service
+Description=People Reader-Writer for Neo4j Service
 After=vulcan.service
 Requires=docker.service
-Wants=public-six-degrees-api-sidekick@%i.service
+Wants=people-rw-neo4j-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -11,26 +11,25 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/public-six-degrees:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || /usr/bin/docker pull coco/public-six-degrees:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/people-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || /usr/bin/docker pull coco/people-rw-neo4j:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_only_url); \
+  export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/people-rw-neo4j/batchsize); \
+  export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
-  -e "NEO_URL=$NEO_URL" \
-  -e "APP_PORT=$APP_PORT" \
-  -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-  -e "GRAPHITE_PREFIX=coco.services.$ENV.public-six-degrees-api.%i" \
-  -e "LOG_METRICS=false" \
-  -e "CACHE_DURATION=24h" \
-  coco/public-six-degrees:$DOCKER_APP_VERSION;'
+  --env "NEO_URL=$NEO_URL" \
+  --env "APP_PORT=$APP_PORT" \
+  --env "BATCH_SIZE=$BATCH_SIZE" \
+  --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.people-rw-neo4j.%i" \
+  coco/people-rw-neo4j:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=public-six-degrees-api@*.service
+Conflicts=people-rw-neo4j@*.service

@@ -19,7 +19,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -96,7 +96,7 @@ services:
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 1
 - name: content-collection-ingester-neo4j@.service
-  version: v71
+  version: v72
   count: 1
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 1
@@ -106,12 +106,12 @@ services:
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: v71
+  version: v72
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -220,7 +220,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
@@ -303,7 +303,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -383,7 +383,7 @@ services:
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: v71
+  version: v72
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

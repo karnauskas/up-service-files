@@ -86,7 +86,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: v29
+  version: v36
   count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1

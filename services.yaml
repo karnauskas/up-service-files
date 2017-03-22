@@ -199,6 +199,7 @@ services:
 - name: internal-components-preview@.service
   version: v1.0.7-rc.1
   count: 2
+  sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
@@ -258,11 +259,13 @@ services:
 - name: methode-article-internal-components-mapper@.service
   version: v1.0.2-rc.1
   count: 2
+  sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
   version: v1.0.28-rc.1
   count: 2
+  sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
@@ -329,7 +332,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: vgtg_endpoint
+  version: v81-rc1-timeout-fix
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

@@ -169,7 +169,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v94
+  version: v95
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service

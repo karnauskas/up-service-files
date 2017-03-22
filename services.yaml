@@ -96,7 +96,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: v36
+  version: v39
   count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
@@ -132,13 +132,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v67
+  version: v68-rj.rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v67
+  version: v68-rj.rc1
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -204,6 +204,7 @@ services:
 - name: internal-components-preview@.service
   version: v1.0.6
   count: 2
+  sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
@@ -258,11 +259,13 @@ services:
 - name: methode-article-internal-components-mapper@.service
   version: v1.0.3-rc1
   count: 2
+  sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.25-rc
+  version: v1.0.29-rj.rc1
   count: 2
+  sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
@@ -324,7 +327,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v81
+  version: v82-rj.rc1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

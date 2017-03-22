@@ -159,11 +159,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-<<<<<<< HEAD
   version: v71-rc1
-=======
-  version: v75
->>>>>>> fix/gtg-headers-notifications-rw
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -239,11 +235,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-<<<<<<< HEAD
-  version: v0.1.3
-=======
   version: v0.1.4-rc1
->>>>>>> fix/gtg-headers-notifications-rw
   count: 2
   sequentialDeployment: true
 - name: load-replicator@.service
@@ -337,11 +329,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-<<<<<<< HEAD
   version: vgtg_endpoint
-=======
-  version: v81
->>>>>>> fix/gtg-headers-notifications-rw
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

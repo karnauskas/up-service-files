@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.5.1-rc.1
+  version: v63.5.1-rc.1.home
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service

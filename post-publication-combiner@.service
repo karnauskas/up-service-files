@@ -1,0 +1,43 @@
+[Unit]
+Description=Post Publication Combiner
+After=vulcan.service
+Requires=docker.service
+Wants=post-publication-combiner-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/post-publication-combiner:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/post-publication-combiner:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export DOCUMENT_STORE_BASE_URL=http://$HOSTNAME:8080/__document-store-api; \
+  export PUBLIC_ANNOTATIONS_API_BASE_URL=http://$HOSTNAME:8080/__public-annotations-api; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  --env "PORT=8080" \
+  --env "KAFKA_CONTENT_TOPIC_NAME=PostPublicationEvents" \
+  --env "KAFKA_METADATA_TOPIC_NAME=PostMetadataPublicationEvents" \
+  --env "KAFKA_COMBINED_TOPIC_NAME=CombinedPostPublicationEvents" \
+  --env "KAFKA_PROXY_ADDR=$HOSTNAME:8080" \
+  --env "KAFKA_PROXY_CONSUMER_GROUP=$ENV-post-publication-combiner" \
+  --env "KAFKA_PROXY_HOST_HEADER=kafka" \
+  --env "KAFKA_PROXY_CONCURRENT_PROCESSING=false" \
+  --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.post-publication-combiner.%i" \
+  --env "LOG_METRICS=false" \
+  --env "DOCUMENT_STORE_BASE_URL=$DOCUMENT_STORE_BASE_URL" \
+  --env "DOCUMENT_STORE_API_ENDPOINT=/content/{uuid}" \
+  --env "PUBLIC_ANNOTATIONS_API_BASE_URL=$PUBLIC_ANNOTATIONS_API_BASE_URL" \
+  --env "PUBLIC_ANNOTATIONS_API_ENDPOINT=/content/{uuid}/annotations/v1" \
+  coco/post-publication-combiner:$DOCKER_APP_VERSION'
+
+#Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

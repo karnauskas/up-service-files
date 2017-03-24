@@ -132,13 +132,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v71-rj.rc1
+  version: v71
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v71-rj.rc1
+  version: v71
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -263,7 +263,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.29-rj.rc1
+  version: v1.0.29
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -327,7 +327,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v82-rj.rc1
+  version: v82
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

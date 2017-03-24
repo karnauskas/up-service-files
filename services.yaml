@@ -97,11 +97,11 @@ services:
   count: 2
 - name: content-collection-ingester-neo4j@.service
   version: v72
-  count: 1
+  count: 2
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.0.1
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -134,7 +134,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -198,13 +198,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v1.0.11
+  version: v1.0.12
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.11
+  version: v1.0.12
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -231,7 +231,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.2
+  version: v0.1.4
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-sidekick@.service
@@ -247,7 +247,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v1.0.1
+  version: v1.0.2
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -264,7 +264,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.6
+  version: v0.0.7
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -389,10 +389,10 @@ services:
   version: v72
   count: 1
 - name: relations-api-sidekick@.service
-  count: 1
+  count: 2
 - name: relations-api@.service
-  version: v1.0.0
-  count: 1
+  version: v1.0.1
+  count: 2
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
@@ -421,7 +421,7 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v36
+  version: v37
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

@@ -127,21 +127,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-<<<<<<< HEAD
-  version: v69-rc1
-=======
   version: v70
->>>>>>> fix/kafka-bridges
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-<<<<<<< HEAD
-  version: v69-rc1
-=======
   version: v70
->>>>>>> fix/kafka-bridges
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -211,21 +203,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-<<<<<<< HEAD
-  version: gtg-fix
-=======
   version: v1.0.12
->>>>>>> fix/kafka-bridges
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-<<<<<<< HEAD
-  version: gtg-fix
-=======
   version: v1.0.12
->>>>>>> fix/kafka-bridges
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -252,11 +236,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-<<<<<<< HEAD
-  version: v0.1.4-rc1
-=======
   version: v0.1.4
->>>>>>> fix/kafka-bridges
   count: 2
   sequentialDeployment: true
 - name: load-replicator@.service
@@ -277,21 +257,13 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-<<<<<<< HEAD
-  version: v1.0.2-rc.1
-=======
   version: v1.0.2
->>>>>>> fix/kafka-bridges
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-<<<<<<< HEAD
-  version: v1.0.28-rc.1
-=======
   version: v1.0.28
->>>>>>> fix/kafka-bridges
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

@@ -333,7 +333,7 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: v1.0.0-rc1-xp
+  version: v1.0.0-rc3-xp
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2

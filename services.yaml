@@ -132,13 +132,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v68-rj.rc1
+  version: v71-rj.rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v68-rj.rc1
+  version: v71-rj.rc1
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -241,7 +241,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.2
+  version: v0.1.4
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-sidekick@.service
@@ -274,7 +274,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.6
+  version: v0.0.7
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -431,7 +431,7 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v36
+  version: v37
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

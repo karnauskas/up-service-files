@@ -6,6 +6,12 @@ Wants=internal-content-preview-api-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment="CONTENT_SOURCE_APP_NAME=content-public-read-preview"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_NAME=internal-components-preview"
+Environment="CONTENT_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/contentreadapi.html"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/internal-components-preview.html"
+Environment="CONTENT_SOURCE_APP_BUSINESS_IMPACT=No internal content articles would be available to be previewed"
+Environment="INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT=Articles won't have the internal components to be previewed"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -15,19 +21,25 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-
 ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/internal-content-api:$DOCKER_APP_VERSION > /dev/null 2>&1 \
   || docker pull coco/internal-content-api:$DOCKER_APP_VERSION'
 
+
 ExecStart=/bin/sh -c '\
     ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
     ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
     --memory="256m" \
+    --env "APP_NAME=internal-content-preview-api" \
     --env "APP_PORT=8080" \
     --env "HANDLER_PATH=internalcontent-preview" \
     --env "CONTENT_SOURCE_URI=http://$HOSTNAME:8080/__content-public-read-preview/content-preview/" \
     --env "INTERNAL_COMPONENTS_SOURCE_URI=http://$HOSTNAME:8080/__internal-components-preview/content-preview/" \
-    --env "CONTENT_SOURCE_APP_NAME=Content Preview" \
-    --env "INTERNAL_COMPONENTS_SOURCE_APP_NAME=Internal Components Preview" \
     --env "CONTENT_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__content-public-read-preview/__health" \
     --env "INTERNAL_COMPONENTS_SOURCE_APP_HEALTH_URI=http://$HOSTNAME:8080/__internal-components-preview/__health" \
+    --env "CONTENT_SOURCE_APP_NAME=$CONTENT_SOURCE_APP_NAME" \
+    --env "INTERNAL_COMPONENTS_SOURCE_APP_NAME=$INTERNAL_COMPONENTS_SOURCE_APP_NAME" \
+    --env "CONTENT_SOURCE_APP_PANIC_GUIDE=$CONTENT_SOURCE_APP_PANIC_GUIDE" \
+    --env "INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=$INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE" \
+    --env "CONTENT_SOURCE_APP_BUSINESS_IMPACT=$CONTENT_SOURCE_APP_BUSINESS_IMPACT" \
+    --env "INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT=$INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT" \
     --env "ENV_API_HOST=$ENV_API_HOST" \
     --env "CACHE_CONTROL_POLICY=no-store" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \

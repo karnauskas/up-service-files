@@ -18,7 +18,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/relations-api/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/relations-api/servers/%i'
 Restart=on-failure
 RestartSec=60
 

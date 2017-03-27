@@ -50,22 +50,22 @@ services:
 - name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-pre-prod@.service
-  version: v14.2.0-rc.1
+  version: v14.1.2-rc1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: v14.2.0-rc.1
+  version: v14.1.2-rc1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us@.service
-  version: v14.2.0-rc.1
+  version:v14.1.2-rc1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp@.service
-  version: v14.2.0-rc.1
+  version: v14.1.2-rc1
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -96,7 +96,7 @@ services:
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
-  version: v14.2.0-rc.1
+  version: v14.1.2-rc1
   count: 1
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
@@ -263,7 +263,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.28
+  version: v1.0.30-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

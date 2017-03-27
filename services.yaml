@@ -218,6 +218,11 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
+- name: keyphrase-rw-neo4j-sidekick@.service
+  count: 1
+- name: keyphrase-rw-neo4j@.service
+  version: InitialWork
+  count: 1
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service

@@ -135,7 +135,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: vdp-read-from-secondary-rc3
+  version: vdp-read-from-secondary-rc2
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service

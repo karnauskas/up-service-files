@@ -21,12 +21,10 @@ ExecStart=/bin/sh -c '\
   export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_only_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
-  -e "NEO_URL=$NEO_URL" \
-  -e "APP_PORT=$APP_PORT" \
-  -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-  -e "GRAPHITE_PREFIX=coco.services.$ENV.relations-api.%i" \
-  -e "LOG_METRICS=false" \
-  -e "CACHE_DURATION=30s" \
+  --env "NEO_URL=$NEO_URL" \
+  --env "APP_PORT=$APP_PORT" \
+  --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.relations-api.%i" \
   $IMAGENAME:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

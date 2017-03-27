@@ -19,7 +19,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -75,7 +75,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: v0.0.10
+  version: v0.0.11
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -86,7 +86,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: v29
+  version: v39
   count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
@@ -94,24 +94,24 @@ services:
   version: v14.1.1
   count: 1
 - name: content-collection-ingester-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: content-collection-ingester-neo4j@.service
-  version: v71
-  count: 1
+  version: v72
+  count: 2
 - name: content-collection-rw-neo4j-sidekick@.service
-  count: 1
+  count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.0.0
-  count: 1
+  version: 1.0.1
+  count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: v71
+  version: v72
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -122,24 +122,25 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v67
+  version: v71
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v67
+  version: v71
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
   version: v1.0.0
 - name: diamond.service
+  version: v1.1.0
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
@@ -153,7 +154,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v70
+  version: v75
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -193,16 +194,17 @@ services:
 - name: internal-components-preview@.service
   version: v1.0.6
   count: 2
+  sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v1.0.12-rj-rc4
+  version: v1.0.13
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.12-rj-rc4
+  version: v1.0.13
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -219,7 +221,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
@@ -229,7 +231,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.2
+  version: v0.1.4
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-sidekick@.service
@@ -245,13 +247,15 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v1.0.1
+  version: v1.0.2
   count: 2
+  sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.24
+  version: v1.0.29
   count: 2
+  sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
@@ -260,7 +264,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.6
+  version: v0.0.7
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -302,7 +306,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: v71
+  version: v72
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -313,7 +317,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v79
+  version: v82
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -382,8 +386,13 @@ services:
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: v71
+  version: v72
   count: 1
+- name: relations-api-sidekick@.service
+  count: 2
+- name: relations-api@.service
+  version: v1.0.1
+  count: 2
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
@@ -412,7 +421,7 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v36
+  version: v37
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

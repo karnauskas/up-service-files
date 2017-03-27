@@ -175,7 +175,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: v1.3.0
+  version: 1.3.1-testing
   count: 1
 - name: genres-rw-neo4j-sidekick@.service
   count: 2
@@ -220,6 +220,11 @@ services:
 - name: kafka.service
 - name: list-notifications-ingester-sidekick@.service
   count: 2
+- name: keyphrase-rw-neo4j-sidekick@.service
+  count: 1
+- name: keyphrase-rw-neo4j@.service
+  version: InitialWork
+  count: 1
 - name: list-notifications-ingester@.service
   version: v72
   count: 2
@@ -497,3 +502,18 @@ services:
   version: v43
   count: 2
 - name: zookeeper.service
+- name: cms-kafka-bridge-pub-semantic-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-semantic-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 2
+- name: concepts-kafka-bridge-pub-semantic-sidekick@.service
+  count: 1
+- name: concepts-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 1

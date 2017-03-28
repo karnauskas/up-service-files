@@ -471,7 +471,7 @@ services:
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v62
+  version: v11-rc1
   count: 2
 - name: v1-content-annotator-brightcove-sidekick@.service
   count: 2

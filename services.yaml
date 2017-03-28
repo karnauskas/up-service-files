@@ -134,7 +134,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v1.0.1
+  version: v1.0.2-DP-allow-type-content-rc-1
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -198,13 +198,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v1.0.12
+  version: v1.0.13
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.12
+  version: v1.0.13
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -257,7 +257,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v1.0.2
+  version: v1.0.3
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -274,7 +274,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.7
+  version: v0.0.8-DP-Save-Type-rc1
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

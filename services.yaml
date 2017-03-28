@@ -348,7 +348,7 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: v1.0.0-rc3-xp
+  version: v1.0.0-rc4-xp
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2

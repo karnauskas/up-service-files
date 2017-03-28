@@ -257,7 +257,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v1.0.3-rc1
+  version: v1.0.3
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -343,7 +343,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -499,7 +499,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.11
+  version: v1.0.13-rj-rc1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

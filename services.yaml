@@ -198,13 +198,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v1.0.14-rj-rc1
+  version: v1.0.14
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.14-rj-rc1
+  version: v1.0.14
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service

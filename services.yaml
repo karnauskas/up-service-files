@@ -489,11 +489,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.11
+  version: v1.0.13-rj-rc1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v43
+  version: v44-rj-rc2
   count: 2
 - name: zookeeper.service

@@ -263,7 +263,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.29
+  version: v1.0.30-rj-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -284,12 +284,12 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.5
+  version: v16.0.6-rj-rc1
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v9.0.3
+  version: v9.0.4-rj-rc1
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2

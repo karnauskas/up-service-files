@@ -471,7 +471,7 @@ services:
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.1.1
+  version: MajorMentionsTopicsLocations
   count: 2
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2

@@ -122,19 +122,19 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v70
+  version: v71
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v70
+  version: v71
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v1.0.1
+  version: v1.0.2
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -144,7 +144,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v94
+  version: v95
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -247,13 +247,13 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v1.0.2
+  version: v1.0.3
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.28
+  version: v1.0.29
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -264,7 +264,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.7
+  version: v0.0.8
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -317,7 +317,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v81
+  version: v82
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -333,7 +333,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v1.0.0
+  version: v1.0.1
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

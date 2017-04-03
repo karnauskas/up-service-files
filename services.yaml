@@ -181,7 +181,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v75
+  version: v76
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -411,7 +411,7 @@ services:
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator@.service
-  version: v62
+  version: v63
   count: 1
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
@@ -488,17 +488,17 @@ services:
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
 - name: v1-content-annotator-binding-service@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-content-annotator-brightcove-sidekick@.service
   count: 2
 - name: v1-content-annotator-brightcove@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -513,7 +513,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v62
+  version: v63
   count: 2
 - name: varnish@.service
   version: v0.1.7

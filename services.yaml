@@ -96,7 +96,7 @@ services:
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
-  version: v14.1.2-rc1
+  version: v14.1.1
   count: 1
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2

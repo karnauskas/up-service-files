@@ -62,6 +62,11 @@ services:
 - name: cms-kafka-bridge-pub-prod-us@.service
   version: v14.1.1
   count: 2
+- name: cms-kafka-bridge-pub-video-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-video@.service
+  version: v14.1.1
+  count: 2
 - name: cms-metadata-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-pre-prod-uk@.service
@@ -80,6 +85,11 @@ services:
 - name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us@.service
+  version: v14.1.1
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-video-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-video@.service
   version: v14.1.1
   count: 2
 - name: cms-notifier-sidekick@.service
@@ -159,7 +169,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v1.0.1
+  version: v1.0.2
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -225,13 +235,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v1.0.13
+  version: v1.0.14
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.13
+  version: v1.0.14
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -296,7 +306,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.7
+  version: v0.0.8
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

@@ -45,7 +45,7 @@ services:
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-xp@.service
-  version: v14.1.1
+  version: v14.1.2-rc4
   count: 2
 - name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2

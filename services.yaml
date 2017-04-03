@@ -306,7 +306,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: v1.0.0-video-rc.1
+  version: 1.0.0-video-rc.2
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

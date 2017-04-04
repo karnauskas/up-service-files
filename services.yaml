@@ -106,7 +106,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: v39
+  version: v41
   count: 1
 - name: concepts-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 1
@@ -141,7 +141,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: v1.0.6
+  version: v1.0.7
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
@@ -219,7 +219,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: v1.0.6
+  version: v1.0.7
   count: 2
   sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
@@ -531,7 +531,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.11
+  version: v1.0.12
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

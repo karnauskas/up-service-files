@@ -139,7 +139,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: v0.0.6-FD
+  version: 0.0.8-FD
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2

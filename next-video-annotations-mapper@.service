@@ -1,0 +1,50 @@
+[Unit]
+Description=Next Video Annotations Mapper
+After=vulcan.service
+Requires=docker.service
+Wants=next-video-annotations-mapper-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+Environment="PUBLIC_THINGS_APP_NAME=public-things-api"
+Environment="PUBLIC_THINGS_APP_PANIC_GUIDE=https://dewey.ft.com/enriched-content-read-api.html"
+Environment="PUBLIC_THINGS_APP_BUSINESS_IMPACT=Annotations will be missing on Next video content"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/upp-next-video-annotations-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/upp-next-video-annotations-mapper:$DOCKER_APP_VERSION'
+
+
+ExecStart=/bin/sh -c '\
+    ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+    --memory="256m" \
+    --env "APP_NAME=next-video-annotations-mapper" \
+    --env "APP_PORT=8080" \
+    --env "ENV_API_HOST=$ENV_API_HOST" \
+    --env "CACHE_CONTROL_POLICY=\"max-age=$(/usr/bin/etcdctl get /ft/config/cache-max-age)\"" \
+    --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
+    --env "GRAPHITE_PREFIX=coco.services.$ENV.next-video-annotations-mapper.%i" \
+    --env "PUBLIC_THINGS_URI=http://$HOSTNAME:8080/__public-things-api/things/" \
+    --env "PUBLIC_THINGS_APP_NAME=$PUBLIC_THINGS_APP_NAME" \
+    --env "PUBLIC_THINGS_APP_HEALTH_URI=http://$HOSTNAME:8080/__public-things-api/__health" \
+    --env "PUBLIC_THINGS_APP_PANIC_GUIDE=$PUBLIC_THINGS_APP_PANIC_GUIDE" \
+    --env "PUBLIC_THINGS_APP_BUSINESS_IMPACT=$PUBLIC_THINGS_APP_BUSINESS_IMPACT" \
+ 	--env "Q_ADDR=http://%H:8080" \
+	--env "Q_GROUP=videoAnnotationsMapper" \
+	--env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
+	--env "Q_READ_QUEUE=kafka" \
+	--env "Q_WRITE_TOPIC=V1ConceptAnnotations" \
+	--env "Q_WRITE_QUEUE=kafka" \
+    coco/upp-next-video-annotations-mapper:$DOCKER_APP_VERSION;'
+ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=next-video-annotations-mapper@*.service

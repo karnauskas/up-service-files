@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: v63.4.2
+  version: v63.4.3
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -253,7 +253,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.29
+  version: v1.0.30
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -317,7 +317,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v82
+  version: v83
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -425,7 +425,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.4
+  version: 1.0.5
 - name: topics-rw-neo4j-sidekick@.service
   count: 2
 - name: topics-rw-neo4j@.service

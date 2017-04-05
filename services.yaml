@@ -78,6 +78,12 @@ services:
   version: v0.0.11
   count: 2
   sequentialDeployment: true
+- name: concepts-rw-neo4j-sidekick@.service
+  count: 2
+- name: concepts-rw-neo4j@.service
+  version: 0.0.1-sm-initialversion-RC1
+  count: 2
+  sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
@@ -154,7 +160,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v75
+  version: v76
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -175,7 +181,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.3.1-rc2
+  version: 1.3.1
   count: 1
 - name: genres-rw-neo4j-sidekick@.service
   count: 2
@@ -391,7 +397,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: v62
+  version: v63
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
@@ -456,17 +462,17 @@ services:
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
 - name: v1-content-annotator-binding-service@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-content-annotator-brightcove-sidekick@.service
   count: 2
 - name: v1-content-annotator-brightcove@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2
@@ -481,7 +487,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v62
+  version: v63
   count: 2
 - name: varnish@.service
   version: v0.1.7

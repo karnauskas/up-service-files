@@ -219,7 +219,7 @@ services:
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.15-rj-rc1
+  version: 1.0.16-rj-status-code-rc1
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service

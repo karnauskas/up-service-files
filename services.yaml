@@ -116,7 +116,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: 1.0.7-rj-rc1
+  version: 1.0.8-rj-rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
@@ -192,7 +192,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: 1.0.7-rj-rc1
+  version: 1.0.8-rj-rc1
   count: 2
   sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service

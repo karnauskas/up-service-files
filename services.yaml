@@ -135,7 +135,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v94
+  version: v95
   count: 2
   sequentialDeployment: true
 - name: elasticsearch-sidekick.service
@@ -147,7 +147,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v75
+  version: v76
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -168,7 +168,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: v1.3.0
+  version: 1.3.1
   count: 1
 - name: genres-rw-neo4j-sidekick@.service
   count: 2
@@ -191,13 +191,13 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v1.0.13
+  version: v1.0.14
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.13
+  version: v1.0.14
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -310,7 +310,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v82
+  version: v85-DP-millisecs-in-page-param-rc1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -379,7 +379,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: v62
+  version: v63
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
@@ -449,22 +449,22 @@ services:
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
 - name: v1-content-annotator-binding-service@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-content-annotator-brightcove-sidekick@.service
   count: 2
 - name: v1-content-annotator-brightcove@.service
-  version: v62
+  version: v63
   count: 2
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
-  version: v0.1.1
+  version: 0.1.2
   count: 2
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
@@ -474,7 +474,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v62
+  version: v63
   count: 2
 - name: varnish@.service
   version: v0.1.7

@@ -78,6 +78,12 @@ services:
   version: v0.0.11
   count: 2
   sequentialDeployment: true
+- name: concepts-rw-neo4j-sidekick@.service
+  count: 2
+- name: concepts-rw-neo4j@.service
+  version: 0.0.1-sm-initialversion-RC1
+  count: 2
+  sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service

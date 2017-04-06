@@ -354,6 +354,10 @@ services:
   count: 2
 - name: next-video-mapper@.service
   version: latest_dev
+- name: next-video-annotations-rw-neo4j-sidekick@.service
+  count: 2
+- name: next-video-annotations-rw-neo4j@.service
+  version: 0.2.0-vid-support-next-video-rc1
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

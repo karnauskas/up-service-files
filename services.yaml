@@ -65,7 +65,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: vdev_video_work
+  version: vv48_video_rc_1
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2

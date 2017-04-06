@@ -45,12 +45,12 @@ services:
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
-  version: 14.1.3-dp-native-hash-support-rc.1
+  version: 14.1.3
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
-  version: 14.1.3-dp-native-hash-support-rc.1
+  version: 14.1.3
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -81,7 +81,7 @@ services:
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
-  version: 14.1.3-dp-native-hash-support-rc.1
+  version: 14.1.3
   count: 1
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2

@@ -21,6 +21,7 @@ ExecStart=/bin/sh -c '\
   export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
+  --env "ANNOTATION_LIFECYCLE=annotations-next-video" \
   --env "PLATFORM_VERSION=next-video" \
   --env "NEO_URL=$NEO_URL" \
   --env "APP_PORT=$APP_PORT" \

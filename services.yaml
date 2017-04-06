@@ -353,7 +353,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: latest_dev
+  version: v1.0.0_rc1
   count: 2  
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2

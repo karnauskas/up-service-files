@@ -303,6 +303,11 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
+- name: next-video-annotations-rw-neo4j-sidekick@.service
+  count: 2
+- name: next-video-annotations-rw-neo4j@.service
+  version: 0.2.0-vid-support-next-video-rc1
+  count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service

@@ -354,6 +354,7 @@ services:
   count: 2
 - name: next-video-mapper@.service
   version: latest_dev
+  count: 2  
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: next-video-annotations-rw-neo4j@.service

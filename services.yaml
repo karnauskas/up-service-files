@@ -308,6 +308,11 @@ services:
 - name: next-video-annotations-rw-neo4j@.service
   version: 0.2.0-vid-support-next-video-rc1
   count: 2
+- name: next-video-content-annotator-sidekick@.service
+  count: 2
+- name: next-video-content-annotator@.service
+  version: v63
+  count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service

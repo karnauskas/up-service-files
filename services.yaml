@@ -348,7 +348,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.0.0-video-rc.6
+  version: 1.0.0-video-rc.8
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2

@@ -20,13 +20,13 @@ KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 #Pull the image, if it is not yet downloaded. Check in history.
-ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/unpublish-content-notifier:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull up-registry.ft.com/coco/unpublish-content-notifier:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history coco/unpublish-content-notifier:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/unpublish-content-notifier:$DOCKER_APP_VERSION'
 
 #Define the variables, and commands below. Please put each command on a separate line.
 #Notice that the name of the container will be completed with a "_$(uuidgen)" - to ensure their uniqueness.
 ExecStart=/bin/sh -c '\
   --env "VULCAN_HOST=$HOSTNAME" \
-  up-registry.ft.com/coco/unpublish-content-notifier:$DOCKER_APP_VERSION'
+  coco/unpublish-content-notifier:$DOCKER_APP_VERSION'
 
 #Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

@@ -443,6 +443,11 @@ services:
   count: 2
 - name: tunnel-registrator.service
   version: v1.0.3
+- name: unpublish-content-notifier-sidekick@.service
+  count: 1
+- name: unpublish-content-notifier@.service
+  version: latest
+  count: 1
 - name: up-coco-admin-sidekick@.service
   count: 1
 - name: up-coco-admin@.service

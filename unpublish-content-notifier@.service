@@ -25,6 +25,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/unpublish-content-notifier:$DOCKE
 #Define the variables, and commands below. Please put each command on a separate line.
 #Notice that the name of the container will be completed with a "_$(uuidgen)" - to ensure their uniqueness.
 ExecStart=/bin/sh -c '\
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "VULCAN_HOST=$HOSTNAME" \
   coco/unpublish-content-notifier:$DOCKER_APP_VERSION'
 

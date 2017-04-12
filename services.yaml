@@ -91,7 +91,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: v39
+  version: v41
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
@@ -121,7 +121,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: v1.0.7-rc.1
+  version: v1.0.7
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
@@ -202,7 +202,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: v1.0.7-rc.1
+  version: v1.0.7
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
@@ -268,7 +268,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.30-rc1
+  version: v1.0.30
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -332,7 +332,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: v84
+  version: 86
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -445,7 +445,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: v1.0.5-rc2
+  version: 1.0.6-rc1
 - name: topics-rw-neo4j-sidekick@.service
   count: 2
 - name: topics-rw-neo4j@.service
@@ -509,7 +509,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.12-rc.1
+  version: v1.0.12
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

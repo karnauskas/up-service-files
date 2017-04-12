@@ -359,6 +359,7 @@ services:
   count: 2
 - name: next-video-content-annotator@.service
   version: v63
+  count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service

@@ -350,11 +350,6 @@ services:
 - name: next-video-annotations-mapper@.service
   version: 1.0.0-video-rc.9
   count: 2
-- name: next-video-mapper-sidekick@.service
-  count: 2
-- name: next-video-mapper@.service
-  version: v1.0.0_rc1
-  count: 2  
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: next-video-annotations-rw-neo4j@.service
@@ -364,6 +359,10 @@ services:
   count: 2
 - name: next-video-content-annotator@.service
   version: v63
+- name: next-video-mapper-sidekick@.service
+  count: 2
+- name: next-video-mapper@.service
+  version: v1.0.0_rc2
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

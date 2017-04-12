@@ -5,6 +5,12 @@ services:
   version: v1.1.10
   count: 2
   sequentialDeployment: true
+- name: annotations-rw-rdb-sidekick@.service
+  count: 2
+- name: annotations-rw-rdb@.service
+  count: 2
+  version: latest
+  sequentialDeployment: true
 - name: annotations-rw-s3-sidekick@.service
   count: 2
 - name: annotations-rw-s3@.service

@@ -363,7 +363,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: v1.0.0_rc2
+  version: v1.0.0_rc3
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

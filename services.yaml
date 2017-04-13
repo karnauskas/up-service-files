@@ -159,6 +159,11 @@ services:
   version: v95
   count: 2
   sequentialDeployment: true
+- name: draft-content-rw-aurora-sidekick@.service
+  count: 1
+- name: draft-content-rw-aurora@.service
+  version: latest
+  count: 1
 - name: elb-dns-registrator.service
   version: v4.0.3
 - name: elb-presence@.service

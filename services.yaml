@@ -156,6 +156,11 @@ services:
   version: v95
   count: 2
   sequentialDeployment: true
+- name: draft-content-rw-aurora-sidekick@.service
+  count: 1
+- name: draft-content-rw-aurora@.service
+  version: latest
+  count: 1
 - name: elasticsearch-sidekick.service
 - name: elasticsearch.service
 - name: elb-dns-registrator.service

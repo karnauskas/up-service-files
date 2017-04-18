@@ -225,13 +225,21 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
+<<<<<<< HEAD
   version: 1.0.16
+=======
+  version: v1.0.14
+>>>>>>> system-healthcheck-ntp-fix
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
+<<<<<<< HEAD
   version: 1.0.16
+=======
+  version: v1.0.14
+>>>>>>> system-healthcheck-ntp-fix
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -462,7 +470,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.5
+  version: 1.0.6
 - name: topics-rw-neo4j-sidekick@.service
   count: 2
 - name: topics-rw-neo4j@.service

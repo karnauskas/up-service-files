@@ -1,4 +1,9 @@
 services:
+- name: aggregate-concept-transformer-sidekick@.service
+  count: 1
+- name: aggregate-concept-transformer@.service
+  version: ReadFromSqsSendToWriters
+  count: 1
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service

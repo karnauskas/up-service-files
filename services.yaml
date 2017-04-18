@@ -480,7 +480,7 @@ services:
 - name: video-mapper-sidekick@.service
   count: 2
 - name: video-mapper@.service
-  version: 1.2.12-rj-type-rc.2
+  version: v1.2.11
   count: 2
 - name: vulcan-config-builder.service
   version: v1.3.5

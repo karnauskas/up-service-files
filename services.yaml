@@ -184,7 +184,7 @@ services:
   count: 2
 - name: image-cleaner.service
   version: 1.0.0
- - name: image-resolver-sidekick@.service
+- name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
   version: 1.0.0-fd-impl-rc1

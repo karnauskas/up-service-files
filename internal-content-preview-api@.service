@@ -27,7 +27,8 @@ ExecStart=/bin/sh -c '\
     ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
     --memory="256m" \
-    --env "APP_NAME=internal-content-preview-api" \
+    --env "APP_SYSTEM_CODE=internal-content-preview-api" \
+    --env "APP_NAME=Internal Content Preview API" \
     --env "APP_PORT=8080" \
     --env "HANDLER_PATH=internalcontent-preview" \
     --env "CONTENT_SOURCE_URI=http://$HOSTNAME:8080/__content-public-read-preview/content-preview/" \

@@ -101,7 +101,7 @@ services:
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.0.2
+  version: 1.0.3
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2

@@ -1,15 +1,16 @@
 [Unit]
-Description=Concepts Kafka Bridge Sidekick
-BindsTo=concepts-kafka-bridge-pub-prod@%i.service
-After=concepts-kafka-bridge-pub-prod@%i.service
+Description=Image resolver sidekick
+BindsTo=image-resolver@%i.service
+After=image-resolver@%i.service
 
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl set /ft/services/$SERVICE/healthcheck true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories read,internalcontent-read,enrichedcontent-read; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -17,11 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concepts-kafka-bridge-pub-prod/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/image-resolver/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=concepts-kafka-bridge-pub-prod@%i.service
-
-
+MachineOf=image-resolver@%i.service

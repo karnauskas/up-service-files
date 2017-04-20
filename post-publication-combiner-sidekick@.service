@@ -1,7 +1,8 @@
+#The sidekick makes sure the service is correctly registered in ETCD.
 [Unit]
-Description=Methode content collection mapper sidekick
-BindsTo=methode-content-collection-mapper@%i.service
-After=methode-content-collection-mapper@%i.service
+Description=Post Publication Combiner Sidekick
+BindsTo=post-publication-combiner@%i.service
+After=post-publication-combiner@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -9,8 +10,7 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/categories content-publish; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
@@ -18,9 +18,10 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/methode-content-collection-mapper/servers/%i'
+#Remove server keys from ETCD on stop
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/post-publication-combiner/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=methode-content-collection-mapper@%i.service
+MachineOf=post-publication-combiner@%i.service

@@ -1,7 +1,7 @@
 [Unit]
-Description=CMS Kafka Bridge Publishing Cluster Prod UK Sidekick
-BindsTo=cms-kafka-bridge-pub-prod-uk@%i.service
-After=cms-kafka-bridge-pub-prod-uk@%i.service
+Description=Concepts Kafka Bridge Sidekick
+BindsTo=concepts-kafka-bridge-pub-xp@%i.service
+After=concepts-kafka-bridge-pub-xp@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -9,8 +9,7 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set   /ft/healthcheck/$SERVICE-%i/categories lists-publish,image-publish,content-publish; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -18,9 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/cms-kafka-bridge-pub-prod-uk/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concepts-kafka-bridge-pub-xp/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=cms-kafka-bridge-pub-prod-uk@%i.service
+MachineOf=concepts-kafka-bridge-pub-xp@%i.service

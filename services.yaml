@@ -101,7 +101,7 @@ services:
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.0.1
+  version: 1.0.3
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -116,7 +116,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: v1.0.7
+  version: 1.0.8
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
@@ -134,7 +134,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: v1.0.2
+  version: 1.0.3
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -192,19 +192,19 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: v1.0.7
+  version: 1.0.8
   count: 2
   sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: v1.0.14
+  version: 1.0.16
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: v1.0.14
+  version: 1.0.16
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -247,7 +247,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: v1.0.3
+  version: 1.0.5
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -425,7 +425,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.5
+  version: 1.0.6
 - name: topics-rw-neo4j-sidekick@.service
   count: 2
 - name: topics-rw-neo4j@.service

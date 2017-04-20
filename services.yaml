@@ -126,7 +126,7 @@ services:
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.0.2
+  version: 1.0.3
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -410,10 +410,10 @@ services:
   version: 1.1.0
   count: 2
   sequentialDeployment: true
+- name: rec-reads-content-annotator-sidekick@.service
+  count: 1
 - name: rec-reads-content-annotator@.service
   version: v63
-  count: 1
-- name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
   version: v72

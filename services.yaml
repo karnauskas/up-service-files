@@ -311,7 +311,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.9
+  version: v3.0.9-kafka-test
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

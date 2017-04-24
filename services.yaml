@@ -136,7 +136,7 @@ services:
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.0.2
+  version: 1.0.3
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -191,7 +191,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v76
+  version: v77
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -295,7 +295,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.0-video-embedded-video-rc1
+  version: 1.1.0-video-embedded-video-rc2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

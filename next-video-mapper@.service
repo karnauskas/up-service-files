@@ -2,6 +2,7 @@
 Description=Next Video Mapper
 After=vulcan.service
 Requires=docker.service
+Wants=next-video-mapper-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

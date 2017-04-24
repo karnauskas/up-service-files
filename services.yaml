@@ -295,7 +295,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.0-video-embedded-video-rc3
+  version: 1.1.0-video-embedded-video-rc4
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

@@ -326,7 +326,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v17-vid-support-next-video-rc1
+  version: v17-vid-support-next-video-rc2
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

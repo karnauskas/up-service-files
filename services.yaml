@@ -303,6 +303,11 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
+- name: next-video-mapper-sidekick@.service
+  count: 2
+- name: next-video-mapper@.service
+  version: 1.1.0
+  count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service

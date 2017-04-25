@@ -22,12 +22,14 @@ ExecStart=/bin/sh -c '\
   export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
-  -e "NEO_URL=$NEO_URL" \
-  -e "APP_PORT=$APP_PORT" \
-  -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-  -e "GRAPHITE_PREFIX=coco.services.$ENV.content-collection-rw-neo4j.%i" \
-  -e "LOG_METRICS=false" \
-  -e "CACHE_DURATION=30s" \
+  --env "APP_SYSTEM_CODE=upp-content-collection-rw-neo4j" \
+  --env "APP_NAME=Content Collection RW Neo4j" \
+  --env "NEO_URL=$NEO_URL" \
+  --env "APP_PORT=$APP_PORT" \
+  --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.content-collection-rw-neo4j.%i" \
+  --env "LOG_METRICS=false" \
+  --env "CACHE_DURATION=30s" \
   coco/content-collection-rw-neo4j:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

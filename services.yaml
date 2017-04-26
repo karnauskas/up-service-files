@@ -353,7 +353,7 @@ services:
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: next-video-annotations-rw-neo4j@.service
-  version: 0.2.0-vid-support-next-video-rc1
+  version: 0.2.0
   count: 2
 - name: next-video-content-annotator-sidekick@.service
   count: 2
@@ -363,7 +363,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: 1.1.0-vid-canbesyndicated-rc1
+  version: 1.1.0
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

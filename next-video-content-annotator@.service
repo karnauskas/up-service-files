@@ -6,14 +6,15 @@ Wants=next-video-content-annotator-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
+Environment="IMAGENAME=up-registry.ft.com/coco/content-annotator"
 Environment="APP_PORT=8080"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || /usr/bin/docker pull up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history $IMAGENAME:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull $IMAGENAME:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-next-video-annotator"; \
@@ -40,7 +41,7 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.next-video-content-annotator.%i" \
-  up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
+  $IMAGENAME:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

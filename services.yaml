@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 63.5.0
+  version: 63.5.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -124,13 +124,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v71
+  version: v74
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v71
+  version: v74
   count: 2
   sequentialDeployment: true
 - name: coco-traffic-analyser.service
@@ -324,6 +324,11 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
+- name: next-video-mapper-sidekick@.service
+  count: 2
+- name: next-video-mapper@.service
+  version: 1.1.0
+  count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
@@ -338,7 +343,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 86
+  version: v87-dp-dropwizard-1.x-rc1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -354,7 +359,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v1.0.1
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

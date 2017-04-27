@@ -264,7 +264,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.8
+  version: v0.0.9-rj-cp-title-override-rc1
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

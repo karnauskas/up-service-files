@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 1
 - name: aggregate-concept-transformer@.service
-  version: ReadFromSqsSendToWriters
+  version: 1.1.0
   count: 1
 - name: aggregate-healthcheck-sidekick@.service
   count: 2

@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 63.5.0
+  version: 63.5.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -116,7 +116,7 @@ services:
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.0.3-rj-tech-summary-fix-rc1
+  version: 1.0.3
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -137,13 +137,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v71
+  version: v74
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v71
+  version: v74
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -159,7 +159,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.0-rj-github-migration-rc3
+  version: 1.0.0
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -169,7 +169,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v76
+  version: v77
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -279,7 +279,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.8
+  version: v0.0.9-rj-cp-title-override-rc1
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -299,7 +299,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v16
+  version: v18
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -318,6 +318,26 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
+- name: next-video-annotations-mapper-sidekick@.service
+  count: 2
+- name: next-video-annotations-mapper@.service
+  version: 1.0.0
+  count: 2
+- name: next-video-annotations-rw-neo4j-sidekick@.service
+  count: 2
+- name: next-video-annotations-rw-neo4j@.service
+  version: 0.2.0
+  count: 2
+- name: next-video-content-annotator-sidekick@.service
+  count: 2
+- name: next-video-content-annotator@.service
+  version: v63
+  count: 2
+- name: next-video-mapper-sidekick@.service
+  count: 2
+- name: next-video-mapper@.service
+  version: 1.1.0
+  count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
@@ -348,7 +368,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: v1.0.1
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

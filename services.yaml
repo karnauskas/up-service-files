@@ -441,7 +441,7 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v37
+  version: 37.0.1-rc-ops-updatePeriodChecks
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

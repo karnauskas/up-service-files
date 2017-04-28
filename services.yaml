@@ -513,7 +513,7 @@ services:
 - name: v1-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v1-annotations-rw-neo4j@.service
-  version: v0.1.9
+  version: 0.2.0
   count: 2
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
@@ -538,7 +538,7 @@ services:
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service
-  version: v0.1.8
+  version: 0.2.0
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2

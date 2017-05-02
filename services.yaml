@@ -101,7 +101,11 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
+<<<<<<< HEAD
   version: 0.0.1-sm-initialversion-RC7
+=======
+  version: 1.0.1
+>>>>>>> initialRelaseConceptsRwNeo4j
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -274,7 +278,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: v1.0.30
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -305,7 +309,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v16
+  version: v18
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -530,7 +534,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.12
+  version: 1.0.13
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

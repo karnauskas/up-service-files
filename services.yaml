@@ -274,7 +274,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.5
+  version: 16.0.6-rj-tid-generation-rc1
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2

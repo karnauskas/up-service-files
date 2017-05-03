@@ -337,7 +337,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 86
+  version: 88-dp-no-null-notifications-date-field-rc1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

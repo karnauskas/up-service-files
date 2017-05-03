@@ -358,7 +358,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 87-dp-milliseconds-in-page-param-rc1
+  version: 87
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

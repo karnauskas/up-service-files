@@ -489,7 +489,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.13-rj-rc1
+  version: 1.0.14-rj-add-type-rc2
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

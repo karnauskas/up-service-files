@@ -305,7 +305,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.5
+  version: v16.0.6
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -368,7 +368,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 86
+  version: 87
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

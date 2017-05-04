@@ -231,7 +231,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.4
+  version: 0.1.5-dp-bugfix-carousel-tid-rc.1
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-sidekick@.service

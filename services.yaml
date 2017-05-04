@@ -247,7 +247,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.4
+  version: 0.1.5-dp-bugfix-carousel-tid-rc.1
   count: 2
   sequentialDeployment: true
 - name: load-replicator@.service
@@ -295,7 +295,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.5
+  version: v16.0.6
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -467,7 +467,7 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v37
+  version: 37.0.1
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

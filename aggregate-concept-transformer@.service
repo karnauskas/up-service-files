@@ -1,5 +1,5 @@
 [Unit]
-Description=Reads concepts from s3 and writes them to kafka
+Description=Aggregate Concept Transformer
 After=vulcan.service
 Requires=docker.service
 Wants=aggregate-concept-transformer-sidekick@%i.service

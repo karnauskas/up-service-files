@@ -1,5 +1,5 @@
 [Unit]
-Description=Reads concepts from s3 and writes them to kafka
+Description=Aggregate Concept Transformer
 After=vulcan.service
 Requires=docker.service
 Wants=aggregate-concept-transformer-sidekick@%i.service
@@ -16,7 +16,8 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/aggregate-concept-transf
 
 ExecStart=/bin/sh -c '\
     export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    export AWS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
+    export SQS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
+    export BUCKET_REGION=$(/usr/bin/etcdctl get /ft/config/bucket_region); \
     export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
     export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
     export BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket); \
@@ -28,7 +29,8 @@ ExecStart=/bin/sh -c '\
     /usr/bin/docker run --rm -P --name %p-%i_$(uuidgen) \
         --memory="512m" \
         -e "APP_PORT=$APP_PORT" \
-	    -e "AWS_REGION=$AWS_REGION" \
+	    -e "SQS_REGION=$SQS_REGION" \
+	    -e "BUCKET_REGION=$BUCKET_REGION" \
 	    -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
 	    -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
 	    -e "BUCKET_NAME=$BUCKET_NAME" \

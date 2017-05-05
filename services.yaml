@@ -337,7 +337,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 87
+  version: 88-dp-filter-carousel-txid-rc.1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

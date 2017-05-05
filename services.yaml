@@ -236,7 +236,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: v1.0.14
+  version: v1.0.15-rc1
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -497,7 +497,7 @@ services:
 - name: v1-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v1-annotations-rw-neo4j@.service
-  version: v0.1.9
+  version: 0.2.0
   count: 2
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
@@ -522,7 +522,7 @@ services:
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service
-  version: v0.1.8
+  version: 0.2.0
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2

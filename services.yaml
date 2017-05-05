@@ -226,7 +226,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.9
+  version: 3.0.10-DP-carousel-tid-bugfix
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -331,7 +331,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.9
+  version: 3.0.10-DP-carousel-tid-bugfix
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

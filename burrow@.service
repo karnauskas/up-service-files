@@ -25,7 +25,7 @@ ExecStart=/bin/sh -c '\
     --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
     --env "KAFKA_HOST=$KAFKA_HOST" \
     --env "KAFKA_PORT=$KAFKA_PORT" \
-    --env "GROUP_BLACKLIST=WordPressImageMapper|BinaryIngester"
+    --env "GROUP_BLACKLIST=WordPressImageMapper|BinaryIngester" \
     coco/burrow:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

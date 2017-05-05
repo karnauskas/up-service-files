@@ -40,7 +40,7 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: v1.0.1
+  version: 1.0.2-ops-rc1
   count: 1
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
@@ -210,7 +210,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: v1.0.15-rc1
+  version: v1.0.14
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

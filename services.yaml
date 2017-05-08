@@ -485,6 +485,7 @@ services:
 - name: swagger-sidekick@.service
   count: 1
 - name: swagger@.service
+  count: 1
   version: v3.0.5
 - name: topics-rw-neo4j-sidekick@.service
   count: 2

@@ -321,7 +321,7 @@ services:
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
-  version: 1.0.0-video-init-impl-rc1
+  version: 1.0.0-video-init-impl-rc2
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2

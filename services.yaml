@@ -482,6 +482,10 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
   version: 1.0.7
+- name: swagger-sidekick@.service
+  count: 1
+- name: swagger@.service
+  version: v3.0.5
 - name: topics-rw-neo4j-sidekick@.service
   count: 2
 - name: topics-rw-neo4j@.service

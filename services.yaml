@@ -231,7 +231,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.4
+  version: 0.1.5
   count: 2
   sequentialDeployment: true
 - name: locations-rw-neo4j-sidekick@.service
@@ -274,7 +274,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.5
+  version: v16.0.6
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -337,7 +337,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 86
+  version: 87
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -441,11 +441,11 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: v37
+  version: 37.0.1
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.6
+  version: 1.0.7
 - name: topics-rw-neo4j-sidekick@.service
   count: 2
 - name: topics-rw-neo4j@.service
@@ -461,7 +461,7 @@ services:
 - name: v1-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v1-annotations-rw-neo4j@.service
-  version: v0.1.9
+  version: 0.2.0
   count: 2
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
@@ -486,7 +486,7 @@ services:
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service
-  version: v0.1.8
+  version: 0.2.0
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2
@@ -509,7 +509,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: v1.0.12
+  version: 1.0.13
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

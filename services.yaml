@@ -105,10 +105,13 @@ services:
   count: 1
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
+- name: concepts-kafka-bridge-pub-semantic@.service
+  version: v14.1.1
+  count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.0.2-sm-minorfixes-RC1
+  version: 1.0.1
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service

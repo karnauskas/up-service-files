@@ -105,13 +105,10 @@ services:
   count: 1
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-semantic@.service
-  version: v14.1.1
-  count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.0.1
+  version: 1.0.2-sm-minorfixes-RC1
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -252,7 +249,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: v0.1.4
+  version: 0.1.5
   count: 2
   sequentialDeployment: true
 - name: memberships-rw-neo4j-sidekick@.service
@@ -457,7 +454,7 @@ services:
 - name: v1-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v1-annotations-rw-neo4j@.service
-  version: v0.1.9
+  version: 0.2.0
   count: 2
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
@@ -482,7 +479,7 @@ services:
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service
-  version: v0.1.8
+  version: 0.2.0
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2

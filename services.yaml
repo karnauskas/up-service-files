@@ -93,6 +93,12 @@ services:
 - name: concepts-kafka-bridge-pub-prod@.service
   version: 14.1.3
   count: 1
+- name: concepts-rw-neo4j-sidekick@.service
+  count: 2
+ - name: concepts-rw-neo4j@.service
+   version: 1.0.2-sm-minorfixes-RC1
+   count: 2
+   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-collection-ingester-neo4j@.service

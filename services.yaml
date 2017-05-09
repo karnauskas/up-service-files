@@ -77,7 +77,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.12-dp-health-and-startup-fixes-rc1
+  version: 0.0.12
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service

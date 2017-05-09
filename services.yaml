@@ -122,13 +122,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v74
+  version: v75
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v74
+  version: v75
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -247,13 +247,13 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.0.5
+  version: 1.0.6
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -264,7 +264,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.8
+  version: 0.0.9
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

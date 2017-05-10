@@ -165,12 +165,12 @@ services:
 - name: fleet-neo4j-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-neo4j-unit-healthcheck@.service
-  version: scott_test_1
+  version: BumpFleetUnitHealthcheck
   count: 1
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: scott_test_1
+  version: BumpFleetUnitHealthcheck
   count: 1
 - name: generic-rw-s3-sidekick@.service
   count: 1

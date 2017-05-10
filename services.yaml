@@ -330,6 +330,11 @@ services:
 - name: people-rw-neo4j@.service
   version: v0.1.9
   count: 2
+- name: post-publication-combiner-sidekick@.service
+  count: 2
+- name: post-publication-combiner@.service
+  version: 1.0.0-rc24-xp
+  count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service

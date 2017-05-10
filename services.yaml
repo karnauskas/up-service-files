@@ -396,7 +396,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -414,7 +414,7 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v1.0.0
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
@@ -438,7 +438,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service

@@ -85,7 +85,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: v0.0.11
+  version: 0.0.12
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -143,13 +143,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v74
+  version: v75
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v74
+  version: v75
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -247,7 +247,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: v3.0.9
+  version: 3.0.10
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -263,13 +263,13 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.0.5
+  version: 1.0.6
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -280,7 +280,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: v0.0.8
+  version: 0.0.9
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -347,13 +347,13 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: v3.0.9
+  version: 3.0.10
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 87
+  version: 89
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

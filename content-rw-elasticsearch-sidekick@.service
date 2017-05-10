@@ -1,0 +1,27 @@
+#The sidekick makes sure the service is correctly registered in ETCD.
+[Unit]
+Description=Content RW Elasticsearch Service Sidekick
+BindsTo=content-rw-elasticsearch@%i.service
+After=content-rw-elasticsearch@%i.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+#Remove server keys from ETCD on stop
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/content-rw-elasticsearch/servers/%i'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=content-rw-elasticsearch@%i.service

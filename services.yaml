@@ -131,6 +131,11 @@ services:
   version: v75
   count: 2
   sequentialDeployment: true
+- name: content-rw-elasticsearch-sidekick@.service
+  count: 2
+- name: content-rw-elasticsearch@.service
+  version: 0.0.23-FD
+  count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
@@ -195,16 +200,16 @@ services:
   version: 1.0.8
   count: 2
   sequentialDeployment: true
-- name: internal-content-preview-api-sidekick@.service
-  count: 2
-- name: internal-content-preview-api@.service
-  version: 1.0.16
-  count: 2
-  sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.0.16
+  version: v1.0.16
+  count: 2
+  sequentialDeployment: true
+- name: internal-content-preview-api-sidekick@.service
+  count: 2
+- name: internal-content-preview-api@.service
+  version: v1.0.16
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -473,14 +478,14 @@ services:
 - name: v1-content-annotator-binding-service@.service
   version: v63
   count: 2
-- name: v1-content-annotator-sidekick@.service
-  count: 2
-- name: v1-content-annotator@.service
-  version: v63
-  count: 2
 - name: v1-content-annotator-brightcove-sidekick@.service
   count: 2
 - name: v1-content-annotator-brightcove@.service
+  version: v63
+  count: 2
+- name: v1-content-annotator-sidekick@.service
+  count: 2
+- name: v1-content-annotator@.service
   version: v63
   count: 2
 - name: v1-suggestor-sidekick@.service

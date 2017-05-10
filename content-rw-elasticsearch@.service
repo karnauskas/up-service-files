@@ -1,0 +1,34 @@
+[Unit]
+Description=Content RW Elasticsearch Service
+After=vulcan.service
+Requires=docker.service
+Wants=%p-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/%p:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/%p:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  --env "APP_PORT=8080" \
+  --env "AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
+  --env "AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
+  --env "ELASTICSEARCH_SAPI_ENDPOINT=$(/usr/bin/etcdctl get /ft/config/aws_es_content_endpoint)" \
+  --env "ELASTICSEARCH_SAPI_INDEX=ft" \
+  --env "KAFKA_PROXY_ADDR=http://%H:8080" \
+  --env "KAFKA_CONSUMER_GROUP=$(/usr/bin/etcdctl get /ft/config/environment_tag)-%p" \
+  --env "KAFKA_TOPIC=CombinedPostPublicationEvents" \
+  --env "KAFKA_HEADER=kafka" \
+  --env "KAFKA_CONCURRENT_PROCESSING=true" \
+  coco/%p:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

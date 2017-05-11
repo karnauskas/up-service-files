@@ -137,13 +137,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v76-rj-uuid-utils-rc1
+  version: v76-rj-image-set-rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v76-rj-uuid-utils-rc1
+  version: v76-rj-image-set-rc1
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -273,7 +273,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.1
+  version: 1.1.2-rj-image-set-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

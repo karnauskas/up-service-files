@@ -122,13 +122,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v75
+  version: v76-rj-uuid-utils-rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v75
+  version: v76-rj-uuid-utils-rc1
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -259,7 +259,7 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: v1.0.2
+  version: 1.0.3-rj-uuid-utils-rc1
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
@@ -274,12 +274,12 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.6
+  version: 16.0.7-rj-uuid-utils-rc1
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v9.0.3
+  version: 9.0.4-rj-uuid-utils-rc1
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -509,11 +509,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.13
+  version: 1.0.14-rj-uuid-utils-rc1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v43
+  version: v44-rj-uuid-utils-rc1
   count: 2
 - name: zookeeper.service

@@ -31,7 +31,7 @@ ExecStart=/bin/sh -c '\
   --env "DOCUMENT_STORE_BASE_URL=$DOCUMENT_STORE_BASE_URL" \
   --env "DOCUMENT_STORE_API_ENDPOINT=/content/{uuid}" \
   --env "PUBLIC_ANNOTATIONS_API_BASE_URL=$PUBLIC_ANNOTATIONS_API_BASE_URL" \
-  --env "PUBLIC_ANNOTATIONS_API_ENDPOINT=/content/{uuid}/annotations/v1" \
+  --env "PUBLIC_ANNOTATIONS_API_ENDPOINT=/content/{uuid}/annotations/{platformVersion}" \
   coco/post-publication-combiner:$DOCKER_APP_VERSION'
 
 #Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.

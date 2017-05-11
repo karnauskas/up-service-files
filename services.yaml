@@ -259,6 +259,11 @@ services:
 - name: memberships-rw-neo4j@.service
   version: v1.1.6
   count: 2
+- name: methode-article-image-set-mapper-sidekick@.service
+  count: 2
+- name: methode-article-image-set-mapper@.service
+  version: latest
+  count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service

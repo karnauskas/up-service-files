@@ -250,11 +250,6 @@ services:
   version: v0.1.4
   count: 2
   sequentialDeployment: true
-- name: load-replicator@.service
-  version: v1.0.2
-  count: 1
-- name: load-replicator-sidekick@.service
-  count: 1
 - name: locations-rw-neo4j-sidekick@.service
   count: 2
 - name: locations-rw-neo4j@.service

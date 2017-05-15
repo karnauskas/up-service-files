@@ -1,15 +1,15 @@
 services:
+- name: aggregate-concept-transformer-sidekick@.service
+  count: 1
+- name: aggregate-concept-transformer@.service
+  version: 1.1.1
+  count: 1
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: v1.1.10
+  version: 1.1.12
   count: 2
   sequentialDeployment: true
-- name: alphaville-series-rw-neo4j-sidekick@.service
-  count: 2
-- name: alphaville-series-rw-neo4j@.service
-  version: v0.0.9
-  count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
@@ -100,7 +100,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: v0.0.11
+  version: 0.0.12
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -123,6 +123,12 @@ services:
 - name: concepts-kafka-bridge-pub-pre-prod-us@.service
   version: 14.1.3
   count: 1
+- name: concepts-rw-neo4j-sidekick@.service
+  count: 2
+- name: concepts-rw-neo4j@.service
+  version: 1.0.3
+  count: 2
+  sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-collection-ingester-neo4j@.service
@@ -209,11 +215,6 @@ services:
 - name: generic-rw-s3@.service
   version: 1.3.1
   count: 1
-- name: genres-rw-neo4j-sidekick@.service
-  count: 2
-- name: genres-rw-neo4j@.service
-  version: v1.1.7
-  count: 2
 - name: image-cleaner.service
   version: 1.0.0
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -242,7 +243,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: v1.0.14
+  version: 1.0.15
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -271,11 +272,6 @@ services:
   version: 0.1.5
   count: 2
   sequentialDeployment: true
-- name: locations-rw-neo4j-sidekick@.service
-  count: 2
-- name: locations-rw-neo4j@.service
-  version: v1.1.4
-  count: 2
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
@@ -343,7 +339,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.0.1-video-healthcheck-version-rc4
+  version: 1.0.1
   count: 2
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2
@@ -363,7 +359,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: sp-rc2
+  version: sp-rc3
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -395,7 +391,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -413,7 +409,7 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: v1.0.0
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
@@ -437,7 +433,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator@.service
@@ -469,22 +465,7 @@ services:
 - name: roles-rw-neo4j@.service
   version: v0.1.6
   count: 2
-- name: sections-rw-neo4j-sidekick@.service
-  count: 2
-- name: sections-rw-neo4j@.service
-  version: v1.1.4
-  count: 2
-- name: special-reports-rw-neo4j-sidekick@.service
-  count: 2
-- name: special-reports-rw-neo4j@.service
-  version: v1.1.4
-  count: 2
 - name: splunk-forwarder.service
-- name: subjects-rw-neo4j-sidekick@.service
-  count: 2
-- name: subjects-rw-neo4j@.service
-  version: v1.1.3
-  count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
@@ -493,11 +474,6 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
   version: 1.0.7
-- name: topics-rw-neo4j-sidekick@.service
-  count: 2
-- name: topics-rw-neo4j@.service
-  version: v1.1.5
-  count: 2
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-coco-admin-sidekick@.service

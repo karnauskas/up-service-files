@@ -1,7 +1,7 @@
 [Unit]
-Description=Sections rw neo4j Sidekick
-BindsTo=sections-rw-neo4j@%i.service
-After=sections-rw-neo4j@%i.service
+Description=Concepts Reader-Writer for Neo4j Service Sidekick
+BindsTo=concepts-rw-neo4j@%i.service
+After=concepts-rw-neo4j@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -17,9 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/sections-rw-neo4j/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concept-rw-neo4j/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=sections-rw-neo4j@%i.service
+MachineOf=concepts-rw-neo4j@%i.service

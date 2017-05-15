@@ -10,11 +10,6 @@ services:
   version: 1.1.12
   count: 2
   sequentialDeployment: true
-- name: alphaville-series-rw-neo4j-sidekick@.service
-  count: 2
-- name: alphaville-series-rw-neo4j@.service
-  version: v0.0.9
-  count: 2
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
@@ -188,11 +183,6 @@ services:
 - name: generic-rw-s3@.service
   version: 1.3.1
   count: 1
-- name: genres-rw-neo4j-sidekick@.service
-  count: 2
-- name: genres-rw-neo4j@.service
-  version: v1.1.7
-  count: 2
 - name: image-cleaner.service
   version: 1.0.0
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -245,11 +235,6 @@ services:
   version: 0.1.5
   count: 2
   sequentialDeployment: true
-- name: locations-rw-neo4j-sidekick@.service
-  count: 2
-- name: locations-rw-neo4j@.service
-  version: v1.1.4
-  count: 2
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
@@ -433,22 +418,7 @@ services:
 - name: roles-rw-neo4j@.service
   version: v0.1.6
   count: 2
-- name: sections-rw-neo4j-sidekick@.service
-  count: 2
-- name: sections-rw-neo4j@.service
-  version: v1.1.4
-  count: 2
-- name: special-reports-rw-neo4j-sidekick@.service
-  count: 2
-- name: special-reports-rw-neo4j@.service
-  version: v1.1.4
-  count: 2
 - name: splunk-forwarder.service
-- name: subjects-rw-neo4j-sidekick@.service
-  count: 2
-- name: subjects-rw-neo4j@.service
-  version: v1.1.3
-  count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
@@ -457,11 +427,6 @@ services:
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
   version: 1.0.7
-- name: topics-rw-neo4j-sidekick@.service
-  count: 2
-- name: topics-rw-neo4j@.service
-  version: v1.1.5
-  count: 2
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-queue-sender-v1-metadata-sidekick@.service

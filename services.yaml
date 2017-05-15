@@ -161,8 +161,6 @@ services:
 - name: draft-content-rw-aurora@.service
   version: latest
   count: 1
-- name: elasticsearch-sidekick.service
-- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v4.0.3
 - name: elb-presence@.service
@@ -414,11 +412,6 @@ services:
   version: 1.1.0
   count: 2
   sequentialDeployment: true
-- name: restorage-elasticsearch-concepts-sidekick@.service
-  count: 1
-- name: restorage-elasticsearch-concepts@.service
-  version: v0.0.3
-  count: 1
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service

@@ -14,7 +14,7 @@ ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p_
 ExecStartPre=/usr/bin/docker pull wurstmeister/zookeeper
 
 ExecStart=/bin/bash -c "/usr/bin/docker run --name %p_$(uuidgen) \
-  -v /vol/zk:/opt/zookeeper-3.4.6/data \
+  -v /vol/zk:/opt/zookeeper-3.4.9/data \
   -p 2181:2181 \
   wurstmeister/zookeeper"
 

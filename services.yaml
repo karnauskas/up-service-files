@@ -1,4 +1,9 @@
 services:
+- name: aggregate-concept-transformer-sidekick@.service
+  count: 1
+- name: aggregate-concept-transformer@.service
+  version: 1.1.1
+  count: 1
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
@@ -93,6 +98,12 @@ services:
 - name: concepts-kafka-bridge-pub-prod@.service
   version: 14.1.3
   count: 1
+- name: concepts-rw-neo4j-sidekick@.service
+  count: 2
+- name: concepts-rw-neo4j@.service
+  version: 1.0.3
+  count: 2
+  sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-collection-ingester-neo4j@.service
@@ -210,7 +221,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: v1.0.14
+  version: 1.0.15
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

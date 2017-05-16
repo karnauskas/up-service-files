@@ -359,7 +359,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.3-semantic-RC1
+  version: 0.5.3
   count: 2
 - name: people-rw-neo4j-sidekick@.service
   count: 2

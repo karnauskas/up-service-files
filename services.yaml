@@ -266,11 +266,6 @@ services:
 - name: load-replicator@.service
   version: v1.0.0
   count: 1
-- name: locations-rw-neo4j-sidekick@.service
-  count: 2
-- name: locations-rw-neo4j@.service
-  version: v1.1.4
-  count: 2
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
@@ -473,11 +468,6 @@ services:
 - name: swagger@.service
   count: 1
   version: v3.0.5
-- name: topics-rw-neo4j-sidekick@.service
-  count: 2
-- name: topics-rw-neo4j@.service
-  version: v1.1.5
-  count: 2
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-queue-sender-v1-metadata-sidekick@.service

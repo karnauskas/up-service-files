@@ -317,7 +317,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: sp-rc3
+  version: sp-rc4
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

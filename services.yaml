@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 1
 - name: aggregate-concept-transformer@.service
-  version: 1.1.1
+  version: 1.1.2.add-aliases-sp-rc2
   count: 1
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
@@ -111,7 +111,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: nickyLogExperiment
+  version: 1.0.4-sm-addPeopleTaxonomy-RC1
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service

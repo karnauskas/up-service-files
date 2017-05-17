@@ -231,7 +231,7 @@ services:
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.0.16
+  version: 1.0.17-fd-imgExpanding-rc1
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -370,7 +370,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: v0.5.2
+  version: 0.5.3
   count: 2
 - name: people-rw-neo4j-sidekick@.service
   count: 2

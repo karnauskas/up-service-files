@@ -274,12 +274,12 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.0.7-rj-uuid-utils-rc1
+  version: 16.0.7-rj-uuid-utils-rc2
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.0.4-rj-uuid-utils-rc1
+  version: 9.0.4-rj-uuid-utils-rc2
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -509,11 +509,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.14-rj-uuid-utils-rc1
+  version: 1.0.14-rj-uuid-utils-rc2
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v44-rj-uuid-utils-rc1
+  version: v44-rj-uuid-utils-rc2
   count: 2
 - name: zookeeper.service

@@ -259,7 +259,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 0.0.7
+  version: 0.0.8
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2

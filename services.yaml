@@ -173,8 +173,6 @@ services:
   version: 1.0.0
   count: 2
   sequentialDeployment: true
-- name: elasticsearch-sidekick.service
-- name: elasticsearch.service
 - name: elb-dns-registrator.service
   version: v4.0.3
 - name: elb-presence@.service
@@ -441,11 +439,6 @@ services:
   version: v72
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
-  count: 1
-- name: restorage-elasticsearch-concepts-sidekick@.service
-  count: 1
-- name: restorage-elasticsearch-concepts@.service
-  version: v0.0.3
   count: 1
 - name: relations-api-sidekick@.service
   count: 2

@@ -134,7 +134,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 0.0.27-FD
+  version: 1.0.0
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
@@ -358,7 +358,7 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.0.0-rc24-xp
+  version: 1.0.0
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2

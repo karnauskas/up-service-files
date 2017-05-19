@@ -1,4 +1,3 @@
-#The sidekick makes sure the service is correctly registered in ETCD.
 [Unit]
 Description=Content RW Elasticsearch Service Sidekick
 BindsTo=content-rw-elasticsearch@%i.service
@@ -18,7 +17,6 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-#Remove server keys from ETCD on stop
 ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/content-rw-elasticsearch/servers/%i'
 Restart=on-failure
 RestartSec=60

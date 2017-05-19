@@ -1,34 +1,34 @@
 [Unit]
-Description=Locations neo4j rw service
+Description=Concepts neo4j rw service
 After=vulcan.service
 Requires=docker.service
-Wants=locations-rw-neo4j-sidekick@%i.service
+Wants=concepts-rw-neo4j-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/locations-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/locations-rw-neo4j:$DOCKER_APP_VERSION'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/concepts-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/concepts-rw-neo4j:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/locations-rw-neo4j/batchsize); \
+  export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/concepts-rw-neo4j/batchsize); \
   export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
   --memory="256m" \
   --env "NEO_URL=$NEO_URL" \
   --env "BATCH_SIZE=$BATCH_SIZE" \
   --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
-  --env "GRAPHITE_PREFIX=coco.services.$ENV.locations-rw-neo4j.%i" \
-  coco/locations-rw-neo4j:$DOCKER_APP_VERSION;'
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.concepts-rw-neo4j.%i" \
+  coco/concepts-rw-neo4j:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=locations-rw-neo4j@*.service
+Conflicts=concepts-rw-neo4j@*.service

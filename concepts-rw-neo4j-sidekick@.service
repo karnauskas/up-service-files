@@ -1,13 +1,13 @@
 [Unit]
-Description=Special Reports rw neo4j Sidekick
-BindsTo=special-reports-rw-neo4j@%i.service
-After=special-reports-rw-neo4j@%i.service
+Description=Concepts Reader-Writer for Neo4j Service Sidekick
+BindsTo=concepts-rw-neo4j@%i.service
+After=concepts-rw-neo4j@%i.service
 
 [Service]
 RemainAfterExit=yes
 ExecStart=/bin/sh -c "\
-  export SERVICE=$(echo %p | sed "s/-sidekick//g"); \
-  etcdctl set   /ft/services/$SERVICE/healthcheck true; \
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
@@ -17,9 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/special-reports-rw-neo4j/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concept-rw-neo4j/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=special-reports-rw-neo4j@%i.service
+MachineOf=concepts-rw-neo4j@%i.service

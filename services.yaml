@@ -150,7 +150,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.0.0
+  version: 1.0.1-FD
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2

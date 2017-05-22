@@ -12,8 +12,8 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c "/usr/bin/docker history coco/content-search-api-port:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-      || /usr/bin/docker pull coco/content-search-api-port:$DOCKER_APP_VERSION"
+ExecStartPre=/bin/bash -c "/usr/bin/docker history up-registry.ft.com/coco/content-search-api-port:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+      || /usr/bin/docker pull up-registry.ft.com/coco/content-search-api-port:$DOCKER_APP_VERSION"
 
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
@@ -25,7 +25,7 @@ ExecStart=/bin/sh -c '\
 	--env "ELASTIC_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
 	--env "ELASTIC_SECRET_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
 	--env "BASE_API_URL=$(/usr/bin/etcdctl get /ft/config/api_host)" \
-  coco/search-api:$DOCKER_APP_VERSION;'
+  up-registry.ft.com/coco/search-api:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure

@@ -160,7 +160,7 @@ services:
 - name: content-search-api-port-sidekick@.service
   count: 2
 - name: content-search-api-port@.service
-  version: v13
+  version: v14
   count: 2
   sequentialDeployment: true
 - name: coreos-version-checker-sidekick.service

@@ -1,0 +1,37 @@
+[Unit]
+Description=Next Video Content Collection Mapper
+After=vulcan.service
+Requires=docker.service
+Wants=next-video-content-collection-mapper-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/upp-next-video-content-collection-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/upp-next-video-content-collection-mapper:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+    --memory="256m" \
+    --env "APP_NAME=Next Video Content Collection Mapper" \
+    --env "APP_SYSTEM_CODE=upp-next-video-cc-mapper" \
+    --env "SERVICE_NAME=next-video-content-collection-mapper" \
+    --env "APP_PORT=8080" \
+    --env "Q_ADDR=http://%H:8080" \
+    --env "Q_GROUP=NextVideoContentCollectionMapper" \
+    --env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
+    --env "Q_READ_QUEUE=kafka" \
+    --env "Q_WRITE_TOPIC=CmsPublicationEvents" \
+    --env "Q_WRITE_QUEUE=kafka" \
+    coco/upp-next-video-content-collection-mapper:$DOCKER_APP_VERSION;'
+ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=next-video-content-collection-mapper@*.service

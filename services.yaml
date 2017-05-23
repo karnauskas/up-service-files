@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 63.5.1
+  version: 63.5.2
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -72,7 +72,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.12
+  version: 0.0.13-DP-typeahead-mapping-es-5-rc-1
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -169,7 +169,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v77
+  version: v78
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -270,7 +270,7 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: v1.0.2
+  version: 1.0.3
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
@@ -285,17 +285,17 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: v16.0.6
+  version: 16.0.7
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: v9.0.3
+  version: 9.0.4
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v18
+  version: v19
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -505,11 +505,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.13
+  version: 1.0.14
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v43
+  version: v48
   count: 2
 - name: zookeeper.service

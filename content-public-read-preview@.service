@@ -27,7 +27,8 @@ ExecStart=/bin/sh -c '\
   					--env "HOST_HEADER=content-preview" \
   					--env "CACHE_CONTROL_POLICY=no-store" \
   					--env "API_HOST=$ENV_API_HOST" \
-  					--env "CONTENT_HEALTHCHECK_PATH=/__ping" \
+  					--env "CONTENT_HEALTHCHECK_PATH=/__ping" 
+					--env "IMAGE_RESOLVER=true" \
   					up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

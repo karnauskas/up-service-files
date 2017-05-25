@@ -27,6 +27,7 @@ ExecStart=/bin/sh -c '\
                     --env "CACHE_CONTROL_POLICY=\"max-age=$(/usr/bin/etcdctl get /ft/config/cache-max-age)\"" \
                     --env "CONTENT_HEALTHCHECK_PATH=/__health" \
                     --env "API_HOST=$ENV_API_HOST" \
+					--env "IMAGE_RESOLVER=false" \
                     up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

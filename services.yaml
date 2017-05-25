@@ -123,13 +123,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v76-fd-content-preview-rc1
+  version: v77-fd-content-preview-rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v75
+  version: v77-fd-content-preview-rc1
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service

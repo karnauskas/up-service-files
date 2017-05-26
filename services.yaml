@@ -339,7 +339,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: limit-since-date-rc1
+  version: limit-since-date-rc2
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

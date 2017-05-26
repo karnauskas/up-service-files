@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 63.5.2
+  version: 63.6.1-fd-rc1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -370,7 +370,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 89
+  version: 90
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

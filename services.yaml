@@ -206,7 +206,7 @@ services:
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.0.16
+  version: 1.0.17-fd-imgExpanding-rc2
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service

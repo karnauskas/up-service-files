@@ -150,7 +150,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.0.2
+  version: 1.0.2-rj-use-uuid-lib-rc1
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
@@ -192,12 +192,12 @@ services:
 - name: fleet-neo4j-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-neo4j-unit-healthcheck@.service
-  version: 1.0.9
+  version: 1.1.0
   count: 1
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: 1.0.9
+  version: 1.1.0
   count: 1
 - name: generic-rw-s3-sidekick@.service
   count: 1

@@ -134,15 +134,12 @@ services:
   version: v79
   count: 2
   sequentialDeployment: true
-<<<<<<< HEAD
 - name: coco-traffic-analyser.service
-=======
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
   version: 1.0.0
   count: 2
->>>>>>> feature/typeahead-brand-search
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service

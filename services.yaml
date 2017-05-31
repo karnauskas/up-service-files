@@ -138,19 +138,19 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v77-fd-content-preview-rc4
+  version: v79
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v77-fd-content-preview-rc4
+  version: v79
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.0.2-FD
+  version: 1.0.2
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
@@ -272,6 +272,11 @@ services:
 - name: memberships-rw-neo4j@.service
   version: v1.1.6
   count: 2
+- name: methode-article-image-set-mapper-sidekick@.service
+  count: 2
+- name: methode-article-image-set-mapper@.service
+  version: 1.0.0
+  count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
@@ -281,7 +286,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.1
+  version: 1.1.2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

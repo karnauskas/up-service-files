@@ -363,7 +363,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 90
+  version: 92
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

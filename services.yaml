@@ -77,7 +77,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.9-dp-typeahead-search-brands-rc.1
+  version: 1.0.10-dp-endpoint-fixes-rc1
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -138,7 +138,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.0.0
+  version: 1.0.2
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2

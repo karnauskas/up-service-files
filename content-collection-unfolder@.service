@@ -16,6 +16,7 @@ ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+  --env "UNFOLDING_WHITELIST=content-package" \
   --env "WRITER_URI=http://%H:8080/__content-collection-rw-neo4j/content-collection/" \
   --env "WRITER_HEALTH_URI=http://%H:8080/__content-collection-rw-neo4j/__health" \
   --env "CONTENT_RESOLVER_URI=http://%H:8080/__document-store-api/content/" \

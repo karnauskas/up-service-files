@@ -231,7 +231,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 1.0.15
+  version: 1.0.16.log-consumers.rc1
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

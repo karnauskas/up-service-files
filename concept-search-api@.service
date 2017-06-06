@@ -20,6 +20,7 @@ ExecStart=/bin/sh -c '\
   export ELASTICSEARCH_INDEX=concept; \
   export RESULT_LIMIT=50; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+  --memory="256m" \
   --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   --env "ELASTICSEARCH_ENDPOINT=$ELASTICSEARCH_ENDPOINT" \

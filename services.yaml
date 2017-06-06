@@ -122,7 +122,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 0.0.2-rj-first-version
+  version: 0.0.3-rj-first-version
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2

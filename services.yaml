@@ -223,16 +223,16 @@ services:
   version: 1.0.8
   count: 2
   sequentialDeployment: true
-- name: internal-content-preview-api-sidekick@.service
-  count: 2
-- name: internal-content-preview-api@.service
-  version: 1.0.17-fd-imgExpanding-rc2
-  count: 2
-  sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.0.17-fd-imgExpanding-rc2
+  version: 1.0.17
+  count: 2
+  sequentialDeployment: true
+- name: internal-content-preview-api-sidekick@.service
+  count: 2
+- name: internal-content-preview-api@.service
+  version: 1.0.17
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service

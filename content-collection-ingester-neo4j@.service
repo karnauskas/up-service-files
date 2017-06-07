@@ -42,11 +42,11 @@ ExecStart=/bin/sh -c '\
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_HEADER=content-collection-unfolder" \
-      --env "WRITER_NAME=Content Collection Unfolder" \
+      --env "WRITER_NAME=ContentCollectionUnfolder" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
       --env "MESSAGE_FORWARDING_ENABLED=false" \
-      --env  "PANIC_GUIDE_URL=$PANIC_GUIDE_URL" \
+      --env "PANIC_GUIDE_URL=$PANIC_GUIDE_URL" \
       up-registry.ft.com/coco/ingester:$DOCKER_APP_VERSION'
 
 #Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.

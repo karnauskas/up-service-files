@@ -135,7 +135,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.0.0
+  version: 1.0.2
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
@@ -217,7 +217,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 1.0.15
+  version: 1.0.16
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -349,7 +349,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 90
+  version: 92
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

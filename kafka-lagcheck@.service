@@ -19,10 +19,10 @@ ExecStart=/bin/sh -c '\
   WHITELISTED_ENVS=$(etcdctl get /ft/config/kafka-lagcheck/whitelisted-envs); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
     --memory="256m" \
-    --env "BURROW_URL=http://%H:8080/__burrow" \
-    --env "WHITELISTED_TOPICS=Concept" \
-    --env "WHITELISTED_ENVS=$WHITELISTED_ENVS" \
-    --env "LAG_TOLERANCE=$LAG_TOLERANCE" \
+    --env="BURROW_URL=http://%H:8080/__burrow" \
+    --env="WHITELISTED_TOPICS=Concept" \
+    --env="WHITELISTED_ENVS=$WHITELISTED_ENVS" \
+    --env="LAG_TOLERANCE=$LAG_TOLERANCE" \
     coco/kafka-lagcheck:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

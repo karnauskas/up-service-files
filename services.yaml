@@ -150,7 +150,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.0.3-fd-fix-logging-rc1
+  version: 1.0.3-fd-fix-logging-and-uuid-utils-rc2
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2

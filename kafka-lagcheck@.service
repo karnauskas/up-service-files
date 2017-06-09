@@ -15,7 +15,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/kafka-lagcheck:$DOCKER_A
   || /usr/bin/docker pull coco/kafka-lagcheck:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  LAG_TOLERANCE=$(etcdctl get /ft/config/kafka-lagcheck/lag-tolerance) || LAG_TOLERANCE=30; \
+  LAG_TOLERANCE=$(etcdctl get /ft/config/kafka-lagcheck/lag-tolerance) || LAG_TOLERANCE=1000; \
   WHITELISTED_ENVS=$(etcdctl get /ft/config/kafka-lagcheck/whitelisted-envs); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
     --memory="256m" \

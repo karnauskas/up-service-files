@@ -231,7 +231,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 1.0.16
+  version: 2.0.0.burrow-status.rc1
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -285,7 +285,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 0.0.10.handle-delete.rc1
+  version: 0.0.10
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

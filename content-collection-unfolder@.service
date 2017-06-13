@@ -21,9 +21,9 @@ ExecStart=/bin/sh -c '\
   --env "WRITER_HEALTH_URI=http://%H:8080/__content-collection-rw-neo4j/__health" \
   --env "CONTENT_RESOLVER_URI=http://%H:8080/__document-store-api/content/" \
   --env "CONTENT_RESOLVER_HEALTH_URI=http://%H:8080/__document-store-api/__health" \
-  --env "Q_ADDR=http://%H:8080" \
   --env "Q_WRITE_TOPIC=PostPublicationEvents" \
-  --env "Q_WRITE_QUEUE=kafka" \
+  --env "Q_ADDR=http://%H:8080" \
+  --env "Q_HOSTNAME=kafka" \
   coco/content-collection-unfolder:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

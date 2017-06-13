@@ -18,14 +18,14 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/image-resolver:$DOCKER_A
 ExecStart=/bin/sh -c '\
 	export PORT=8080; \
 	export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-	export WHITELIST="^http://www.ft.com/ontology/content/ImageSet"; \
+	ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
 	/usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
 	--memory="256m" \
 	--env "PORT=$PORT" \
-	--env "ENV_API_HOST=$ENV_API_HOST" \
-	--env "CONTENT_READ_ENDPOINT=content-public-read" \
-	--env "EMBEDS_TYPE_WHITELIST=$WHITELIST" \
-	--env "ROUTER_ADDRESS=%H:8080" \
+	--env "CONTENT_SOURCE_APP_NAME=content-public-read" \
+	--env "CONTENT_SOURCE_URL=http://$HOSTNAME:8080/__content-public-read/content" \
+	--env "EMBEDS_CONTENT_TYPE_WHITELIST=^(http://www.ft.com/ontology/content/ImageSet)" \
+	--env "API_HOST=$ENV_API_HOST" \
 	--env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
 	--env "GRAPHITE_PREFIX=coco.services.$ENV.image-resolver.%i" \
 	coco/image-resolver:$DOCKER_APP_VERSION;'

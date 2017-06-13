@@ -18,7 +18,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/image-resolver:$DOCKER_A
 ExecStart=/bin/sh -c '\
 	export PORT=8080; \
 	export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-	ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
+	export ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
 	/usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
 	--memory="256m" \
 	--env "PORT=$PORT" \

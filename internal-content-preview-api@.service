@@ -12,6 +12,9 @@ Environment="CONTENT_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/contentreadapi.
 Environment="INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=https://dewey.ft.com/internal-components-preview.html"
 Environment="CONTENT_SOURCE_APP_BUSINESS_IMPACT=No internal content articles would be available to be previewed"
 Environment="INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT=Articles won't have the internal components to be previewed"
+Environment="IMAGE_RESOLVER_APP_NAME=image-resolver"
+Environment="IMAGE_RESOLVER_APP_PANIC_GUIDE=https://dewey.ft.com/image-resolver.html"
+Environment="IMAGE_RESOLVER_APP_BUSINESS_IMPACT=Describe the business impact the image resolver app would produce if it is broken."
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
@@ -41,6 +44,11 @@ ExecStart=/bin/sh -c '\
     --env "INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE=$INTERNAL_COMPONENTS_SOURCE_APP_PANIC_GUIDE" \
     --env "CONTENT_SOURCE_APP_BUSINESS_IMPACT=$CONTENT_SOURCE_APP_BUSINESS_IMPACT" \
     --env "INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT=$INTERNAL_COMPONENTS_SOURCE_APP_BUSINESS_IMPACT" \
+    --env "IMAGE_RESOLVER_URI=http://$HOSTNAME:8080/__image-resolver/internalcontent/image" \
+    --env "IMAGE_RESOLVER_APP_NAME=$IMAGE_RESOLVER_APP_NAME" \
+    --env "IMAGE_RESOLVER_APP_HEALTH_URI=http://$HOSTNAME:8080/__image-resolver/__health" \
+    --env "IMAGE_RESOLVER_APP_PANIC_GUIDE=$IMAGE_RESOLVER_APP_PANIC_GUIDE" \
+    --env "IMAGE_RESOLVER_APP_BUSINESS_IMPACT=$IMAGE_RESOLVER_APP_BUSINESS_IMPACT" \
     --env "ENV_API_HOST=$ENV_API_HOST" \
     --env "CACHE_CONTROL_POLICY=no-store" \
     --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \

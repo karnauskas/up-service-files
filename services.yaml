@@ -369,7 +369,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 92
+  version: 93-rj-new-types-rc3
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

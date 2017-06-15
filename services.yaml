@@ -90,7 +90,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.10
+  version: 1.0.12
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -301,7 +301,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.1.0-rj-graphics-rc1
+  version: 16.1.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -369,7 +369,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 93-rj-new-types-rc3
+  version: 93-ops-warn-log-fix
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

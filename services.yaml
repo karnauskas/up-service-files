@@ -77,7 +77,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.13.various-fixes.dp.rc1
+  version: 1.0.14.api-docs.dp.rc1
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -300,7 +300,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.0.7
+  version: 16.1.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2

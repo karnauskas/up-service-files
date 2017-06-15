@@ -214,7 +214,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 1.0.3-fd-multi-uuid-rc3
+  version: 1.0.3-fd-multi-uuid-rc4
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service

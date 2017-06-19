@@ -9,7 +9,6 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-Type=oneshot
 RemainAfterExit=yes
 ExecStartPre=-/bin/bash -c "/usr/bin/docker kill "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1"
 ExecStartPre=-/bin/bash -c "/usr/bin/docker rm "$(docker ps -q --filter=name=%p_)" > /dev/null 2>&1"
@@ -44,4 +43,6 @@ ExecStart=/bin/bash -c '\
         coco/coco-mongodb-configurator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
+Restart=on-failure
+RestartSec=60
 

@@ -28,10 +28,6 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck-categories/content-publish/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/image-publish/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/image-publish/is_resilient false; \
-  etcdctl set /ft/healthcheck-categories/annotations-read/period_seconds 60; \
-  etcdctl set /ft/healthcheck-categories/annotations-read/is_resilient false; \
-  etcdctl set /ft/healthcheck-categories/annotations-publish/period_seconds 60; \
-  etcdctl set /ft/healthcheck-categories/annotations-publish/is_resilient false; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \

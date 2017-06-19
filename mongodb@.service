@@ -24,7 +24,7 @@ ExecStart=/bin/sh -c "\
   -p $(( $MONGO_ADMIN_PORT + %i )):$MONGO_ADMIN_PORT \
   coco/coco-mongodb:$DOCKER_APP_VERSION;"
 
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 30 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

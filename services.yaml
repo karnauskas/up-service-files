@@ -336,16 +336,19 @@ services:
 - name: next-video-annotations-mapper@.service
   version: 1.0.1
   count: 2
+  sequentialDeployment: true
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: next-video-annotations-rw-neo4j@.service
   version: 0.2.0
   count: 2
+  sequentialDeployment: true
 - name: next-video-content-annotator-sidekick@.service
   count: 2
 - name: next-video-content-annotator@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
@@ -486,16 +489,19 @@ services:
 - name: v1-annotations-rw-neo4j@.service
   version: 0.2.0
   count: 2
+  sequentialDeployment: true
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
   version: 0.1.2
   count: 2
+  sequentialDeployment: true
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service

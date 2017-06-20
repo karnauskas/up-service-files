@@ -112,7 +112,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.0.1-rj-fix-date-format-rc1
+  version: 1.0.2-rj-fix-date-format-rc1
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2

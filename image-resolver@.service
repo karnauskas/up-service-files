@@ -1,0 +1,38 @@
+[Unit]
+Description=Image Resolver
+After=vulcan.service
+Requires=docker.service
+Wants=image-resolver-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/image-resolver:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/image-resolver:$DOCKER_APP_VERSION'
+
+
+ExecStart=/bin/sh -c '\
+	export PORT=8080; \
+	export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+	export ENV_API_HOST=$(etcdctl get /ft/config/api_host); \
+	/usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+	--memory="256m" \
+	--env "PORT=$PORT" \
+	--env "CONTENT_SOURCE_APP_NAME=content-public-read" \
+	--env "CONTENT_SOURCE_URL=http://$HOSTNAME:8080/__content-public-read/content" \
+	--env "CONTENT_SOURCE_HEALTH_URL=http://$HOSTNAME:8080/__content-public-read/__health" \
+	--env "EMBEDS_CONTENT_TYPE_WHITELIST=^(http://www.ft.com/ontology/content/ImageSet)" \
+	--env "API_HOST=$ENV_API_HOST" \
+	--env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
+	--env "GRAPHITE_PREFIX=coco.services.$ENV.image-resolver.%i" \
+	coco/image-resolver:$DOCKER_APP_VERSION;'
+ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=image-resolver@*.service

@@ -1,7 +1,7 @@
 [Unit]
-Description=Concept Search API Sidekick
-BindsTo=concept-search-api@%i.service
-After=concept-search-api@%i.service
+Description=Content RW Elasticsearch Service Sidekick
+BindsTo=content-rw-elasticsearch@%i.service
+After=content-rw-elasticsearch@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -9,9 +9,7 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
-  etcdctl set   /ft/services/$SERVICE/path-regex/public-services /concepts\?.*; \
-  etcdctl set   /ft/services/$SERVICE/path-host/public-services public-services; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
@@ -19,9 +17,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concept-search-api/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/content-rw-elasticsearch/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=concept-search-api@%i.service
+MachineOf=content-rw-elasticsearch@%i.service

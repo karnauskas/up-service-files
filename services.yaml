@@ -35,7 +35,7 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: v1.0.1
+  version: 1.0.2
   count: 1
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
@@ -140,7 +140,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.0.3
+  version: 1.0.4
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
@@ -193,7 +193,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 1.0.2
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -254,7 +254,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.0.0
+  version: 1.1.0
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -291,7 +291,7 @@ services:
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.0.4
+  version: 9.1.0
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -320,16 +320,19 @@ services:
 - name: next-video-annotations-mapper@.service
   version: 1.0.1
   count: 2
+  sequentialDeployment: true
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: next-video-annotations-rw-neo4j@.service
   version: 0.2.0
   count: 2
+  sequentialDeployment: true
 - name: next-video-content-annotator-sidekick@.service
   count: 2
 - name: next-video-content-annotator@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
@@ -354,7 +357,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 92
+  version: 94
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -370,7 +373,7 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.0.1
+  version: 1.0.2
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -465,21 +468,25 @@ services:
 - name: v1-annotations-rw-neo4j@.service
   version: 0.2.0
   count: 2
+  sequentialDeployment: true
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
 - name: v1-content-annotator-binding-service@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
   version: 0.1.2
   count: 2
+  sequentialDeployment: true
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service

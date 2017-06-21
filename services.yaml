@@ -193,7 +193,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 1.0.2
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -222,7 +222,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 1.0.16
+  version: 2.0.1
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -254,7 +254,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -320,16 +320,19 @@ services:
 - name: next-video-annotations-mapper@.service
   version: 1.0.1
   count: 2
+  sequentialDeployment: true
 - name: next-video-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: next-video-annotations-rw-neo4j@.service
   version: 0.2.0
   count: 2
+  sequentialDeployment: true
 - name: next-video-content-annotator-sidekick@.service
   count: 2
 - name: next-video-content-annotator@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
@@ -465,21 +468,25 @@ services:
 - name: v1-annotations-rw-neo4j@.service
   version: 0.2.0
   count: 2
+  sequentialDeployment: true
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2
 - name: v1-content-annotator-binding-service@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: v1-content-annotator-sidekick@.service
   count: 2
 - name: v1-content-annotator@.service
   version: v63
   count: 2
+  sequentialDeployment: true
 - name: v1-suggestor-sidekick@.service
   count: 2
 - name: v1-suggestor@.service
   version: 0.1.2
   count: 2
+  sequentialDeployment: true
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service
@@ -491,7 +498,7 @@ services:
   version: v63
   count: 2
 - name: varnish@.service
-  version: v0.1.7
+  version: 0.1.8
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

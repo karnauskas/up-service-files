@@ -286,7 +286,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.2.0-rc
+  version: 16.2.0-rc2
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2

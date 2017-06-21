@@ -1,0 +1,38 @@
+[Unit]
+Description=Annotations Mapper
+After=vulcan.service
+Requires=docker.service
+Wants=annotations-mapper-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/v1-suggestor:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/annotations-mapper:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/bash -c '\
+  	export ENVIRONMENT_TAG=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
+    export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
+    export ZOOKEEPER_IP=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
+	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+	    --memory="256m" \
+	    --env "ZOOKEEPER_ADDRESS=$ZOOKEEPER_IP:2181" \
+	    --env "SRC_GROUP=annotations-mapper" \
+	    --env "SRC_TOPIC=NativeCmsMetadataPublicationEvents" \
+	    --env "DEST_ADDRESS=$KAFKA_HOST:$KAFKA_PORT" \
+	    --env "DEST_TOPIC=V1ConceptAnnotations" \
+	    --env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
+	coco/annotations-mapper:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=annotations-mapper@*.service

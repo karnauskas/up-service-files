@@ -10,6 +10,12 @@ services:
   version: 1.1.12
   count: 2
   sequentialDeployment: true
+- name: annotations-mapper-sidekick@.service
+  count: 2
+- name: annotations-mapper@.service
+  version: 0.0.1-fd-rc1
+  count: 2
+  sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
@@ -80,7 +86,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.12
+  version: 1.0.13
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service

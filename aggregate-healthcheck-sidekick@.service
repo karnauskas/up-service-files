@@ -5,15 +5,18 @@ After=aggregate-healthcheck@%i.service
 
 [Service]
 RemainAfterExit=yes
-ExecStart=/bin/sh -c "\
-  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
-  etcdctl mkdir /ft/services/$SERVICE/servers; \
+
+ExecStartPre=/bin/sh -c "\
   etcdctl set /ft/healthcheck-categories/read/period_seconds 4; \
   etcdctl set /ft/healthcheck-categories/read/is_resilient true; \
   etcdctl set /ft/healthcheck-categories/lists-read/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/lists-read/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/lists-publish/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/lists-publish/is_resilient false; \
+  etcdctl set /ft/healthcheck-categories/annotations-read/period_seconds 60; \
+  etcdctl set /ft/healthcheck-categories/annotations-read/is_resilient false; \
+  etcdctl set /ft/healthcheck-categories/annotations-publish/period_seconds 60; \
+  etcdctl set /ft/healthcheck-categories/annotations-publish/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/system/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/system/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/content-read/period_seconds 60; \
@@ -27,7 +30,11 @@ ExecStart=/bin/sh -c "\
   etcdctl set /ft/healthcheck-categories/image-publish/period_seconds 60; \
   etcdctl set /ft/healthcheck-categories/image-publish/is_resilient false; \
   etcdctl set /ft/healthcheck-categories/content-publish/period_seconds 60; \
-  etcdctl set /ft/healthcheck-categories/content-publish/is_resilient false; \
+  etcdctl set /ft/healthcheck-categories/content-publish/is_resilient false; \"
+
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \

@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 0.0.1-fd-rc-3
+  version: 0.0.1-fd-rc-4
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service

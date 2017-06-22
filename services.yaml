@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 0.0.1-fd-rc-1
+  version: 0.0.1-fd-rc-3
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -340,7 +340,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.1.0-xp-remove-kafka-topic-check-rc1
+  version: 1.1.1-fd-rc2
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-rw-neo4j-sidekick@.service

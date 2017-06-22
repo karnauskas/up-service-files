@@ -25,7 +25,7 @@ ExecStart=/bin/bash -c '\
 	--env "SRC_QUEUE=kafka" \
 	--env "SRC_CONCURRENT_PROCESSING=false" \
 	--env "DEST_ADDRESS=http://%H:8080" \
-	--env "DEST_TOPIC=V1ConceptAnnotations" \
+	--env "DEST_TOPIC=V12ConceptAnnotations" \
 	--env "DEST_QUEUE=kafka" \
 	--env "ENVIRONMENT=coco-$ENVIRONMENT_TAG" \
 	coco/v1-suggestor:$DOCKER_APP_VERSION'

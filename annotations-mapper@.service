@@ -26,7 +26,7 @@ ExecStart=/bin/bash -c '\
 	    --env "CONSUMER_GROUP=annotations-mapper" \
 	    --env "CONSUMER_TOPIC=NativeCmsMetadataPublicationEvents" \
 	    --env "BROKER_ADDRESS=$KAFKA_HOST:$KAFKA_PORT" \
-	    --env "PRODUCER_TOPIC=V1ConceptAnnotations" \
+	    --env "PRODUCER_TOPIC=ConceptAnnotations" \
 	coco/annotations-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

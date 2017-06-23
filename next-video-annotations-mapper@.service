@@ -27,7 +27,7 @@ ExecStart=/bin/sh -c '\
     --env "Q_GROUP=videoAnnotationsMapper" \
     --env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
     --env "Q_READ_QUEUE=kafka" \
-    --env "Q_WRITE_TOPIC=V1ConceptAnnotations" \
+    --env "Q_WRITE_TOPIC=ConceptAnnotations" \
     --env "Q_WRITE_QUEUE=kafka" \
     coco/upp-next-video-annotations-mapper:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

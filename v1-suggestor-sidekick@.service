@@ -10,6 +10,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories annotations-publish; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -23,4 +24,3 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=v1-suggestor@%i.service
-

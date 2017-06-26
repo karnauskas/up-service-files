@@ -75,7 +75,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.15
+  version: 1.0.18
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service

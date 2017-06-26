@@ -105,7 +105,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.15
+  version: 1.0.18
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -163,13 +163,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: vv78-image-rights-new-fields-rc1
+  version: v81
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: vv81-video-rc1
+  version: v81
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service

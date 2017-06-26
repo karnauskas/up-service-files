@@ -128,13 +128,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: vv78-image-rights-new-fields-rc1
+  version: v82-image-rights-rc2
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: vv78-image-rights-new-fields-rc1
+  version: v82-image-rights-rc2
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service

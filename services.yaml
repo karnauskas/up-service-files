@@ -469,7 +469,7 @@ services:
 - name: v1-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v1-annotations-rw-neo4j@.service
-  version: 0.2.0
+  version: 1.0.0-fd-rc1
   count: 2
 - name: v1-content-annotator-binding-service-sidekick@.service
   count: 2

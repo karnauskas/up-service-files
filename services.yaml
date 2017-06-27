@@ -77,7 +77,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.19-dp-search-all-types-rc.1
+  version: 1.0.20-dp-boost-authors-rc1
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -491,12 +491,6 @@ services:
   count: 2
 - name: v1-annotations-rw-neo4j@.service
   version: 0.2.0
-  count: 2
-  sequentialDeployment: true
-- name: v1-content-annotator-binding-service-sidekick@.service
-  count: 2
-- name: v1-content-annotator-binding-service@.service
-  version: v63
   count: 2
   sequentialDeployment: true
 - name: v1-content-annotator-sidekick@.service

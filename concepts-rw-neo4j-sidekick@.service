@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/concept-rw-neo4j/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/$SERVICE/servers/%i'
 Restart=on-failure
 RestartSec=60
 

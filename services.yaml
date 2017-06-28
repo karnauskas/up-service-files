@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 63.9.0-img-rigths-rc1
+  version: 63.9.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -105,7 +105,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.18
+  version: 1.0.19
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -163,13 +163,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v82-image-rights-rc2
+  version: v82
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v82-image-rights-rc2
+  version: v82
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service
@@ -328,7 +328,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.2.0-rc3
+  version: 16.3.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2

@@ -43,24 +43,9 @@ services:
 - name: burrow@.service
   version: 1.0.2
   count: 1
-- name: cms-kafka-bridge-pub-prod-sidekick@.service
-  count: 2
-- name: cms-kafka-bridge-pub-prod@.service
-  version: 14.2.0-xp-remove-topic-check-rc3
-  count: 2
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-xp@.service
-  version: 14.2.0-xp-remove-topic-check-rc3
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: 14.2.0-xp-remove-topic-check-rc3
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-us@.service
   version: 14.2.0-xp-remove-topic-check-rc3
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service

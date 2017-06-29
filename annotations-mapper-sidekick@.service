@@ -23,4 +23,3 @@ RestartSec=60
 
 [X-Fleet]
 MachineOf=annotations-mapper@%i.service
-

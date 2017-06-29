@@ -493,13 +493,13 @@ services:
 - name: v1-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v1-annotations-rw-neo4j@.service
-  version: 1.0.0-fd-rc4
+  version: 1.0.0-fd-rc5
   count: 2
   sequentialDeployment: true
 - name: v2-annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: v2-annotations-rw-neo4j@.service
-  version: 1.0.0-fd-rc4
+  version: 1.0.0-fd-rc5
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2

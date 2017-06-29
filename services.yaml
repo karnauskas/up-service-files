@@ -478,6 +478,7 @@ services:
   version: v0.1.6
   count: 2
 - name: splunk-forwarder.service
+  desiredState: loaded
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service

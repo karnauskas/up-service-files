@@ -23,18 +23,17 @@ ExecStart=/bin/sh -c '\
   export ELASTICSEARCH_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
   export PUBLISH_CLUSTER_URL=$(/usr/bin/etcdctl get /ft/config/publishing/read_url); \
   export PUBLISH_CLUSTER_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/publishing/authorization_key); \
-  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
-  --memory="256m" \
-  -p $APP_PORT \
-  -e "APP_PORT=$APP_PORT" \
-  -e "ELASTICSEARCH_WHITELISTED_CONCEPTS=$ELASTICSEARCH_WHITELISTED_CONCEPTS" \
-  -e "ELASTICSEARCH_ENDPOINT=$ELASTICSEARCH_ENDPOINT" \
-  -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
-  -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-  -e "ELASTICSEARCH_REGION=$ELASTICSEARCH_REGION" \
-  -e "PUBLISH_CLUSTER_URL=$PUBLISH_CLUSTER_URL" \
-  -e "PUBLISH_CLUSTER_CREDENTIALS=$PUBLISH_CLUSTER_CREDENTIALS" \ 
-  coco/concept-rw-elasticsearch:$DOCKER_APP_VERSION;'
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
+    --memory="256m" \
+    --env="APP_PORT=$APP_PORT" \
+    --env="ELASTICSEARCH_WHITELISTED_CONCEPTS=$ELASTICSEARCH_WHITELISTED_CONCEPTS" \
+    --env="ELASTICSEARCH_ENDPOINT=$ELASTICSEARCH_ENDPOINT" \
+    --env="AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
+    --env="AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+    --env="ELASTICSEARCH_REGION=$ELASTICSEARCH_REGION" \
+    --env="PUBLISH_CLUSTER_URL=$PUBLISH_CLUSTER_URL" \
+    --env="PUBLISH_CLUSTER_CREDENTIALS=$PUBLISH_CLUSTER_CREDENTIALS" \
+    coco/concept-rw-elasticsearch:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

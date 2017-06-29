@@ -28,6 +28,7 @@ ExecStart=/bin/sh -c '\
   --env "NEO_URL=$NEO_URL" \
   --env "APP_PORT=$APP_PORT" \
   --env "BATCH_SIZE=50" \
+  --env "SHOULD_CONSUME_MESSAGES=true" \
   --env "ZOOKEEPER_ADDRESS=$ZOOKEEPER_IP:2181"\
   --env "CONSUMER_GROUP=annotations-rw"\
   --env "CONSUMER_TOPIC=ConceptAnnotations"\

@@ -559,6 +559,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v48
+  version: v49
   count: 2
 - name: zookeeper.service

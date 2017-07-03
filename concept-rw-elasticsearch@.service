@@ -24,7 +24,7 @@ ExecStart=/bin/sh -c '\
   export PUBLISH_CLUSTER_URL=$(/usr/bin/etcdctl get /ft/config/publishing/read_url); \
   export PUBLISH_CLUSTER_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/publishing/authorization_key); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
-    --memory="256m" \
+    --memory="512m" \
     --env="APP_PORT=$APP_PORT" \
     --env="ELASTICSEARCH_WHITELISTED_CONCEPTS=$ELASTICSEARCH_WHITELISTED_CONCEPTS" \
     --env="ELASTICSEARCH_ENDPOINT=$ELASTICSEARCH_ENDPOINT" \

@@ -254,7 +254,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.1.1
+  version: 1.2.0-rj-use-host-article-uuid-rc1
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -265,7 +265,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.3
+  version: 1.1.4-rj-use-host-article-uuid-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

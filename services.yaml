@@ -85,12 +85,12 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.13
+  version: 0.0.15
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.19
+  version: 1.0.20
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -180,7 +180,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v78
+  version: v81
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -269,7 +269,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.1.1
+  version: 1.2.0-rj-use-host-article-uuid-rc1
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -280,7 +280,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.4-rj-set-type-rc5
+  version: 1.1.4-rj-use-host-article-uuid-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -301,7 +301,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.2.3
+  version: 16.3.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2

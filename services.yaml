@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 63.10.0-ir-fix-expand-images-rc2
+  version: 64.1.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -100,12 +100,12 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.13
+  version: 0.0.15
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.19
+  version: 1.0.20
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -163,13 +163,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v83-rc1
+  version: v83
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v83-rc1
+  version: v83
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service
@@ -202,7 +202,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v78
+  version: v81
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -259,7 +259,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 1.0.16
+  version: 2.0.2
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -393,6 +393,12 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
+  version: 3.0.10
+  count: 2
+  sequentialDeployment: true
+- name: new-notifications-push-sidekick@.service
+  count: 2
+- name: new-notifications-push@.service
   version: 3.0.10
   count: 2
   sequentialDeployment: true

@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.0.0-rj-onward-journey-rc2
+  version: 64.2.0-rj-onward-journey-rc1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -70,12 +70,12 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.13
+  version: 0.0.15
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.18
+  version: 1.0.20
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -128,13 +128,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v81
+  version: v83
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v81
+  version: v83
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service
@@ -165,7 +165,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v78
+  version: v81
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -222,7 +222,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 1.0.16
+  version: 2.0.2
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -286,7 +286,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.2.3
+  version: 16.3.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -502,11 +502,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.14
+  version: 1.0.15
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v48
+  version: v49
   count: 2
 - name: zookeeper.service

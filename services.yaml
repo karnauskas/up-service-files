@@ -77,7 +77,11 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
+<<<<<<< HEAD
   version: 1.0.21-dp-health-ang-gtg-fixes-rc1
+=======
+  version: 1.0.22.param-err-msgs.dp.rc1
+>>>>>>> bugfix/concept-search-param-errs
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -236,7 +240,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 2.0.2.err-tolerance.rc1
+  version: 2.0.2
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -531,6 +535,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v48
+  version: v49
   count: 2
 - name: zookeeper.service

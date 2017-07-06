@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.0.0-rj-onward-journey-rc2
+  version: 64.2.0-rj-onward-journey-rc1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -237,7 +237,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 1.0.16
+  version: 2.0.2
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -522,6 +522,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v49-rj-type-determination-rc4
+  version: v49
   count: 2
 - name: zookeeper.service

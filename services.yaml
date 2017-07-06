@@ -280,7 +280,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.4-rj-use-host-article-uuid-rc1
+  version: 1.2.0-rj-onward-journey-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -517,7 +517,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.15-rj-type-determination-rc2
+  version: 1.0.15
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

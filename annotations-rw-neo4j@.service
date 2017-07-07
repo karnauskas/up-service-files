@@ -1,8 +1,8 @@
 [Unit]
-Description=V1 Annotations Reader-Writer for Neo4j Service
+Description=Annotations Reader-Writer for Neo4j Service
 After=vulcan.service
 Requires=docker.service
-Wants=v1-annotations-rw-neo4j-sidekick@%i.service
+Wants=annotations-rw-neo4j-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -23,8 +23,6 @@ ExecStart=/bin/sh -c '\
   export ZOOKEEPER_IP=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --memory="256m" \
-  --env "ANNOTATION_LIFECYCLE=annotations-v1" \
-  --env "PLATFORM_VERSION=v1" \
   --env "NEO_URL=$NEO_URL" \
   --env "APP_PORT=$APP_PORT" \
   --env "BATCH_SIZE=50" \
@@ -33,10 +31,11 @@ ExecStart=/bin/sh -c '\
   --env "CONSUMER_GROUP=annotations-rw"\
   --env "CONSUMER_TOPIC=ConceptAnnotations"\
   --env "BROKER_ADDRESS=$KAFKA_HOST:$KAFKA_PORT"\
-  --env "PRODUCER_TOPIC=PostMetadataPublicationEvents"\
   --env "SHOULD_FORWARD_MESSAGES=true"\
+  --env "PRODUCER_TOPIC=PostConceptAnnotationsPublicationEvents"\
+  --env "LIFECYCLE_CONFIG_PATH=annotations-config.json"
   --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-  --env "GRAPHITE_PREFIX=coco.services.$ENV.v1-annotations-rw-neo4j.%i" \
+  --env "GRAPHITE_PREFIX=coco.services.$ENV.annotations-rw-neo4j.%i" \
   --env "LOG_METRICS=false" \
   coco/annotations-rw-neo4j:$DOCKER_APP_VERSION;'
 
@@ -45,4 +44,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-Conflicts=v1-annotations-rw-neo4j@*.service
+Conflicts=annotations-rw-neo4j@*.service

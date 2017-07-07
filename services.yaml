@@ -16,6 +16,12 @@ services:
   version: 0.0.1-fd-rc-5
   count: 2
   sequentialDeployment: true
+- name: annotations-rw-neo4j-sidekick@.service
+  count: 2
+- name: annotations-rw-neo4j@.service
+  version: 1.0.0-fd-rc8
+  count: 2
+  sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
@@ -327,12 +333,6 @@ services:
   version: 1.1.1-fd-rc2
   count: 2
   sequentialDeployment: true
-- name: next-video-content-annotator-sidekick@.service
-  count: 2
-- name: next-video-content-annotator@.service
-  version: v63
-  count: 2
-  sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
@@ -448,6 +448,11 @@ services:
   version: v0.1.6
   count: 2
 - name: splunk-forwarder.service
+- name: suggestions-rw-neo4j-sidekick@.service
+  count: 2
+- name: suggestions-rw-neo4j@.service
+  version: 1.0.0-fd-rc8
+  count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
@@ -463,17 +468,6 @@ services:
 - name: up-queue-sender-v1-metadata@.service
   version: v0.0.2
   count: 1
-- name: annotations-rw-neo4j-sidekick@.service
-  count: 2
-- name: annotations-rw-neo4j@.service
-  version: 1.0.0-fd-rc8
-  count: 2
-  sequentialDeployment: true
-- name: suggestions-rw-neo4j-sidekick@.service
-  count: 2
-- name: suggestions-rw-neo4j@.service
-  version: 1.0.0-fd-rc8
-  count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service

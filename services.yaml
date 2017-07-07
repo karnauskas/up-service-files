@@ -343,12 +343,6 @@ services:
   version: 1.0.2-rj-fix-date-format-rc1
   count: 2
   sequentialDeployment: true
-- name: next-video-annotations-rw-neo4j-sidekick@.service
-  count: 2
-- name: next-video-annotations-rw-neo4j@.service
-  version: 0.2.0
-  count: 2
-  sequentialDeployment: true
 - name: next-video-content-annotator-sidekick@.service
   count: 2
 - name: next-video-content-annotator@.service

@@ -19,9 +19,9 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
   --memory="256m" \
   --env "PORT=8080" \
-  --env "KAFKA_CONTENT_TOPIC_NAME=PostPublicationEvents_testTL" \
-  --env "KAFKA_METADATA_TOPIC_NAME=PostMetadataPublicationEvents_testTL" \
-  --env "KAFKA_COMBINED_TOPIC_NAME=CombinedPostPublicationEvents_testTL" \
+  --env "KAFKA_CONTENT_TOPIC_NAME=PostPublicationEvents" \
+  --env "KAFKA_METADATA_TOPIC_NAME=PostMetadataPublicationEvents" \
+  --env "KAFKA_COMBINED_TOPIC_NAME=CombinedPostPublicationEvents" \
   --env "KAFKA_PROXY_ADDR=http://$HOSTNAME:8080" \
   --env "KAFKA_PROXY_CONTENT_CONSUMER_GROUP=$ENV-post-publication-combiner-content-consumer" \
   --env "KAFKA_PROXY_METADATA_CONSUMER_GROUP=$ENV-post-publication-combiner-metadata-consumer" \

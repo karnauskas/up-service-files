@@ -469,16 +469,16 @@ services:
 - name: up-queue-sender-v1-metadata@.service
   version: v0.0.2
   count: 1
-- name: v1-annotations-rw-neo4j-sidekick@.service
+- name: annotations-rw-neo4j-sidekick@.service
   count: 2
-- name: v1-annotations-rw-neo4j@.service
-  version: 1.0.0-fd-rc6
+- name: annotations-rw-neo4j@.service
+  version: 1.0.0-fd-rc8
   count: 2
   sequentialDeployment: true
-- name: v2-annotations-rw-neo4j-sidekick@.service
+- name: suggestions-rw-neo4j-sidekick@.service
   count: 2
-- name: v2-annotations-rw-neo4j@.service
-  version: 1.0.0-fd-rc6
+- name: suggestions-rw-neo4j@.service
+  version: 1.0.0-fd-rc8
   count: 2
 - name: v2-content-annotator-sidekick@.service
   count: 2

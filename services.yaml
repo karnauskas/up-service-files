@@ -399,7 +399,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.0.10
+  version: 3.2.0-upp-extreme-rc1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

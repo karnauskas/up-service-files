@@ -17,12 +17,14 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/concepts-rw-neo4j:$DOCKE
 ExecStart=/bin/sh -c '\
   export PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export LOG_LEVEL=$(/usr/bin/etcdctl get /ft/config/concepts-rw-neo4j/loglevel); \
   export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/concepts-rw-neo4j/batchsize); \
   export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
   --memory="256m" \
   --env "NEO_URL=$NEO_URL" \
   --env "BATCH_SIZE=$BATCH_SIZE" \
+  --env "LOG_LEVEL=$LOG_LEVEL" \
   --env "GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.concepts-rw-neo4j.%i" \
   coco/concepts-rw-neo4j:$DOCKER_APP_VERSION;'

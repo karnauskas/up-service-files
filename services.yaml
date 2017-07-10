@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.0-fd-rc12
+  version: 1.0.0-fd-rc13
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -467,7 +467,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.0.0-fd-rc12
+  version: 1.0.0-fd-rc13
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
@@ -492,7 +492,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: v64-fd-rc1 
+  version: v64-fd-rc1
   count: 2
 - name: varnish@.service
   version: 0.1.8

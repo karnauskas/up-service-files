@@ -145,7 +145,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 1.0.5
+  version: 1.0.6
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service

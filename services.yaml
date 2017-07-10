@@ -90,7 +90,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.20
+  version: 1.0.22
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -180,7 +180,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: v81
+  version: v82
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -269,7 +269,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.2.0-rj-use-host-article-uuid-rc1
+  version: 1.1.2
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -306,7 +306,7 @@ services:
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.1.1-rj-type-determination-rc5
+  version: 9.1.1
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -517,11 +517,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.15
+  version: 1.0.16
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v49
+  version: v50
   count: 2
 - name: zookeeper.service

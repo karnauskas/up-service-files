@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.2.0-rj-onward-journey-rc1
+  version: 64.2.0-rj-onward-journey-rc2
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -265,7 +265,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.2.0-rj-onward-journey-rc2
+  version: 1.2.0-rj-onward-journey-rc3
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

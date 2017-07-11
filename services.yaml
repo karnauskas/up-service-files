@@ -82,7 +82,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: v2.0.2
+  version: 2.1.0-xp-remove-kafka-topic-check-rc1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2

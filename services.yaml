@@ -360,7 +360,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.2.0-upp-extreme-rc7
+  version: 3.2.0-upp-extreme-rc8
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service

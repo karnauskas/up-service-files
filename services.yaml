@@ -81,7 +81,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: TestAddConcordanceBranch 
+  version: TestAddConcordanceBranch
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -139,7 +139,7 @@ services:
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: 1.0.3 
+  version: 1.0.3
 - name: diamond.service
   version: v1.1.0
 - name: document-store-api-sidekick@.service

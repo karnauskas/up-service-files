@@ -139,7 +139,7 @@ services:
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: 1.2.0-sm-add_people-rc3
+  version: 1.0.3 
 - name: diamond.service
   version: v1.1.0
 - name: document-store-api-sidekick@.service

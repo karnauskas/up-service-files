@@ -363,7 +363,7 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: v0.1.9
+  version: 0.2.1
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2

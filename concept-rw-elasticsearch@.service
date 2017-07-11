@@ -33,7 +33,7 @@ ExecStart=/bin/sh -c '\
     --env="ELASTICSEARCH_REGION=$ELASTICSEARCH_REGION" \
     --env="PUBLISH_CLUSTER_URL=$PUBLISH_CLUSTER_URL" \
     --env="PUBLISH_CLUSTER_CREDENTIALS=$PUBLISH_CLUSTER_CREDENTIALS" \
-    --env="AUTHOR_REFRESH_INTERVAL=1" \
+    --env="AUTHOR_REFRESH_INTERVAL=60" \
     coco/concept-rw-elasticsearch:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

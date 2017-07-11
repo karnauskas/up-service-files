@@ -357,6 +357,12 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
+- name: new-notifications-push-sidekick@.service
+  count: 2
+- name: new-notifications-push@.service
+  version: 3.2.0-upp-extreme-rc6
+  count: 2
+  sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
@@ -394,12 +400,6 @@ services:
   count: 2
 - name: notifications-push@.service
   version: 3.0.10
-  count: 2
-  sequentialDeployment: true
-- name: new-notifications-push-sidekick@.service
-  count: 2
-- name: new-notifications-push@.service
-  version: 3.2.0-upp-extreme-rc4
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

@@ -72,11 +72,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-<<<<<<< HEAD
-  version: 0.0.18
-=======
   version: 0.0.19.agg-model.dp.rc2
->>>>>>> feature/concept-rw-es-support-agg-model
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2

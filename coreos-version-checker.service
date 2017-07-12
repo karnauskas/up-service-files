@@ -5,7 +5,7 @@ After=docker.socket
 Wants=coreos-version-checker-sidekick.service
 
 [Service]
-Environment="DOCKER_APP_VERSION=latest"
+Environment="DOCKER_APP_VERSION=latest" "SYS_HC_HOST_PATH=host_dir"
 ExecStartPre=-/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p_)"
 ExecStartPre=-/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p_)"
 ExecStartPre=/bin/sh -c "docker history coco/coreos-version-checker:$DOCKER_APP_VERSION >/dev/null 2>&1 || docker pull coco/coreos-version-checker:$DOCKER_APP_VERSION"

@@ -1,9 +1,9 @@
 services:
 - name: aggregate-concept-transformer-sidekick@.service
-  count: 1
+  count: 5
 - name: aggregate-concept-transformer@.service
   version: add-concordance
-  count: 1
+  count: 5
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service

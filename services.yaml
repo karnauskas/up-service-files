@@ -360,7 +360,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.2.0-upp-extreme-rc10
+  version: 3.1.0
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
@@ -550,7 +550,7 @@ services:
   version: v63
   count: 2
 - name: varnish@.service
-  version: 0.1.9-np-rc2
+  version: 0.1.9
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

@@ -68,10 +68,10 @@ services:
   version: v2.0.2
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
-  count: 2
+  count: 5
 - name: concept-rw-elasticsearch@.service
   version: 0.0.17
-  count: 2
+  count: 5
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service

@@ -91,7 +91,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 5
 - name: concepts-rw-neo4j@.service
-  version: 1.1.0-sm-addSimpleConcordance-RC6 
+  version: 1.1.0-sm-addSimpleConcordance-RC7 
   count: 5
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service

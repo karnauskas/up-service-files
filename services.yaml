@@ -87,7 +87,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.18
+  version: 0.0.19
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2
@@ -261,7 +261,11 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
+<<<<<<< HEAD
   version: 3.1.0-xp-remove-kafka-topic-check-rc1
+=======
+  version: 3.2.0
+>>>>>>> remove-topic-checks
   count: 2
 - name: list-notifications-rw-sidekick@.service
   count: 2
@@ -379,7 +383,11 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
+<<<<<<< HEAD
   version: 3.1.0-xp-remove-kafka-topic-check-rc1
+=======
+  version: 3.2.0
+>>>>>>> remove-topic-checks
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

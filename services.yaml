@@ -78,6 +78,11 @@ services:
   version: 1.0.24
   count: 2
   sequentialDeployment: true
+- name: concept-search-reindexer-sidekick@.service
+  count: 1
+- name: concept-search-reindexer@.service
+  version: 0.0.1-dp-rc2
+  count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service

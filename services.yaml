@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.1.0
+  version: 64.2.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -87,12 +87,12 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.15
+  version: 0.0.18
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.20
+  version: 1.0.24
   count: 2
   sequentialDeployment: true
 - name: concept-suggestion-api-sidekick@.service
@@ -162,7 +162,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 1.0.4
+  version: 1.0.6
   count: 2
 - name: content-search-api-port-sidekick@.service
   count: 2
@@ -172,7 +172,7 @@ services:
   sequentialDeployment: true
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: v1.0.0
+  version: 1.0.4-ops-cve-severities-rc1
 - name: diamond.service
   version: v1.1.0
 - name: document-store-api-sidekick@.service
@@ -293,7 +293,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.1.3
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -319,7 +319,7 @@ services:
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.1.0
+  version: 9.1.1
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -379,12 +379,12 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.3
+  version: 0.5.6
   count: 2
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: v0.1.9
+  version: 0.2.1
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2
@@ -505,11 +505,11 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.15
+  version: 1.0.16
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: v48
+  version: v50
   count: 2
 - name: zookeeper.service

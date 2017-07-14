@@ -19,7 +19,6 @@ ExecStart=/bin/sh -c '\
   export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
   export APP_PORT=8080; \
   export ELASTICSEARCH_ENDPOINT=$(/usr/bin/etcdctl get /ft/config/aws_es_endpoint); \
-  export ELASTICSEARCH_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
   /usr/bin/docker run --read-only --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
     --memory="256m" \
     --env="APP_PORT=$APP_PORT" \
@@ -28,6 +27,7 @@ ExecStart=/bin/sh -c '\
     --env="AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
     --env="AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
     --env="ELASTICSEARCH_INDEX_ALIAS=concepts" \
+    --env="ELASTICSEARCH_TRACE=true" \
     coco/concept-search-index-mapping:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

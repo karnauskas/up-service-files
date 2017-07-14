@@ -18,10 +18,9 @@ ExecStart=/bin/sh -c '\
    export NOTIFICATIONS_PUSH_PORT=8599; \
    export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-new-notifications-push-%i"; \
    export API_BASE_URL="http://"$(/usr/bin/etcdctl get /ft/config/api_host); \
-   export KAFKA_ADDR="%H:2181" \
    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $NOTIFICATIONS_PUSH_PORT:8080 \
       --memory="256m" \
-      --env="KAFKA_ADDR=$KAFKA_ADDR" \
+      --env="KAFKA_ADDR="%H:2181" \
       --env="GROUP_ID=$GROUP_ID" \
       --env="TOPIC=PostPublicationEvents" \
       --env="NOTIFICATIONS_DELAY=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \

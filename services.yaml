@@ -77,7 +77,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.25-dp-multi-type-params-for-mentions-search-rc2
+  version: 1.0.25
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service

@@ -52,12 +52,12 @@ services:
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
-  version: 14.1.3
+  version: 14.2.0
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
-  version: 14.1.3
+  version: 14.2.0
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -77,9 +77,14 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.23
+  version: 1.0.24
   count: 2
   sequentialDeployment: true
+- name: concept-search-reindexer-sidekick@.service
+  count: 1
+- name: concept-search-reindexer@.service
+  version: 0.0.1-dp-rc2
+  count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
@@ -88,7 +93,7 @@ services:
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
-  version: 14.1.3
+  version: 14.2.0
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2

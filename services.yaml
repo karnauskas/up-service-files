@@ -498,7 +498,7 @@ services:
   version: v63
   count: 2
 - name: varnish@.service
-  version: 0.2.0.api-endpoint.dp.rc2
+  version: feature_no-auth-for-api
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

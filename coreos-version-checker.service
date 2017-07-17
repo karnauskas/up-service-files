@@ -12,8 +12,8 @@ ExecStartPre=/bin/sh -c "docker history coco/coreos-version-checker:$DOCKER_APP_
 ExecStart=/bin/sh -c "/usr/bin/docker run --rm --name %p_$(uuidgen) \
     --memory=\"256m\" \
     -P \
-    -e SYS_HC_HOST_PATH=$SYS_HC_HOST_PATH \
-    -v /:/$SYS_HC_HOST_PATH:ro \
+    -v /etc/coreos/update.conf \
+    -v /usr/share/coreos/release \
     coco/coreos-version-checker:$DOCKER_APP_VERSION"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'

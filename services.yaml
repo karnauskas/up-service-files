@@ -498,7 +498,7 @@ services:
   version: v63
   count: 2
 - name: varnish@.service
-  version: 0.1.9
+  version: 0.2.0.api-endpoint.dp.rc1
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

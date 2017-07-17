@@ -1,3 +1,4 @@
+
 [Unit]
 Description=System CoreOS version monitoring service
 Requires=docker.socket
@@ -12,8 +13,8 @@ ExecStartPre=/bin/sh -c "docker history coco/coreos-version-checker:$DOCKER_APP_
 ExecStart=/bin/sh -c "/usr/bin/docker run --rm --name %p_$(uuidgen) \
     --memory=\"256m\" \
     -P \
-    -v /etc/coreos/update.conf \
-    -v /usr/share/coreos/release \
+    -e SYS_HC_HOST_PATH=$SYS_HC_HOST_PATH \
+    -v /:/$SYS_HC_HOST_PATH:ro \
     coco/coreos-version-checker:$DOCKER_APP_VERSION"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'

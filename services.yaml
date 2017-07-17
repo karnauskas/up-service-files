@@ -172,7 +172,7 @@ services:
   sequentialDeployment: true
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: 1.0.4-ops-cve-severities-rc1
+  version: v1.0.0
 - name: diamond.service
   version: v1.1.0
 - name: document-store-api-sidekick@.service

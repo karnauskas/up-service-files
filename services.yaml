@@ -240,6 +240,7 @@ services:
 - name: list-notifications-push@.service
   version: 3.2.0
   count: 2
+  sequentialDeployment: true
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service

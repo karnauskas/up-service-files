@@ -13,7 +13,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.2.0
+  version: 64.3.0-dp-reduce-logging-rc1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service

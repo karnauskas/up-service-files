@@ -21,9 +21,9 @@ ExecStart=/bin/bash -c '\
 	--env "APP_NAME=next-video-mapper" \
 	--env "Q_ADDR=http://%H:8080" \
 	--env "Q_GROUP=nextVideoMapper" \
-	--env "Q_READ_TOPIC=NativeCmsPublicationEvents_testTL" \
+	--env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
 	--env "Q_READ_QUEUE=kafka" \
-	--env "Q_WRITE_TOPIC=CmsPublicationEvents_testTL" \
+	--env "Q_WRITE_TOPIC=CmsPublicationEvents" \
 	--env "Q_WRITE_QUEUE=kafka" \
 	coco/upp-next-video-mapper:$DOCKER_APP_VERSION'
 

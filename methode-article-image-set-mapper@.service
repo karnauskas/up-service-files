@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
   --env "Q_ADDR=http://%H:8080" \
   --env "Q_GROUP=methode-article-image-set-mapper" \
-  --env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
+  --env "Q_READ_TOPIC=NativeCmsPublicationEvents_testTL" \
   --env "Q_READ_QUEUE=kafka" \
-  --env "Q_WRITE_TOPIC=CmsPublicationEvents" \
+  --env "Q_WRITE_TOPIC=CmsPublicationEvents_testTL" \
   --env "Q_WRITE_QUEUE=kafka" \
   coco/methode-article-image-set-mapper:$DOCKER_APP_VERSION'
 

@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c '\
   --env "ELASTICSEARCH_SAPI_INDEX=ft" \
   --env "KAFKA_PROXY_ADDR=http://%H:8080" \
   --env "KAFKA_CONSUMER_GROUP=$(/usr/bin/etcdctl get /ft/config/environment_tag)-%p" \
-  --env "KAFKA_TOPIC=CombinedPostPublicationEvents" \
+  --env "KAFKA_TOPIC=CombinedPostPublicationEvents_testTL" \
   --env "KAFKA_HEADER=kafka" \
   --env "KAFKA_CONCURRENT_PROCESSING=true" \
   coco/%p:$DOCKER_APP_VERSION'

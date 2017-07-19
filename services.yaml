@@ -318,7 +318,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.1.0
+  version: 3.3.0
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service

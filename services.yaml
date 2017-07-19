@@ -70,7 +70,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.20 
+  version: 0.0.20
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2

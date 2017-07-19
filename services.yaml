@@ -75,7 +75,7 @@ services:
   count: 1
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-prod@.service
+- name: concepts-kafka-bridge-pub-semantic@.service
   version: 14.2.0
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service

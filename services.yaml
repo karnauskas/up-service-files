@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: add-concordance
+  version: 1.2.0
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
@@ -70,7 +70,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.17
+  version: 0.0.18
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2
@@ -91,7 +91,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.1.0-sm-addSimpleConcordance-RC10 
+  version: FixTransferConcordanceBug
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -384,7 +384,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: HandleBrandConcordance
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service

@@ -1,7 +1,7 @@
 [Unit]
-Description=V2 Annotations Reader-Writer for Neo4j Service Sidekick
-BindsTo=v2-annotations-rw-neo4j@%i.service
-After=v2-annotations-rw-neo4j@%i.service
+Description=Annotations Mapper Sidekick
+BindsTo=annotations-mapper@%i.service
+After=annotations-mapper@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -10,6 +10,7 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories annotations-publish; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -17,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/v2-annotations-rw-neo4j/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/annotations-mapper/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=v2-annotations-rw-neo4j@%i.service
+MachineOf=annotations-mapper@%i.service

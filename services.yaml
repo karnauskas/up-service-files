@@ -70,7 +70,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.18
+  version: 0.0.17
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2
@@ -390,7 +390,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: new-concordance-model
+  version: v0.2.0
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

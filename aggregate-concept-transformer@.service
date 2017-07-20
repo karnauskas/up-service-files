@@ -19,11 +19,11 @@ ExecStart=/bin/sh -c '\
     /usr/bin/docker run --rm -P --name %p-%i_$(uuidgen) \
       --memory="512m" \
       -e "APP_PORT=$APP_PORT" \
-	    -e "SQS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region)" \
-	    -e "BUCKET_REGION=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket_region)" \
-	    -e "AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
-	    -e "AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
-	    -e "BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket)" \
+	  -e "SQS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region)" \
+	  -e "BUCKET_REGION=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket_region)" \
+	  -e "AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
+	  -e "AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
+	  -e "BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket)" \
       -e "NEO_WRITER_ADDRESS=http://%H:8080/__concepts-rw-neo4j" \
       -e "ES_WRITER_ADDRESS=http://%H:8080/__concept-rw-elasticsearch" \
       -e "DYNAMODB_TABLE=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/dynamodb_table)" \

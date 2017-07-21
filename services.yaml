@@ -274,7 +274,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.0.7-rj-body-processing-rc7
+  version: 1.0.7-rj-body-processing-rc8
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

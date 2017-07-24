@@ -12,7 +12,7 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/v1-suggestor:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+ExecStartPre=/bin/bash -c 'docker history coco/annotations-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
   || docker pull coco/annotations-mapper:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\

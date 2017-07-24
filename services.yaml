@@ -193,7 +193,7 @@ services:
 - name: fleet-unit-healthcheck-sidekick@.service
   count: 1
 - name: fleet-unit-healthcheck@.service
-  version: dora_separate-ignore-list
+  version: 1.2.0
   count: 1
 - name: generic-rw-s3-sidekick@.service
   count: 1

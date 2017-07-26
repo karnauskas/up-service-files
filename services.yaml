@@ -72,11 +72,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-<<<<<<< HEAD
-  version: 0.0.21-dp-fix-400-invalid-types-rc1
-=======
   version: 0.0.22-dp-improved-logging-rc2
->>>>>>> feature/concept-rw-es-improve-error-logging
   count: 2
 - name: concept-search-api-sidekick@.service
   count: 2

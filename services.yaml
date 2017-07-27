@@ -391,7 +391,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: 1.1.0
+  version: changedParentBrandToSingular
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service

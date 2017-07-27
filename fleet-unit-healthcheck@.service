@@ -17,6 +17,7 @@ ExecStart=/bin/bash -c "\
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
     --memory=\"256m\" \
     --env=\"FLEET_ENDPOINT=http://$HOSTNAME:49153\" \
+    --env=\"TIMER_BASED_SERVICES=$(/usr/bin/etcdctl get /ft/config/fleet-unit-healthcheck/timer_based_services)\" \
     coco/coco-fleet-unit-healthcheck:$DOCKER_APP_VERSION"
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

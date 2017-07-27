@@ -235,7 +235,7 @@ services:
 - name: load-replicator@.service
   version: v1.0.2
   count: 1
-  desiredState: loadedg
+  desiredState: loaded
 - name: load-replicator-sidekick@.service
   count: 1
 - name: keyphrase-rw-neo4j-sidekick@.service

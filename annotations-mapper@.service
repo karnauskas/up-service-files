@@ -10,9 +10,9 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
-ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/v1-suggestor:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/annotations-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
   || docker pull coco/annotations-mapper:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
@@ -29,7 +29,7 @@ ExecStart=/bin/bash -c '\
 	    --env "PRODUCER_TOPIC=ConceptAnnotations" \
 	coco/annotations-mapper:$DOCKER_APP_VERSION'
 
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.0.1-fd-logging-rc3
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -87,8 +87,9 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.19
+  version: 0.0.21
   count: 2
+  sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
@@ -468,7 +469,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.0.1-fd-logging-rc3
   count: 2
   sequentialDeployment: true
 - name: swagger-sidekick@.service

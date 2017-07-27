@@ -49,6 +49,16 @@ services:
 - name: burrow@.service
   version: 1.0.2
   count: 1
+- name: cms-kafka-bridge-pub-pre-prod-uk-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-pre-prod-uk@.service
+  version: 14.2.0
+  count: 2
+- name: cms-kafka-bridge-pub-pre-prod-us-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-pre-prod-us@.service
+  version: 14.2.0
+  count: 2
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-uk@.service
@@ -57,6 +67,16 @@ services:
 - name: cms-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-us@.service
+  version: 14.2.0
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-uk-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-uk@.service
+  version: 14.2.0
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-us-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-pre-prod-us@.service
   version: 14.2.0
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
@@ -82,8 +102,9 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.22-dp-improved-logging-rc2
+  version: 0.0.23-dp-iprove-logging-rc1
   count: 2
+  sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
@@ -95,9 +116,14 @@ services:
 - name: concept-suggestion-api@.service
   version: v41
   count: 1
-- name: concepts-kafka-bridge-pub-prod-sidekick@.service
+- name: concepts-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 1
-- name: concepts-kafka-bridge-pub-prod@.service
+- name: concepts-kafka-bridge-pub-pre-prod-uk@.service
+  version: 14.2.0
+  count: 1
+- name: concepts-kafka-bridge-pub-pre-prod-us-sidekick@.service
+  count: 1
+- name: concepts-kafka-bridge-pub-pre-prod-us@.service
   version: 14.2.0
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
@@ -242,6 +268,11 @@ services:
   version: v1.0.0
   count: 1
 - name: kafka.service
+- name: load-replicator@.service
+  version: v1.0.2
+  count: 1
+- name: load-replicator-sidekick@.service
+  count: 1
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
@@ -272,7 +303,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.0.6
+  version: 1.0.7
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -331,7 +362,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.1.0
+  version: 3.3.0
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
@@ -435,10 +466,10 @@ services:
 - name: rec-reads-content-annotator@.service
   version: v63
   count: 1
-- name: rec-reads-content-ingester-sidekick@.service
-  count: 1
 - name: rec-reads-content-ingester@.service
   version: v72
+  count: 1
+- name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: relations-api-sidekick@.service
   count: 2
@@ -455,6 +486,7 @@ services:
   version: v0.1.6
   count: 2
 - name: splunk-forwarder.service
+  desiredState: loaded
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
@@ -470,6 +502,11 @@ services:
   version: 1.0.7
 - name: tunnel-registrator.service
   version: v1.0.3
+- name: up-coco-admin-sidekick@.service
+  count: 1
+- name: up-coco-admin@.service
+  version: v0.0.2
+  count: 1
 - name: up-queue-sender-v1-metadata-sidekick@.service
   count: 1
 - name: up-queue-sender-v1-metadata@.service

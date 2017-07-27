@@ -13,11 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-<<<<<<< HEAD
   version: 0.0.2-fd-rc-2
-=======
-  version: 0.0.1
->>>>>>> coco-logfilter
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service

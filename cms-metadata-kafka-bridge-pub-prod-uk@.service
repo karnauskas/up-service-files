@@ -30,6 +30,7 @@ ExecStart=/bin/sh -c '\
   --env "PRODUCER_HOST=http://%H:8080" \
   --env "PRODUCER_HOST_HEADER=kafka" \
   --env "PRODUCER_TYPE=proxy" \
+  --env "SERVICE_NAME=cms-metadata-kafka-bridge-pub-prod-uk" \
   coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

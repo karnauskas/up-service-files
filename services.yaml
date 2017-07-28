@@ -82,7 +82,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.23-dp-iprove-logging-rc1
+  version: 0.0.23
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service

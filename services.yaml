@@ -112,8 +112,9 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.19
+  version: 0.0.21
   count: 2
+  sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
@@ -292,7 +293,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: 3.3.1-kafka-interact-optimized-rc1
+  version: 3.3.1
   count: 2
   sequentialDeployment: true
 - name: list-notifications-rw-sidekick@.service
@@ -314,7 +315,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.0.6
+  version: 1.0.8
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

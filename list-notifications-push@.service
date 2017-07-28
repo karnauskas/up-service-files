@@ -21,7 +21,7 @@ ExecStart=/bin/sh -c '\
    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $LIST_NOTIFICATIONS_PUSH_PORT:8080 \
       --memory="256m" \
       --env="NOTIFICATIONS_RESOURCE=lists" \
-      --env="QUEUE_ADDRS=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip):$(/usr/bin/etcdctl get /ft/config/zookeeper/port)" \
+      --env="KAFKA_ADDRS=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip):$(/usr/bin/etcdctl get /ft/config/zookeeper/port)" \
       --env="GROUP_ID=$GROUP_ID" \
       --env="TOPIC=PostPublicationEvents" \
       --env="NOTIFICATIONS_DELAY=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \

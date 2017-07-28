@@ -288,7 +288,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.0.8-rj-fix-ft-related-rc1
+  version: 1.1.0-rj-text-divider-blockquote-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

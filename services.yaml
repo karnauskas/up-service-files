@@ -392,7 +392,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v1.0.0
+  version: 2.0.0
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service

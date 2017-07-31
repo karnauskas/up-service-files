@@ -72,13 +72,13 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.23-dp-iprove-logging-rc1
+  version: 0.0.23
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.25
+  version: 1.0.26-dp-edge-ngrams-rc1
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -280,7 +280,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.0.6
+  version: 1.0.8
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -339,7 +339,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.1.0
+  version: 3.3.0
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service

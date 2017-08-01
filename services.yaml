@@ -112,7 +112,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.21
+  version: 0.0.23
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -534,7 +534,7 @@ services:
   version: v64
   count: 2
 - name: varnish@.service
-  version: 0.1.9
+  version: 0.3.0-rc1
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

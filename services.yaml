@@ -164,7 +164,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: v95
+  version: 1.0.1-ops-tx-id-logging-rc1
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

@@ -482,7 +482,7 @@ services:
   version: v64
   count: 2
 - name: varnish@.service
-  version: fix-security-vulnerability
+  version: 0.1.10
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

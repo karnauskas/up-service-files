@@ -483,7 +483,7 @@ services:
   version: v64
   count: 2
 - name: varnish@.service
-  version: feature_no-auth-for-api
+  version: fix-security-vulnerability
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

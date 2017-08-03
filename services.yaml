@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 0.0.2-fd-logging-rc4
+  version: 0.0.2-fd-logging-rc5
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service

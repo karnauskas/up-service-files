@@ -94,7 +94,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: ensure-new-indexes 
+  version: ensure-new-indexes
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -376,7 +376,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.3.0
+  version: BackwardsCompatibilityParents
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

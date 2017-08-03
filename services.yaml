@@ -396,7 +396,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: async-healthcheck
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

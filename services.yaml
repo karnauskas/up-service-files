@@ -332,7 +332,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.3.0
+  version: 3.4.0_upp_extreme_rc1
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service

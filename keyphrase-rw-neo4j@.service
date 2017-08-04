@@ -1,0 +1,50 @@
+[Unit]
+Description=Service which ingests ConceptSuggestions from the queue and writes keyphrases to neo4j
+After=vulcan.service
+Requires=docker.service
+Wants=keyphrase-rw-neo4j-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/keyphrase-rw-neo4j:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/keyphrase-rw-neo4j:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export PORT=8080; \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export VULCAN_ADDR=http://%H:8080; \
+  export GROUP_ID=KeyphraseRwNeo4j; \
+  export TOPIC=ConceptSuggestions; \
+  export QUEUE_ID=kafka; \
+  export GRAPHITE_TCP_ADDRESS=graphite.ft.com:2003; \
+  export GRAPHITE_PREFIX=coco.services.$ENV.keyphrase-rw-neo4j.%i; \
+  export OFFSET=largest; \
+  export COMMIT_ENABLE=true; \
+  export THROTTLE=1000; \
+  export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/keyphrase-rw-neo4j/batchsize); \
+  export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
+  --memory="256m" \
+  -p $PORT \
+  -e "PORT=$PORT" \
+  -e "VULCAN_ADDR=$VULCAN_ADDR" \
+  -e "GROUP_ID=$GROUP_ID" \
+  -e "TOPIC=$TOPIC" \
+  -e "QUEUE_ID=$QUEUE_ID" \
+  -e "GRAPHITE_TCP_ADDRESS=$GRAPHITE_TCP_ADDRESS" \
+  -e "GRAPHITE_PREFIX=$GRAPHITE_PREFIX" \
+  -e "OFFSET=$OFFSET" \
+  -e "COMMIT_ENABLE=$COMMIT_ENABLE" \
+  -e "NEO_URL=$NEO_URL" \
+  -e "BATCH_SIZE=$BATCH_SIZE" \
+  coco/keyphrase-rw-neo4j:$DOCKER_APP_VERSION;'
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

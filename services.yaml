@@ -39,11 +39,6 @@ services:
   version: v48
   count: 2
   sequentialDeployment: true
-- name: brands-rw-neo4j-sidekick@.service
-  count: 2
-- name: brands-rw-neo4j@.service
-  version: v0.1.7
-  count: 2
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
@@ -400,13 +395,13 @@ services:
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: v1.0.0
+  version: 1.0.2
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service

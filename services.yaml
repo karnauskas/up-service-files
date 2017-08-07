@@ -16,6 +16,12 @@ services:
   version: 0.0.1
   count: 2
   sequentialDeployment: true
+- name: annotations-monitoring-sidekick@.service
+  count: 2
+- name: annotations-monitoring@.service
+  version: 0.0.1-fd-rc1
+  count: 2
+  sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
@@ -455,6 +461,14 @@ services:
 - name: roles-rw-neo4j@.service
   version: v0.1.6
   count: 2
+- name: roles-rw-neo4j-sidekick@.service
+  count: 2
+- name: splunk-event-reader-sidekick@.service
+  count: 2
+- name: splunk-event-reader@.service
+  version: 0.0.1-fd-rc1
+  count: 2
+  sequentialDeployment: true
 - name: splunk-forwarder.service
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2

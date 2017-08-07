@@ -20,8 +20,7 @@ services:
   count: 2
 - name: annotations-monitoring@.service
   version: 0.0.1-fd-rc2
-  count: 2
-  sequentialDeployment: true
+  count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service

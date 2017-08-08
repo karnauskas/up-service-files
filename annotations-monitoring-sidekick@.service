@@ -1,0 +1,26 @@
+[Unit]
+Description=Annotations Monitoring Service Sidekick
+BindsTo=annotations-monitoring@%i.service
+After=annotations-monitoring@%i.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "\
+  export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
+  etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
+  etcdctl mkdir /ft/services/$SERVICE/servers; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  while [ -z $PORT ]; do \
+    sleep 5; \
+    CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
+    PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
+  done; \
+  etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
+
+#Remove server keys from ETCD on stop
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/annotations-monitoring/servers/%i'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+MachineOf=annotations-monitoring@%i.service

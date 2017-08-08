@@ -11,6 +11,8 @@ ExecStart=/bin/sh -c "\
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/categories internalcontent-read,enrichedcontent-read,annotations-read,read; \
+  etcdctl set   /ft/services/$SERVICE/path-regex/public-services /content/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/annotations$; \
+  etcdctl set   /ft/services/$SERVICE/path-host/public-services public-services; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \

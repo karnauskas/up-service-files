@@ -78,11 +78,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-<<<<<<< HEAD
-  version: 1.0.26-dp-edge-ngrams-rc3
-=======
   version: 1.0.26-dp-return-direct-type.rc1
->>>>>>> concept-search-api-return-direct-type
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service

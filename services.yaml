@@ -88,9 +88,14 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.25
+  version: 1.0.26
   count: 2
   sequentialDeployment: true
+- name: concept-search-reindexer-sidekick@.service
+  count: 1
+- name: concept-search-reindexer@.service
+  version: 0.0.7
+  count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
@@ -251,7 +256,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: 3.2.0
+  version: 3.3.1
   count: 2
   sequentialDeployment: true
 - name: list-notifications-rw-sidekick@.service
@@ -279,7 +284,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.3.0
+  version: 1.3.2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

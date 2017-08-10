@@ -28,6 +28,7 @@ ExecStart=/bin/sh -c '\
       -e "ES_WRITER_ADDRESS=http://%H:8080/__concept-rw-elasticsearch/bulk" \
       -e "DYNAMODB_TABLE=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/dynamodb_table)" \
       -e "QUEUE_URL=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/queue_url)" \
+      -e "KINESIS_STREAM_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/kinesis_stream_name)" \
       -e "MAX_MESSAGES=10" \
       -e "VISIBILITY_TIMEOUT=30" \
       -e "WAIT_TIME=20" \

@@ -41,7 +41,7 @@ services:
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: v66
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: brands-rw-neo4j-sidekick@.service

@@ -17,16 +17,18 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/public-concordances-api:
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-  export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_only_url); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) \
   --memory="256m" \
   -p $APP_PORT \
-  -e "NEO_URL=$NEO_URL" \
+  -e "NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_only_url)" \
   -e "APP_PORT=$APP_PORT" \
   -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
   -e "GRAPHITE_PREFIX=coco.services.$ENV.public-concordances-api.%i" \
   -e "LOG_METRICS=false" \
   -e "CACHE_DURATION=10m" \
+  -e "LOG_LEVEL=$(/usr/bin/etcdctl get /ft/config/public-concordances-api/log_level)" \
+  -e "HEALTHCHECK_INTERVAL=$(/usr/bin/etcdctl get /ft/config/public-concordances-api/healthcheck_interval)" \
+  -e "BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/public-concordances-api/batch_size)" \
   coco/public-concordances-api:$DOCKER_APP_VERSION;'
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

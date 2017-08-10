@@ -136,13 +136,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v83
+  version: 1.0.86.no-uuids-param.rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v83
+  version: 1.0.86.no-uuids-param.rc1
   count: 2
   sequentialDeployment: true
 - name: coco-traffic-analyser.service

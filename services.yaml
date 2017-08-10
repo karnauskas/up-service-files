@@ -57,12 +57,12 @@ services:
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-xp@.service
-  version: 14.2.1-fd-logging-rc2
+  version: 14.2.1-fd-logging-rc3
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp@.service
-  version: 14.2.1-fd-logging-rc2
+  version: 14.2.1-fd-logging-rc3
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1

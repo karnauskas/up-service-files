@@ -497,7 +497,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.16
+  version: 1.0.17
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

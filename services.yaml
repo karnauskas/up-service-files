@@ -146,13 +146,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.0.86.no-uuids-param.rc1
+  version: 1.0.86
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: 1.0.86.no-uuids-param.rc1
+  version: 1.0.86
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service
@@ -173,7 +173,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.2.multi-uuid-no-param.rc1
+  version: 1.0.2
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

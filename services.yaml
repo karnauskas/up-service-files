@@ -39,11 +39,6 @@ services:
   version: v48
   count: 2
   sequentialDeployment: true
-- name: brands-rw-neo4j-sidekick@.service
-  count: 2
-- name: brands-rw-neo4j@.service
-  version: v0.1.7
-  count: 2
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service

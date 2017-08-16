@@ -423,7 +423,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.3.0
+  version: sectionMigrationToTopics
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service

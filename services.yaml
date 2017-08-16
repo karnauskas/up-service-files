@@ -136,13 +136,21 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
+<<<<<<< HEAD
   version: v83
+=======
+  version: 1.0.86
+>>>>>>> parent of 48e2a78... Merge branch 'fix/cpr-no-uuid-params' into semantic
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
+<<<<<<< HEAD
   version: v83
+=======
+  version: 1.0.86
+>>>>>>> parent of 48e2a78... Merge branch 'fix/cpr-no-uuid-params' into semantic
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service

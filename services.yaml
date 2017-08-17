@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: HandleNewFieldsAndSections
+  version: HandleSectionsWithNewFields
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2

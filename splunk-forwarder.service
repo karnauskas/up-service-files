@@ -3,7 +3,7 @@ Description=Splunk forwarder
 
 [Service]
 
-Environment="DOCKER_FORWARDER_VERSION=v1.1.0-fd-timedevents-rc1"
+Environment="DOCKER_FORWARDER_VERSION=v1.1.0-fd-timedevents-rc2"
 Environment="DOCKER_LOGFILTER_VERSION=1.1.5-fd-rc1"
 TimeoutStartSec=1200
 # Change killmode from "control-group" to "none" to let Docker remove

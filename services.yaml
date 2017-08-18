@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.01-dp-pac-rc1
+  version: 1.0.1-dp-pac-rc1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service

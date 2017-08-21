@@ -268,7 +268,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -327,7 +327,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.3.0
+  version: 3.4.1
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
@@ -381,7 +381,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.4.1
+  version: 1.4.2
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

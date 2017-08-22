@@ -1,9 +1,9 @@
 services:
 - name: aggregate-concept-transformer-sidekick@.service
-  count: 2
+  count: 5
 - name: aggregate-concept-transformer@.service
   version: HandleSectionConcordance
-  count: 2
+  count: 5
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
@@ -87,10 +87,10 @@ services:
   version: 14.2.0
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
-  count: 2
+  count: 5
 - name: concepts-rw-neo4j@.service
   version: support-topics
-  count: 2
+  count: 5
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2

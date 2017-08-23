@@ -27,7 +27,10 @@ ExecStart=/bin/sh -c '\
     --env="AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
     --env="AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
     --env="ELASTICSEARCH_INDEX_ALIAS=concepts" \
+    --env="ALIAS_FILTER_FILE=./alias-filter.json" \
     --env="ELASTICSEARCH_TRACE=false" \
+    --env="SYSTEM_CODE=concepts-reindexer" \
+    --env="PANIC_GUIDE_URL=https://dewey.ft.com/concepts-reindexer.html" \
     coco/concept-search-index-mapping:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 0.0.2-fd-logging-rc6
+  version: 0.0.2-fd-logging-rc7
   count: 2
   sequentialDeployment: true
 - name: annotations-monitoring-sidekick@.service

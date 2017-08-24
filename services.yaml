@@ -13,13 +13,13 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 0.0.2-fd-logging-rc4
+  version: 0.0.2-fd-logging-rc6
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.1-fd-logging-rc6
+  version: 1.0.1-fd-logging-rc10
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -153,7 +153,7 @@ services:
 - name: content-rw-elasticsearch-sidekick@.service
   count: 2
 - name: content-rw-elasticsearch@.service
-  version: 1.1.1-fd-rc1
+  version: 1.1.1-fd-rc2
   count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
@@ -381,7 +381,7 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.1.2-fd-rc1
+  version: 1.1.2-fd-rc3
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
@@ -459,7 +459,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.0.1-fd-logging-rc6
+  version: 1.0.1-fd-logging-rc10
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1

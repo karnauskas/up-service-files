@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.0.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -293,7 +293,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.3.0-rj-rework-recommended-rc3
+  version: 1.4.0-rj-summary-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

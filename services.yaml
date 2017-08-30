@@ -379,7 +379,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.5.0
+  version: 3.5.1-upp-xtrm-content-type-rc-1
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service

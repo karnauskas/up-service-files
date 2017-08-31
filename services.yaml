@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.1.0-sm-sirupsen-rc1
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -361,7 +361,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.6
+  version: 0.5.8-sm-sirupsen-rc1
   count: 2
 - name: people-rw-neo4j-sidekick@.service
   count: 2
@@ -449,7 +449,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.1.0-sm-sirupsen-rc1
+  version: 1.1.0
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1

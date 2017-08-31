@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.0.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -76,6 +76,14 @@ services:
   version: 1.0.25
   count: 2
   sequentialDeployment: true
+<<<<<<< HEAD
+=======
+- name: concept-search-reindexer-sidekick@.service
+  count: 1
+- name: concept-search-reindexer@.service
+  version: 0.0.8
+  count: 1
+>>>>>>> multipleIdsFixConcordanceApi
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
@@ -143,7 +151,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 1.0.6
+  version: 1.0.7
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -258,7 +266,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.2.0
+  version: 1.4.0
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -383,7 +391,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: 1.1.0
+  version: multipleIdsBothModelFix
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

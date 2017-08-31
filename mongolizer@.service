@@ -1,5 +1,5 @@
 [Unit]
-Description=Fastest and newest app creating the mongodb backups.
+Description=Creates mongodb backups.
 After=vulcan.service
 Requires=docker.service
 Wants=mongolizer-sidekick@%i.service
@@ -27,7 +27,7 @@ ExecStart=/bin/sh -c '\
   --env "S3_DIR=$S3_DIR" \
   --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
-  --env "MONGODB_COLLECTIONS=upp-store/content" \
+  --env "MONGODB_COLLECTIONS=upp-store/content,upp-store/lists,upp-store/internalcomponents,upp-store/notifications,upp-store/organizations" \
   --env "CRON=1 0 * * *" \
   coco/mongolizer:$DOCKER_APP_VERSION'
 

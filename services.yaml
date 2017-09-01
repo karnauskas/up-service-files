@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.3.0
+  version: 1.3.2-k8s-helm-rc4
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2

@@ -367,7 +367,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.4.1
+  version: 3.5.1-upp-xtrm-content-type-rc3
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service

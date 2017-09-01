@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.1
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -188,7 +188,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 1.0.6
+  version: 1.0.7
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -406,7 +406,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.6
+  version: 0.5.8
   count: 2
 - name: people-rw-neo4j-sidekick@.service
   count: 2
@@ -433,7 +433,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
@@ -495,7 +495,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.1.0
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1

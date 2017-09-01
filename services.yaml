@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.4.1
+  version: 64.5.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -406,7 +406,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 1.0.2
+  version: 1.0.4
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service

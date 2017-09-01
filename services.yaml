@@ -337,7 +337,7 @@ services:
 - name: mongolizer-sidekick@.service
   count: 1
 - name: mongolizer@.service
-  version: 2.0.0-productionize-rc2
+  version: 2.0.0-productionize-rc3
   count: 1
 - name: new-notifications-push-sidekick@.service
   count: 2

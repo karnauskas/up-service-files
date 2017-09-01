@@ -29,6 +29,7 @@ ExecStart=/bin/sh -c '\
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   --env "MONGODB_COLLECTIONS=upp-store/content,upp-store/lists,upp-store/internalcomponents,upp-store/notifications,upp-store/organizations" \
   --env "CRON=1 0 * * *" \
+  --env "RUN=false" \
   coco/mongolizer:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

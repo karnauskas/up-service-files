@@ -5,8 +5,6 @@ After=mongolizer@%i.service
 
 [Service]
 RemainAfterExit=yes
-#Set the service keys in ETCD. Get the application port by filtering for the container name.
-#The pattern you should filter for is the name of the the service (ex: cms-notifier-1) followed by a "_".
 ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck true; \

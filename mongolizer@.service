@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c '\
   export MONGODB=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//); \
   export S3_DOMAIN=s3-eu-west-1.amazonaws.com; \
   export S3_BUCKET=com.ft.coco-mongo-backup.prod; \
-  export S3_DIR=mongolizer-$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export S3_DIR=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id);\
   export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
@@ -27,7 +27,7 @@ ExecStart=/bin/sh -c '\
   --env "S3_DIR=$S3_DIR" \
   --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
-  --env "MONGODB_COLLECTIONS=upp-store/content,upp-store/lists,upp-store/internalcomponents,upp-store/notifications,upp-store/organizations" \
+  --env "MONGODB_COLLECTIONS=upp-store/content,upp-store/lists,upp-store/internalcomponents,upp-store/notifications,upp-store/list-notifications,upp-store/organizations" \
   --env "CRON=1 0 * * *" \
   --env "RUN=false" \
   coco/mongolizer:$DOCKER_APP_VERSION'
@@ -37,7 +37,6 @@ Restart=on-failure
 RestartSec=60
 
 [Install]
-# this sets user-level
 WantedBy=multi-user.target
 
 [X-Fleet]

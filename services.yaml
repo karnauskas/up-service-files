@@ -346,7 +346,7 @@ services:
 - name: mongolizer-sidekick@.service
   count: 1
 - name: mongolizer@.service
-  version: 2.0.0-productionize-rc5
+  version: 2.0.0-productionize-rc7
   count: 1
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2

@@ -162,6 +162,11 @@ services:
 - name: content-collection-unfolder@.service
   version: 1.1.0
   count: 2
+- name: content-exporter-sidekick@.service
+  count: 2
+- name: content-exporter@.service
+  version: impl
+  count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service

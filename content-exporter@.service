@@ -1,0 +1,28 @@
+[Unit]
+Description=Content Exporter
+After=vulcan.service
+Requires=docker.service
+Wants=content-exporter-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker pull coco/upp-content-exporter:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/bash -c '\
+	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+	--memory="256m" \
+	--env "MONGO_CONNECTION=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)\",\" ; done | sed s/.$//);" \
+	coco/upp-content-exporter:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=content-exporter@*.service

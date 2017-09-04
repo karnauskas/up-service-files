@@ -284,7 +284,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.4.0-rj-rework-links-processing-rc1
+  version: 1.4.0-rj-rework-links-processing-rc2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

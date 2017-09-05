@@ -235,7 +235,7 @@ services:
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: 1.0.17
+  version: 1.1.0-fd-skyline-rc2
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service

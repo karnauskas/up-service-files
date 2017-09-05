@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 0.0.1
+  version: 1.0.1-k8s-whitelist-rc2
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
@@ -328,7 +328,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.4.1
+  version: 3.5.1
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
@@ -382,7 +382,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.4.3-dp-pac-priority-rc2
+  version: 1.4.5
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -406,13 +406,13 @@ services:
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: 1.1.1
+  version: 1.2.1
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 1.0.2
+  version: 1.0.4
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service
@@ -424,7 +424,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.3.0
+  version: 1.5.0
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service
@@ -449,7 +449,7 @@ services:
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
 - name: roles-rw-neo4j@.service
-  version: v0.1.6
+  version: 0.1.7
   count: 2
 - name: splunk-forwarder.service
 - name: suggestions-rw-neo4j-sidekick@.service

@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.1.0
+  version: 1.2.0-dp-contributor-display-tag-rc.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -382,7 +382,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.4.5
+  version: 1.5.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

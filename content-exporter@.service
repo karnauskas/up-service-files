@@ -17,7 +17,7 @@ ExecStartPre=/bin/bash -c 'docker pull coco/content-exporter:$DOCKER_APP_VERSION
 ExecStart=/bin/bash -c '\
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="256m" \
-	--env "ENRICHED_CONTENT_URL=%H:8080/__api-policy-component/" \
+	--env "ENRICHED_CONTENT_URL=http://%H:8080/__api-policy-component/" \
 	--env "MONGO_CONNECTION=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)\",\" ; done | sed s/.$//)" \
 	coco/content-exporter:$DOCKER_APP_VERSION'
 

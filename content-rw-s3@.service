@@ -31,7 +31,7 @@ ExecStart=/bin/sh -c '\
         -e "BUCKET_PREFIX=test" \
         -e "RESOURCE_PATH=content" \
         -e "LOG_METRICS=false" \
-	coco/content-rw-s3:$DOCKER_APP_VERSION;'
+	coco/generic-rw-s3:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure

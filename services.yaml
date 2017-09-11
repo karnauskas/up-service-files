@@ -1,9 +1,9 @@
 services:
 - name: aggregate-concept-transformer-sidekick@.service
-  count: 1
+  count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.1.2
-  count: 1
+  version: 1.4.0
+  count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
@@ -13,19 +13,19 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 0.0.1
+  version: 1.0.1
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.3.0
+  version: 64.5.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -77,15 +77,20 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.24
+  version: 0.0.26
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.25
+  version: 1.0.27
   count: 2
   sequentialDeployment: true
+- name: concept-search-reindexer-sidekick@.service
+  count: 1
+- name: concept-search-reindexer@.service
+  version: 0.0.8
+  count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
@@ -99,7 +104,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.0.4
+  version: 1.1.4
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -136,13 +141,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: v83
+  version: 86
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: v83
+  version: 86
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service
@@ -153,7 +158,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 1.0.6
+  version: 1.0.7
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -163,7 +168,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.0
+  version: 1.0.2
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -218,13 +223,13 @@ services:
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.0.17
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: 1.0.17
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -246,7 +251,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: 3.2.0
+  version: 3.3.1
   count: 2
   sequentialDeployment: true
 - name: list-notifications-rw-sidekick@.service
@@ -268,13 +273,13 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.1.0
+  version: 1.5.0
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.3.0
+  version: 1.5.0
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -327,7 +332,7 @@ services:
 - name: new-notifications-push-sidekick@.service
   count: 2
 - name: new-notifications-push@.service
-  version: 3.3.0
+  version: 3.5.1
   count: 2
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
@@ -366,7 +371,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.6
+  version: 0.5.8
   count: 2
 - name: people-rw-neo4j-sidekick@.service
   count: 2
@@ -381,37 +386,37 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.2.0
+  version: 1.5.1
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: v1.0.0
+  version: 2.0.0
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: v0.2.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: 1.1.1
+  version: 1.2.1
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 1.0.2
+  version: 1.0.4
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service
@@ -423,7 +428,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.2.0
+  version: 1.5.0
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service
@@ -448,13 +453,13 @@ services:
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
 - name: roles-rw-neo4j@.service
-  version: v0.1.6
+  version: 0.1.7
   count: 2
 - name: splunk-forwarder.service
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.0.0
+  version: 1.1.0
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
@@ -477,7 +482,7 @@ services:
   version: v64
   count: 2
 - name: varnish@.service
-  version: 0.1.10
+  version: 0.1.11
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service
@@ -487,7 +492,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.16
+  version: 1.0.17
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

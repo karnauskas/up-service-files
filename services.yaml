@@ -315,7 +315,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: v19
+  version: 1.1.0-rj-dockerhub-cphwp-rc6
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

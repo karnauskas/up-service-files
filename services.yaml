@@ -403,6 +403,12 @@ services:
 - name: organisations-rw-neo4j@.service
   version: 0.5.8
   count: 2
+- name: pac-annotations-mapper-sidekick@.service
+  count: 2
+- name: pac-annotations-mapper@.service
+  version: 0.1.0
+  count: 2
+  sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service

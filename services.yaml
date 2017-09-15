@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.2.0
+  version: 1.2.2-k8s-implicitly-classified-by-rc1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -73,7 +73,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.29-dp-swagger-fix-rc1
+  version: 1.0.29
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -383,7 +383,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.2-dp-add-new-predicates-rc3
+  version: 1.5.2
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

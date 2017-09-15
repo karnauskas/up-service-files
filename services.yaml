@@ -329,12 +329,6 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
-- name: new-notifications-push-sidekick@.service
-  count: 2
-- name: new-notifications-push@.service
-  version: 3.5.1
-  count: 2
-  sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
@@ -359,7 +353,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.2.0
+  version: 3.5.1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -482,7 +476,7 @@ services:
   version: v64
   count: 2
 - name: varnish@.service
-  version: 0.1.11
+  version: 0.3.0-rc11
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

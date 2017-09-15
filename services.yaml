@@ -78,7 +78,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.27
+  version: 1.0.29-dp-swagger-fix-rc1
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -397,7 +397,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.1
+  version: 1.5.2
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

@@ -30,6 +30,8 @@ ExecStart=/bin/sh -c '\
   --env "KAFKA_PORT=$KAFKA_PORT" \
   --env "BUCKET_PATH=$BUCKET" \
   --env "FAKE_SERVICE=false" \
+  --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+  --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   up-registry.ft.com/coco/binary-writer:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

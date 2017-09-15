@@ -340,12 +340,6 @@ services:
 - name: mongolizer@.service
   version: 2.0.0-productionize-rc7
   count: 1
-- name: new-notifications-push-sidekick@.service
-  count: 2
-- name: new-notifications-push@.service
-  version: 3.5.1
-  count: 2
-  sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
@@ -370,7 +364,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.2.0
+  version: 3.5.1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -507,7 +501,7 @@ services:
   version: v64
   count: 2
 - name: varnish@.service
-  version: 0.1.11
+  version: 0.3.0-rc11
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

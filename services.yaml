@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.2.2-k8s-implicitly-classified-by-rc2
+  version: 2.1.0
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service

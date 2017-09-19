@@ -28,7 +28,7 @@ ExecStart=/bin/sh -c '\
   --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   --env "MONGODB_COLLECTIONS=upp-store/content,upp-store/lists,upp-store/internalcomponents,upp-store/notifications,upp-store/list-notifications" \
-  --env "CRON=0 16 * * *" \
+  --env "CRON=0 15 * * *" \
   --env "RUN=false" \
   coco/mongolizer:$DOCKER_APP_VERSION'
 

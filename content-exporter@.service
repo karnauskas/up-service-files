@@ -17,8 +17,9 @@ ExecStartPre=/bin/bash -c 'docker pull coco/content-exporter:$DOCKER_APP_VERSION
 ExecStart=/bin/bash -c '\
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="256m" \
-	--env "ENRICHED_CONTENT_URL=http://%H:8080/__api-policy-component/enrichedcontent/" \
+	--env "ENRICHED_CONTENT_URL=http://%H:80/enrichedcontent/" \
 	--env "S3_WRITER_URL=http://%H:8080/__content-rw-s3/content/" \
+	--env "AUTHORIZATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/authorization)" \
 	--env "MONGO_CONNECTION=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)\",\" ; done | sed s/.$//)" \
 	coco/content-exporter:$DOCKER_APP_VERSION'
 
@@ -28,3 +29,4 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=content-exporter@*.service
+MachineOf=varnish@%i.service

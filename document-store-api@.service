@@ -12,7 +12,7 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c "/usr/bin/docker history up-registry.ft.com/coco/document-store-api:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+ExecStartPre=/bin/bash -c "/usr/bin/docker history coco/document-store-api:$DOCKER_APP_VERSION > /dev/null 2>&1 \
       || /usr/bin/docker pull   coco/document-store-api:$DOCKER_APP_VERSION"
 
 ExecStart=/bin/sh -c '\

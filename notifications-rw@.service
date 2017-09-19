@@ -10,10 +10,12 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker login --username "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_user)" \
+--password "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_pass)" nexus.in.ft.com:5000 > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c "docker history up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || docker pull up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION"
+ExecStartPre=/bin/bash -c "docker history nexus.in.ft.com:5000/coco/notifications-rw:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull nexus.in.ft.com:5000/coco/notifications-rw:$DOCKER_APP_VERSION"
 
 ExecStart=/bin/sh -c '\
  export JAVA_OPTS="-Xms64m -Xmx64m -XX:+UseG1GC -server" ; \
@@ -27,7 +29,7 @@ ExecStart=/bin/sh -c '\
     --env "CACHE_TTL=$(/usr/bin/etcdctl get /ft/config/cache-max-age)" \
     --env "NODE_ID=$(/usr/bin/etcdctl get /ft/config/cluster_id)" \
     --env "MAX_NODE_SKEW=120seconds" \
-    up-registry.ft.com/coco/notifications-rw:$DOCKER_APP_VERSION;'
+    nexus.in.ft.com:5000/coco/notifications-rw:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t $(( $(/usr/bin/etcdctl get /ft/config/cache-max-age) + 1 )) "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure

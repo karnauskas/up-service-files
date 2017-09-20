@@ -290,7 +290,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 0.2.0-rj-wpcphnotest-rc1
+  version: 0.2.0-rj-wpcphnotest-rc2
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

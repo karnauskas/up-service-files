@@ -6,7 +6,7 @@ Wants=aggregate-concept-transformer-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="APP_PORT=8080"
+Environment="PORT=8080"
 TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
@@ -16,9 +16,8 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/aggregate-concept-transf
 
 ExecStart=/bin/sh -c '\
     export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    /usr/bin/docker run --rm -P --name %p-%i_$(uuidgen) \
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
       --memory="512m" \
-      -e "APP_PORT=$APP_PORT" \
 	  -e "SQS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region)" \
 	  -e "BUCKET_REGION=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket_region)" \
 	  -e "AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
@@ -28,6 +27,8 @@ ExecStart=/bin/sh -c '\
       -e "ES_WRITER_ADDRESS=http://%H:8080/__concept-rw-elasticsearch/bulk" \
       -e "DYNAMODB_TABLE=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/dynamodb_table)" \
       -e "QUEUE_URL=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/queue_url)" \
+      -e "KINESIS_STREAM_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/kinesis_stream_name)" \
+      -e "LOG_LEVEL=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/log_level)" \
       -e "MAX_MESSAGES=10" \
       -e "VISIBILITY_TIMEOUT=30" \
       -e "WAIT_TIME=20" \

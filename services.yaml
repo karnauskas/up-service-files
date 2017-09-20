@@ -94,7 +94,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.4.0-sm-resolvedissuewith409
+  version: rebuildWithUpdatedTypeHierachyForMembershipRole
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -253,7 +253,7 @@ services:
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
-  version: v1.1.6
+  version: v1.1.7
   count: 2
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
@@ -412,7 +412,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 1.0.4
+  version: updatedToSupportOldAndNewModel
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service

@@ -476,7 +476,7 @@ services:
   version: v64
   count: 2
 - name: varnish@.service
-  version: 0.3.0-rc11
+  version: 0.2.0
   count: 2
   sequentialDeployment: true
 - name: vulcan-config-builder.service

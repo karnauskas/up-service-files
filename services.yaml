@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.3-fd-logging-rc1
+  version: 1.0.3
   count: 2
   sequentialDeployment: true
 - name: annotations-monitoring-sidekick@.service
@@ -24,7 +24,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 2.0.1-fd-logging-rc2
+  version: 2.1.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -52,12 +52,12 @@ services:
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-xp@.service
-  version: 14.2.2-fd-logging-rc1
+  version: 14.2.2
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp@.service
-  version: 14.2.2-fd-logging-rc1
+  version: 14.2.2
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -94,7 +94,7 @@ services:
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
-  version: 14.2.1-fd-logging-rc4
+  version: 14.2.2
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -378,6 +378,12 @@ services:
 - name: organisations-rw-neo4j@.service
   version: 0.5.8
   count: 2
+- name: pac-annotations-mapper-sidekick@.service
+  count: 2
+- name: pac-annotations-mapper@.service
+  version: 0.1.0
+  count: 2
+  sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
@@ -472,7 +478,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 2.0.1-fd-logging-rc2
+  version: 2.1.1
   count: 2
   sequentialDeployment: true
 - name: swagger-sidekick@.service

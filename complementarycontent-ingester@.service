@@ -2,7 +2,7 @@
 Description=Complementary Content Ingester
 After=vulcan.service
 Requires=docker.service
-Wants=complementary-content-ingester-sidekick@%i.service
+Wants=complementarycontent-ingester-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

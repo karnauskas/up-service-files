@@ -84,6 +84,11 @@ services:
 - name: cms-notifier@.service
   version: v39
   count: 1
+- name: complementarycontent-ingester-sidekick@.service
+  count: 2
+- name: complementarycontent-ingester@.service
+  version: v72
+  count: 2
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service

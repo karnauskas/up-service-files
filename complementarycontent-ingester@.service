@@ -2,7 +2,7 @@
 Description=Complementary Content Ingester
 After=vulcan.service
 Requires=docker.service
-Wants=complementary-content-ingester-sidekick@%i.service
+Wants=complementarycontent-ingester-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -29,7 +29,7 @@ ExecStart=/bin/sh -c '\
   export WR_HC_NAME="Can connect to the Document Store"; \
   export WR_HC_TECH_SUMMARY="Tests that the build-info endpoint for the Document Store returns a 200 response"; \
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
-  export PANIC_GUIDE_URL="https://dewey.ft.com/complementary-content-ingester.html"; \
+  export PANIC_GUIDE_URL="https://dewey.ft.com/complementarycontent-ingester.html"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "VULCAN_HOST=%H:8080" \

@@ -1,7 +1,7 @@
 [Unit]
 Description=Complementary Content Ingester Sidekick
-BindsTo=complementary-content-ingester@%i.service
-After=complementary-content-ingester@%i.service
+BindsTo=complementarycontent-ingester@%i.service
+After=complementarycontent-ingester@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/complementary-content-ingester/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/complementarycontent-ingester/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=complementary-content-ingester@%i.service
+MachineOf=complementarycontent-ingester@%i.service

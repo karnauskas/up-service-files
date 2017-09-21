@@ -1,7 +1,7 @@
 [Unit]
 Description=Complementary Content Ingester Sidekick
-BindsTo=complementary-content-ingester@%i.service
-After=complementary-content-ingester@%i.service
+BindsTo=complementarycontent-ingester@%i.service
+After=complementarycontent-ingester@%i.service
 
 [Service]
 RemainAfterExit=yes

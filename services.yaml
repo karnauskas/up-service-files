@@ -36,7 +36,7 @@ services:
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: 1.77.0
+  version: v48
   count: 2
   sequentialDeployment: true
 - name: burrow-sidekick@.service
@@ -57,7 +57,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.55.0
+  version: v39
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2

@@ -87,7 +87,7 @@ services:
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
 - name: complementarycontent-ingester@.service
-  version: v72
+  version: 1.0.0-rj-wpcph-rc1
   count: 2
 - name: concept-ingester-sidekick@.service
   count: 2

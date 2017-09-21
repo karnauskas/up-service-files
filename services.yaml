@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 1.2.0
+  version: 2.1.0
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -83,7 +83,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.27
+  version: 1.0.29
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -373,6 +373,12 @@ services:
 - name: organisations-rw-neo4j@.service
   version: 0.5.8
   count: 2
+- name: pac-annotations-mapper-sidekick@.service
+  count: 2
+- name: pac-annotations-mapper@.service
+  version: 0.1.0
+  count: 2
+  sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
@@ -386,7 +392,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.1
+  version: 1.5.2
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

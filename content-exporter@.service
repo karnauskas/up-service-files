@@ -18,7 +18,9 @@ ExecStart=/bin/bash -c '\
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="256m" \
 	--env "ENRICHED_CONTENT_BASE_URL=http://%H:80" \
+	--env "ENRICHED_CONTENT_HEALTH_URL=http://%H:80/__api-policy-component/__gtg" \
 	--env "S3_WRITER_BASE_URL=http://%H:8080/__content-rw-s3" \
+	--env "S3_WRITER_HEALTH_URL=http://%H:8080/__content-rw-s3/__gtg" \
 	--env "AUTHORIZATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/authorization)" \
 	--env "MONGO_CONNECTION=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)\",\" ; done | sed s/.$//)" \
 	coco/content-exporter:$DOCKER_APP_VERSION'

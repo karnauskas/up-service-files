@@ -19,7 +19,7 @@ ExecStart=/bin/bash -c '\
 	export BUCKET_ADDRESS=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="256m" \
-	--env "POST_ADDRESS=%H:8080" \
+	--env "POST_ADDRESS=%H:8080/__cms-notifier" \
 	--env "BUCKET_ADDRESS=$BUCKET_ADDRESS" \
 	--env "DYN_ROUTING=true" \
 	--env "TEST_UUID=$TEST_UUID" \

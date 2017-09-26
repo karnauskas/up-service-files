@@ -24,6 +24,10 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "VULCAN_HOST=%H:8080" \
+  --env "THINGS_API_URL=$VULCAN_HOST" \
+  --env "DOCUMENT_STORE_API_URL=$VULCAN_HOST" \
+  --env "CONCORDANCE_API_URL=$VULCAN_HOST" \
+  --env "KAFKA_PROXY_URL=$VULCAN_HOST" \
   nexus.in.ft.com:5000/coco/methode-list-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

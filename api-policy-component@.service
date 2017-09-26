@@ -22,6 +22,7 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "READ_ENDPOINT=$HOSTNAME:8080:8182" \
+  --env "CHECKING_VULCAN_HEALTH=true" \
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
   --env "JERSEY_TIMEOUT_DURATION=10000ms" \

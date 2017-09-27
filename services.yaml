@@ -7,7 +7,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: 1.1.13-oc-service-info-rc1
+  version: 1.1.13
   count: 2
   sequentialDeployment: true
 - name: annotations-mapper-sidekick@.service

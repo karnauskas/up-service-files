@@ -212,7 +212,7 @@ services:
 - name: industry-classifications-rw-neo4j-sidekick@.service
   count: 2
 - name: industry-classifications-rw-neo4j@.service
-  version: v0.0.10
+  version: 1.0.1
   count: 2
 - name: internal-components-preview-sidekick@.service
   count: 2

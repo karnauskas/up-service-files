@@ -24,8 +24,8 @@ ExecStart=/bin/sh -c '\
   --env "KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip)" \
   --env "KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port)" \
   --env "BUCKET_PATH=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket)" \
-  --env "S3_ACCESSKEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
-  --env "S3_SECRETKEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
+  --env "AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
+  --env "AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
   --env "FAKE_SERVICE=false" \
   nexus.in.ft.com:5000/coco/binary-writer:$DOCKER_APP_VERSION'
 

@@ -1,7 +1,7 @@
 [Unit]
-Description=Brands Reader-Writer for Neo4j Service Sidekick
-BindsTo=brands-rw-neo4j@%i.service
-After=brands-rw-neo4j@%i.service
+Description=PAC Annotations Mapper Sidekick
+BindsTo=pac-annotations-mapper@%i.service
+After=pac-annotations-mapper@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -10,16 +10,17 @@ ExecStart=/bin/sh -c "\
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
   etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set /ft/healthcheck/$SERVICE-%i/categories annotations-publish; \
   while [ -z $PORT ]; do \
     sleep 5; \
-    CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
+    CONTAINER_NAME=$(docker ps -q --filter=name=^/\"$SERVICE\"-%i_); \
     PORT=`echo $(/usr/bin/docker port $CONTAINER_NAME 8080 | cut -d':' -f2)`; \
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/brands-rw-neo4j/servers/%i'
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/pac-annotations-mapper/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=brands-rw-neo4j@%i.service
+MachineOf=pac-annotations-mapper@%i.service

@@ -10,29 +10,24 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker login --username "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_user)" \
+--password "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_pass)" nexus.in.ft.com:5000 > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/binary-writer:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || docker pull up-registry.ft.com/coco/binary-writer:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history nexus.in.ft.com:5000/coco/binary-writer:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull nexus.in.ft.com:5000/coco/binary-writer:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
-  export APP_PORT=8080; \
-  export ADMIN_PORT=8080; \
-  export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
-  export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export S3_ACCESSKEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
-  export S3_SECRETKEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
-  export BUCKET=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket); \
   export JAVA_OPTS="-Xms296m -Xmx296m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
-  --env "KAFKA_HOST=$KAFKA_HOST" \
-  --env "KAFKA_PORT=$KAFKA_PORT" \
-  --env "BUCKET_PATH=$BUCKET" \
-  --env "S3_ACCESSKEY=$S3_ACCESSKEY" \
-  --env "S3_SECRETKEY=$S3_SECRETKEY" \
+  --env "KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip)" \
+  --env "KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port)" \
+  --env "BUCKET_PATH=$(/usr/bin/etcdctl get /ft/config/binary-writer/bucket)" \
+  --env "AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
+  --env "AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
   --env "FAKE_SERVICE=false" \
-  up-registry.ft.com/coco/binary-writer:$DOCKER_APP_VERSION'
+  nexus.in.ft.com:5000/coco/binary-writer:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

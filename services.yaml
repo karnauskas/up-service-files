@@ -13,13 +13,13 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.1
+  version: 1.0.3
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 2.1.0
+  version: 2.1.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -370,7 +370,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.0
+  version: 0.1.1
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
@@ -444,8 +444,9 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: v1.0.1
+  version: 2.0.0
   count: 2
+  sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

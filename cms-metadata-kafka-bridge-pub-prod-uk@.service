@@ -29,6 +29,7 @@ ExecStart=/bin/sh -c '\
   --env "TOPIC=NativeCmsMetadataPublicationEvents" \
   --env "PRODUCER_ADDRESS=http://%H:8080/__kafka-rest-proxy" \
   --env "PRODUCER_TYPE=proxy" \
+  --env "SERVICE_NAME=cms-metadata-kafka-bridge-pub-prod-uk" \
   coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

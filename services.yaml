@@ -13,13 +13,13 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.1
+  version: 1.0.3
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 2.1.0
+  version: 2.1.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -47,12 +47,12 @@ services:
 - name: cms-kafka-bridge-pub-semantic-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-semantic@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 2
 - name: cms-metadata-kafka-bridge-pub-semantic-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-semantic@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -89,7 +89,7 @@ services:
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-semantic@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -202,7 +202,7 @@ services:
 - name: industry-classifications-rw-neo4j-sidekick@.service
   count: 2
 - name: industry-classifications-rw-neo4j@.service
-  version: v0.0.10
+  version: 1.0.1
   count: 2
 - name: internal-components-preview-sidekick@.service
   count: 2
@@ -444,7 +444,7 @@ services:
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
 - name: roles-rw-neo4j@.service
-  version: 0.1.7
+  version: 0.2.0
   count: 2
 - name: splunk-forwarder.service
 - name: suggestions-rw-neo4j-sidekick@.service

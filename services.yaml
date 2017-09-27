@@ -484,7 +484,7 @@ services:
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
 - name: roles-rw-neo4j@.service
-  version: 0.1.7
+  version: 0.2.0
   count: 2
 - name: splunk-forwarder.service
   desiredState: loaded

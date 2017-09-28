@@ -7,7 +7,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: 1.1.13-oc-service-info-rc1
+  version: 1.1.13
   count: 2
   sequentialDeployment: true
 - name: annotations-mapper-sidekick@.service
@@ -300,7 +300,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

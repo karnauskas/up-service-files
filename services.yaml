@@ -279,7 +279,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.5.1
+  version: 1.6.1-k8s-fix-docker-tag-fetch-rc2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

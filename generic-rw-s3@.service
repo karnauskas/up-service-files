@@ -33,7 +33,6 @@ ExecStart=/bin/sh -c '\
 	    -e "SRC_ADDR=http://%H:8080" \
 	    -e "SRC_GROUP=generic-rw-s3-ConceptSuggestions-$ENV" \
 	    -e "SRC_TOPIC=ConceptSuggestions" \
-	    -e "SRC_QUEUE=kafka" \
 	    -e "SRC_CONCURRENT_PROCESSING=true" \
 	coco/generic-rw-s3:$DOCKER_APP_VERSION;'
 

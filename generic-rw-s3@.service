@@ -20,8 +20,9 @@ ExecStart=/bin/sh -c '\
     export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
     export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
     export BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/generic-rw-s3/bucket); \
-    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT  \
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
         --memory="512m" \
+        -e "APP_PORT=$APP_PORT" \
         -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
         -e "GRAPHITE_PREFIX=coco.services.$ENV.generic-rw-s3.%i" \
 	    -e "AWS_REGION=$AWS_REGION" \
@@ -29,8 +30,8 @@ ExecStart=/bin/sh -c '\
 	    -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
 	    -e "BUCKET_NAME=$BUCKET_NAME" \
         -e "LOG_METRICS=false" \
-	    -e "SRC_ADDR=http://%H:8080" \
-	    -e "SRC_GROUP=generic-rw-s3-ConceptSuggestions-$ENV" \
+	    -e "SRC_ADDR=http://%H:8080/__kafka-rest-proxy" \
+	    -e "SRC_GROUP=generic-rw-s3-$ENV" \
 	    -e "SRC_TOPIC=ConceptSuggestions" \
 	    -e "SRC_CONCURRENT_PROCESSING=true" \
 	coco/generic-rw-s3:$DOCKER_APP_VERSION;'

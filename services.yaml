@@ -62,7 +62,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.2.0
+  version: 2.1.0
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -169,7 +169,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.1.0
+  version: 1.0.77
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -270,7 +270,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.1-k8s-fix-docker-tag-fetch-rc3
+  version: 1.5.1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

@@ -7,7 +7,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: 1.1.12
+  version: 1.1.13
   count: 2
   sequentialDeployment: true
 - name: annotations-mapper-sidekick@.service
@@ -67,7 +67,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.1.2-k8s-dual-stack-rc2
+  version: 2.1.2-k8s-dual-stack-rc3
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -316,7 +316,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -465,7 +465,7 @@ services:
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
 - name: roles-rw-neo4j@.service
-  version: 0.1.7
+  version: 0.2.0
   count: 2
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
@@ -518,7 +518,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

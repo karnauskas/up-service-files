@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 64.5.0
+  version: 65.0.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -47,13 +47,14 @@ services:
 - name: cms-kafka-bridge-pub-semantic-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-semantic@.service
-  version: 14.2.2
+  version: 15.0.0
   count: 2
 - name: cms-metadata-kafka-bridge-pub-semantic-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-semantic@.service
-  version: 14.2.2
+  version: 15.0.0
   count: 2
+  sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
@@ -89,7 +90,7 @@ services:
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-semantic@.service
-  version: 14.2.2
+  version: 15.0.0
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -131,13 +132,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.0.87
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: 1.0.87
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service

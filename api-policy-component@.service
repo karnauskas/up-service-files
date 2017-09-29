@@ -25,6 +25,7 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
   --env "JERSEY_TIMEOUT_DURATION=10000ms" \
+  --env "CHECKING_VULCAN_HEALTH=true" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.api-policy-component.%i" \
   coco/api-policy-component:$DOCKER_APP_VERSION'
 ExecStop=-/bin/bash -c '/usr/bin/docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

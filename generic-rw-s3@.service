@@ -31,7 +31,7 @@ ExecStart=/bin/sh -c '\
 	    -e "BUCKET_NAME=$BUCKET_NAME" \
         -e "LOG_METRICS=false" \
 	    -e "SRC_ADDR=http://%H:8080/__kafka-rest-proxy" \
-	    -e "SRC_GROUP=generic-rw-s3-$ENV" \
+	    -e "SRC_GROUP=generic-rw-s3-ConceptSuggestions" \
 	    -e "SRC_TOPIC=ConceptSuggestions" \
 	    -e "SRC_CONCURRENT_PROCESSING=true" \
 	coco/generic-rw-s3:$DOCKER_APP_VERSION;'

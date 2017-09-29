@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 65.0.0-k8s-dual-stack-rc2
+  version: 65.0.0-k8s-dual-stack-rc4
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service

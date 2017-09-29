@@ -62,7 +62,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.1.0
+  version: 2.2.0
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -94,7 +94,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.4.0
+  version: 1.5.1
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -168,7 +168,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.0.77
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -483,7 +483,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

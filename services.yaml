@@ -198,7 +198,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.1.0-rj-complementarycontent-rc1
+  version: 1.2.0-rj-complementarycontent-rc1
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -293,7 +293,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.6.0-k8s-dualstack-rc2
+  version: 1.6.0-rj-wordpress-cphs-rc2
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -354,6 +354,12 @@ services:
 - name: mongolizer@.service
   version: 2.0.0-productionize-rc7
   count: 1
+- name: new-notifications-push-sidekick@.service
+  count: 2
+- name: new-notifications-push@.service
+  version: 3.5.1
+  count: 2
+  sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service

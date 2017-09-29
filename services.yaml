@@ -158,7 +158,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.6
+  version: 1.0.7
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -225,7 +225,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 2.0.2
+  version: 2.0.3
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

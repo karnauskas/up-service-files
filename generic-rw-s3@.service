@@ -25,16 +25,16 @@ ExecStart=/bin/sh -c '\
         -e "APP_PORT=$APP_PORT" \
         -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
         -e "GRAPHITE_PREFIX=coco.services.$ENV.generic-rw-s3.%i" \
-	-e "AWS_REGION=$AWS_REGION" \
-	-e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-	-e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
-	-e "BUCKET_NAME=$BUCKET_NAME" \
+	    -e "AWS_REGION=$AWS_REGION" \
+	    -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+	    -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
+	    -e "BUCKET_NAME=$BUCKET_NAME" \
         -e "LOG_METRICS=false" \
-	-e "SRC_ADDR=http://%H:8080" \
-	-e "SRC_GROUP=generic-rw-s3-ConceptSuggestions" \
-	-e "SRC_TOPIC=ConceptSuggestions" \
-	-e "SRC_QUEUE=kafka" \
-	-e "SRC_CONCURRENT_PROCESSING=true" \
+	    -e "SRC_ADDR=http://%H:8080" \
+	    -e "SRC_GROUP=generic-rw-s3-ConceptSuggestions-$ENV" \
+	    -e "SRC_TOPIC=ConceptSuggestions" \
+	    -e "SRC_QUEUE=kafka" \
+	    -e "SRC_CONCURRENT_PROCESSING=true" \
 	coco/generic-rw-s3:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

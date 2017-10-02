@@ -315,7 +315,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.1.0-rj-cphwp-rc3
+  version: 1.2.0-rj-k8s-cphwp-rc4
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

@@ -36,7 +36,7 @@ services:
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: 1.77.0
+  version: 1.78.0
   count: 2
   sequentialDeployment: true
 - name: burrow-sidekick@.service

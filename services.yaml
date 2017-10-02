@@ -31,7 +31,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -87,7 +87,7 @@ services:
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
 - name: complementarycontent-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 2
 - name: concept-ingester-sidekick@.service
   count: 2
@@ -130,7 +130,7 @@ services:
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-collection-ingester-neo4j@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 2
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
@@ -145,12 +145,12 @@ services:
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -188,7 +188,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.7-rj-complementarycontent-rc1
+  version: 1.0.8-rj-k8s-complementarycontent-rc2
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -266,7 +266,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
@@ -305,7 +305,7 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.0-rj-wpcph-rc3
+  version: 1.1.0-rj-wpcph-rc4
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
@@ -330,7 +330,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.1.0-rj-cphwp-rc3
+  version: 1.2.0-rj-k8s-cphwp-rc4
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -373,7 +373,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -464,7 +464,7 @@ services:
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc1
+  version: 1.77.0-k8s-helm-integration-rc5
   count: 1
 - name: relations-api-sidekick@.service
   count: 2

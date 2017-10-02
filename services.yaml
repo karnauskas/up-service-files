@@ -188,7 +188,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.8-rj-k8s-complementarycontent-rc2
+  version: 1.0.8-k8s-rj-complementarycontent-rc4
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

@@ -30,7 +30,11 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
+<<<<<<< HEAD
   version: 64.6.0-k8s-dual-stack-rc2
+=======
+  version: 65.0.0
+>>>>>>> binary-writer-helm-updates
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -41,7 +45,7 @@ services:
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: 1.77.0
+  version: 1.78.0
   count: 2
   sequentialDeployment: true
 - name: burrow-sidekick@.service
@@ -54,11 +58,31 @@ services:
 - name: cms-kafka-bridge-pub-xp@.service
   version: 15.0.0
   count: 2
+<<<<<<< HEAD
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp@.service
+=======
+  sequentialDeployment: true
+- name: cms-kafka-bridge-pub-prod-us-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-pub-prod-us@.service
   version: 15.0.0
   count: 2
+  sequentialDeployment: true
+- name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-uk@.service
+  version: 15.0.0
+  count: 2
+  sequentialDeployment: true
+- name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-us@.service
+>>>>>>> binary-writer-helm-updates
+  version: 15.0.0
+  count: 2
+  sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
@@ -136,13 +160,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.0.87
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: 1.0.87
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service
@@ -169,7 +193,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.6
+  version: 1.0.7
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -179,7 +203,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.1.1-k8s-helm-rc3
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -236,7 +260,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 2.0.2
+  version: 2.0.3
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1

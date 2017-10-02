@@ -31,7 +31,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -72,7 +72,7 @@ services:
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
 - name: complementarycontent-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 2
 - name: concept-ingester-sidekick@.service
   count: 2
@@ -115,7 +115,7 @@ services:
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-collection-ingester-neo4j@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 2
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
@@ -130,12 +130,12 @@ services:
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -251,7 +251,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
@@ -359,7 +359,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -444,7 +444,7 @@ services:
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: 1.77.0-k8s-helm-integration-rc5
+  version: 1.77.0-k8s-helm-integration-rc6
   count: 1
 - name: relations-api-sidekick@.service
   count: 2

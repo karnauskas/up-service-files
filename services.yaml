@@ -90,7 +90,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.46.0
+  version: 1.47.0
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
@@ -164,7 +164,7 @@ services:
   sequentialDeployment: true
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: 1.0.5
+  version: 1.1.1
 - name: diamond.service
   version: v1.1.0
 - name: document-store-api-sidekick@.service

@@ -10,10 +10,12 @@ Environment="APP_PORT=8080"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker login --username "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_user)" \
+--password "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_pass)" nexus.in.ft.com:5000 > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || /usr/bin/docker pull up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)"-v2-annotator"; \
@@ -37,7 +39,7 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.v2-content-annotator.%i" \
-  up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
+  nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

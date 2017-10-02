@@ -29,7 +29,7 @@ ExecStart=/bin/sh -c '\
   --env "TOPIC=NativeCmsPublicationEvents" \
   --env "PRODUCER_ADDRESS=http://%H:8080/__cms-notifier" \
   --env "PRODUCER_TYPE=plainHTTP" \
-  --env "SERVICE_NAME=cms-kafka-bridge-pub-prod-us" \
+  --env "SERVICE_NAME=cms-kafka-bridge-pub-dynpub-uk" \
   coco/coco-kafka-bridge:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

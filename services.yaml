@@ -293,7 +293,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.6.0-rj-wordpress-cphs-rc4
+  version: 1.6.0-rj-wordpress-cphs-rc5
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -305,7 +305,7 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.0-k8s-rj-wpcph-rc5
+  version: 1.1.0-k8s-rj-wpcph-rc6
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2

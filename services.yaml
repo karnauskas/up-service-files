@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.4.0
+  version: 1.5.1
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
@@ -154,7 +154,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 1.0.7
+  version: 2.0.1
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -180,7 +180,7 @@ services:
 - name: financial-instruments-rw-neo4j-sidekick@.service
   count: 2
 - name: financial-instruments-rw-neo4j@.service
-  version: v0.0.5
+  version: 0.0.9
   count: 2
 - name: fleet-neo4j-unit-healthcheck-sidekick@.service
   count: 1

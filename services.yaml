@@ -13,13 +13,13 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.1
+  version: 1.0.3
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 2.1.0
+  version: 2.1.1
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -57,12 +57,12 @@ services:
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-uk@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 2
 - name: cms-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-us@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 2
 - name: cms-metadata-kafka-bridge-pub-pre-prod-sidekick@.service
   count: 2
@@ -72,12 +72,12 @@ services:
 - name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 2
 - name: cms-notifier-sidekick@.service
   count: 1
@@ -97,7 +97,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 0.0.26
+  version: 1.0.0
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -119,7 +119,7 @@ services:
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
-  version: 14.2.0
+  version: 14.2.2
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -232,7 +232,7 @@ services:
 - name: industry-classifications-rw-neo4j-sidekick@.service
   count: 2
 - name: industry-classifications-rw-neo4j@.service
-  version: v0.0.10
+  version: 1.0.1
   count: 2
 - name: internal-components-preview-sidekick@.service
   count: 2
@@ -330,7 +330,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.2.0-rj-k8s-cphwp-rc4
+  version: 1.2.0-k8s-rj-cphwp-rc5
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -395,7 +395,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.0
+  version: 0.1.1
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
@@ -469,8 +469,9 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: v1.0.1
+  version: 2.0.0
   count: 2
+  sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service
@@ -517,7 +518,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.0.17
+  version: 1.1.0
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

@@ -173,7 +173,7 @@ services:
 - name: content-rw-s3-sidekick@.service
   count: 1
 - name: content-rw-s3@.service
-  version: 1.0.0-xtreme-rc1
+  version: automated-content-exports
   count: 1
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service

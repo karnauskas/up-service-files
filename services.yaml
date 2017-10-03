@@ -188,7 +188,7 @@ services:
 - name: financial-instruments-rw-neo4j-sidekick@.service
   count: 2
 - name: financial-instruments-rw-neo4j@.service
-  version: v0.0.5
+  version: 0.0.9
   count: 2
 - name: fleet-neo4j-unit-healthcheck-sidekick@.service
   count: 1

@@ -39,7 +39,7 @@ ExecStart=/bin/sh -c '\
       --env "WHITELIST=$WHITELIST" \
       --env "WRITER_URL=%H:8080" --env "WRITER_HEADER=document-store-api" --env "WRITER_NAME=DocumentStore" --env "WRITER_HEALTHCHECK_NAME=$WR_HC_NAME" --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WR_HC_TECH_SUMMARY" \
       --env "MESSAGE_FORWARDING_ENABLED=true" --env "FORWARD_TO_TOPIC_NAME=PostPublicationEvents" \
-      --env "KAFKA_PROXY=%H:8080" \
+      --env "KAFKA_PROXY_URL=%H:8080" \
       --env "PANIC_GUIDE_URL=$PANIC_GUIDE_URL"  \
       nexus.in.ft.com:5000/coco/ingester:$DOCKER_APP_VERSION'
 

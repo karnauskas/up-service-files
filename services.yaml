@@ -290,12 +290,12 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.0-k8s-rj-wpcph-rc5
+  version: 1.1.0-k8s-rj-wpcph-rc6
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 0.2.0-rj-wpcph-rc1
+  version: 0.2.0-rj-wpcph-rc2
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

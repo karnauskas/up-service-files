@@ -261,7 +261,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: 0.1.5
+  version: 0.1.6
   count: 2
   sequentialDeployment: true
 - name: memberships-rw-neo4j-sidekick@.service

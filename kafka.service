@@ -18,6 +18,7 @@ ExecStart=/bin/bash -c '\
   --env "KAFKA_ADVERTISED_HOST_NAME=$$HOSTNAME" \
   --env="KAFKA_MESSAGE_MAX_BYTES=16777216" \
   --env="KAFKA_REPLICA_FETCH_MAX_BYTES=16777216" \
+  --env="KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=true" \
   --env="DOCKER_HOST=$HOSTNAME:2375" \
   -v /vol/kafka:/kafka \
   wurstmeister/kafka:0.11.0.0'

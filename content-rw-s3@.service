@@ -28,7 +28,7 @@ ExecStart=/bin/sh -c '\
         -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
         -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
         -e "BUCKET_NAME=$BUCKET_NAME" \
-        -e "BUCKET_PREFIX=unarchived" \
+        -e "BUCKET_PREFIX=unarchived2" \
         -e "RESOURCE_PATH=content" \
         -e "LOG_METRICS=false" \
 	coco/generic-rw-s3:$DOCKER_APP_VERSION;'

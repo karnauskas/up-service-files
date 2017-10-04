@@ -407,7 +407,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 2.0.0-sm-newconcordancemodel-RC1
+  version: 2.0.0-sm-newconcordancemodel-RC2
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service

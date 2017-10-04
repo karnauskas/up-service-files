@@ -29,7 +29,7 @@ ExecStart=/bin/bash -c '\
 	--env "WHITELIST=^http://(methode|wordpress)-article-(transformer|mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$" \
 	coco/content-exporter:$DOCKER_APP_VERSION'
 
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 30 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure
 RestartSec=60
 

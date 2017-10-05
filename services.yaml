@@ -95,7 +95,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v39
+  version: 1.55.2
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2

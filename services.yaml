@@ -299,7 +299,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 0.2.0-rj-wpcph-rc3
+  version: 0.2.0-k8s-wpcph-rc3
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

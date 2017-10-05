@@ -378,7 +378,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.2
+  version: 1.5.3-k8s-add-implicitlyClassifiedBy-rc1
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -436,7 +436,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.0.0
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service

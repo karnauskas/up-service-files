@@ -1,13 +1,13 @@
 #NOTE: please remove comments, before deploying your service file.
-# This template is for services that are hosted publicly on DockerHub
+# This template is for private services that are not hosted publicly on DockerHub
 [Unit]
-#Add the name of your service. We use Concept Search API as an example to illustrate.
-Description=Concept Search API
+#Add the name of your service. We use CMS Notifier as an example to illustrate.
+Description=CMS Notifier
 After=vulcan.service
 Requires=docker.service
 #The service's sidekick and optionally other dependent services can be added here. Separate by space.
 #Systemd will try to start these services, when the unit is activated, but it continues to work, even if they fail.
-Wants=concept-search-api-sidekick@%i.service
+Wants=cms-notifier-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -20,8 +20,10 @@ KillMode=none
 #Note: the container name can be filtered to start with the service name (^/).
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
-#Pull the image, if it is not yet downloaded. Check in history.
-ExecStartPre=/bin/bash -c 'docker history coco/concept-search-api:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull up-registry.ft.com/coco/concept-search-api:$DOCKER_APP_VERSION'
+# Log into Nexus, then pull the image, if it is not yet downloaded. Check in history.
+ExecStartPre=-/bin/bash -c '/usr/bin/docker login --username "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_user)" \
+--password "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_pass)" nexus.in.ft.com:5000 > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history nexus.in.ft.com:5000/coco/cms-notifier:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull up-registry.ft.com/coco/cms-notifier:$DOCKER_APP_VERSION'
 
 #Define the variables, and commands below. Please put each command on a separate line.
 #Notice that the name of the container will be completed with a "_$(uuidgen)" - to ensure their uniqueness.
@@ -35,7 +37,7 @@ ExecStart=/bin/sh -c '\
   --env "KAFKA_HOST=$KAFKA_HOST" \
   --env "KAFKA_PORT=$KAFKA_PORT" \
   --env "KAFKA_TOPIC=$KAFKA_TOPIC" \
-  coco/concept-search-api:$DOCKER_APP_VERSION'
+  nexus.in.ft.com:5000/coco/cms-notifier:$DOCKER_APP_VERSION'
 
 #Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

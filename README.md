@@ -40,7 +40,7 @@ sudo gpasswd -a [user] docker
 
 ## services stop docker
 ### In new terminal window
-sudo docker -d --insecure-registry up-registry.ft.com
+sudo docker -d 
 ```
 
 Install fleet and etcd:

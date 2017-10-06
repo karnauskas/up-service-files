@@ -301,7 +301,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.4.0
+  version: 16.4.1
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -376,7 +376,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.1
+  version: 0.1.2
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service

@@ -309,7 +309,7 @@ services:
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.1.2
+  version: 9.1.3
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2

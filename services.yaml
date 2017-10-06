@@ -71,7 +71,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v39
+  version: 1.55.2
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2
@@ -464,7 +464,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.1.0
+  version: 2.1.1
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1

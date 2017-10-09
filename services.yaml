@@ -58,7 +58,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v39
+  version: 1.55.2
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2
@@ -361,7 +361,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.1
+  version: 0.1.2
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
@@ -389,7 +389,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: 1.1.1
+  version: 1.2.0-sm-showupp-rc1
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
@@ -435,7 +435,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.0.0
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service
@@ -451,7 +451,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.1.0
+  version: 2.1.1
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1

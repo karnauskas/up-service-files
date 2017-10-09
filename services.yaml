@@ -507,7 +507,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.7
+  version: 1.0.8
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-coco-admin-sidekick@.service

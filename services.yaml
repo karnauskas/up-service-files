@@ -42,7 +42,7 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: 1.0.2-k8s-rc3
+  version: 2.1.0
   count: 1
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
@@ -137,13 +137,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.1.0
+  version: 1.1.1-ops-logging-rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: 1.1.0
+  version: 1.1.1-ops-logging-rc1
   count: 2
   sequentialDeployment: true
 - name: coco-traffic-analyser.service

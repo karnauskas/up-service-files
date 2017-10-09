@@ -30,6 +30,7 @@ ExecStart=/bin/sh -c '\
   export WR_HC_TECH_SUMMARY="Tests that the build-info endpoint for the Document Store returns a 200 response"; \
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   export PANIC_GUIDE_URL="https://dewey.ft.com/complementarycontent-ingester.html"; \
+  export COMPLEMENTARY_CONTENT_WRITER_PATH="/complementarycontent/{uuid}"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \

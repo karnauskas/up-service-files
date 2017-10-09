@@ -145,13 +145,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.1.0
+  version: 1.1.1-ops-logging-rc1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: 1.1.0
+  version: 1.1.1-ops-logging-rc1
   count: 2
   sequentialDeployment: true
 - name: content-rw-elasticsearch-sidekick@.service

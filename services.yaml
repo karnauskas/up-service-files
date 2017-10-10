@@ -85,7 +85,7 @@ services:
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.8
+  version: 0.0.9-k8s-last-modified-rc1
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1

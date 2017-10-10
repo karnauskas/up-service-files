@@ -440,7 +440,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: 1.67.0
+  version: 1.68.0-k8s-dual-stack-rc2
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
@@ -474,7 +474,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.1.0
+  version: 2.1.1
   count: 2
   sequentialDeployment: true
 - name: swagger-sidekick@.service
@@ -500,7 +500,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: 1.67.0
+  version: 1.68.0-k8s-dual-stack-rc2
   count: 2
 - name: varnish@.service
   version: 0.2.0

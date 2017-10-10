@@ -42,6 +42,7 @@ ExecStart=/bin/sh -c '\
       --env "MESSAGE_FORWARDING_ENABLED=true" --env "FORWARD_TO_TOPIC_NAME=PostPublicationEvents" \
       --env "KAFKA_PROXY_URL=%H:8080" \
       --env "PANIC_GUIDE_URL=$PANIC_GUIDE_URL"  \
+      --env "COMPLEMENTARY_CONTENT_WRITER_PATH=$COMPLEMENTARY_CONTENT_WRITER_PATH" \
       nexus.in.ft.com:5000/coco/ingester:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

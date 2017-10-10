@@ -35,7 +35,6 @@ ExecStart=/bin/sh -c '\
   --env "WRITER_PATH=/rr-suggestions" \
   --env "WRITER_ENDPOINT=$WRITER_HOST:$WRITER_PORT" \
   --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
-  --env "WRITER_HOST_HEADER=upp-gateway" \
   --env "WRITER_HEALTHCHECK_PATH=/build-info" \
   --env "MESSAGE_FORWARDING_ENABLED=false" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \

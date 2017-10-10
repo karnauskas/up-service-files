@@ -333,7 +333,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: v1.0.2
+  version: 1.0.4
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2

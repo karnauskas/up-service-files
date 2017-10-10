@@ -131,7 +131,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: 1.0.8
+  version: 2.0.1-k8s-dual-stack-rc2
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
@@ -376,7 +376,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.2
+  version: 0.1.3
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service

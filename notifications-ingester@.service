@@ -30,7 +30,6 @@ ExecStart=/bin/sh -c '\
   export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the Notifications Reader/Writer returns a 200 response"; \
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   export PANIC_GUIDE_URL="https://dewey.ft.com/notifications-ingester.html"; \
-  export COMPLEMENTARY_CONTENT_WRITER_PATH="/content/{uuid}"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
@@ -48,7 +47,7 @@ ExecStart=/bin/sh -c '\
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
       --env "MESSAGE_FORWARDING_ENABLED=false" \
       --env "PANIC_GUIDE_URL=$PANIC_GUIDE_URL"  \
-      --env "COMPLEMENTARY_CONTENT_WRITER_PATH=$COMPLEMENTARY_CONTENT_WRITER_PATH" \
+      --env "COMPLEMENTARY_CONTENT_WRITER_PATH=/content/{uuid}" \
       nexus.in.ft.com:5000/coco/ingester:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

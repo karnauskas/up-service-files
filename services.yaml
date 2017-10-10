@@ -162,7 +162,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 2.0.1
+  version: 2.0.2-k8s-dp-open-api-rc.1
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service

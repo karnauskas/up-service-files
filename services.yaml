@@ -153,7 +153,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2

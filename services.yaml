@@ -362,7 +362,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.5.1
+  version: 3.5.3-k8s-wordpresscph-rc1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

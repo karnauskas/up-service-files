@@ -42,7 +42,7 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: 1.0.2
+  version: 2.1.0
   count: 1
 - name: cms-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 2
@@ -81,7 +81,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: v39
+  version: 1.55.2
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
@@ -123,7 +123,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.1.4
+  version: 1.5.3
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -169,15 +169,10 @@ services:
   version: 1.1.0
   count: 2
   sequentialDeployment: true
-- name: content-rw-elasticsearch-sidekick@.service
-  count: 2
-- name: content-rw-elasticsearch@.service
-  version: 1.1.0
-  count: 2
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -287,7 +282,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.2.0
+  version: 1.4.0
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -298,7 +293,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.0
+  version: 1.6.1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -314,17 +309,17 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: v1.0.2
+  version: 1.0.4
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.3.0
+  version: 16.4.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.1.1
+  version: 9.1.3
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -377,7 +372,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.5.1
+  version: 3.5.2
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -394,7 +389,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.1
+  version: 0.1.4
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
@@ -410,7 +405,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.2
+  version: 1.5.3
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -422,7 +417,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: 1.1.1
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service
@@ -468,7 +463,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.0.0
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service
@@ -484,7 +479,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 1.1.0
+  version: 2.1.1
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
@@ -493,7 +488,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.7
+  version: 1.0.8
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-queue-sender-v1-metadata-sidekick@.service
@@ -522,6 +517,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: 0.55.0
+  version: 0.56.0
   count: 2
 - name: zookeeper.service

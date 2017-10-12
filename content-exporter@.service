@@ -15,6 +15,7 @@ ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /
 ExecStartPre=/bin/bash -c 'docker pull coco/content-exporter:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
+    IS_INC_EXPORT_ENABLED=$(/usr/bin/etcdctl get /ft/config/zipper-s3/is-enabled) || IS_INC_EXPORT_ENABLED=false; \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="256m" \
 	--env "ENRICHED_CONTENT_BASE_URL=http://%H:80" \
@@ -27,6 +28,7 @@ ExecStart=/bin/bash -c '\
 	--env "GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)-content-exporter-%i" \
 	--env "TOPIC=PostPublicationEvents" \
 	--env "WHITELIST=^http://(methode|wordpress)-article-(transformer|mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$" \
+	--env "IS_INC_EXPORT_ENABLED=$IS_INC_EXPORT_ENABLED" \
 	coco/content-exporter:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 30 "$(docker ps -q --filter=name=%p-%i_)"'

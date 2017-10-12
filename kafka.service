@@ -22,7 +22,7 @@ ExecStart=/bin/bash -c '\
   -v /vol/kafka:/kafka \
   wurstmeister/kafka:0.11.0.1'
 
-ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 10 "$(docker ps -q --filter=name=%p_)"'
 ExecStartPost=/bin/sh -c "\
   KAFKA_IP=$HOSTNAME; \
   etcdctl set /ft/config/kafka/ip $KAFKA_IP; \

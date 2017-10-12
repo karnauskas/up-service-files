@@ -402,7 +402,7 @@ services:
 - name: public-concordances-api-sidekick@.service
   count: 2
 - name: public-concordances-api@.service
-  version: 1.1.1
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: public-content-by-concept-api-sidekick@.service

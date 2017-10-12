@@ -17,7 +17,12 @@ ExecStartPre=/bin/bash -c 'docker history coco/methode-article-mapper:$DOCKER_AP
 
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
-  --env "VULCAN_HOST=%H:8080" \
+  --env "CONSUMER_GROUP_NAME=MethodeArticleMapper" \
+  --env "INTERNAL_CONTENT_COMPONTENT_MAPPER=false" \
+  --env "CONTENT_URI_PREFIX=http://methode-article-mapper.svc.ft.com/content" \
+  --env "DOCUMENT_STORE_API_URL=%H:8080" \
+  --env "CONCORDANCE_API_URL=%H:8080" \
+  --env "KAFKA_PROXY_URL=%H:8080" \
   coco/methode-article-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

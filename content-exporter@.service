@@ -15,7 +15,7 @@ ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /
 ExecStartPre=/bin/bash -c 'docker pull coco/content-exporter:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
-    IS_INC_EXPORT_ENABLED=$(/usr/bin/etcdctl get /ft/config/zipper-s3/is-enabled) || IS_INC_EXPORT_ENABLED=false; \
+    IS_INC_EXPORT_ENABLED=$(/usr/bin/etcdctl get /ft/config/content-exporter/is-enabled) || IS_INC_EXPORT_ENABLED=false; \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="256m" \
 	--env "ENRICHED_CONTENT_BASE_URL=http://%H:80" \

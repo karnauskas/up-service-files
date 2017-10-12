@@ -24,7 +24,7 @@ ExecStart=/bin/bash -c '\
 ExecStartPost=/bin/sh -c "\
   etcdctl set /ft/config/zookeeper/ip $HOSTNAME; \
   etcdctl set /ft/config/zookeeper/port 2181;"
-ExecStop=-/bin/bash -c 'docker stop -t 10 "$(docker ps -q --filter=name=%p_)"'
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 Restart=on-failure
 RestartSec=120
 

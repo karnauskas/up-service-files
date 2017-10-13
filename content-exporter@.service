@@ -12,7 +12,8 @@ TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker pull coco/content-exporter:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history coco/content-exporter:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull coco/content-exporter:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/bash -c '\
     IS_INC_EXPORT_ENABLED=$(/usr/bin/etcdctl get /ft/config/content-exporter/is-enabled) || IS_INC_EXPORT_ENABLED=false; \
@@ -25,7 +26,7 @@ ExecStart=/bin/bash -c '\
 	--env "AUTHORIZATION=$(/usr/bin/etcdctl get /ft/_credentials/content-exporter/authorization)" \
 	--env "MONGO_CONNECTION=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)\",\" ; done | sed s/.$//)" \
 	--env "KAFKA_ADDRS=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip):$(/usr/bin/etcdctl get /ft/config/zookeeper/port)" \
-	--env "GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)-content-exporter-%i" \
+	--env "GROUP_ID=$(/usr/bin/etcdctl get /ft/config/environment_tag)-content-exporter" \
 	--env "TOPIC=PostPublicationEvents" \
 	--env "WHITELIST=^http://(methode|wordpress)-article-(transformer|mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$" \
 	--env "IS_INC_EXPORT_ENABLED=$IS_INC_EXPORT_ENABLED" \

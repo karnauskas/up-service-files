@@ -364,7 +364,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.8
+  version: 0.5.9
   count: 2
 - name: pac-annotations-mapper-sidekick@.service
   count: 2

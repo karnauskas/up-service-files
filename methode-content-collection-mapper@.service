@@ -25,7 +25,7 @@ ExecStart=/bin/sh -c '\
   --env "KAFKA_PROXY_URL=%H:8080" \
   --env "DOCUMENT_STORE_API_URL=%H:8080" \
   coco/methode-content-collection-mapper:$DOCKER_APP_VERSION'
-  
+
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
 RestartSec=60

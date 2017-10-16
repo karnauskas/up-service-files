@@ -160,7 +160,7 @@ services:
 - name: content-exporter-sidekick@.service
   count: 2
 - name: content-exporter@.service
-  version: impl
+  version: 1.0.0
   count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -203,7 +203,7 @@ services:
 - name: content-rw-s3-sidekick@.service
   count: 1
 - name: content-rw-s3@.service
-  version: 1.0.0-xtreme-rc3
+  version: 1.0.1
   count: 1
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service

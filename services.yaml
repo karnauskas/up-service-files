@@ -156,7 +156,7 @@ services:
   version: 1.2.0
   count: 2
 - name: content-exporter-sidekick@.service
-  count: 2
+  count: 1
 - name: content-exporter@.service
   version: 1.0.0
   count: 1

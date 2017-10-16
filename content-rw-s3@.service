@@ -1,0 +1,44 @@
+[Unit]
+Description=content RW for S3
+After=vulcan.service
+Requires=docker.service
+Wants=content-rw-s3-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+Environment="APP_PORT=8080"
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/content-rw-s3:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull coco/content-rw-s3:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+    export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+    export AWS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
+    export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
+    export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
+    export BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/content-rw-s3/bucket); \
+    export BUCKET_PREFIX=$(/usr/bin/etcdctl get /ft/config/content-rw-s3/bucket-prefix); \
+    /usr/bin/docker run --rm -p $APP_PORT --name %p-%i_$(uuidgen) \
+        --memory="512m" \
+        -e "APP_PORT=$APP_PORT" \
+        -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+        -e "GRAPHITE_PREFIX=coco.services.$ENV.content-rw-s3.%i" \
+        -e "AWS_REGION=$AWS_REGION" \
+        -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+        -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
+        -e "BUCKET_NAME=$BUCKET_NAME" \
+        -e "BUCKET_PREFIX=$BUCKET_PREFIX" \
+        -e "RESOURCE_PATH=content" \
+        -e "LOG_METRICS=false" \
+	coco/content-rw-s3:$DOCKER_APP_VERSION;'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=content-rw-s3@*.service
+

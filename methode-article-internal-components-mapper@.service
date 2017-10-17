@@ -19,11 +19,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/methode-article-internal-componen
 
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
-  --env "METHODE_ARTICLE_MAPPER_URL=%H:8080" \
-  --env "METHODE_CPH_MAPPER_URL=%H:8080" \
-  --env "DOC_STORE_API_URL=%H:8080" \
-  --env "CONCORDANCE_API_URL=%H:8080" \
-  --env "KAFKA_PROXY_URL=%H:8080" \
+  --env "VULCAN_HOST=%H:8080" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   coco/methode-article-internal-components-mapper:$DOCKER_APP_VERSION'
 

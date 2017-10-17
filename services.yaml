@@ -518,7 +518,6 @@ services:
   version: 0.2.0
   count: 2
 - name: splunk-forwarder.service
-  desiredState: loaded
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service

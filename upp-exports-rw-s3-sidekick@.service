@@ -1,7 +1,7 @@
 [Unit]
-Description=content RW for S3 Sidekick
-BindsTo=content-rw-s3@%i.service
-After=content-rw-s3@%i.service
+Description=UPP Exports RW for S3 Sidekick
+BindsTo=upp-exports-rw-s3@%i.service
+After=upp-exports-rw-s3@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -24,4 +24,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=content-rw-s3@%i.service
+MachineOf=upp-exports-rw-s3@%i.service

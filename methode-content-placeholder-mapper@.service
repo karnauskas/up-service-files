@@ -24,7 +24,6 @@ ExecStart=/bin/bash -c '\
 	--env "Q_GROUP=$GROUP_ID" \
 	--env "Q_READ_TOPIC=NativeCmsPublicationEvents" \
 	--env "Q_WRITE_TOPIC=CmsPublicationEvents" \
-  --env "DOCUMENT_STORE_API_ADDRESS=http://%H:8080" \
 	coco/methode-content-placeholder-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

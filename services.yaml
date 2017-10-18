@@ -362,7 +362,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.5-monitoring-logging-rc.1
+  version: 0.1.5-monitoring-logging-rc.2
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service

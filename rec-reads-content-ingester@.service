@@ -35,7 +35,6 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
       --env "UPP_GATEWAY_PATH=/rr-content" \
-      --env "VULCAN_HOST=$WRITER_HOST:$WRITER_PORT:$WRITER_PORT" \
       --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
       --env "WRITER_HEADER=upp-gateway" \
       --env "APP_PORT=8080" \
@@ -50,6 +49,7 @@ ExecStart=/bin/sh -c '\
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
       --env "MESSAGE_FORWARDING_ENABLED=false" \
+      --env "WRITER_URL=$WRITER_HOST:$WRITER_PORT" \
       --env "WRITER_NAME=$WRITER_NAME" \
       --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
       --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \

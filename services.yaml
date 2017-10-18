@@ -470,7 +470,7 @@ services:
 - name: public-six-degrees-api-sidekick@.service
   count: 2
 - name: public-six-degrees-api@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: public-things-api-sidekick@.service

@@ -287,7 +287,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: 1.0.4
+  version: 1.1.0-k8s-pdfs-rc1
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
@@ -414,7 +414,7 @@ services:
 - name: public-six-degrees-api-sidekick@.service
   count: 2
 - name: public-six-degrees-api@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: public-things-api-sidekick@.service

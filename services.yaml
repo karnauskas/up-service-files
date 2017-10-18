@@ -170,11 +170,6 @@ services:
 - name: content-rw-neo4j@.service
   version: 1.0.7
   count: 2
-- name: content-rw-s3-sidekick@.service
-  count: 1
-- name: content-rw-s3@.service
-  version: 1.0.1
-  count: 1
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
   version: 1.0.5
@@ -490,6 +485,11 @@ services:
   count: 1
 - name: up-queue-sender-v1-metadata@.service
   version: v0.0.2
+  count: 1
+- name: upp-exports-rw-s3-sidekick@.service
+  count: 1
+- name: upp-exports-rw-s3@.service
+  version: 1.0.0-extreme-rc1
   count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2

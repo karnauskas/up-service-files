@@ -467,7 +467,7 @@ services:
 - name: splunk-event-reader-sidekick@.service
   count: 2
 - name: splunk-event-reader@.service
-  version: 0.0.9-fd
+  version: 0.0.10-fd
   count: 2
   sequentialDeployment: true
 - name: splunk-forwarder.service

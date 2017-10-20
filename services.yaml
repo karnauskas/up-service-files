@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 65.1.0
+  version: 66.0.0-k8s-ops-logging-retry-dw-upgrade-rc3
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service

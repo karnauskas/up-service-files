@@ -73,7 +73,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 1.0.2-k8s-DP-Authors-rc3
+  version: 1.0.2
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service

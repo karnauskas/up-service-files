@@ -19,6 +19,7 @@ ExecStart=/bin/bash -c '\
     IS_INC_EXPORT_ENABLED=$(/usr/bin/etcdctl get /ft/config/content-exporter/is-enabled) || IS_INC_EXPORT_ENABLED=false; \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="512m" \
+	--env "DELAY_FOR_NOTIFICATION=10" \
 	--env "ENRICHED_CONTENT_BASE_URL=http://%H:80" \
 	--env "ENRICHED_CONTENT_HEALTH_URL=http://%H:80/__api-policy-component/__gtg" \
 	--env "S3_WRITER_BASE_URL=http://%H:8080/__content-rw-s3" \

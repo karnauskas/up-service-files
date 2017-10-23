@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 65.0.0
+  version: 65.1.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -287,7 +287,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.5.1
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -299,17 +299,17 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.0.3
+  version: 1.1.0
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 0.1.0
+  version: 1.0.1-k8s-wpcph-rc1
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: 1.0.4
+  version: 1.1.0
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
@@ -324,7 +324,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.1.1
+  version: 1.2.0
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -441,7 +441,7 @@ services:
 - name: public-six-degrees-api-sidekick@.service
   count: 2
 - name: public-six-degrees-api@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: public-things-api-sidekick@.service
@@ -512,7 +512,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.1.1
+  version: 1.1.2
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

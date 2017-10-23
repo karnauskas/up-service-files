@@ -96,7 +96,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 1.0.0
+  version: 1.0.1
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -108,12 +108,12 @@ services:
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.8
+  version: 0.0.10
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.46.0
+  version: 1.47.0
   count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
@@ -134,12 +134,12 @@ services:
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
 - name: content-collection-rw-neo4j@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -160,13 +160,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.1.0
+  version: 1.1.2
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 2
 - name: content-public-read@.service
-  version: 1.1.0
+  version: 1.1.2
   count: 2
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -198,7 +198,7 @@ services:
 - name: financial-instruments-rw-neo4j-sidekick@.service
   count: 2
 - name: financial-instruments-rw-neo4j@.service
-  version: v0.0.5
+  version: 0.0.9
   count: 2
 - name: fleet-neo4j-unit-healthcheck-sidekick@.service
   count: 1
@@ -220,7 +220,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -271,7 +271,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: 0.1.5
+  version: 0.1.6
   count: 2
   sequentialDeployment: true
 - name: memberships-rw-neo4j-sidekick@.service
@@ -287,7 +287,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.6.0
+  version: 1.5.1
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -299,12 +299,12 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.0
+  version: 1.0.3
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.0
+  version: 0.1.0
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -314,7 +314,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.4.0
+  version: 16.4.1
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -324,7 +324,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.2.0
+  version: 1.1.1
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -351,18 +351,18 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.1.1
+  version: 1.3.0
   count: 2
   sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
-  version: 1.1.0
+  version: 1.3.0
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: 1.3.3
+  version: 1.5.0
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -384,7 +384,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.8
+  version: 0.5.9
   count: 2
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
@@ -395,17 +395,17 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: 0.2.1
+  version: 2.0.0
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.1.1
+  version: 1.2.0
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.3
+  version: 1.5.4
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -423,7 +423,7 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: 1.2.0
+  version: 1.3.1
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service

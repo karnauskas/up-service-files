@@ -30,7 +30,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 65.0.0
+  version: 65.1.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -63,7 +63,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.55.2
+  version: 1.56.0-fd-rc3
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
@@ -296,7 +296,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: 1.0.4
+  version: 1.1.0
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
@@ -513,7 +513,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.1.1
+  version: 1.1.2
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

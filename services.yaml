@@ -73,12 +73,12 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.2.0
+  version: 2.2.1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 1.0.1
+  version: 1.0.2
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service

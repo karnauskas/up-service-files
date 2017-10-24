@@ -18,9 +18,11 @@ ExecStartPre=/bin/bash -c 'docker history coco/content-exporter:$DOCKER_APP_VERS
 ExecStart=/bin/bash -c '\
     IS_INC_EXPORT_ENABLED=$(/usr/bin/etcdctl get /ft/config/content-exporter/is-enabled) || IS_INC_EXPORT_ENABLED=false; \
     MAX_GO_ROUTINES=$(/usr/bin/etcdctl get /ft/config/content-exporter/max-go-routines) || MAX_GO_ROUTINES=100; \
+    DELAY_FOR_NOTIFICATION=$(/usr/bin/etcdctl get /ft/config/content-exporter/delay-for-notification) || DELAY_FOR_NOTIFICATION=10; \
+    CONTENT_RETRIEVAL_THROTTLE=$(/usr/bin/etcdctl get /ft/config/content-exporter/content-retrieval-throttle) \
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="512m" \
-	--env "DELAY_FOR_NOTIFICATION=10" \
+	--env "DELAY_FOR_NOTIFICATION=$DELAY_FOR_NOTIFICATION" \
 	--env "MAX_GO_ROUTINES=$MAX_GO_ROUTINES" \
 	--env "ENRICHED_CONTENT_BASE_URL=http://%H:80" \
 	--env "ENRICHED_CONTENT_HEALTH_URL=http://%H:80/__api-policy-component/__gtg" \
@@ -33,6 +35,7 @@ ExecStart=/bin/bash -c '\
 	--env "TOPIC=PostPublicationEvents" \
 	--env "WHITELIST=^http://(methode|wordpress)-article-(transformer|mapper)(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/(content)/[\\w-]+.*$" \
 	--env "IS_INC_EXPORT_ENABLED=$IS_INC_EXPORT_ENABLED" \
+	--env "CONTENT_RETRIEVAL_THROTTLE =$CONTENT_RETRIEVAL_THROTTLE" \
 	coco/content-exporter:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 30 "$(docker ps -q --filter=name=%p-%i_)"'

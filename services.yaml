@@ -182,7 +182,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.2.1-k8s-rj-complresolve-rc1
+  version: 1.2.1-rj-expand-complementarycontent-images-rc1
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -210,7 +210,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.0.2
+  version: 2.1.0-rj-handle-promotionalImage-id-field-rc1
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service

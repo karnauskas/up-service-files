@@ -182,7 +182,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.2.0
+  version: 1.2.1-rj-expand-complementarycontent-images-rc1
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -294,7 +294,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.0
+  version: 1.0.1
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

@@ -47,13 +47,13 @@ services:
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.0.0
+  version: 15.0.1
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.0.0
+  version: 15.0.1
   count: 2
   sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
@@ -80,7 +80,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.29
+  version: 1.0.30-dp-find-by-id-rc2
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -96,7 +96,7 @@ services:
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.0.0
+  version: 15.0.1
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -363,7 +363,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.5-monitoring-logging-rc.2
+  version: 0.1.5
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service

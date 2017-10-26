@@ -80,7 +80,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.30-dp-find-by-id-rc2
+  version: 1.0.30-dp-find-by-id-rc3
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service

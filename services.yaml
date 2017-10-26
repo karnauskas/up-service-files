@@ -63,11 +63,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-<<<<<<< HEAD
-  version: 1.56.0-fd-rc5
-=======
   version: 1.56.0-k8s-fd-rc6
->>>>>>> video-metadata-monitoring
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2

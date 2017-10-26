@@ -21,8 +21,6 @@ ExecStart=/bin/sh -c '\
   export ELASTICSEARCH_WHITELISTED_CONCEPTS="genres,topics,sections,subjects,locations,brands,organisations,people"; \
   export ELASTICSEARCH_ENDPOINT=$(/usr/bin/etcdctl get /ft/config/aws_es_endpoint); \
   export ELASTICSEARCH_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
-  export PUBLISH_CLUSTER_URL=$(/usr/bin/etcdctl get /ft/config/publishing/read_url); \
-  export PUBLISH_CLUSTER_CREDENTIALS=$(/usr/bin/etcdctl get /ft/_credentials/publishing/authorization_key); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
     --memory="512m" \
     --env="APP_PORT=$APP_PORT" \
@@ -31,9 +29,6 @@ ExecStart=/bin/sh -c '\
     --env="AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
     --env="AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
     --env="ELASTICSEARCH_REGION=$ELASTICSEARCH_REGION" \
-    --env="PUBLISH_CLUSTER_URL=$PUBLISH_CLUSTER_URL" \
-    --env="PUBLISH_CLUSTER_CREDENTIALS=$PUBLISH_CLUSTER_CREDENTIALS" \
-    --env="AUTHOR_REFRESH_INTERVAL=60" \
     coco/concept-rw-elasticsearch:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

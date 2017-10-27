@@ -20,8 +20,8 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history nexus.in.ft.com:5000/coco/con
 # Setting the proper API_HOST parameter according to the current environment
 ExecStart=/bin/sh -c '\
   export ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
-  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server" ; \
-  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false" ; \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 -p 9010 \
       --env="JAVA_OPTS=$JAVA_OPTS" \
       --env="CONTENT_STORE_HOST=$HOSTNAME:8080:8081" \
       --env="CONTENT_PATH=/content" \

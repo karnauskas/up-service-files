@@ -19,8 +19,8 @@ ExecStart=/bin/bash -c '\
 	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
 	--memory="512m" \
 	--env "MAX_GO_ROUTINES=$MAX_GO_ROUTINES" \
-	--env "S3_WRITER_BASE_URL=http://%H:8080/__content-rw-s3" \
-	--env "S3_WRITER_HEALTH_URL=http://%H:8080/__content-rw-s3/__gtg" \
+	--env "S3_WRITER_BASE_URL=http://%H:8080/__upp-exports-rw-s3" \
+	--env "S3_WRITER_HEALTH_URL=http://%H:8080/__upp-exports-rw-s3/__gtg" \
 	--env "NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url)" \
 	coco/concept-exporter:$DOCKER_APP_VERSION'
 

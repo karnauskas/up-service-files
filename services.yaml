@@ -163,7 +163,6 @@ services:
 - name: content-public-read@.service
   version: visualvm
   count: 4
-  sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service

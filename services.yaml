@@ -78,6 +78,11 @@ services:
 - name: complementarycontent-ingester@.service
   version: 1.77.0
   count: 2
+- name: concept-exporter-sidekick@.service
+  count: 1
+- name: concept-exporter@.service
+  version: impl
+  count: 1
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service

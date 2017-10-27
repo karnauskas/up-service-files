@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 65.1.0-ops-logging-rc1
+  version: 65.1.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -57,13 +57,13 @@ services:
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-uk@.service
-  version: 15.0.0
+  version: 15.0.1
   count: 2
   sequentialDeployment: true
 - name: cms-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-us@.service
-  version: 15.0.0
+  version: 15.0.1
   count: 2
   sequentialDeployment: true
 - name: cms-kafka-bridge-pub-video-sidekick@.service
@@ -84,13 +84,13 @@ services:
 - name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: 15.0.0
+  version: 15.0.1
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us@.service
-  version: 15.0.0
+  version: 15.0.1
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-video-sidekick@.service
@@ -116,7 +116,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 1.0.1
+  version: 1.0.2
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -194,10 +194,10 @@ services:
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
-  count: 2
+  count: 4
 - name: content-public-read@.service
   version: 1.1.2
-  count: 2
+  count: 4
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
   count: 2
@@ -346,7 +346,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: 1.0.4
+  version: 1.1.0
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
@@ -421,7 +421,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.4
+  version: 0.1.5
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
@@ -559,7 +559,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.1.1
+  version: 1.1.2
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

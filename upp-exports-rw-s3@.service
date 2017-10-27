@@ -1,5 +1,5 @@
 [Unit]
-Description=UPP Exports RW for S3
+Description=UPP exports RW for S3
 After=vulcan.service
 Requires=docker.service
 Wants=upp-exports-rw-s3-sidekick@%i.service

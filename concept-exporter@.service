@@ -1,0 +1,32 @@
+[Unit]
+Description=Content Exporter
+After=vulcan.service
+Requires=docker.service
+Wants=concept-exporter-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+ExecStartPre=-/bin/bash -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker pull coco/concept-exporter:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/bash -c '\
+    MAX_GO_ROUTINES=$(/usr/bin/etcdctl get /ft/config/concept-exporter/max-go-routines) || MAX_GO_ROUTINES=100; \
+	docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+	--memory="512m" \
+	--env "MAX_GO_ROUTINES=$MAX_GO_ROUTINES" \
+	--env "S3_WRITER_BASE_URL=http://%H:8080/__upp-exports-rw-s3" \
+	--env "S3_WRITER_HEALTH_URL=http://%H:8080/__upp-exports-rw-s3/__gtg" \
+	--env "NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url)" \
+	coco/concept-exporter:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 30 "$(docker ps -q --filter=name=%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=concept-exporter@*.service

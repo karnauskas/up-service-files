@@ -71,7 +71,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.56.0-k8s-fd-rc6
+  version: 1.56.0-k8s-fd-rc7
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2

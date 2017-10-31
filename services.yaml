@@ -338,7 +338,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.4.0-k8s-fd-monitoring-logs-rc3
+  version: 1.4.0-k8s-fd-monitoring-logs-rc4
   count: 2
   sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service

@@ -95,7 +95,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.55.2
+  version: 1.56.0
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
@@ -380,7 +380,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.3.0
+  version: 1.4.0
   count: 2
   sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service

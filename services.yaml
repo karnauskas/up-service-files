@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 65.1.0
+  version: 66.0.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -111,7 +111,7 @@ services:
 - name: concept-exporter-sidekick@.service
   count: 1
 - name: concept-exporter@.service
-  version: impl
+  version: 1.0.0-xtrm-rc1
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2
@@ -127,7 +127,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.29
+  version: 1.0.30
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -189,7 +189,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: 1.0.8
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
@@ -268,7 +268,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: 1.0.8
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
@@ -415,7 +415,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 1.97.0
+  version: 1.98.0
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -546,7 +546,7 @@ services:
 - name: upp-exports-rw-s3-sidekick@.service
   count: 1
 - name: upp-exports-rw-s3@.service
-  version: 1.0.0-extreme-rc4
+  version: 1.0.0-extreme-rc5
   count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2

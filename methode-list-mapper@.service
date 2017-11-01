@@ -16,14 +16,17 @@ KillMode=none
 
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history up-registry.ft.com/coco/methode-list-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || docker pull up-registry.ft.com/coco/methode-list-mapper:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history nexus.in.ft.com:5000/coco/methode-list-mapper:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull nexus.in.ft.com:5000/coco/methode-list-mapper:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
-  --env "VULCAN_HOST=%H:8080" \
-  up-registry.ft.com/coco/methode-list-mapper:$DOCKER_APP_VERSION'
+  --env "THINGS_API_URL=%H:8080" \
+  --env "DOCUMENT_STORE_API_URL=%H:8080" \
+  --env "CONCORDANCE_API_URL=%H:8080" \
+  --env "KAFKA_PROXY_URL=%H:8080" \
+  nexus.in.ft.com:5000/coco/methode-list-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

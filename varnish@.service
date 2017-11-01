@@ -21,7 +21,6 @@ ExecStart=/bin/bash -c '\
   docker run --rm --name %p-%i_$(uuidgen) -p 80:80 \
   -e "VARNISH_BACKEND_HOST=%H" \
   -e "VARNISH_BACKEND_PORT=8080" \
-  -e "CONTENT_NOTIFICATIONS_PUSH_PORT=8548" \
   -e "LIST_NOTIFICATIONS_PUSH_PORT=8549" \
   -e "CONTENT_NOTIFICATIONS_PUSH_API_PORT=8599" \
   -e "HOST_HEADER=api-policy-component" \

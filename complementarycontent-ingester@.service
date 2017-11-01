@@ -1,8 +1,8 @@
 [Unit]
-Description=List Notifications Ingester
+Description=Complementary Content Ingester
 After=vulcan.service
 Requires=docker.service
-Wants=list-notifications-ingester-sidekick@%i.service
+Wants=complementarycontent-ingester-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -21,33 +21,28 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history nexus.in.ft.com:5000/coco/ing
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
   export ADMIN_PORT=8080; \
-  export ZOOKEEPER_HOST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
-  export ZOOKEEPER_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
+  export ZK_HOST=$(/usr/bin/etcdctl get /ft/config/zookeeper/ip); \
+  export ZK_PORT=$(/usr/bin/etcdctl get /ft/config/zookeeper/port); \
   export KAFKA_HOST=$(/usr/bin/etcdctl get /ft/config/kafka/ip); \
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
-  export WHITELIST="^http://methode-list-mapper(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/lists/[\\w-]+.*$"; \
-  export WRITER_HEALTHCHECK_NAME="Can connect to the List Notifications Reader/Writer"; \
-  export WRITER_HEALTHCHECK_TECH_SUMMARY="Tests that the build-info endpoint for the List Notifications Reader/Writer returns a 200 response"; \
+  export WHITELIST="^http://methode-content-placeholder-mapper(-pr|-iw)?(-uk-.*)?\\.svc\\.ft\\.com(:\\d{2,5})?/complementarycontent/[\\w-]+.*$"; \
+  export WR_HC_NAME="Can connect to the Document Store"; \
+  export WR_HC_TECH_SUMMARY="Tests that the build-info endpoint for the Document Store returns a 200 response"; \
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
-  export PANIC_GUIDE_URL="https://dewey.ft.com/list-notifications-ingester.html"; \
+  export PANIC_GUIDE_URL="https://dewey.ft.com/complementarycontent-ingester.html"; \
+  export COMPLEMENTARY_CONTENT_WRITER_PATH="${UPP_GATEWAY_PATH:-}/complementarycontent/{uuid}"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
       --env "JAVA_OPTS=$JAVA_OPTS" \
-      --env "INGESTER_APP_DESCRIPTION=ListNotificationsIngester" \
       --env "APP_PORT=$APP_PORT" --env "ADMIN_PORT=$ADMIN_PORT" \
-      --env "ZOOKEEPER_HOST=$ZOOKEEPER_HOST" --env "ZOOKEEPER_PORT=$ZOOKEEPER_PORT" \
-      --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" \
-      --env "KAFKA_GROUPNAME=list-notifications" \
-      --env "KAFKA_SYSTEM_ID=ListNotificationsIngester" \
-      --env "KAFKA_TOPIC_NAME=PostPublicationEvents" \
+      --env "ZOOKEEPER_HOST=$ZK_HOST" --env "ZOOKEEPER_PORT=$ZK_PORT" \
+      --env "KAFKA_HOST=$KAFKA_HOST" --env "KAFKA_PORT=$KAFKA_PORT" --env "KAFKA_GROUPNAME=complementarycontent" --env "KAFKA_SYSTEM_ID=ComplementaryContentIngester" --env "KAFKA_TOPIC_NAME=CmsPublicationEvents" \
       --env "TRANSFORMER_PROXY=$HOSTNAME:8080" \
       --env "WHITELIST=$WHITELIST" \
-      --env "WRITER_URL=%H:8080" \
-      --env "WRITER_HEADER=list-notifications-rw" \
-      --env "WRITER_NAME=ListNotificationsReaderWriter" \
-      --env "WRITER_HEALTHCHECK_NAME=$WRITER_HEALTHCHECK_NAME" \
-      --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WRITER_HEALTHCHECK_TECH_SUMMARY" \
-      --env "MESSAGE_FORWARDING_ENABLED=false" \
+      --env "WRITER_URL=%H:8080" --env "WRITER_HEADER=document-store-api" --env "WRITER_NAME=DocumentStore" --env "WRITER_HEALTHCHECK_NAME=$WR_HC_NAME" --env "WRITER_HEALTHCHECK_TECH_SUMMARY=$WR_HC_TECH_SUMMARY" \
+      --env "MESSAGE_FORWARDING_ENABLED=true" --env "FORWARD_TO_TOPIC_NAME=PostPublicationEvents" \
+      --env "KAFKA_PROXY_URL=%H:8080" \
       --env "PANIC_GUIDE_URL=$PANIC_GUIDE_URL"  \
+      --env "COMPLEMENTARY_CONTENT_WRITER_PATH=$COMPLEMENTARY_CONTENT_WRITER_PATH" \
       nexus.in.ft.com:5000/coco/ingester:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

@@ -507,7 +507,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.2.0-rj-fastft-syndicatable-rc3
+  version: 1.2.0
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

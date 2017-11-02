@@ -111,7 +111,7 @@ services:
 - name: concept-exporter-sidekick@.service
   count: 1
 - name: concept-exporter@.service
-  version: 1.0.0-xtrm-rc5
+  version: 1.0.0-xtrm-rc6
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2

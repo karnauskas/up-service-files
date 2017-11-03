@@ -10,26 +10,29 @@ TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove
 # work correctly.
 KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker login --username "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_user)" \
+--password "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_pass)" nexus.in.ft.com:5000 > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || docker pull up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history nexus.in.ft.com:5000/coco/content-public-read:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || docker pull nexus.in.ft.com:5000/coco/content-public-read:$DOCKER_APP_VERSION'
 
 # Setting the proper API_HOST parameter according to the current environment
 ExecStart=/bin/sh -c '\
   export ENV_API_HOST=$(etcdctl get /ft/config/api_host) ; \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server" ; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
-  					--env "JAVA_OPTS=$JAVA_OPTS" \
-  					--env "VULCAN_HOST=$HOSTNAME:8080:8081" \
-  					--env "CONTENT_PATH=content/" \
-  					--env "CONTENT_MULTIPLE_PATH=content" \
-  					--env "HOST_HEADER=document-store-api" \
-  					--env "CACHE_CONTROL_POLICY=\"max-age=$(/usr/bin/etcdctl get /ft/config/cache-max-age)\"" \
-  					--env "CONTENT_HEALTHCHECK_PATH=/__health" \
-  					--env "API_HOST=$ENV_API_HOST" \
-  					--env "IS_PREVIEW=false" \
-                    up-registry.ft.com/coco/content-public-read:$DOCKER_APP_VERSION;'
+      --env="JAVA_OPTS=$JAVA_OPTS" \
+      --env="CONTENT_STORE_HOST=$HOSTNAME:8080:8081" \
+      --env="CONTENT_PATH=/content" \
+      --env="CONTENT_MULTIPLE_PATH=/content" \
+      --env="CONTENT_STORE_HOST_HEADER=document-store-api" \
+      --env="CACHE_CONTROL_POLICY=\"max-age=$(/usr/bin/etcdctl get /ft/config/cache-max-age)\"" \
+      --env="CONTENT_HEALTHCHECK_PATH=/__health" \
+      --env="IMAGE_RESOLVER_HOST=$HOSTNAME:8080:8081" \
+      --env="API_HOST=$ENV_API_HOST" \
+      --env="IS_PREVIEW=false" \
+     nexus.in.ft.com:5000/coco/content-public-read:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

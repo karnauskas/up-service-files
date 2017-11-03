@@ -1,7 +1,7 @@
 [Unit]
-Description=Concepts Reader-Writer for Neo4j Service Sidekick
-BindsTo=concepts-rw-neo4j@%i.service
-After=concepts-rw-neo4j@%i.service
+Description=Content Exporter sidekick
+BindsTo=content-exporter@%i.service
+After=content-exporter@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -9,7 +9,7 @@ ExecStart=/bin/sh -c "\
   export SERVICE=$(echo %p | sed 's/-sidekick//g'); \
   etcdctl set   /ft/services/$SERVICE/healthcheck     true; \
   etcdctl mkdir /ft/services/$SERVICE/servers; \
-  etcdctl set /ft/healthcheck/$SERVICE-%i/path /__health; \
+  etcdctl set   /ft/healthcheck/$SERVICE-%i/path /__health; \
   while [ -z $PORT ]; do \
     sleep 5; \
     CONTAINER_NAME=$(docker ps -q --filter=name=\"$SERVICE\"-%i_); \
@@ -17,9 +17,7 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/$SERVICE/servers/%i'
-Restart=on-failure
-RestartSec=60
+ExecStop=-/bin/bash -c '/usr/bin/etcdctl rm /ft/services/content-exporter/servers/%i'
 
 [X-Fleet]
-MachineOf=concepts-rw-neo4j@%i.service
+MachineOf=content-exporter@%i.service

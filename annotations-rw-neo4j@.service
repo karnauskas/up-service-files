@@ -15,6 +15,7 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/annotations-rw-neo4j:$DO
   || /usr/bin/docker pull coco/annotations-rw-neo4j:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
+  export APP_NAME=annotations-rw-neo4j; \
   export APP_PORT=8080; \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
@@ -37,6 +38,7 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.annotations-rw-neo4j.%i" \
   --env "LOG_METRICS=false" \
+  --env "APP_NAME=$APP_NAME" \
   coco/annotations-rw-neo4j:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

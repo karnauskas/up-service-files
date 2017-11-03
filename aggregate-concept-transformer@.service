@@ -6,7 +6,7 @@ Wants=aggregate-concept-transformer-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
-Environment="APP_PORT=8080"
+Environment="PORT=8080"
 TimeoutStartSec=0
 KillMode=none
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
@@ -16,29 +16,22 @@ ExecStartPre=/bin/bash -c '/usr/bin/docker history coco/aggregate-concept-transf
 
 ExecStart=/bin/sh -c '\
     export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    export SQS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region); \
-    export BUCKET_REGION=$(/usr/bin/etcdctl get /ft/config/bucket_region); \
-    export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
-    export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
-    export BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket); \
-    export VULCAN_ADDR=http://%H:8080/; \
-    export QUEUE_URL=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/queue_url); \
-    export MAX_MESSAGES=10; \
-    export VISIBILITY_TIMEOUT=30; \
-    export WAIT_TIME=20; \
-    /usr/bin/docker run --rm -P --name %p-%i_$(uuidgen) \
-        --memory="512m" \
-        -e "APP_PORT=$APP_PORT" \
-	    -e "SQS_REGION=$SQS_REGION" \
-	    -e "BUCKET_REGION=$BUCKET_REGION" \
-	    -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
-	    -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
-	    -e "BUCKET_NAME=$BUCKET_NAME" \
-        -e "VULCAN_ADDR=$VULCAN_ADDR" \
-        -e "QUEUE_URL=$QUEUE_URL" \
-        -e "MAX_MESSAGES=$MAX_MESSAGES" \
-        -e "VISIBILITY_TIMEOUT=$VISIBILITY_TIMEOUT" \
-        -e "WAIT_TIME=$WAIT_TIME" \
+    /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
+      --memory="512m" \
+	  -e "SQS_REGION=$(/usr/bin/etcdctl get /ft/config/aws_region)" \
+	  -e "BUCKET_REGION=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket_region)" \
+	  -e "AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id)" \
+	  -e "AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key)" \
+	  -e "BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/bucket)" \
+      -e "NEO_WRITER_ADDRESS=http://%H:8080/__concepts-rw-neo4j" \
+      -e "ES_WRITER_ADDRESS=http://%H:8080/__concept-rw-elasticsearch/bulk" \
+      -e "DYNAMODB_TABLE=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/dynamodb_table)" \
+      -e "QUEUE_URL=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/queue_url)" \
+      -e "KINESIS_STREAM_NAME=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/kinesis_stream_name)" \
+      -e "LOG_LEVEL=$(/usr/bin/etcdctl get /ft/config/aggregate-concept-transformer/log_level)" \
+      -e "MAX_MESSAGES=10" \
+      -e "VISIBILITY_TIMEOUT=30" \
+      -e "WAIT_TIME=20" \
 	coco/aggregate-concept-transformer:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

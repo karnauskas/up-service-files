@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 65.1.0
+  version: 66.1.0-oc-fix-relative-url-redirect-rc.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service

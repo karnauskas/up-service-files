@@ -370,7 +370,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 94
+  version: "94"
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -457,10 +457,10 @@ services:
   count: 1
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
+- name: roles-rw-neo4j-sidekick@.service
+  count: 2
 - name: roles-rw-neo4j@.service
   version: v0.1.6
-  count: 2
-- name: roles-rw-neo4j-sidekick@.service
   count: 2
 - name: splunk-event-reader-sidekick@.service
   count: 2

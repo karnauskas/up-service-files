@@ -19,6 +19,7 @@ ExecStart=/bin/sh -c '\
   export SPLUNK_URL=$(/usr/bin/etcdctl get /ft/config/splunk-event-reader/url); \
   export ENVIRONMENT=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  --memory="256m" \
   --env "SPLUNK_USER=$SPLUNK_USER" \
   --env "SPLUNK_PASSWORD=$SPLUNK_PASSWORD" \
   --env "SPLUNK_URL=$SPLUNK_URL" \

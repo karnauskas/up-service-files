@@ -17,7 +17,6 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "APP_PORT=$APP_PORT" \
   --env "EVENT_READER_URL=http://%H:8080/__splunk-event-reader" \
-  --env "ETCD_URL=http://%H:4001" \
   --env "MAX_LOOKBACK_PERIOD_MIN=4320" \
   --env "SUPERSEDED_CHECK_PERIOD_MIN=4320" \
   coco/annotations-monitoring-service:$DOCKER_APP_VERSION'

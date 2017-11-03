@@ -482,7 +482,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: 1.67.0
+  version: 1.68.0
   count: 1
 - name: rec-reads-content-ingester@.service
   version: 1.77.0
@@ -538,7 +538,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: 1.67.0
+  version: 1.68.0
   count: 2
 - name: varnish@.service
   version: 0.2.0

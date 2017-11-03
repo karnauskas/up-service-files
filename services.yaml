@@ -19,7 +19,7 @@ services:
 - name: annotations-monitoring-sidekick@.service
   count: 2
 - name: annotations-monitoring@.service
-  version: 0.0.1-k8s-fd-rc23
+  version: 1.0.0
   count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
@@ -84,7 +84,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.29
+  version: 1.0.30
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -123,6 +123,11 @@ services:
 - name: content-collection-unfolder@.service
   version: 1.2.0
   count: 2
+- name: content-exporter-sidekick@.service
+  count: 1
+- name: content-exporter@.service
+  version: 1.1.5
+  count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
@@ -146,16 +151,21 @@ services:
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
-  count: 2
+  count: 4
 - name: content-public-read@.service
   version: 1.1.2
-  count: 2
+  count: 4
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
   version: 2.0.2
   count: 2
+- name: content-rw-s3-sidekick@.service
+  count: 1
+- name: content-rw-s3@.service
+  version: 1.0.1
+  count: 1
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
   version: 1.1.1
@@ -174,7 +184,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.2.1-k8s-rj-complresolve-rc1
+  version: 1.2.1
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -202,7 +212,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.0.2
+  version: 2.1.0
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -291,7 +301,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.1
+  version: 1.0.2
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -462,12 +472,10 @@ services:
 - name: roles-rw-neo4j@.service
   version: 0.2.0
   count: 2
-- name: roles-rw-neo4j-sidekick@.service
-  count: 2
 - name: splunk-event-reader-sidekick@.service
   count: 2
 - name: splunk-event-reader@.service
-  version: 0.0.10-fd
+  version: 1.0.0
   count: 2
   sequentialDeployment: true
 - name: splunk-forwarder.service
@@ -513,7 +521,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.1.2
+  version: 1.2.0
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

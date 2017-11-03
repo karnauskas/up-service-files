@@ -14,14 +14,11 @@ ExecStartPre=/bin/bash -c 'docker history coco/annotations-monitoring-service:$D
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
-  export MAX_LOOKBACK_PERIOD_MIN=$(/usr/bin/etcdctl get /ft/config/annotations-monitoring/max-lookback-period-min); \
-  export SUPERSEDED_LOOKBACK_PERIOD_MIN=$(/usr/bin/etcdctl get /ft/config/annotations-monitoring/superseded-lookback-period-min); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "APP_PORT=$APP_PORT" \
   --env "EVENT_READER_URL=http://%H:8080/__splunk-event-reader" \
-  --env "ETCD_URL=http://%H:4001" \
-  --env "MAX_LOOKBACK_PERIOD_MIN=$MAX_LOOKBACK_PERIOD_MIN" \
-  --env "SUPERSEDED_CHECK_PERIOD_MIN=$SUPERSEDED_LOOKBACK_PERIOD_MIN" \
+  --env "MAX_LOOKBACK_PERIOD_MIN=4320" \
+  --env "SUPERSEDED_CHECK_PERIOD_MIN=4320" \
   coco/annotations-monitoring-service:$DOCKER_APP_VERSION'
 
 #Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.

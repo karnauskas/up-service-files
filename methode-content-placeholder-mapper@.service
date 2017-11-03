@@ -2,7 +2,7 @@
 Description=Methode Content Placeholder Mapper
 After=vulcan.service
 Requires=docker.service
-Wants=methode-content-placeholder-mappercms-notifier-sidekick@%i.service
+Wants=methode-content-placeholder-mapper-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"

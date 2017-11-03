@@ -472,8 +472,6 @@ services:
   count: 1
 - name: roles-rw-neo4j-sidekick@.service
   count: 2
-- name: roles-rw-neo4j-sidekick@.service
-  count: 2
 - name: roles-rw-neo4j@.service
   version: 0.2.0
   count: 2

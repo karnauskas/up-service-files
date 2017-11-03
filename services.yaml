@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 66.0.0
+  version: 66.1.0-oc-fix-relative-url-redirect-rc.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -80,7 +80,11 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
+<<<<<<< HEAD
   version: 1.0.30-dp-find-by-id-rc3
+=======
+  version: 1.0.30
+>>>>>>> fix/api-policy-component-relativer-url-redirect
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -119,6 +123,11 @@ services:
 - name: content-collection-unfolder@.service
   version: 1.2.0
   count: 2
+- name: content-exporter-sidekick@.service
+  count: 1
+- name: content-exporter@.service
+  version: 1.1.5
+  count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
@@ -132,7 +141,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: 1.0.8
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service
@@ -142,10 +151,10 @@ services:
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
-  count: 2
+  count: 4
 - name: content-public-read@.service
   version: 1.1.2
-  count: 2
+  count: 4
   sequentialDeployment: true
 - name: coco-traffic-analyser.service
 - name: content-rw-neo4j-sidekick@.service
@@ -153,6 +162,11 @@ services:
 - name: content-rw-neo4j@.service
   version: 2.0.2
   count: 2
+- name: content-rw-s3-sidekick@.service
+  count: 1
+- name: content-rw-s3@.service
+  version: 1.0.1
+  count: 1
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
   version: 1.1.1
@@ -171,7 +185,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.2.0
+  version: 1.2.1
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -199,7 +213,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.0.2
+  version: 2.1.0
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -210,7 +224,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: 1.0.8
+  version: 2.0.1
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service
@@ -266,7 +280,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.5.1
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -278,12 +292,16 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.0.3
+  version: 1.1.0
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
+<<<<<<< HEAD
   version: 0.2.0-k8s-wpcph-rc8
+=======
+  version: 1.0.2
+>>>>>>> fix/api-policy-component-relativer-url-redirect
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -303,7 +321,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.1.1
+  version: 1.2.0
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -427,7 +445,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: 1.67.0
+  version: 1.68.0
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
@@ -478,7 +496,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: 1.67.0
+  version: 1.68.0
   count: 2
 - name: varnish@.service
   version: 0.2.0
@@ -491,7 +509,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.1.2
+  version: 1.2.0
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

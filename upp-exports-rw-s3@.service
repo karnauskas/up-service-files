@@ -16,7 +16,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/upp-exports-rw-s3:$DOCKER_APP_VER
 
 ExecStart=/bin/sh -c '\
     export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
-    export AWS_REGION=$(/usr/bin/etcdctl get /ft/config/upp-exports-rw-s3/aws_region); \
+    export AWS_REGION=$(/usr/bin/etcdctl get /ft/config/bucket_region); \
     export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
     export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
     export BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/upp-exports-rw-s3/bucket); \
@@ -44,4 +44,3 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=upp-exports-rw-s3@*.service
-

@@ -400,7 +400,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.4
+  version: 1.5.5
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

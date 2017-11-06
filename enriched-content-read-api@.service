@@ -21,6 +21,7 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "CONTENT_API_HOST=%H:8080" \
+  --env "DOCUMENT_STORE_API_HOST=%H:8080" \
   --env "ANNOTATIONS_API_HOST=%H:8080" \
   --env "RELATIONS_API_HOST=%H:8080" \
   --env "IMAGE_RESOLVER_HOST=%H:8080" \

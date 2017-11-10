@@ -343,9 +343,9 @@ services:
   version: v3.0.2
   count: 3
   sequentialDeployment: true
-- name: mongolizer-sidekick@.service
+- name: mongo-hot-backup-sidekick@.service
   count: 1
-- name: mongolizer@.service
+- name: mongo-hot-backup@.service
   version: 2.0.0-productionize-rc7
   count: 1
 - name: next-video-annotations-mapper-sidekick@.service

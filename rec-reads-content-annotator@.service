@@ -9,10 +9,12 @@ Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker login --username "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_user)" \
+--password "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_pass)" nexus.in.ft.com:5000 > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c '/usr/bin/docker history up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION > /dev/null 2>&1 \
-  || /usr/bin/docker pull up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c '/usr/bin/docker history nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION > /dev/null 2>&1 \
+  || /usr/bin/docker pull nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export APP_PORT=8080; \
@@ -33,7 +35,6 @@ ExecStart=/bin/sh -c '\
   --env "WRITER_PATH=/rr-suggestions" \
   --env "WRITER_ENDPOINT=$WRITER_HOST:$WRITER_PORT" \
   --env "WRITER_CREDENTIALS=$WRITER_CREDENTIALS" \
-  --env "WRITER_HOST_HEADER=upp-gateway" \
   --env "WRITER_HEALTHCHECK_PATH=/build-info" \
   --env "MESSAGE_FORWARDING_ENABLED=false" \
   --env "ANNOTATING_SYSTEM=concept-suggestor" \
@@ -42,7 +43,7 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.rec-reads-content-annotator.%i" \
-  up-registry.ft.com/coco/content-annotator:$DOCKER_APP_VERSION;'
+  nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

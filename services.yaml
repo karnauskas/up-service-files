@@ -211,7 +211,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.8
+  version: 1.0.9
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -305,7 +305,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: 0.1.6
+  version: 0.1.7
   count: 2
   sequentialDeployment: true
 - name: memberships-rw-neo4j-sidekick@.service
@@ -407,7 +407,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 1.98.0
+  version: 1.98.1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

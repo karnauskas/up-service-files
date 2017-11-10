@@ -1,7 +1,7 @@
 [Unit]
-Description=mongolizer-sidekick
-BindsTo=mongolizer@%i.service
-After=mongolizer@%i.service
+Description=mongo-hot-backup-sidekick
+BindsTo=mongo-hot-backup@%i.service
+After=mongo-hot-backup@%i.service
 
 [Service]
 RemainAfterExit=yes
@@ -18,9 +18,9 @@ ExecStart=/bin/sh -c "\
   done; \
   etcdctl set /ft/services/$SERVICE/servers/%i http://%H:$PORT;"
 
-ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/mongolizer/servers/%i'
+ExecStop=-/bin/bash -c 'etcdctl rm /ft/services/mongo-hot-backup/servers/%i'
 Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=mongolizer@%i.service
+MachineOf=mongo-hot-backup@%i.service

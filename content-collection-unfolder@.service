@@ -21,6 +21,7 @@ ExecStart=/bin/sh -c '\
   --env "WRITER_HEALTH_URI=http://%H:8080/__content-collection-rw-neo4j/__health" \
   --env "CONTENT_RESOLVER_URI=http://%H:8080/__document-store-api/content/" \
   --env "CONTENT_RESOLVER_HEALTH_URI=http://%H:8080/__document-store-api/__health" \
+  --env "CONTENT_COLLECTION_RELATIONS_URI=http://%H:8080/__relations-api/contentcollection/{uuid}/relations" \
   --env "Q_WRITE_TOPIC=PostPublicationEvents" \
   --env "Q_ADDR=http://%H:8080" \
   --env "Q_HOSTNAME=kafka" \

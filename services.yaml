@@ -458,7 +458,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.1.0-k8s-rj-cp-notifications-rc1
+  version: 2.1.0-k8s-rj-cp-notifications-rc2
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service

@@ -2,7 +2,7 @@
 Description=Creates mongodb backups.
 After=vulcan.service
 Requires=docker.service
-Wants=mongolizer-sidekick@%i.service
+Wants=mongo-hot-backup-sidekick@%i.service
 
 [Service]
 Environment="DOCKER_APP_VERSION=latest"
@@ -11,7 +11,7 @@ KillMode=none
 
 ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
 ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
-ExecStartPre=/bin/bash -c 'docker history coco/mongolizer:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/mongolizer:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/bash -c 'docker history nexus.in.ft.com:5000/coco/mongo-hot-backup:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull nexus.in.ft.com:5000/coco/mongo-hot-backup:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export MONGODB=$(for x in $(etcdctl ls /ft/config/mongodb);do echo -n $(etcdctl get $x/host):$(etcdctl get $x/port)"," ; done | sed s/.$//); \
@@ -21,6 +21,7 @@ ExecStart=/bin/sh -c '\
   export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id);\
   export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
+  -v /vol/mongo-hot-backup:/var/data/mongobackup \
   --env "MONGODB=$MONGODB" \
   --env "S3_DOMAIN=$S3_DOMAIN" \
   --env "S3_BUCKET=$S3_BUCKET" \
@@ -29,8 +30,7 @@ ExecStart=/bin/sh -c '\
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   --env "MONGODB_COLLECTIONS=upp-store/content,upp-store/lists,upp-store/internalcomponents,upp-store/notifications,upp-store/list-notifications" \
   --env "CRON=0 15 * * *" \
-  --env "RUN=false" \
-  coco/mongolizer:$DOCKER_APP_VERSION'
+  nexus.in.ft.com:5000/coco/mongo-hot-backup:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
 Restart=on-failure
@@ -41,4 +41,4 @@ WantedBy=multi-user.target
 
 [X-Fleet]
 Conflicts=%p@*.service
-MachineMetadata=persistent_tag=%i
+MachineMetadata=persistent_tag=1

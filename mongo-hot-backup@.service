@@ -30,6 +30,7 @@ ExecStart=/bin/sh -c '\
   --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   --env "MONGODB_COLLECTIONS=upp-store/content,upp-store/lists,upp-store/internalcomponents,upp-store/notifications,upp-store/list-notifications" \
   --env "CRON=0 15 * * *" \
+  --env "RUN=false" \
   nexus.in.ft.com:5000/coco/mongo-hot-backup:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

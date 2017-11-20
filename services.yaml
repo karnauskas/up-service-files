@@ -343,7 +343,7 @@ services:
 - name: mongo-hot-backup-sidekick@.service
   count: 1
 - name: mongo-hot-backup@.service
-  version: lets-productionize
+  version: 2.0.0-k8s-productionize-rc14
   count: 1
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2

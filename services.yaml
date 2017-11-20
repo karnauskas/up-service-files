@@ -442,7 +442,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.5.0
+  version: 1.5.1
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service

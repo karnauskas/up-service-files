@@ -97,7 +97,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.30
+  version: 1.0.31
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service

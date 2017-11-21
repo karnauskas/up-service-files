@@ -52,7 +52,7 @@ services:
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-xp@.service
-  version: 15.0.2-k8s
+  version: 15.0.2
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2

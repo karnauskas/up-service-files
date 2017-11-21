@@ -52,12 +52,12 @@ services:
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-xp@.service
-  version: 15.0.2-k8s-pre-prod-config-rc1
+  version: 15.0.2-k8s
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp@.service
-  version: 15.0.2-k8s-pre-prod-config-rc1
+  version: 15.0.2
   count: 2
   sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
@@ -89,13 +89,13 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.30
+  version: 1.0.31
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.11
+  version: 0.0.12
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
@@ -105,7 +105,7 @@ services:
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-xp@.service
-  version: 15.0.2-k8s-pre-prod-config-rc1
+  version: 15.0.2
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -205,7 +205,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.4.0
+  version: 1.4.1
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
@@ -402,7 +402,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.4
+  version: 1.5.5
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -432,7 +432,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 1.0.4
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service
@@ -444,7 +444,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.5.0
+  version: 1.5.1
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service

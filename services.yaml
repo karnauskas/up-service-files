@@ -58,17 +58,22 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.55.2
+  version: 1.56.0
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
 - name: complementarycontent-ingester@.service
   version: 1.77.0
   count: 2
+- name: concept-exporter-sidekick@.service
+  count: 1
+- name: concept-exporter@.service
+  version: 1.0.0
+  count: 1
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.2.0
+  version: 2.2.1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -79,13 +84,13 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.30
+  version: 1.0.31
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.10
+  version: 0.0.12
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
@@ -156,11 +161,6 @@ services:
 - name: content-rw-neo4j@.service
   version: 2.0.2
   count: 2
-- name: content-rw-s3-sidekick@.service
-  count: 1
-- name: content-rw-s3@.service
-  version: 1.0.1
-  count: 1
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
   version: 1.1.1
@@ -169,7 +169,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.8
+  version: 1.0.9
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -258,7 +258,7 @@ services:
 - name: list-notifications-rw-sidekick@.service
   count: 2
 - name: list-notifications-rw@.service
-  version: 0.1.6
+  version: 0.1.7
   count: 2
   sequentialDeployment: true
 - name: memberships-rw-neo4j-sidekick@.service
@@ -274,7 +274,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.6.0
+  version: 1.7.0
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -286,12 +286,12 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.2
+  version: 1.0.4
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -333,7 +333,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.3.0
+  version: 1.4.0
   count: 2
   sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
@@ -360,7 +360,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 1.98.0
+  version: 1.98.1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -377,7 +377,7 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: 2.0.0
+  version: 2.0.1-sm-imageurl-rc1
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2
@@ -477,6 +477,11 @@ services:
   count: 1
 - name: up-queue-sender-v1-metadata@.service
   version: v0.0.2
+  count: 1
+- name: upp-exports-rw-s3-sidekick@.service
+  count: 1
+- name: upp-exports-rw-s3@.service
+  version: 1.1.0
   count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2

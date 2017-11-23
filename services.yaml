@@ -31,7 +31,7 @@ services:
 - name: binary-ingester-sidekick@.service
   count: 2
 - name: binary-ingester@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 2
 - name: binary-writer-sidekick@.service
   count: 2
@@ -57,25 +57,25 @@ services:
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-uk@.service
-  version: 15.0.1
+  version: 15.0.2
   count: 2
   sequentialDeployment: true
 - name: cms-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-us@.service
-  version: 15.0.1
+  version: 15.0.2
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: 15.0.1
+  version: 15.0.2
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us@.service
-  version: 15.0.1
+  version: 15.0.2
   count: 2
   sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
@@ -86,7 +86,7 @@ services:
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
 - name: complementarycontent-ingester@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 2
 - name: concept-exporter-sidekick@.service
   count: 1
@@ -107,13 +107,13 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.30
+  version: 1.0.31
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.11
+  version: 0.0.12
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
@@ -123,7 +123,7 @@ services:
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-prod@.service
-  version: 15.0.1
+  version: 15.0.2
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -134,7 +134,7 @@ services:
 - name: content-collection-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-collection-ingester-neo4j@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 2
 - name: content-collection-rw-neo4j-sidekick@.service
   count: 2
@@ -154,12 +154,12 @@ services:
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
 - name: content-ingester-neo4j@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 2
 - name: content-ingester-sidekick@.service
   count: 2
 - name: content-ingester@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 2
 - name: content-preview-sidekick@.service
   count: 2
@@ -222,7 +222,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.4.0
+  version: 1.4.1
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
@@ -269,7 +269,7 @@ services:
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 2
 - name: list-notifications-push-sidekick@.service
   count: 2
@@ -296,7 +296,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.7.0
+  version: 1.7.1-k8s-api-host-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -313,7 +313,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.4-k8s-fix-complementarycontent-brands-rc1
+  version: 1.0.4
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -376,7 +376,7 @@ services:
 - name: notifications-ingester-sidekick@.service
   count: 2
 - name: notifications-ingester@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 2
 - name: notifications-push-sidekick@.service
   count: 2
@@ -404,7 +404,7 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: 2.0.0
+  version: 2.0.1
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2
@@ -444,7 +444,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 1.0.4
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service
@@ -456,7 +456,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.5.0
+  version: 1.5.1
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service
@@ -467,7 +467,7 @@ services:
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
 - name: rec-reads-content-ingester@.service
-  version: 1.77.1-k8s-cleanup-rc1
+  version: 1.77.1
   count: 1
 - name: relations-api-sidekick@.service
   count: 2

@@ -212,7 +212,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.1.1-k8s-simplification-rc2
+  version: 2.1.1-k8s-simplification-rc3
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service

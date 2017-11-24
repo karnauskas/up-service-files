@@ -546,7 +546,7 @@ services:
 - name: upp-exports-rw-s3-sidekick@.service
   count: 1
 - name: upp-exports-rw-s3@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2

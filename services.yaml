@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 66.1.0
+  version: 66.1.1-k8s-query-param-encoding-rc1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -356,7 +356,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.5.2
+  version: 3.5.3
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

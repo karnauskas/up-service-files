@@ -100,7 +100,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.1-k8s-ces-host-rc1
+  version: 1.47.1-k8s-ces-host-rc2
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1

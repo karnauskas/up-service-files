@@ -293,7 +293,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.2-k8s-api-host-rc1
+  version: 1.6.2-k8s-api-host-rc2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

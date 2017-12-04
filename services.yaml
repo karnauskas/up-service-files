@@ -132,7 +132,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.0
+  version: 1.47.1
   count: 1
 - name: concepts-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 1

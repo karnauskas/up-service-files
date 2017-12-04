@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.5.1
+  version: 1.6.0-k8s-hc-rc1
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
@@ -63,7 +63,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.57.0-k8s-fd-unique-video-metadata-tid-rc1
+  version: 1.57.0
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
@@ -508,7 +508,7 @@ services:
 - name: upp-exports-rw-s3-sidekick@.service
   count: 1
 - name: upp-exports-rw-s3@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2

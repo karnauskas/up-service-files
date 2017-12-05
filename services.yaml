@@ -387,7 +387,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.6.0-k8s-implicit-abouts-rc1
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

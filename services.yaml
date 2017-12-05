@@ -144,7 +144,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.3.0-k8s-rj-cp-notifications-rc13
+  version: 1.3.0-k8s-rj-cp-notifications-rc14
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1

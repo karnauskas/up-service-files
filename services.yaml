@@ -95,7 +95,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.0
+  version: 1.47.1
   count: 1
 - name: concepts-kafka-bridge-pub-semantic-sidekick@.service
   count: 1
@@ -105,7 +105,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.5.3
+  version: 1.6.0-sm-addHash-rc1
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service

@@ -287,7 +287,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.7.1
+  version: 1.7.2-k8s-rj-design-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

@@ -134,7 +134,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.2.0
+  version: 1.3.0
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1
@@ -458,7 +458,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.0.1
+  version: 2.1.0
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service

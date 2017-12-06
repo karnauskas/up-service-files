@@ -81,7 +81,7 @@ services:
 - name: concept-exporter-sidekick@.service
   count: 1
 - name: concept-exporter@.service
-  version: 1.0.0
+  version: 1.0.1-k8s-hc-rc11
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2

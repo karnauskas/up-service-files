@@ -18,6 +18,7 @@ ExecStartPre=/bin/bash -c 'docker history coco/methode-article-internal-componen
   || docker pull coco/methode-article-internal-components-mapper:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
+  export API_HOST=$(/usr/bin/etcdctl get /ft/config/api_host) ;\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "METHODE_ARTICLE_MAPPER_URL=%H:8080" \
   --env "METHODE_CPH_MAPPER_URL=%H:8080" \
@@ -25,6 +26,7 @@ ExecStart=/bin/sh -c '\
   --env "CONCORDANCE_API_URL=%H:8080" \
   --env "KAFKA_PROXY_URL=%H:8080" \
   --env "JAVA_OPTS=$JAVA_OPTS" \
+  --env "API_HOST=$API_HOST" \
   coco/methode-article-internal-components-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

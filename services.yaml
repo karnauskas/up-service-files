@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 66.1.0
+  version: 66.1.1
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -111,7 +111,7 @@ services:
 - name: concept-exporter-sidekick@.service
   count: 1
 - name: concept-exporter@.service
-  version: 1.0.1-k8s-hc-rc3
+  version: 1.0.1-k8s-hc-rc11
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2
@@ -138,7 +138,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.0
+  version: 1.47.1
   count: 1
 - name: concepts-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 1
@@ -169,12 +169,12 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.2.0
+  version: 1.3.0
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1
 - name: content-exporter@.service
-  version: 1.2.0-k8s-helmfix-rc8
+  version: 1.2.0
   count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -329,13 +329,13 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.7.0
+  version: 1.7.1
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.1
+  version: 1.6.2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -505,7 +505,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.0.1
+  version: 2.1.0
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service

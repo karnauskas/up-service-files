@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.5.1
+  version: 1.7.0-sm-handleUpdatedIDs-rc2
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2

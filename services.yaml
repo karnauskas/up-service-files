@@ -13,13 +13,13 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.3
+  version: 1.1.14-fd-ann-monitoring-rc1
   count: 2
   sequentialDeployment: true
 - name: annotations-monitoring-sidekick@.service
   count: 1
 - name: annotations-monitoring@.service
-  version: 1.0.0
+  version: 1.0.1-k8s-fd-healthcheck-fix-rc1
   count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2

@@ -19,7 +19,7 @@ services:
 - name: annotations-monitoring-sidekick@.service
   count: 1
 - name: annotations-monitoring@.service
-  version: 1.0.0
+  version: 1.0.1-k8s-fd-healthcheck-fix-rc1
   count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2

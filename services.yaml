@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.7.0-sm-handleUpdatedIDs-rc3
+  version: 1.7.0
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
@@ -118,7 +118,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.6.0-sm-addHash-rc3
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -213,7 +213,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.5.0-sm-writeOnUpdateFlag-rc5
+  version: 1.5.1
   count: 1
 - name: image-cleaner.service
   version: 1.0.0

@@ -279,7 +279,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.4.0
+  version: 1.4.1-k8s-increase-mem-rc1
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -290,7 +290,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.2
+  version: 1.6.3-k8s-increase-mem-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -321,7 +321,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.2.0
+  version: 1.2.1-k8s-increase-mem-rc1
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

@@ -24,6 +24,7 @@ ExecStart=/bin/sh -c '\
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
       --memory="512m" \
       -e "APP_PORT=$APP_PORT" \
+      -e "APP_NAME=generic-rw-s3" \
       -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
       -e "GRAPHITE_PREFIX=coco.services.$ENV.generic-rw-s3.%i" \
 	    -e "AWS_REGION=$AWS_REGION" \

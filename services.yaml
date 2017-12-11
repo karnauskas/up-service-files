@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.3
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service

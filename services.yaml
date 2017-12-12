@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.3
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
@@ -42,24 +42,24 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: 2.1.0
+  version: 2.1.1
   count: 1
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.0.2
+  version: 15.0.3
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.0.2
+  version: 15.0.3
   count: 2
   sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.56.0
+  version: 1.57.1
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
@@ -96,12 +96,12 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.0
+  version: 1.47.1
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.0.2
+  version: 15.0.3
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -122,12 +122,12 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.2.0
+  version: 1.3.0
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1
 - name: content-exporter@.service
-  version: 1.1.5
+  version: 1.2.0
   count: 1
 - name: content-ingester-neo4j-sidekick@.service
   count: 2
@@ -276,13 +276,13 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.7.0
+  version: 1.7.1
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.1
+  version: 1.6.2
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -362,7 +362,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 1.98.1
+  version: 1.98.2-k8s-ops-log-defrag-rc1
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service
@@ -389,7 +389,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.6.0-k8s-implicit-abouts-rc1
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
@@ -447,7 +447,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.0.1
+  version: 2.1.0
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service
@@ -488,7 +488,7 @@ services:
 - name: upp-exports-rw-s3-sidekick@.service
   count: 1
 - name: upp-exports-rw-s3@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 1
 - name: v2-content-annotator-sidekick@.service
   count: 2

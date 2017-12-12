@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.0.3
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 66.1.1
+  version: 66.2.0-k8s-hc-helm-rc2
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -42,7 +42,7 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: 2.1.0
+  version: 2.1.1
   count: 1
 - name: cms-kafka-bridge-pub-pre-prod-uk-sidekick@.service
   count: 2
@@ -101,7 +101,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.57.0
+  version: 1.57.1
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2
@@ -442,7 +442,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.5.5
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

@@ -19,7 +19,7 @@ services:
 - name: annotations-monitoring-sidekick@.service
   count: 1
 - name: annotations-monitoring@.service
-  version: 1.0.1
+  version: 1.0.2-xp
   count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
@@ -475,7 +475,7 @@ services:
 - name: splunk-event-reader-sidekick@.service
   count: 2
 - name: splunk-event-reader@.service
-  version: 0.0.11-xp
+  version: 0.0.12-xp
   count: 2
   sequentialDeployment: true
 - name: splunk-forwarder.service

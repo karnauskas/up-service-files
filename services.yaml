@@ -96,7 +96,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.2-k8s-ops-redact-creds-rc1
+  version: 1.47.2
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1

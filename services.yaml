@@ -36,7 +36,7 @@ services:
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: 1.78.0
+  version: 1.79.0-k8s-hc-helm-rc1
   count: 2
   sequentialDeployment: true
 - name: burrow-sidekick@.service
@@ -57,13 +57,13 @@ services:
 - name: cms-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-uk@.service
-  version: 15.0.2
+  version: 15.0.3
   count: 2
   sequentialDeployment: true
 - name: cms-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-prod-us@.service
-  version: 15.0.2
+  version: 15.0.3
   count: 2
   sequentialDeployment: true
 - name: cms-kafka-bridge-pub-video-sidekick@.service
@@ -84,13 +84,13 @@ services:
 - name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: 15.0.2
+  version: 15.0.3
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-prod-us@.service
-  version: 15.0.2
+  version: 15.0.3
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-video-sidekick@.service

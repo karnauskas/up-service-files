@@ -20,11 +20,13 @@ ExecStart=/bin/sh -c '\
   export LOG_LEVEL=$(/usr/bin/etcdctl get /ft/config/concepts-rw-neo4j/loglevel); \
   export BATCH_SIZE=$(/usr/bin/etcdctl get /ft/config/concepts-rw-neo4j/batchsize); \
   export NEO_URL=$(/usr/bin/etcdctl get /ft/config/neo4j/read_write_url); \
+  export REQUEST_LOGGING_ON=$(usr/bin/etcdctl get /ft/config/neo4j/req_logging_enabled); \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
   --memory="256m" \
   --env "NEO_URL=$NEO_URL" \
   --env "BATCH_SIZE=$BATCH_SIZE" \
   --env "LOG_LEVEL=$LOG_LEVEL" \
+  --env "REQUEST_LOGGING_ON=$REQUEST_LOGGING_ON" \
   coco/concepts-rw-neo4j:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

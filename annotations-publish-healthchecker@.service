@@ -16,7 +16,7 @@ ExecStart=/bin/sh -c '\
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --memory="512m" \
   --env "APP_PORT=8080" \
-  --env "EVENT_READER_URL=http://%H:8080/__splunk-event-reader" \
+  --env "SPLUNK_EVENT_READER=http://%H:8080/__splunk-event-reader" \
   coco/annotations-publish-healthchecker:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'

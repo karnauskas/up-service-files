@@ -20,6 +20,7 @@ services:
   count: 1
 - name: annotations-monitoring@.service
   version: 1.0.2-xp
+  count: 1
 - name: annotations-publish-healthchecker-sidekick@.service
   count: 1
 - name: annotations-publish-healthchecker@.service

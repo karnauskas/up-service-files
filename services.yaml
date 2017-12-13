@@ -20,6 +20,10 @@ services:
   count: 1
 - name: annotations-monitoring@.service
   version: 1.0.2-xp
+- name: annotations-publish-healthchecker-sidekick@.service
+  count: 1
+- name: annotations-publish-healthchecker@.service
+  version: 1.0.0-xp-rc3
   count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
@@ -100,7 +104,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.1-k8s-ces-host-rc2
+  version: 1.47.2
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
@@ -110,7 +114,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.5.3
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -205,7 +209,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.4.1
+  version: 1.5.1
   count: 1
 - name: image-cleaner.service
   version: 1.0.0

@@ -16,6 +16,11 @@ services:
   version: 1.1.0
   count: 2
   sequentialDeployment: true
+- name: annotations-publish-healthchecker-sidekick@.service
+  count: 1
+- name: annotations-publish-healthchecker@.service
+  version: 1.0.0-xp-rc3
+  count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service

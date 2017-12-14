@@ -20,20 +20,24 @@ ExecStart=/bin/sh -c '\
     export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_access_key_id); \
     export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/_credentials/aws/aws_secret_access_key); \
     export BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/generic-rw-s3/bucket); \
+    export LOG_LEVEL=$(/usr/bin/etcdctl get /ft/config/generic-rw-s3/log_level); \
     /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $PORT \
-        --memory="512m" \
-        -e "APP_PORT=$APP_PORT" \
-        -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
-        -e "GRAPHITE_PREFIX=coco.services.$ENV.generic-rw-s3.%i" \
+      --memory="512m" \
+      -e "APP_PORT=$APP_PORT" \
+      -e "APP_NAME=generic-rw-s3" \
+      -e "GRAPHITE_ADDRESS=graphite.ft.com:2003" \
+      -e "GRAPHITE_PREFIX=coco.services.$ENV.generic-rw-s3.%i" \
 	    -e "AWS_REGION=$AWS_REGION" \
 	    -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
 	    -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
 	    -e "BUCKET_NAME=$BUCKET_NAME" \
-        -e "LOG_METRICS=false" \
+      -e "LOG_METRICS=false" \
 	    -e "SRC_ADDR=http://%H:8080/__kafka-rest-proxy" \
 	    -e "SRC_GROUP=generic-rw-s3-ConceptSuggestions" \
 	    -e "SRC_TOPIC=ConceptSuggestions" \
 	    -e "SRC_CONCURRENT_PROCESSING=true" \
+      -e "LOG_LEVEL=$LOG_LEVEL" \
+      -e "ONLY_UPDATES_ENABLED=true" \
 	coco/generic-rw-s3:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
@@ -42,4 +46,3 @@ RestartSec=60
 
 [X-Fleet]
 Conflicts=generic-rw-s3@*.service
-

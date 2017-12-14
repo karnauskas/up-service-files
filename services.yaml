@@ -115,7 +115,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.6.0
+  version: 1.7.0-k8s-helm-improvements-rc2
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -380,7 +380,7 @@ services:
 - name: notifications-rw-sidekick@.service
   count: 2
 - name: notifications-rw@.service
-  version: 1.98.1
+  version: 1.98.2
   count: 2
   sequentialDeployment: true
 - name: organisations-rw-neo4j-sidekick@.service

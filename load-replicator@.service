@@ -17,7 +17,7 @@ ExecStart=/bin/sh -c '\
   ENDPOINT_RATE_PAIRS=$(/usr/bin/etcdctl get /ft/config/load-replicator/endpoint-rate-pairs) || ENDPOINT_RATE_PAIRS="things:1;enrichedcontent:3"; \
   AUTHORIZATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/authorization); \
   NOTIFICATIONS_DATE=$(/usr/bin/etcdctl get /ft/config/load-replicator/notifications); \
-  ENVIRONMENT=pre-prod; \
+  ENVIRONMENT=mongo-upgrade; \
   DURATION=$(/usr/bin/etcdctl get /ft/config/load-replicator/duration) || DURATION=0; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
   --env "ENDPOINT_RATE_PAIRS=$ENDPOINT_RATE_PAIRS" \

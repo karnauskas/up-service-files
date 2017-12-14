@@ -169,7 +169,7 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 2.0.2
+  version: 2.1.0-k8s-hc-helm-rc1
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
@@ -289,7 +289,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.7.1
+  version: 1.7.2
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

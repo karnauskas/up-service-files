@@ -374,7 +374,7 @@ services:
 - name: mongodb-sidekick@.service
   count: 3
 - name: mongodb@.service
-  version: v3.0.2
+  version: 3.2.18-ops-rc1
   count: 3
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service

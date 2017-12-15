@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.5.1
+  version: 1.7.0
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
@@ -19,7 +19,7 @@ services:
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2
 - name: annotations-rw-neo4j@.service
-  version: 2.1.1
+  version: 2.2.0
   count: 2
   sequentialDeployment: true
 - name: api-policy-component-sidekick@.service
@@ -69,7 +69,7 @@ services:
 - name: concept-exporter-sidekick@.service
   count: 1
 - name: concept-exporter@.service
-  version: 1.0.0
+  version: 1.1.0
   count: 1
 - name: concept-ingester-sidekick@.service
   count: 2
@@ -106,7 +106,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.5.3
+  version: 1.6.0
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -202,7 +202,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.4.1
+  version: 1.5.1
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
@@ -226,13 +226,13 @@ services:
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -276,7 +276,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.7.1
+  version: 1.7.2
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service
@@ -329,7 +329,7 @@ services:
 - name: mongodb-sidekick@.service
   count: 3
 - name: mongodb@.service
-  version: v3.0.2
+  version: 3.2.18
   count: 3
   sequentialDeployment: true
 - name: next-video-annotations-mapper-sidekick@.service
@@ -463,7 +463,7 @@ services:
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service
-  version: 2.1.1
+  version: 2.2.0
   count: 2
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1

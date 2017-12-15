@@ -7,7 +7,7 @@ services:
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
 - name: aggregate-healthcheck@.service
-  version: 1.1.14-fd-ann-monitoring-rc2
+  version: 1.1.14
   count: 2
   sequentialDeployment: true
 - name: annotations-mapper-sidekick@.service
@@ -478,7 +478,7 @@ services:
 - name: splunk-event-reader-sidekick@.service
   count: 2
 - name: splunk-event-reader@.service
-  version: 1.0.2-xp-rc1-mem-opt
+  version: 1.0.2
   count: 2
   sequentialDeployment: true
 - name: splunk-forwarder.service

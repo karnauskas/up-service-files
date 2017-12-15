@@ -1,0 +1,34 @@
+[Unit]
+Description=Splunk Event Reader
+After=vulcan.service
+Requires=docker.service
+Wants=splunk-event-reader-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/splunk-event-reader:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/splunk-event-reader:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export APP_PORT=8080; \
+  export SPLUNK_USER=$(/usr/bin/etcdctl get /ft/config/splunk-event-reader/user); \
+  export SPLUNK_PASSWORD=$(/usr/bin/etcdctl get /ft/config/splunk-event-reader/password); \
+  export SPLUNK_URL=$(/usr/bin/etcdctl get /ft/config/splunk-event-reader/url); \
+  export ENVIRONMENT=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+  --memory="512m" \
+  --env "SPLUNK_USER=$SPLUNK_USER" \
+  --env "SPLUNK_PASSWORD=$SPLUNK_PASSWORD" \
+  --env "SPLUNK_URL=$SPLUNK_URL" \
+  --env "ENVIRONMENT=$ENVIRONMENT" \
+  coco/splunk-event-reader:$DOCKER_APP_VERSION'
+
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

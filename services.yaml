@@ -36,7 +36,7 @@ services:
 - name: binary-writer-sidekick@.service
   count: 2
 - name: binary-writer@.service
-  version: 1.79.0-k8s-hc-helm-rc1
+  version: 1.79.0-k8s-hc-helm-rc2
   count: 2
   sequentialDeployment: true
 - name: burrow-sidekick@.service

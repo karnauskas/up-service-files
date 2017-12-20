@@ -154,7 +154,7 @@ services:
 - name: content-preview-sidekick@.service
   count: 2
 - name: content-preview@.service
-  version: 2.0.1
+  version: 2.1.0-k8s-hc-helm-rc4a
   count: 2
   sequentialDeployment: true
 - name: content-public-read-preview-sidekick@.service

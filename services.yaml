@@ -231,7 +231,7 @@ services:
 - name: internal-components-preview-sidekick@.service
   count: 2
 - name: internal-components-preview@.service
-  version: 2.0.1
+  version: 2.1.0-k8s-hc-helm-rc4a
   count: 2
   sequentialDeployment: true
 - name: internal-content-api-sidekick@.service

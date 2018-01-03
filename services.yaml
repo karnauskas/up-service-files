@@ -2,7 +2,7 @@ services:
 - name: aggregate-concept-transformer-sidekick@.service
   count: 2
 - name: aggregate-concept-transformer@.service
-  version: 1.7.0
+  version: 1.8.0
   count: 2
 - name: aggregate-healthcheck-sidekick@.service
   count: 2
@@ -165,7 +165,7 @@ services:
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: 1.1.1
+  version: 1.1.2
 - name: diamond.service
   version: v1.1.0
 - name: document-store-api-sidekick@.service
@@ -271,7 +271,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.4.0
+  version: 1.4.1
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -282,7 +282,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.2
+  version: 1.6.4-k8s-dp-concordance-fix
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -313,7 +313,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.2.0
+  version: 1.2.1
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1
@@ -472,7 +472,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.8
+  version: 1.0.9
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-coco-admin-sidekick@.service

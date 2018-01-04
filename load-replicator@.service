@@ -28,8 +28,8 @@ ExecStart=/bin/sh -c '\
   coco/load-replicator:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
-Restart=on-failure
-RestartSec=60
+Restart=no
+RuntimeMaxSec=32400
 
 [X-Fleet]
 Conflicts=%p@*.service

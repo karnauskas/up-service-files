@@ -1,0 +1,11 @@
+[Unit]
+Description=Runs the Load Replicator
+
+[Timer]
+OnCalendar=Mon,Tue,Wed,Thu,Fri *-*-* 09:00:00
+
+[Install]
+WantedBy=timers.target
+
+[X-Fleet]
+MachineOf=load-replicator@%i.service

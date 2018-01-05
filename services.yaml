@@ -301,6 +301,8 @@ services:
   count: 1
 - name: load-replicator-sidekick@.service
   count: 1
+- name: load-replicator@.timer
+  count: 1
 - name: list-notifications-ingester-sidekick@.service
   count: 2
 - name: list-notifications-ingester@.service

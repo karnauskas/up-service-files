@@ -35,7 +35,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 66.2.0-k8s-hc-helm-rc3
+  version: 66.2.0-k8s-hc-helm-rc5
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service

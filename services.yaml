@@ -271,7 +271,7 @@ services:
 - name: internal-concordances-sidekick@.service
   count: 2
 - name: internal-concordances@.service
-  version: 0.0.1
+  version: 0.0.2
   count: 2
 - name: internal-content-api-sidekick@.service
   count: 2

@@ -108,7 +108,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.48.0-k8s-hc-helm-rc2
+  version: 1.48.0-k8s-hc-helm-rc3
   count: 1
 - name: concepts-kafka-bridge-pub-prod-sidekick@.service
   count: 1

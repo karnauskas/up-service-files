@@ -106,7 +106,7 @@ services:
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
 - name: concepts-rw-neo4j@.service
-  version: 1.6.0
+  version: 1.7.0
   count: 2
   sequentialDeployment: true
 - name: content-collection-ingester-neo4j-sidekick@.service
@@ -226,7 +226,7 @@ services:
 - name: internal-concordances-sidekick@.service
   count: 2
 - name: internal-concordances@.service
-  version: 0.0.1.initial-impl.rc1
+  version: 0.0.2-k8s-fix-urls-rc1
   count: 2
 - name: internal-content-api-sidekick@.service
   count: 2

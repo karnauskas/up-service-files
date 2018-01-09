@@ -182,7 +182,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.10-k8s-hc-helm-rc4
+  version: 1.0.10-k8s-hc-helm-rc5
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service

@@ -79,13 +79,13 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 1.0.2
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.0.31
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service
@@ -226,7 +226,7 @@ services:
 - name: internal-concordances-sidekick@.service
   count: 2
 - name: internal-concordances@.service
-  version: 0.0.2-k8s-fix-urls-rc1
+  version: 0.0.2
   count: 2
 - name: internal-content-api-sidekick@.service
   count: 2
@@ -243,7 +243,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 2.0.3
+  version: 2.0.4
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -378,7 +378,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.5
+  version: 0.1.6-k8s-hc-helm-rc1
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service

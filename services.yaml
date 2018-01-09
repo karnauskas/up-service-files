@@ -396,7 +396,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.5
+  version: 0.1.6
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service
@@ -407,7 +407,7 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.2.0
+  version: 1.2.1-k8s-hc-helm-rc1
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2

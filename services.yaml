@@ -300,7 +300,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.4
+  version: 1.6.5-k8s-hc-helm-rc-1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

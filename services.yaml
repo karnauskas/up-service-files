@@ -412,7 +412,7 @@ services:
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.6.0
+  version: 1.6.1-k8s-hc-helm-rc1
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

@@ -536,7 +536,7 @@ services:
 - name: wordpress-article-mapper-sidekick@.service
   count: 2
 - name: wordpress-article-mapper@.service
-  version: 1.3.0-k8s-hc-helm-rc3
+  version: 1.3.0
   count: 2
 - name: wordpress-image-mapper-sidekick@.service
   count: 2

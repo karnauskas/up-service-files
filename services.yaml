@@ -389,7 +389,7 @@ services:
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
 - name: pac-annotations-mapper@.service
-  version: 0.1.6-k8s-hc-helm-rc1
+  version: 0.1.6-k8s-hc-helm-rc2
   count: 2
   sequentialDeployment: true
 - name: people-rw-neo4j-sidekick@.service

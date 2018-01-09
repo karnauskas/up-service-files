@@ -309,7 +309,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.4
+  version: 1.0.5-k8s-improvements-rc2
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

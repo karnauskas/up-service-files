@@ -88,7 +88,7 @@ services:
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
 - name: concept-rw-elasticsearch@.service
-  version: 1.1.0-k8s-helm-fix-rc5
+  version: 1.1.0
   count: 2
   sequentialDeployment: true
 - name: concept-search-api-sidekick@.service
@@ -289,7 +289,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.4.1
+  version: 1.4.2-k8s-hc-helm-rc1
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2

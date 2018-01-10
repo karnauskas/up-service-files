@@ -9,17 +9,19 @@ Environment="DOCKER_APP_VERSION=latest"
 TimeoutStartSec=0
 # Change killmode from "control-group" to "none" to let Docker remove work correctly.
 KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker login --username "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_user)" \
+--password "$(/usr/bin/etcdctl get /ft/_credentials/nexus/docker_pass)" nexus.in.ft.com:5000 > /dev/null 2>&1'
 ExecStartPre=-/bin/sh -c 'docker kill "$(docker ps -q --filter=name=%p-%i_)" >/dev/null 2>&1'
 ExecStartPre=-/bin/sh -c 'docker rm "$(docker ps -q --filter=name=%p-%i_)" >/dev/null 2>&1'
-ExecStartPre=/bin/sh -c 'docker history coco/methode-image-set-mapper:$DOCKER_APP_VERSION >/dev/null 2>&1 \
-  || docker pull coco/methode-image-set-mapper:$DOCKER_APP_VERSION'
+ExecStartPre=/bin/sh -c 'docker history nexus.in.ft.com:5000/coco/methode-image-set-mapper:$DOCKER_APP_VERSION >/dev/null 2>&1 \
+  || docker pull nexus.in.ft.com:5000/coco/methode-image-set-mapper:$DOCKER_APP_VERSION'
 
 ExecStart=/bin/sh -c '\
   export JAVA_OPTS="-Xms256m -Xmx256m -XX:+UseG1GC -server"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 -p 8081 \
   --env "JAVA_OPTS=$JAVA_OPTS" \
   --env "KAFKA_PROXY=$HOSTNAME:8080" \
-  coco/methode-image-set-mapper:$DOCKER_APP_VERSION'
+  nexus.in.ft.com:5000/coco/methode-image-set-mapper:$DOCKER_APP_VERSION'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'
 Restart=on-failure

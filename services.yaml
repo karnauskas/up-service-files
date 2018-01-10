@@ -242,13 +242,13 @@ services:
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.1.1
+  version: 1.1.2
   count: 2
   sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: 1.1.1
+  version: 1.1.2
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service

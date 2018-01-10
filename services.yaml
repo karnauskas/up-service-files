@@ -83,7 +83,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.2.1
+  version: 2.3.0
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -169,11 +169,11 @@ services:
 - name: content-rw-neo4j-sidekick@.service
   count: 2
 - name: content-rw-neo4j@.service
-  version: 2.1.0-k8s-hc-helm-rc1
+  version: 2.1.0
   count: 2
 - name: coreos-version-checker-sidekick.service
 - name: coreos-version-checker.service
-  version: 1.1.2-d94b1a-fix-for-coreupdate
+  version: 1.1.3
 - name: diamond.service
   version: v1.1.0
 - name: document-store-api-sidekick@.service
@@ -239,13 +239,13 @@ services:
 - name: internal-content-api-sidekick@.service
   count: 2
 - name: internal-content-api@.service
-  version: 1.1.2-k8s-improvements-rc2
+  version: 1.1.2
   count: 2
   sequentialDeployment: true
 - name: internal-content-preview-api-sidekick@.service
   count: 2
 - name: internal-content-preview-api@.service
-  version: 1.1.2-k8s-improvements-rc2
+  version: 1.1.2
   count: 2
   sequentialDeployment: true
 - name: kafka-lagcheck-sidekick@.service
@@ -321,7 +321,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.4.1
+  version: 16.5.0-k8s-hc-helm-rc1
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2

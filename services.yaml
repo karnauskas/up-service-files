@@ -73,7 +73,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.3.0-k8s-hc-helm-rc1
+  version: 2.3.0
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2

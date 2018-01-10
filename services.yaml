@@ -91,7 +91,7 @@ services:
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.12
+  version: 0.0.13-k8s-helm-day-rc1
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1

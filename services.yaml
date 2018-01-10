@@ -441,7 +441,7 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.2.0
+  version: 1.2.1
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2

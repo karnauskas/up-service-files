@@ -131,7 +131,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.4.0-k8s-improvements-rc2
+  version: 1.4.0
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1
@@ -364,7 +364,7 @@ services:
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
-  version: 1.3.0
+  version: 1.3.1-k8s-hc-helm-rc1
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2
@@ -407,12 +407,12 @@ services:
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.2.1-k8s-hc-helm-rc2
+  version: 1.2.1
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.6.1-k8s-hc-helm-rc1
+  version: 1.6.1
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service

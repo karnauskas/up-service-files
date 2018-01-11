@@ -247,7 +247,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.5.1
+  version: 1.6.0
   count: 1
 - name: image-cleaner.service
   version: 1.0.0

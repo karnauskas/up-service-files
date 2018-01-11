@@ -168,7 +168,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.3.0
+  version: 1.4.0
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1

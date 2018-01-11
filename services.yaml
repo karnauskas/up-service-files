@@ -86,7 +86,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.3.0
+  version: 2.3.1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2

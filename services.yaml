@@ -314,7 +314,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: 1.1.0
+  version: 1.2.0-k8s-hc-helm-rc1
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2

@@ -362,7 +362,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: 1.5.1-k8s-hc-helm-rc1
+  version: 1.6.0
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

@@ -210,7 +210,7 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.6.0-k8s-hc-helm-rc1
+  version: 1.6.0
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
@@ -379,7 +379,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.5.3-k8s-group-fix-rc2
+  version: 3.6.0-k8s-helm-rc1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

@@ -217,7 +217,7 @@ services:
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.1.2-k8s-hc-helm-rc1
+  version: 2.1.2
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -289,7 +289,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.4.2-k8s-hc-helm-rc1
+  version: 1.4.2
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -300,7 +300,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.5-k8s-hc-helm-rc-1
+  version: 1.6.5
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -321,7 +321,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.5.0-k8s-hc-helm-rc1
+  version: 16.5.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
@@ -402,7 +402,7 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2
@@ -418,7 +418,7 @@ services:
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
@@ -454,7 +454,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.5.1
+  version: 1.5.2-k8s-affinity-rc1
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service

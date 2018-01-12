@@ -287,7 +287,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.5-k8s-hc-helm-rc-5
+  version: 1.6.5
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
@@ -384,7 +384,7 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2
@@ -412,7 +412,7 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: 1.3.1
+  version: 1.3.2-k8s-hc-helm-rc1
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service

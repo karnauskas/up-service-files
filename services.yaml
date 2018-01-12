@@ -403,7 +403,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: 1.5.0
+  version: 1.6.0
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

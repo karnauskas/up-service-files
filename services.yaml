@@ -360,7 +360,7 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.4.1
+  version: 16.5.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2

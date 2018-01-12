@@ -115,7 +115,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.3.0
+  version: 2.3.1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -392,7 +392,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.4.0
+  version: 1.4.1
   count: 2
   sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service

@@ -194,13 +194,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.1.2
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 4
 - name: content-public-read@.service
-  version: 1.1.2
+  version: 1.2.0
   count: 4
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service

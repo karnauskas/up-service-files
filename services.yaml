@@ -179,7 +179,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.2.1
+  version: 1.2.2
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -274,7 +274,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.4.1
+  version: 1.4.2
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -349,7 +349,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: 1.5.0
+  version: 1.6.0
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -371,7 +371,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.9
+  version: 0.5.10-k8s-hc-helm-rc3
   count: 2
 - name: pac-annotations-mapper-sidekick@.service
   count: 2

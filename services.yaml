@@ -436,7 +436,7 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2

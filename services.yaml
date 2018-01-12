@@ -83,7 +83,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.3.0
+  version: 2.3.1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -100,7 +100,7 @@ services:
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.12
+  version: 0.0.13
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
@@ -311,7 +311,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.5-k8s-improvements-rc2
+  version: 1.0.5
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -358,7 +358,7 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.4.1-k8s-hc-helm-rc3
+  version: 1.4.1
   count: 2
   sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
@@ -369,7 +369,7 @@ services:
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: 1.5.0
+  version: 1.5.1-k8s-hc-helm-rc1
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2

@@ -202,14 +202,14 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.5.1
+  version: 1.6.0
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.1.1
+  version: 2.1.2-k8s-hc-helm-rc1
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -346,7 +346,7 @@ services:
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
-  version: 1.3.0
+  version: 1.3.1
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2

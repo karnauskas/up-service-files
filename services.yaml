@@ -35,7 +35,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 66.2.0-k8s-hc-helm-rc5
+  version: 66.2.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -52,7 +52,7 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: 2.1.1
+  version: 2.1.2-k8s-affinity-rc1
   count: 1
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
@@ -83,7 +83,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.3.0
+  version: 2.3.1
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -100,12 +100,12 @@ services:
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.12
+  version: 0.0.13
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.48.0-k8s-hc-helm-rc3
+  version: 1.48.0
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
@@ -131,7 +131,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.4.0-k8s-improvements-rc2
+  version: 1.4.0
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1
@@ -157,13 +157,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.2.0-k8s-hc-helm-rc6
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 4
 - name: content-public-read@.service
-  version: 1.2.0-k8s-hc-helm-rc6
+  version: 1.2.0
   count: 4
   sequentialDeployment: true
 - name: content-rw-neo4j-sidekick@.service
@@ -179,7 +179,7 @@ services:
 - name: document-store-api-sidekick@.service
   count: 2
 - name: document-store-api@.service
-  version: 1.0.9
+  version: 1.0.10
   count: 2
   sequentialDeployment: true
 - name: elb-dns-registrator.service
@@ -189,7 +189,7 @@ services:
 - name: enriched-content-read-api-sidekick@.service
   count: 2
 - name: enriched-content-read-api@.service
-  version: 1.2.1
+  version: 1.2.2
   count: 2
   sequentialDeployment: true
 - name: financial-instruments-rw-neo4j-sidekick@.service
@@ -210,14 +210,14 @@ services:
 - name: generic-rw-s3-sidekick@.service
   count: 1
 - name: generic-rw-s3@.service
-  version: 1.6.0-k8s-hc-helm-rc1
+  version: 1.6.0
   count: 1
 - name: image-cleaner.service
   version: 1.0.0
 - name: image-resolver-sidekick@.service
   count: 2
 - name: image-resolver@.service
-  version: 2.1.1
+  version: 2.1.2
   count: 2
   sequentialDeployment: true
 - name: industry-classifications-rw-neo4j-sidekick@.service
@@ -284,7 +284,7 @@ services:
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
-  version: v2.0.0
+  version: 2.0.1
   count: 2
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
@@ -300,18 +300,18 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.5-k8s-hc-helm-rc-1
+  version: 1.6.5
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.2-k8s-hc-helm-rc1
+  version: 1.1.2
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.5-k8s-improvements-rc2
+  version: 1.0.5
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
@@ -321,12 +321,12 @@ services:
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
 - name: methode-image-model-mapper@.service
-  version: 16.5.0-k8s-hc-helm-rc1
+  version: 16.5.0
   count: 2
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.2.0-k8s-hc-helm-rc4
+  version: 9.2.0
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -358,18 +358,18 @@ services:
 - name: next-video-annotations-mapper-sidekick@.service
   count: 2
 - name: next-video-annotations-mapper@.service
-  version: 1.4.1-k8s-hc-helm-rc3
+  version: 1.4.1
   count: 2
   sequentialDeployment: true
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
-  version: 1.3.0
+  version: 1.3.1
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2
 - name: next-video-mapper@.service
-  version: 1.5.0
+  version: 1.6.0
   count: 2
 - name: notifications-ingester-sidekick@.service
   count: 2
@@ -391,7 +391,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.9
+  version: 0.5.10
   count: 2
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
@@ -402,23 +402,23 @@ services:
 - name: people-rw-neo4j-sidekick@.service
   count: 2
 - name: people-rw-neo4j@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
 - name: post-publication-combiner-sidekick@.service
   count: 2
 - name: post-publication-combiner@.service
-  version: 1.2.1-k8s-hc-helm-rc2
+  version: 1.2.1
   count: 2
 - name: public-annotations-api-sidekick@.service
   count: 2
 - name: public-annotations-api@.service
-  version: 1.6.1-k8s-hc-helm-rc1
+  version: 1.6.1
   count: 2
   sequentialDeployment: true
 - name: public-brands-api-sidekick@.service
   count: 2
 - name: public-brands-api@.service
-  version: 2.0.1
+  version: 2.0.2
   count: 2
   sequentialDeployment: true
 - name: public-concordances-api-sidekick@.service
@@ -430,13 +430,13 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: 1.3.1
+  version: 1.3.2
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: 1.2.1
+  version: 1.3.0
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service
@@ -541,6 +541,6 @@ services:
 - name: wordpress-image-mapper-sidekick@.service
   count: 2
 - name: wordpress-image-mapper@.service
-  version: 0.57.0-k8s-hc-helm-rc4
+  version: 0.57.0
   count: 2
 - name: zookeeper.service

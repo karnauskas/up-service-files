@@ -423,7 +423,7 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: 1.3.2-k8s-hc-helm-rc1
+  version: 1.3.2
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service

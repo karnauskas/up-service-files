@@ -289,7 +289,7 @@ services:
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-article-image-set-mapper@.service
-  version: 1.4.2-k8s-hc-helm-rc1
+  version: 1.4.2
   count: 2
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
@@ -316,7 +316,7 @@ services:
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2
 - name: methode-image-binary-mapper@.service
-  version: 1.1.0
+  version: 1.2.0-k8s-hc-helm-rc1
   count: 2
 - name: methode-image-model-mapper-sidekick@.service
   count: 2
@@ -364,7 +364,7 @@ services:
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
-  version: 1.3.1
+  version: 1.3.1-k8s-hc-helm-rc1
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2
@@ -379,7 +379,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.5.3-k8s-group-fix-rc2
+  version: 3.6.0-k8s-helm-rc2
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -454,7 +454,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.5.1
+  version: 1.5.2-k8s-affinity-rc1
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service
@@ -503,7 +503,7 @@ services:
 - name: synthetic-image-publication-monitor-coco-sidekick@.service
   count: 1
 - name: synthetic-image-publication-monitor-coco@.service
-  version: 38.0.0
+  version: 39.0.0-k8s-hc-helm-rc1
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service

@@ -281,7 +281,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: k8s-hc-affinity-memory-rc5
+  version: 1.7.3-k8s-hc-affinity-memory-rc5
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

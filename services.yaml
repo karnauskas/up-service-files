@@ -304,7 +304,7 @@ services:
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.2-k8s-hc-helm-rc1
+  version: 1.1.2
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2

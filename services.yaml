@@ -379,7 +379,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.6.0-k8s-helm-rc1
+  version: 3.6.0-k8s-helm-rc2
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

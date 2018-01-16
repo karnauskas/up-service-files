@@ -441,7 +441,7 @@ services:
 - name: public-six-degrees-api-sidekick@.service
   count: 2
 - name: public-six-degrees-api@.service
-  version: 1.1.1
+  version: 1.2.0-k8s-hc-helm-rc1
   count: 2
   sequentialDeployment: true
 - name: public-things-api-sidekick@.service

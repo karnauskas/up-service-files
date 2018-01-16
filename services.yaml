@@ -298,7 +298,7 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.5
+  version: 1.7.0-k8s-suggest-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service

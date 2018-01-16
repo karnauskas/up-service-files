@@ -24,7 +24,7 @@ services:
 - name: annotations-publish-healthchecker-sidekick@.service
   count: 1
 - name: annotations-publish-healthchecker@.service
-  version: 1.0.0-xp-rc4
+  version: 1.0.0-xp-rc5
   count: 1
 - name: annotations-rw-neo4j-sidekick@.service
   count: 2

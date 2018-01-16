@@ -25,7 +25,7 @@ services:
 - name: api-policy-component-sidekick@.service
   count: 2
 - name: api-policy-component@.service
-  version: 66.1.1
+  version: 66.2.0
   count: 2
   sequentialDeployment: true
 - name: binary-ingester-sidekick@.service
@@ -96,7 +96,7 @@ services:
 - name: concept-suggestion-api-sidekick@.service
   count: 1
 - name: concept-suggestion-api@.service
-  version: 1.47.2
+  version: 1.48.0
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
@@ -148,13 +148,13 @@ services:
 - name: content-public-read-preview-sidekick@.service
   count: 2
 - name: content-public-read-preview@.service
-  version: 1.1.2
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: content-public-read-sidekick@.service
   count: 4
 - name: content-public-read@.service
-  version: 1.1.2
+  version: 1.2.0
   count: 4
   sequentialDeployment: true
 - name: coco-traffic-analyser.service
@@ -271,7 +271,7 @@ services:
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
-  version: v2.0.0
+  version: 2.0.1
   count: 2
 - name: methode-article-image-set-mapper-sidekick@.service
   count: 2
@@ -287,13 +287,13 @@ services:
 - name: methode-article-mapper-sidekick@.service
   count: 2
 - name: methode-article-mapper@.service
-  version: 1.6.5
+  version: 1.7.0-k8s-suggest-rc1
   count: 2
   sequentialDeployment: true
 - name: methode-content-collection-mapper-sidekick@.service
   count: 2
 - name: methode-content-collection-mapper@.service
-  version: 1.1.1
+  version: 1.1.2
   count: 2
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
@@ -313,7 +313,7 @@ services:
 - name: methode-image-set-mapper-sidekick@.service
   count: 2
 - name: methode-image-set-mapper@.service
-  version: 9.2.0-k8s-hc-helm-rc6
+  version: 9.2.0
   count: 2
 - name: methode-list-mapper-sidekick@.service
   count: 2
@@ -373,7 +373,7 @@ services:
 - name: organisations-rw-neo4j-sidekick@.service
   count: 2
 - name: organisations-rw-neo4j@.service
-  version: 0.5.9
+  version: 0.5.10
   count: 2
 - name: pac-annotations-mapper-sidekick@.service
   count: 2
@@ -412,13 +412,13 @@ services:
 - name: public-content-by-concept-api-sidekick@.service
   count: 2
 - name: public-content-by-concept-api@.service
-  version: 1.3.2-k8s-hc-helm-rc1
+  version: 1.3.2
   count: 2
   sequentialDeployment: true
 - name: public-organisations-api-sidekick@.service
   count: 2
 - name: public-organisations-api@.service
-  version: 1.2.1
+  version: 1.3.0
   count: 2
   sequentialDeployment: true
 - name: public-people-api-sidekick@.service

@@ -22,4 +22,4 @@ Restart=on-failure
 RestartSec=60
 
 [X-Fleet]
-MachineOf=relations-api@%i.service
+MachineOf=resilient-splunk-forwarder@%i.service

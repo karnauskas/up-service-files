@@ -292,7 +292,7 @@ services:
 - name: methode-article-internal-components-mapper-sidekick@.service
   count: 2
 - name: methode-article-internal-components-mapper@.service
-  version: 1.7.2
+  version: 1.7.4
   count: 2
   sequentialDeployment: true
 - name: methode-article-mapper-sidekick@.service

@@ -469,7 +469,7 @@ services:
 - name: resilient-splunk-forwarder-sidekick@.service
   count: 1
 - name: resilient-splunk-forwarder@.service
-  version: 1.0.0-fd-rc2
+  version: 1.0.0-fd-rc3
   count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1

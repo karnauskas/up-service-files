@@ -1,0 +1,41 @@
+[Unit]
+Description=Resilient Splunk Forwarder
+After=vulcan.service
+Requires=docker.service
+Wants=resilient-splunk-forwarder-sidekick@%i.service
+
+[Service]
+Environment="DOCKER_APP_VERSION=latest"
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=-/bin/bash -c '/usr/bin/docker kill "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=-/bin/bash -c '/usr/bin/docker rm "$(docker ps -q --filter=name=^/%p-%i_)" > /dev/null 2>&1'
+ExecStartPre=/bin/bash -c 'docker history coco/resilient-splunk-forwarder:$DOCKER_APP_VERSION > /dev/null 2>&1 || docker pull coco/resilient-splunk-forwarder:$DOCKER_APP_VERSION'
+
+ExecStart=/bin/sh -c '\
+  export FORWARD_URL=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/splunk_hec_url); \
+  export TOKEN=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/splunk_hec_token); \
+  export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
+  export BUCKET_NAME=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/bucket_name); \
+  export AWS_REGION=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/aws_region); \
+  export AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/aws_access_key_id); \
+  export AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /ft/config/splunk-forwarder/aws_secret_access_key); \
+  /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p 8080 \
+  --memory="256m" \
+  --env "PORT=8080" \
+  --env "FORWARD_URL=$FORWARD_URL" \
+  --env "TOKEN=$TOKEN" \
+  --env "ENV=$ENV" \
+  --env "BUCKET_NAME=$BUCKET_NAME" \
+  --env "AWS_REGION=$AWS_REGION" \
+  --env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
+  --env "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
+  coco/resilient-splunk-forwarder:$DOCKER_APP_VERSION'
+
+#Filter out and stop the container. It waits 3 sec for being stopped, before sending a sigterm to terminate.
+ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=^/%p-%i_)"'
+Restart=on-failure
+RestartSec=60
+
+[X-Fleet]
+Conflicts=%p@*.service

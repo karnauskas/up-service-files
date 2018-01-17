@@ -466,6 +466,11 @@ services:
   version: 2.1.0
   count: 2
   sequentialDeployment: true
+- name: resilient-splunk-forwarder-sidekick@.service
+  count: 1
+- name: resilient-splunk-forwarder@.service
+  version: 1.0.0-fd-rc2
+  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

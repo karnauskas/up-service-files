@@ -13,7 +13,7 @@ services:
 - name: annotations-mapper-sidekick@.service
   count: 2
 - name: annotations-mapper@.service
-  version: 1.1.0
+  version: 1.1.1
   count: 2
   sequentialDeployment: true
 - name: annotations-rw-neo4j-sidekick@.service
@@ -86,7 +86,7 @@ services:
 - name: concept-ingester-sidekick@.service
   count: 2
 - name: concept-ingester@.service
-  version: 2.3.1
+  version: 2.3.2
   count: 2
 - name: concept-rw-elasticsearch-sidekick@.service
   count: 2
@@ -309,7 +309,7 @@ services:
 - name: methode-content-placeholder-mapper-sidekick@.service
   count: 2
 - name: methode-content-placeholder-mapper@.service
-  version: 1.0.5
+  version: 1.0.6
   count: 2
 - name: methode-image-binary-mapper-sidekick@.service
   count: 2

@@ -279,6 +279,7 @@ services:
   version: 0.2.0
   count: 2
   sequentialDeployment: true
+- name: log-collector.service
 - name: memberships-rw-neo4j-sidekick@.service
   count: 2
 - name: memberships-rw-neo4j@.service
@@ -480,7 +481,6 @@ services:
 - name: roles-rw-neo4j@.service
   version: 0.2.0
   count: 2
-- name: splunk-forwarder.service
 - name: suggestions-rw-neo4j-sidekick@.service
   count: 2
 - name: suggestions-rw-neo4j@.service

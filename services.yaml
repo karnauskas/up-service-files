@@ -454,7 +454,7 @@ services:
 - name: public-things-api-sidekick@.service
   count: 2
 - name: public-things-api@.service
-  version: 1.5.2-k8s-affinity-rc12
+  version: 1.5.2
   count: 2
   sequentialDeployment: true
 - name: rec-reads-content-annotator-sidekick@.service
@@ -473,6 +473,11 @@ services:
   version: 2.2.0-k8s-hc-helm-rc1
   count: 2
   sequentialDeployment: true
+- name: resilient-splunk-forwarder-sidekick@.service
+  count: 1
+- name: resilient-splunk-forwarder@.service
+  version: 1.0.0-fd-rc2
+  count: 1
 - name: restorage-mongo-sidekick@.service
   count: 1
 - name: restorage-mongo@.service

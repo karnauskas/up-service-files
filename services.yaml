@@ -478,7 +478,7 @@ services:
 - name: splunk-event-reader-sidekick@.service
   count: 2
 - name: splunk-event-reader@.service
-  version: 1.0.3-k8s-fd-retries-rc1
+  version: 1.0.3-k8s-fd-retries-rc2
   count: 2
   sequentialDeployment: true
 - name: splunk-forwarder.service

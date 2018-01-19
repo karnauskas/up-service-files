@@ -71,7 +71,7 @@ services:
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
-  version: 1.58.0-k8s-hc-helm-rc4
+  version: 1.58.0
   count: 1
 - name: complementarycontent-ingester-sidekick@.service
   count: 2

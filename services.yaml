@@ -418,7 +418,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.5.3
+  version: 3.6.0
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

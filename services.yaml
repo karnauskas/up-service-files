@@ -52,7 +52,7 @@ services:
 - name: burrow-sidekick@.service
   count: 1
 - name: burrow@.service
-  version: 2.1.2-k8s-affinity-rc1
+  version: 2.1.2
   count: 1
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2

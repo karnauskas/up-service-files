@@ -463,7 +463,7 @@ services:
 - name: relations-api-sidekick@.service
   count: 2
 - name: relations-api@.service
-  version: 2.2.0-k8s-hc-helm-rc1
+  version: 2.2.0
   count: 2
   sequentialDeployment: true
 - name: restorage-mongo-sidekick@.service

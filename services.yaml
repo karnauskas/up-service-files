@@ -435,7 +435,7 @@ services:
 - name: public-people-api-sidekick@.service
   count: 2
 - name: public-people-api@.service
-  version: 1.1.0
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: public-six-degrees-api-sidekick@.service

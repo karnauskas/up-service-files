@@ -134,7 +134,7 @@ services:
 - name: content-collection-unfolder-sidekick@.service
   count: 2
 - name: content-collection-unfolder@.service
-  version: 1.5.0-k8s-remove-delete-notifications-rc1
+  version: 1.5.0-k8s-remove-delete-notifications-rc2
   count: 2
 - name: content-exporter-sidekick@.service
   count: 1

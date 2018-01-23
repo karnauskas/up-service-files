@@ -512,7 +512,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.10
+  version: 1.0.11-k8s-improvements-rc2
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-queue-sender-v1-metadata-sidekick@.service

@@ -318,7 +318,7 @@ services:
 - name: methode-list-mapper-sidekick@.service
   count: 2
 - name: methode-list-mapper@.service
-  version: 1.3.1-k8s-ops-dup-list-msg-rc2
+  version: 1.3.1
   count: 2
 - name: mongo-backup@.service
   version: v20.0.1

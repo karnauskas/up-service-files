@@ -27,6 +27,7 @@ ExecStart=/bin/sh -c '\
   export WRITER_HOST=$(/usr/bin/etcdctl get /ft/config/upp-gateway/host); \
   export WRITER_PORT=$(/usr/bin/etcdctl get /ft/config/upp-gateway/port); \
   export WRITER_CREDENTIALS=$(usr/bin/etcdctl get /ft/_credentials/upp-gateway/authorization_key); \
+  export PANIC_GUIDE_URL="https://dewey.in.ft.com/view/system/rec-reads-content-annotator"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "TOPIC=ConceptSuggestions" \
   --env "GROUP_ID=$GROUP_ID" \

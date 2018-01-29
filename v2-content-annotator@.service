@@ -25,7 +25,6 @@ ExecStart=/bin/sh -c '\
   export KAFKA_PORT=$(/usr/bin/etcdctl get /ft/config/kafka/port); \
   export ENV=$(/usr/bin/etcdctl get /ft/config/environment_tag); \
   export JAVA_OPTS="-Xms128m -Xmx128m -XX:+UseG1GC -server"; \
-  export PANIC_GUIDE_URL="https://dewey.in.ft.com/view/system/v2-content-annotator"; \
   /usr/bin/docker run --rm --name %p-%i_$(uuidgen) -p $APP_PORT \
   --env "TOPIC=ConceptSuggestions" \
   --env "GROUP_ID=$GROUP_ID" \
@@ -40,6 +39,7 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.v2-content-annotator.%i" \
+  --env PANIC_GUIDE_URL="https://dewey.in.ft.com/view/system/v2-content-annotator" \
   nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

@@ -47,13 +47,13 @@ services:
 - name: cms-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.1.0
+  version: 15.1.1
   count: 2
   sequentialDeployment: true
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 2
 - name: cms-metadata-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.1.0
+  version: 15.1.1
   count: 2
   sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
@@ -101,7 +101,7 @@ services:
 - name: concepts-kafka-bridge-pub-dynpub-uk-sidekick@.service
   count: 1
 - name: concepts-kafka-bridge-pub-dynpub-uk@.service
-  version: 15.1.0
+  version: 15.1.1
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
   count: 2
@@ -243,7 +243,7 @@ services:
 - name: kafka-lagcheck-sidekick@.service
   count: 1
 - name: kafka-lagcheck@.service
-  version: 2.0.4
+  version: 2.0.5
   count: 1
 - name: kafka-rest-proxy-sidekick@.service
   count: 1
@@ -361,7 +361,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.6.0
+  version: 3.6.1-k8s-improved-subscriber-logging-rc.1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -477,7 +477,7 @@ services:
   count: 1
 - name: system-healthcheck-sidekick.service
 - name: system-healthcheck.service
-  version: 1.0.10
+  version: 1.0.11
 - name: tunnel-registrator.service
   version: v1.0.3
 - name: up-coco-admin-sidekick@.service

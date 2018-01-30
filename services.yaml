@@ -372,7 +372,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.6.2-k8s-ops-go-library-rc1
+  version: 3.6.2
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service

@@ -56,12 +56,32 @@ services:
   count: 1
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
+<<<<<<< HEAD
 - name: cms-kafka-bridge-pub-xp@.service
+=======
+- name: cms-kafka-bridge-pub-prod-uk@.service
+>>>>>>> notifications-push-logging
   version: 15.1.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2
+<<<<<<< HEAD
 - name: cms-metadata-kafka-bridge-pub-xp@.service
+=======
+- name: cms-kafka-bridge-pub-prod-us@.service
+  version: 15.1.1
+  count: 2
+  sequentialDeployment: true
+- name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-uk@.service
+  version: 15.1.1
+  count: 2
+  sequentialDeployment: true
+- name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-pub-prod-us@.service
+>>>>>>> notifications-push-logging
   version: 15.1.1
   count: 2
   sequentialDeployment: true
@@ -109,7 +129,11 @@ services:
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
+<<<<<<< HEAD
 - name: concepts-kafka-bridge-pub-xp@.service
+=======
+- name: concepts-kafka-bridge-pub-prod@.service
+>>>>>>> notifications-push-logging
   version: 15.1.1
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service
@@ -380,7 +404,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.6.0
+  version: 3.6.2-k8s-ops-go-library-rc1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -461,7 +485,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: 1.69.0-k8s-hc-helm-rc6
+  version: 1.69.0
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
@@ -528,7 +552,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: 1.69.0-k8s-hc-helm-rc6
+  version: 1.69.0
   count: 2
 - name: varnish@.service
   version: 0.2.0

@@ -270,7 +270,7 @@ services:
 - name: list-notifications-push-sidekick@.service
   count: 2
 - name: list-notifications-push@.service
-  version: 3.3.2
+  version: 3.3.1
   count: 2
   sequentialDeployment: true
 - name: list-notifications-rw-sidekick@.service

@@ -56,32 +56,12 @@ services:
   count: 1
 - name: cms-kafka-bridge-pub-xp-sidekick@.service
   count: 2
-<<<<<<< HEAD
 - name: cms-kafka-bridge-pub-xp@.service
-=======
-- name: cms-kafka-bridge-pub-prod-uk@.service
->>>>>>> notifications-push-logging
   version: 15.1.1
   count: 2
 - name: cms-metadata-kafka-bridge-pub-xp-sidekick@.service
   count: 2
-<<<<<<< HEAD
 - name: cms-metadata-kafka-bridge-pub-xp@.service
-=======
-- name: cms-kafka-bridge-pub-prod-us@.service
-  version: 15.1.1
-  count: 2
-  sequentialDeployment: true
-- name: cms-metadata-kafka-bridge-pub-prod-uk-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-uk@.service
-  version: 15.1.1
-  count: 2
-  sequentialDeployment: true
-- name: cms-metadata-kafka-bridge-pub-prod-us-sidekick@.service
-  count: 2
-- name: cms-metadata-kafka-bridge-pub-prod-us@.service
->>>>>>> notifications-push-logging
   version: 15.1.1
   count: 2
   sequentialDeployment: true
@@ -129,11 +109,7 @@ services:
   count: 1
 - name: concepts-kafka-bridge-pub-xp-sidekick@.service
   count: 1
-<<<<<<< HEAD
 - name: concepts-kafka-bridge-pub-xp@.service
-=======
-- name: concepts-kafka-bridge-pub-prod@.service
->>>>>>> notifications-push-logging
   version: 15.1.1
   count: 1
 - name: concepts-rw-neo4j-sidekick@.service

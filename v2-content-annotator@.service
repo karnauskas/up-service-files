@@ -39,7 +39,6 @@ ExecStart=/bin/sh -c '\
   --env "GRAPHITE_HOST=graphite.ft.com" \
   --env "GRAPHITE_PORT=2003" \
   --env "GRAPHITE_PREFIX=coco.services.$ENV.v2-content-annotator.%i" \
-  --env PANIC_GUIDE_URL="https://dewey.in.ft.com/view/system/v2-content-annotator" \
   nexus.in.ft.com:5000/coco/content-annotator:$DOCKER_APP_VERSION;'
 
 ExecStop=-/bin/bash -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p-%i_)"'

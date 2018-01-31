@@ -91,7 +91,7 @@ services:
 - name: concept-search-reindexer-sidekick@.service
   count: 1
 - name: concept-search-reindexer@.service
-  version: 0.0.13
+  version: 0.1.0-k8s-aliases-rc1
   count: 1
 - name: concept-suggestion-api-sidekick@.service
   count: 1
@@ -361,7 +361,7 @@ services:
 - name: notifications-push-sidekick@.service
   count: 2
 - name: notifications-push@.service
-  version: 3.6.1-k8s-improved-subscriber-logging-rc.1
+  version: 3.6.1
   count: 2
   sequentialDeployment: true
 - name: notifications-rw-sidekick@.service
@@ -442,7 +442,7 @@ services:
 - name: rec-reads-content-annotator-sidekick@.service
   count: 1
 - name: rec-reads-content-annotator@.service
-  version: 1.68.0
+  version: 1.69.0
   count: 1
 - name: rec-reads-content-ingester-sidekick@.service
   count: 1
@@ -498,7 +498,7 @@ services:
 - name: v2-content-annotator-sidekick@.service
   count: 2
 - name: v2-content-annotator@.service
-  version: 1.68.0
+  version: 1.69.0
   count: 2
 - name: varnish@.service
   version: 0.2.0

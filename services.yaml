@@ -126,7 +126,7 @@ services:
 - name: concept-search-api-sidekick@.service
   count: 2
 - name: concept-search-api@.service
-  version: 1.2.0-k8s-aliases-rc1
+  version: 1.2.0
   count: 2
   sequentialDeployment: true
 - name: concept-search-reindexer-sidekick@.service

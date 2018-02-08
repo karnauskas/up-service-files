@@ -68,9 +68,9 @@ services:
   version: 15.1.1
   count: 2
   sequentialDeployment: true
-- name: cms-kafka-bridge-k8s-pub-prod-uk-sidekick@.service
+- name: cms-kafka-bridge-k8s-pub-prod-eu-sidekick@.service
   count: 2
-- name: cms-kafka-bridge-k8s-pub-prod-uk@.service
+- name: cms-kafka-bridge-k8s-pub-prod-eu@.service
   version: 15.1.1
   count: 2
   sequentialDeployment: true
@@ -80,9 +80,9 @@ services:
   version: 15.1.1
   count: 2
   sequentialDeployment: true
-- name: cms-metadata-kafka-bridge-k8s-pub-prod-uk-sidekick@.service
+- name: cms-metadata-kafka-bridge-k8s-pub-prod-eu-sidekick@.service
   count: 2
-- name: cms-metadata-kafka-bridge-k8s-pub-prod-uk@.service
+- name: cms-metadata-kafka-bridge-k8s-pub-prod-eu@.service
   version: 15.1.1
   count: 2
   sequentialDeployment: true

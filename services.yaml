@@ -97,6 +97,30 @@ services:
   version: 15.1.1
   count: 2
   sequentialDeployment: true
+- name: cms-kafka-bridge-k8s-pub-prod-eu-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-k8s-pub-prod-eu@.service
+  version: 15.1.1
+  count: 2
+  sequentialDeployment: true
+- name: cms-kafka-bridge-k8s-pub-prod-us-sidekick@.service
+  count: 2
+- name: cms-kafka-bridge-k8s-pub-prod-us@.service
+  version: 15.1.1
+  count: 2
+  sequentialDeployment: true
+- name: cms-metadata-kafka-bridge-k8s-pub-prod-eu-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-k8s-pub-prod-eu@.service
+  version: 15.1.1
+  count: 2
+  sequentialDeployment: true
+- name: cms-metadata-kafka-bridge-k8s-pub-prod-us-sidekick@.service
+  count: 2
+- name: cms-metadata-kafka-bridge-k8s-pub-prod-us@.service
+  version: 15.1.1
+  count: 2
+  sequentialDeployment: true
 - name: cms-notifier-sidekick@.service
   count: 1
 - name: cms-notifier@.service
@@ -396,7 +420,7 @@ services:
 - name: next-video-content-collection-mapper-sidekick@.service
   count: 2
 - name: next-video-content-collection-mapper@.service
-  version: 1.3.1
+  version: 1.3.2
   count: 2
 - name: next-video-mapper-sidekick@.service
   count: 2
